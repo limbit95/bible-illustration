@@ -32,6 +32,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - STEP 0-7 — Image / Asset Storage Policy: **CONFIRMED**
 - Repository Structure v1.0: **CONFIRMED**
 - Production Rules v1.0: **CONFIRMED**
+- Templates v1.0: **CONFIRMED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
@@ -144,12 +145,18 @@ Provider 내부의 character, model, prompt, slot, project structure는 Canonica
 
 과거 테스트 기준서나 채팅 인수인계 자료보다 정식 Rules 문서를 우선한다.
 
-## 10. 다음 작업
+## 10. Templates Source of Truth
+
+현재 반복 제작 데이터의 정식 Template Source of Truth는 `templates/` 아래 승인된 YAML 11개다.
+
+Template은 Architecture와 Rules를 구현하기 위한 최소 물리 스키마다. 새로운 필드를 추가하거나 기존 책임을 바꾸기 전에 관련 Architecture / Rules를 먼저 확인한다.
+
+## 11. 다음 작업
 
 `docs/progress/CURRENT.md`를 기준으로 이어서 진행한다.
 
 현재 다음 작업은:
 
-**Templates 생성**
+**Progress / Decision 기록 체계 보완**
 
 이다.
