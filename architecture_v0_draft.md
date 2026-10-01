@@ -2123,9 +2123,9 @@ continuity mismatch
 
 ---
 
-# STEP 0-4 — Library Model Working Draft v0.3
+# STEP 0-4 — Library Model v1.0
 
-> 상태: **REVIEW READY / 구조 점검 완료**
+> 상태: **CONFIRMED / 2026-10-01 사용자 승인**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -2693,7 +2693,7 @@ OpenArt / Higgsfield / future provider
 
 ## 19. STEP 0-4 검토 포인트
 
-사용자 검토가 필요한 핵심 항목:
+다음 항목은 사용자 승인으로 확정되었다:
 
 - Library Asset 생성 기준
 - CHR / LOC / OBJ / CST / ENV / STY ID 체계
@@ -2712,4 +2712,8 @@ OpenArt / Higgsfield / future provider
 - Reference Image / Provider Binding을 Canonical Library에서 분리
 - 일회성 요소를 과도하게 Library Asset으로 만들지 않는 원칙
 
-이 항목들이 확정되면 STEP 0-4를 CONFIRMED로 전환하고 STEP 0-5 — Generation Run Model로 진행한다.
+위 항목은 2026-10-01 사용자 승인으로 확정되었다.
+
+**STEP 0-4 — Library Model: COMPLETED / CONFIRMED**
+
+다음 작업은 **STEP 0-5 — Generation Run Model**이다.
