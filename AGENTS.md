@@ -17,22 +17,26 @@
 
 ## 2. 현재 단계
 
-현재 프로젝트는 **STEP 0 — Architecture Definition** 단계다.
+**STEP 0 — Architecture Definition은 완료되었다.**
 
-아직 최종 디렉터리 구조와 제작 데이터 모델이 확정되지 않았다.
+Content / Episode-Cut / Continuity / Library / Generation Run / Provider Integration / Image-Asset Storage의 7개 설계 영역은 모두 사용자 승인으로 확정되었다.
+
+다만 실제 최종 디렉터리 구조와 정식 문서 분리는 아직 생성하지 않았다.
 
 따라서 다음 원칙을 따른다.
 
 - 미래에 필요할 것이라는 이유만으로 디렉터리와 파일을 대량 생성하지 않는다.
-- `architecture_v0_draft.md`의 제안 구조를 확정 구조로 간주하지 않는다.
-- STEP 0의 각 설계 영역을 사용자와 검토한 뒤 필요한 구조만 단계적으로 생성한다.
+- `architecture_v0_draft.md`에 기록된 STEP 0-1~0-7의 **CONFIRMED 결정은 현재 아키텍처 기준**으로 사용한다.
+- 문서 상단의 초기 제안 디렉터리 트리는 그대로 확정 구조로 간주하지 않고, CONFIRMED 결정 전체를 반영해 최종 디렉터리 구조를 별도로 확정한다.
 - **STEP 0-1 — Content Model은 CONFIRMED 상태다.**
 - **STEP 0-2 — Episode / Cut Model은 CONFIRMED 상태다.**
 - **STEP 0-3 — Continuity Model은 CONFIRMED 상태다.**
 - **STEP 0-4 — Library Model은 CONFIRMED 상태다.**
 - **STEP 0-5 — Generation Run Model은 CONFIRMED 상태다.**
 - **STEP 0-6 — Provider Integration Model은 CONFIRMED 상태다.**
-- 현재 최우선 작업은 **STEP 0-7 — Image / Asset Storage Policy 정의**다.
+- **STEP 0-7 — Image / Asset Storage Policy는 CONFIRMED 상태다.**
+- **STEP 0 전체는 COMPLETED 상태다.**
+- 현재 최우선 작업은 **확정된 아키텍처를 반영한 최종 디렉터리 구조 확정**이다.
 
 ## 3. 저장소 범위
 
@@ -54,7 +58,7 @@
 - 승인 / 수정 / 폐기 상태
 - 현재 진행 위치
 
-STEP 0에서 최종 기록 체계를 확정하기 전까지는 필요한 최소 문서만 생성한다.
+STEP 0은 완료되었다. 다음 작업에서 확정된 아키텍처를 기준으로 최종 기록 체계와 디렉터리 구조를 단계적으로 생성한다.
 
 ## 5. 외부 생성 서비스
 
@@ -66,8 +70,8 @@ Canonical Scene, Character, Location, Object, Continuity 등 장기적으로 유
 
 ## 6. 다음 작업
 
-`architecture_v0_draft.md`를 읽고 다음 항목부터 진행한다.
+`architecture_v0_draft.md`의 STEP 0-1~0-7 CONFIRMED 결정을 읽고 다음 항목부터 진행한다.
 
-**STEP 0-7 — Image / Asset Storage Policy**
+**POST STEP 0 — 최종 디렉터리 구조 확정**
 
-확정된 Content / Episode-Cut / Continuity / Library / Generation Run / Provider Integration Model을 전제로 원본·후보·최종·Reference 이미지의 Asset ID, 파일명, 저장 위치, 보존·폐기·파생본 정책과 Git/Git LFS/외부 저장소의 역할을 설계하고 검토한다.
+확정된 아키텍처를 기준으로 실제 저장소 구조를 설계·확정한다. 이후 Architecture 문서 분리, Rules 문서 체계, Templates, Progress / Decision 기록 체계를 생성하고 기존 Genesis Creation CUT 1–4 작업을 이관한다.
