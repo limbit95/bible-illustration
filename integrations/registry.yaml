@@ -1,0 +1,5 @@
+schema_version: 1
+
+# Provider Registry
+# 실제 Provider integration을 정식 구성할 때 항목을 추가한다.
+providers: []
