@@ -603,7 +603,8 @@ STEP 0의 7개 영역이 검토·승인되면 다음을 진행한다.
 - OpenArt는 향후 적극 활용 예정
 - Higgsfield도 향후 provider 후보로 고려
 - 이전 대화에서 Genesis Creation의 초기 컷 제작을 진행했으나, **아키텍처 확정 전까지 기존 작업물을 성급히 새로운 구조에 이관하지 않는다**
-- 다음 작업은 이미지 제작이 아니라 **STEP 0 — Architecture Definition**부터 진행한다
+- **STEP 0 — Architecture Definition의 7개 영역은 모두 CONFIRMED 상태다.**
+- 다음 작업은 확정된 모델을 기반으로 **최종 디렉터리 구조를 확정하고 실제 저장소 구조를 구성하는 것**이다.
 
 ---
 
@@ -613,9 +614,9 @@ STEP 0의 7개 영역이 검토·승인되면 다음을 진행한다.
 
 다음 작업:
 
-> **STEP 0-7 — Image / Asset Storage Policy 정의**
+> **POST STEP 0 — 최종 디렉터리 구조 확정**
 
-확정된 Content / Episode-Cut / Continuity / Library / Generation Run / Provider Integration Model을 전제로 원본·후보·최종·Reference 이미지의 Asset ID, 파일명, 저장 위치, 보존·폐기·파생본 정책과 Git/Git LFS/외부 저장소의 역할을 설계한다.
+STEP 0-1~0-7에서 확정한 모델과 정책을 기준으로 실제 저장소의 최종 디렉터리 구조를 확정한다. 이후 Architecture / Rules / Templates / Progress / Decision 문서를 분리·정식화하고 기존 Genesis Creation CUT 1–4 작업을 이관한다.
 
 STEP 0 진행 중 중요한 설계 결정은 대화에만 남기지 말고 이 저장소에 기록한다.
 
@@ -4118,9 +4119,9 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 
 ---
 
-# STEP 0-7 — Image / Asset Storage Policy Working Draft v0.3
+# STEP 0-7 — Image / Asset Storage Policy v1.0
 
-> 상태: **REVIEW READY / 구조 점검 완료**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -4895,7 +4896,7 @@ STEP 0 확정 후 실제 구조 생성 또는 운영 과정에서 정한다.
 
 ## 29. STEP 0-7 검토 포인트
 
-사용자 검토가 필요한 핵심 항목:
+다음 항목은 사용자 승인으로 확정되었다:
 
 - 일반 Git = metadata / Git LFS = 장기 이미지 binary 원칙
 - 외부 Storage/CDN은 Source of Truth가 아니라는 원칙
@@ -4918,7 +4919,11 @@ STEP 0 확정 후 실제 구조 생성 또는 운영 과정에서 정한다.
 - 웹 공개본과 Production Master 분리
 - 이미지와 사이트용 본문/내레이션 text 분리
 
-이 항목들이 확정되면 STEP 0-7을 CONFIRMED로 전환하고 STEP 0 — Architecture Definition을 완료한다.
+위 항목은 2026-10-02 사용자 승인으로 확정되었다.
+
+**STEP 0-7 — Image / Asset Storage Policy: COMPLETED / CONFIRMED**
+
+**STEP 0 — Architecture Definition: COMPLETED / ALL 7 AREAS CONFIRMED**
 
 완료 후 다음 순서로 실제 저장소 구조를 만든다.
 
