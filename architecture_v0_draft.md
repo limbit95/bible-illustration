@@ -615,7 +615,7 @@ STEP 0의 7개 영역이 검토·승인되면 다음을 진행한다.
 
 > **STEP 0-6 — Provider Integration Model 정의**
 
-확정된 Content / Episode-Cut / Continuity / Library / Generation Run Model을 전제로 OpenArt, Higgsfield, ChatGPT 등 외부 Provider의 binding, generation profile, prompt adapter, reference 전달 규칙과 교체 가능성을 설계한다.
+확정된 Content / Episode-Cut / Continuity / Library / Generation Run Model을 전제로 OpenArt, Higgsfield, ChatGPT 등 외부 Provider의 binding, generation profile, prompt adapter, reference 전달 규칙, input resolution과 교체 가능성을 설계한다.
 
 STEP 0 진행 중 중요한 설계 결정은 대화에만 남기지 말고 이 저장소에 기록한다.
 
@@ -3363,9 +3363,9 @@ Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산�
 
 ---
 
-# STEP 0-6 — Provider Integration Model Working Draft v0.2
+# STEP 0-6 — Provider Integration Model Working Draft v0.3
 
-> 상태: **WORKING DRAFT / Binding·Result 정규화 보완**
+> 상태: **REVIEW READY / 구조 점검 완료**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -3669,6 +3669,9 @@ Provider Generation Profile
 7. profile은 편의를 위한 기본값이며 Run의 실제 입력 기록을 대체하지 않는다.
 8. 하나의 Canonical Style이 여러 Provider profile에 매핑될 수 있다.
 9. 한 Provider에 여러 목적의 profile을 둘 수 있지만 실제 필요가 생기기 전 과도하게 만들지 않는다.
+10. provider_key + profile_key는 같은 목적의 profile identity를 나타내며, 설정 변경은 profile_revision으로 추적한다.
+11. 완전히 다른 목적의 profile은 새 profile_key를 사용한다.
+12. 이미 Run에서 사용된 profile_key/revision의 과거 의미를 다른 설정으로 재사용하지 않는다.
 
 ## 11. Prompt Adapter
 
@@ -3716,7 +3719,50 @@ Run은 사용한 adapter key/revision을 기록하고, STEP 0-5 규칙대로 실
 
 따라서 adapter revision만으로 과거 Run을 재현하려 하지 않는다.
 
-## 13. Reference Delivery Mapping
+adapter key 규칙:
+
+1. provider_key + adapter_key는 같은 변환 목적의 adapter identity를 나타낸다.
+2. 같은 목적의 의미 있는 변환 규칙 변경은 adapter_revision을 증가시킨다.
+3. 완전히 다른 변환 목적은 새 adapter_key를 사용한다.
+4. 이미 Run에서 사용된 adapter key/revision의 과거 의미를 다른 규칙으로 재사용하지 않는다.
+
+## 13. Input Resolution 우선순위
+
+Provider 요청을 만들 때 재사용 기본값과 Run별 override가 충돌하지 않도록 우선순위를 명확히 한다.
+
+기본 개념:
+
+~~~text
+Canonical Definition
+        +
+Provider Binding / Reference Mapping
+        +
+Generation Profile defaults
+        +
+Run-specific explicit overrides
+        ↓
+Resolved Provider Input
+        ↓
+Generation Run snapshot
+~~~
+
+설정값의 일반 우선순위:
+
+~~~text
+Run explicit override
+> Generation Profile default
+> 확인 가능한 Provider default
+~~~
+
+원칙:
+
+1. Canonical Scene / Library constraint는 “설정 기본값”이 아니므로 위 우선순위로 덮어쓰지 않는다.
+2. Run override가 Canonical constraint와 충돌하면 실행 전에 mismatch로 표시한다.
+3. Provider default가 명확하지 않으면 추측하지 않고 unknown / omitted로 취급한다.
+4. 최종적으로 resolve된 observable prompt, reference, binding, model, settings를 STEP 0-5 Run snapshot에 기록한다.
+5. Integration 정의만 보고 나중에 실제 resolved input을 역산하지 않는다.
+
+## 14. Reference Delivery Mapping
 
 Canonical Reference 역할과 Provider가 실제로 받는 입력 방식은 동일하지 않을 수 있다.
 
@@ -3742,7 +3788,7 @@ Provider Integration은 이 변환 규칙을 명시한다.
 
 실제 Run에는 STEP 0-5에서 확정한 대로 **무엇을 어떤 역할과 설정으로 전달했는지** snapshot한다.
 
-## 14. Reference Delivery Method
+## 15. Reference Delivery Method
 
 Provider별 reference 전달 method 후보:
 
@@ -3756,6 +3802,8 @@ unsupported
 
 Provider가 어떤 Canonical role을 직접 지원하지 않는다고 해서 Canonical 정의를 삭제하거나 단순화하지 않는다.
 
+Binding이 needs_review / unavailable 상태이거나 capability가 unknown / unsupported인 경우 Adapter는 해당 입력을 **조용히 생략하지 않고 warning 또는 unresolved requirement로 노출**해야 한다.
+
 처리 순서:
 
 1. 다른 지원 방식으로 전달 가능한지 검토
@@ -3763,7 +3811,7 @@ Provider가 어떤 Canonical role을 직접 지원하지 않는다고 해서 Can
 3. Provider capability로 충족 불가능한 핵심 constraint라면 다른 Provider 사용을 검토
 4. Canonical 정의를 Provider 한계에 맞춰 조용히 훼손하지 않음
 
-## 15. Capability Mismatch
+## 16. Capability Mismatch
 
 Provider가 필요한 기능을 지원하지 않을 수 있다.
 
@@ -3783,12 +3831,13 @@ Provider capability:
 - Canonical Scene을 낮추지 않는다.
 - unsupported 사항을 명시한다.
 - 다른 전달 방법 또는 Provider를 검토한다.
-- 탐색 Run이라면 한계를 알고 실행할 수 있다.
+- 탐색 Run이라면 한계를 명시한 상태로 실행할 수 있다.
 - 최종 production candidate에는 현재 Canonical 요구사항을 다시 적용한다.
+- 핵심 requirement가 unresolved인 상태를 “정상 지원”으로 기록하지 않는다.
 
 Provider의 기능 부족이 프로젝트의 성경·고증·Continuity 기준을 변경하는 근거가 되어서는 안 된다.
 
-## 16. Provider Selection
+## 17. Provider Selection
 
 Canonical Episode / Cut에는 특정 Provider를 영구 기본값으로 박아두지 않는다.
 
@@ -3809,7 +3858,7 @@ Provider 선택은 운영 결정이다.
 
 같은 Cut을 ChatGPT에서 탐색하고 OpenArt에서 재생성해도 Cut ID와 Canonical 정의는 동일하다.
 
-## 17. Execution Mode
+## 18. Execution Mode
 
 같은 Provider라도 실제 실행 방식이 다를 수 있다.
 
@@ -3826,7 +3875,7 @@ Generation Profile은 지원 가능한 execution mode를 기록할 수 있고, G
 
 UI를 통해 수동 생성한 기록과 API 자동 생성 기록을 동일한 Run Model 아래 관리하되, 확인 가능한 metadata 범위가 다를 수 있음을 허용한다.
 
-## 18. Provider-specific 정보의 위치
+## 19. Provider-specific 정보의 위치
 
 Provider-specific 데이터는 가능한 한 Integration Layer에 격리한다.
 
@@ -3857,7 +3906,7 @@ Run
 - API endpoint 세부 정보
 - Provider용 최적화 Prompt
 
-## 19. Provider Response Normalization
+## 20. Provider Response Normalization
 
 Provider마다 반환하는 job 구조, output ID, 이미지 개수, metadata 형식이 다를 수 있다.
 
@@ -3881,9 +3930,10 @@ Generated Result(s)
 4. Provider가 일부 결과만 반환하면 execution_status를 partial로 표현할 수 있다.
 5. Provider 고유 metadata를 공통 필드에 억지로 끼워 맞추지 않고 provider_specific raw metadata 영역을 허용한다.
 6. raw metadata를 보존하더라도 인증 토큰이나 민감한 요청 헤더는 저장하지 않는다.
-7. Integration normalization이 Canonical Scene이나 Result 평가를 자동으로 변경하지 않는다.
+7. 대용량 binary/image payload 자체를 raw metadata에 중복 저장하지 않는다. 실제 Asset 저장은 STEP 0-7 정책을 따른다.
+8. Integration normalization이 Canonical Scene이나 Result 평가를 자동으로 변경하지 않는다.
 
-## 20. Provider Integration 변경과 Canonical Revision
+## 21. Provider Integration 변경과 Canonical Revision
 
 다음 변화는 일반적으로 Canonical revision을 요구하지 않는다.
 
@@ -3898,7 +3948,7 @@ Generated Result(s)
 
 즉 **Integration 변경과 Canonical 변경을 구분한다.**
 
-## 21. Provider 폐기 / 교체
+## 22. Provider 폐기 / 교체
 
 Provider를 더 이상 사용하지 않아도 과거 기록은 유지한다.
 
@@ -3920,7 +3970,7 @@ OpenArt integration retired
 4. Provider migration을 이유로 Episode/Cut/Library ID를 다시 만들지 않는다.
 5. 필요한 경우 새 Binding/Profile/Adapter만 추가한다.
 
-## 22. Secrets / Credential 규칙
+## 23. Secrets / Credential 규칙
 
 Provider Integration 문서와 Run 기록에는 다음을 저장하지 않는다.
 
@@ -3936,7 +3986,7 @@ Provider Integration 문서와 Run 기록에는 다음을 저장하지 않는다
 
 Credential은 저장소 밖의 안전한 실행 환경에서 관리한다.
 
-## 23. Provider Integration과 Generation Run의 관계
+## 24. Provider Integration과 Generation Run의 관계
 
 Integration은 **재사용 가능한 운영 정의**, Run은 **실제로 실행된 immutable snapshot**이다.
 
@@ -3958,7 +4008,7 @@ External Provider
 3. Run에는 최종 observable prompt/reference/settings도 별도로 기록한다.
 4. Integration 정의만 보고 과거 Run 입력을 추정하지 않는다.
 
-## 24. 초기 Provider별 적용 원칙
+## 25. 초기 Provider별 적용 원칙
 
 ### ChatGPT
 
@@ -3982,7 +4032,7 @@ Provider에서 재사용 가능한 외부 리소스나 profile이 필요해질 �
 
 세 Provider의 구체적인 기능·필드명은 실제 Integration을 구현할 때 당시 지원 상태를 확인하여 작성한다.
 
-## 25. 과도한 Provider 추상화 금지
+## 26. 과도한 Provider 추상화 금지
 
 Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의 완벽한 공통 스키마로 만들지 않는다.
 
@@ -3994,7 +4044,7 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 4. 공통화가 Canonical 의미 손실을 만들면 공통화하지 않는다.
 5. 새 Provider가 들어올 때 필요한 최소 확장만 한다.
 
-## 26. STEP 0-6 불변 조건 후보
+## 27. STEP 0-6 불변 조건 후보
 
 1. Provider Integration은 Canonical 정의와 외부 서비스를 연결하는 Adapter Layer다.
 2. Provider 내부 리소스는 Canonical Library identity가 아니다.
@@ -4005,17 +4055,20 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 7. 외부 resource 재등록은 Canonical Library ID 변경을 요구하지 않는다.
 8. Generation Profile은 Provider-specific 재사용 기본값이며 Canonical Style과 다르다.
 9. Prompt Adapter 출력은 Canonical 데이터의 파생물이다.
-10. Reference role과 Provider delivery method를 분리한다.
-11. Provider가 기능을 지원하지 않아도 Canonical 정의를 자동으로 축소하지 않는다.
-12. Provider 선택은 운영 결정이며 Canonical Content identity가 아니다.
-13. Integration 변경은 일반적으로 Cut/Library revision을 요구하지 않는다.
-14. Provider 응답은 STEP 0-5의 공통 Run / Result 의미로 정규화하되 Provider 고유 metadata를 필요 시 보존한다.
-15. Provider 폐기·교체 후에도 과거 Binding/Profile/Run 기록을 유지한다.
-16. Run은 사용한 Integration revision과 실제 resolved input snapshot을 함께 보존한다.
-17. 인증 비밀값을 GitHub Source of Truth에 저장하지 않는다.
-18. Provider-specific 기능은 필요 시 격리하되 과도한 공통 추상화를 만들지 않는다.
+10. Generation Profile / Prompt Adapter는 안정적인 key와 revision으로 추적한다.
+11. Reference role과 Provider delivery method를 분리한다.
+12. Input resolution은 Run override > Profile default > 확인 가능한 Provider default 순으로 하되 Canonical constraint를 덮어쓰지 않는다.
+13. Provider가 기능을 지원하지 않아도 Canonical 정의를 자동으로 축소하지 않는다.
+14. unsupported / unknown capability나 비활성 Binding을 조용히 누락하지 않고 unresolved requirement로 드러낸다.
+15. Provider 선택은 운영 결정이며 Canonical Content identity가 아니다.
+16. Integration 변경은 일반적으로 Cut/Library revision을 요구하지 않는다.
+17. Provider 응답은 STEP 0-5의 공통 Run / Result 의미로 정규화하되 Provider 고유 metadata를 필요 시 보존한다.
+18. Provider 폐기·교체 후에도 과거 Binding/Profile/Run 기록을 유지한다.
+19. Run은 사용한 Integration revision과 실제 resolved input snapshot을 함께 보존한다.
+20. 인증 비밀값을 GitHub Source of Truth에 저장하지 않는다.
+21. Provider-specific 기능은 필요 시 격리하되 과도한 공통 추상화를 만들지 않는다.
 
-## 27. STEP 0-6에서 의도적으로 미확정하는 항목
+## 28. STEP 0-6에서 의도적으로 미확정하는 항목
 
 다음은 이후 구현 또는 STEP 0-7에서 정한다.
 
@@ -4031,7 +4084,7 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 - 이미지 Asset ID / 저장 위치
 - 웹사이트 전달용 Asset pipeline
 
-## 28. STEP 0-6 검토 포인트
+## 29. STEP 0-6 검토 포인트
 
 사용자 검토가 필요한 핵심 항목:
 
@@ -4041,8 +4094,11 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 - Binding revision과 Canonical Library revision 분리
 - scope alias와 credential 분리
 - Generation Profile과 Canonical Visual Style 분리
+- Generation Profile / Prompt Adapter key와 revision 수명 주기
 - Prompt Adapter 출력은 파생 데이터라는 원칙
+- Input resolution 우선순위와 Canonical constraint 비덮어쓰기 원칙
 - Canonical Reference role과 Provider delivery method 분리
+- Capability mismatch / inactive Binding을 조용히 누락하지 않는 원칙
 - Capability mismatch 시 Canonical 정의를 낮추지 않는 원칙
 - Provider 선택을 운영 결정으로 두는 원칙
 - manual_ui / api / chat_native execution mode
