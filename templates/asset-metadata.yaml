@@ -1,0 +1,42 @@
+# Bible Illustration — Asset metadata template
+# Binary filename should be <ASSET_ID>.<ext>.
+# Meaningful pixel changes require a new Asset ID.
+
+asset_id: null
+
+owner:
+  # Allowed v1 owner types: cut | library
+  type: null
+  id: null
+
+source:
+  # Allowed: generation_result | manual_edit | user_supplied | external_import | derived_import
+  kind: null
+  result_id: null
+  parent_asset_id: null
+
+binary:
+  storage: git_lfs
+  path: null
+  sha256: null
+  media_type: null
+  width: null
+  height: null
+  size_bytes: null
+
+# Allowed: pending_ingest | available | missing | removed
+availability: pending_ingest
+
+created_at: null
+
+provenance:
+  provider: null
+  note: null
+
+rights:
+  # storage_status: permitted | restricted | unknown
+  storage_status: unknown
+  # basis: project_generated | licensed | public_domain |
+  #        permission_granted | user_asserted | other | unknown
+  basis: unknown
+  note: null
