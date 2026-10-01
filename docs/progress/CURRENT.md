@@ -16,7 +16,8 @@
 - Production Rules v1.0: **CONFIRMED**
 - Templates v1.0: **CONFIRMED**
 - Template 필수 필드 교차 검증: **PASSED**
-- 현재 작업: **Progress / Decision 기록 체계 보완 준비**
+- Progress / Decision 기록 체계 v1.0 초안: **REVIEW READY**
+- 현재 작업: **Progress / Decision 기록 체계 사용자 검토 대기**
 
 ## 현재 Production 위치
 
@@ -54,6 +55,9 @@
 23. Architecture 기준 필수 필드 및 enum 교차 검증 통과
 24. Template 단계 물리 스키마 구체화: `cut.library_refs`, `generation-run.integration`, `asset-selection.cut_id`
 25. Templates v1.0 사용자 승인 및 11개 YAML CONFIRMED 전환
+26. `docs/progress/MILESTONES.md` 생성
+27. `docs/decisions/README.md` Decision Record 정책 생성
+28. CURRENT / MILESTONES / Decision 책임 분리 및 자체 점검 완료
 
 ## 현재 Source of Truth
 
@@ -62,14 +66,21 @@
 - 확정 Repository Structure: `docs/architecture/REPOSITORY_STRUCTURE.md`
 - Architecture 진입점: `docs/architecture/OVERVIEW.md`
 - 세부 Architecture: `docs/architecture/*.md`
-- 확정 Repository Structure: `docs/architecture/REPOSITORY_STRUCTURE.md`
+- Milestone 이력: `docs/progress/MILESTONES.md`
+- Decision 정책/인덱스: `docs/decisions/README.md`
 - Historical working record: `architecture_v0_draft.md`, `repository_structure_v1_draft.md`
 
 현재 Architecture 판단에서는 정식 `docs/architecture/` 문서를 historical working record보다 우선한다.
 
+## 관련 결정 / 문서
+
+- `docs/progress/MILESTONES.md` — 주요 완료 기준점
+- `docs/decisions/README.md` — Decision Record 생성·상태·번호 규칙
+- 현재 생성된 `DEC-*.md`: 없음
+
 ## 다음 작업
 
-1. Progress / Decision 기록 체계 보완
+1. Progress / Decision 기록 체계 v1.0 사용자 승인 및 CONFIRMED 전환
 2. Git LFS / ignore 정책 확정
 3. Genesis Creation CUT 1–4 migration
 4. migration 감사
