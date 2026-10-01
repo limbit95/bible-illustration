@@ -978,9 +978,9 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 
 ---
 
-# STEP 0-2 — Episode / Cut Model Working Draft v0.4
+# STEP 0-2 — Episode / Cut Model Working Draft v0.5
 
-> 상태: **REVIEW READY / 사용자 수정사항 반영**
+> 상태: **REVIEW READY / 상태 모델 분리 반영**
 >
 > 선행 조건: **STEP 0-1 — Content Model v1.0 CONFIRMED**
 >
@@ -1033,7 +1033,7 @@ revision: 1
 - `primary_scripture`: 직접 시각화하는 기준 본문
 - `supporting_scripture`: 병행·보조·역사적 맥락 참고 본문
 - `production_intent`: 왜 이 범위를 하나의 Episode로 묶었는지와 제작상의 핵심 목적
-- `status`: Episode 제작 상태
+- `definition_status`: Episode 정의의 설계·검토·승인 상태
 - `revision`: Episode 정의의 승인 이력을 추적하기 위한 정수 revision
 
 ### 2.2 Episode에 직접 저장하지 않는 데이터
@@ -1086,7 +1086,7 @@ revision: 1
 - `scene.summary`: 이미지 생성과 검토의 기준이 되는 장면 설명
 - `scene.required_elements`: 반드시 존재해야 하는 핵심 요소
 - `scene.forbidden_elements`: 본문 왜곡이나 잘못된 표현을 막기 위해 명시적으로 금지할 요소
-- `status`: Cut 제작 상태
+- `definition_status`: Cut Canonical Scene 정의의 설계·검토·승인 상태
 - `revision`: Canonical Cut Specification의 revision
 
 ### 3.2 Cut의 상세 시각 필드는 단계적으로 확장한다
@@ -1139,74 +1139,14 @@ STEP 0-1에서 Storyboard의 최소 책임으로 확정된 `scripture_anchor`와
 
 Cut 문서가 해당 값을 필요로 할 때는 자신의 `cut_id`로 Storyboard entry를 참조한다. 동일한 `scripture_anchor`나 `beat`를 Cut에 다시 복사해 두 군데를 동기화하지 않는다.
 
-## 5. Episode 상태 모델
+## 5. Episode Definition Status
 
-Episode의 상태는 Provider의 생성 작업이 아니라 **Episode 전체 제작 진행 상태**를 나타낸다.
+Episode의 상태는 이미지 제작 진행률이 아니라 **Episode 정의 자체의 설계·검토·승인 상태**만 나타낸다.
 
-기본 상태 후보:
-
-```text
-draft
-↓
-in_progress
-↓
-in_review
-↓
-approved
-```
-
-보조 종료 상태:
-
-```text
-cancelled
-superseded
-```
-
-의미:
-
-- `draft`: 범위와 Storyboard를 설계 중
-- `in_progress`: Cut 설계 또는 제작이 실제 진행 중
-- `in_review`: Episode 전체 범위와 Cut 구성을 최종 검토 중
-- `approved`: 현재 revision이 제작 기준으로 승인됨
-- `cancelled`: 승인 전에 제작 자체가 취소됨
-- `superseded`: 과거 승인 Episode가 **다른 Episode ID**로 대체되어 더 이상 현행 기준이 아님
-
-### Episode 승인 조건
-
-Episode를 `approved`로 만들기 위한 최소 조건은 다음으로 둔다.
-
-1. Episode 필수 데이터가 존재한다.
-2. Storyboard가 존재한다.
-3. Storyboard에 포함된 모든 active Cut이 승인 상태다.
-4. Storyboard 순서와 실제 Cut 참조가 유효하다.
-5. Episode의 주본문 범위를 의도적으로 누락하거나 중복한 부분이 없는지 검토되었다.
-
-Continuity 승인 조건은 STEP 0-3에서 추가될 수 있다.
-
-### Cut 승인 조건
-
-Cut을 `approved`로 만들기 위한 최소 조건은 다음으로 둔다.
-
-1. Cut 필수 Canonical Scene 데이터가 존재한다.
-2. 해당 Cut의 Storyboard entry가 존재하고 `scripture_anchor`와 `beat`가 유효하다.
-3. 현재 Cut revision을 기준으로 생성된 결과 중 승인할 대표 결과가 최소 하나 존재한다.
-4. 대표 결과가 Scripture Anchor, Scene Intent, required/forbidden elements와 일치하는지 검토되었다.
-5. 생성 실패 기록이 있더라도 최종 승인 판단에 필요한 이력이 보존되어 있다.
-
-Continuity 관련 검토 조건은 STEP 0-3에서 추가될 수 있다.
-
-## 6. Cut 상태 모델
-
-Cut은 Episode보다 세부적인 제작 흐름을 가진다.
-
-기본 상태 후보:
+기본 상태:
 
 ```text
 draft
-↓
-ready
-↓
-in_production
 ↓
 in_review
 ↓
@@ -1218,7 +1158,7 @@ approved
 ```text
 in_review
 → revision_requested
-→ draft 또는 ready
+→ draft
 ```
 
 보조 종료 상태:
@@ -1230,20 +1170,98 @@ superseded
 
 의미:
 
-- `draft`: Scene Specification 작성 중
-- `ready`: 생성 가능한 수준으로 Canonical Scene 정의가 준비됨
-- `in_production`: 현재 revision을 기준으로 이미지 제작/생성 시도가 진행 중
-- `in_review`: 생성 결과와 Canonical Scene의 일치 여부를 검토 중
-- `revision_requested`: Scene Specification 또는 생성 방향 수정이 필요함
-- `approved`: 해당 Cut의 현재 revision과 대표 결과가 승인됨
-- `cancelled`: 승인 전에 해당 Cut 제작이 취소됨
+- `draft`: Episode 범위, 본문, production intent, Storyboard를 설계 중
+- `in_review`: Episode 정의를 승인하기 위해 검토 중
+- `revision_requested`: Episode 정의 수정이 필요함
+- `approved`: 현재 revision의 Episode 정의가 Canonical 기준으로 승인됨
+- `cancelled`: 승인 전에 Episode 정의 자체가 취소됨
+- `superseded`: 과거 승인 Episode가 **다른 Episode ID**로 대체되어 더 이상 현행 기준이 아님
+
+Episode가 `approved`라는 것은 “모든 이미지 제작이 끝났다”는 뜻이 아니다.
+
+정확한 의미는:
+
+> **이 Episode의 범위와 Storyboard, active Cut 구성과 제작 의도가 이미지 제작에 사용할 Canonical 기준으로 승인되었다.**
+
+### Episode 정의 승인 조건
+
+Episode를 `approved`로 만들기 위한 최소 조건은 다음으로 둔다.
+
+1. Episode 필수 데이터가 존재한다.
+2. Storyboard가 존재한다.
+3. Storyboard에 포함된 모든 active Cut의 **definition_status가 approved**다.
+4. Storyboard 순서와 실제 Cut 참조가 유효하다.
+5. Episode의 주본문 범위를 의도적으로 누락하거나 중복한 부분이 없는지 검토되었다.
+
+Continuity 정의 승인 조건은 STEP 0-3에서 추가될 수 있다.
+
+## 6. Cut Definition Status
+
+Cut의 상태도 이미지 생성 진행률이 아니라 **Canonical Scene 정의의 설계·검토·승인 상태**만 나타낸다.
+
+기본 상태:
+
+```text
+draft
+↓
+in_review
+↓
+approved
+```
+
+검토 후 수정이 필요하면:
+
+```text
+in_review
+→ revision_requested
+→ draft
+```
+
+보조 종료 상태:
+
+```text
+cancelled
+superseded
+```
+
+의미:
+
+- `draft`: Canonical Scene Specification 작성 중
+- `in_review`: Scripture Anchor, Scene Intent, 필수/금지 요소 등을 검토 중
+- `revision_requested`: 장면 정의 수정이 필요함
+- `approved`: 현재 revision의 Canonical Scene 정의가 이미지 제작 기준으로 승인됨
+- `cancelled`: 승인 전에 Cut 정의 자체가 취소됨
 - `superseded`: 이미 승인된 Cut이 **다른 Cut ID**로 대체되어 더 이상 현행 기준이 아님
 
-`rejected`는 Cut 자체의 영구 상태로 사용하지 않는다.
+Cut의 `approved`는 최종 이미지 승인과 분리한다.
 
-개별 생성 실패와 Reject는 Generation Run의 결과로 기록하고, Cut은 계속 다음 생성 시도를 이어갈 수 있기 때문이다.
+즉:
 
-`in_production`은 특정 Provider 실행 상태가 아니라 Cut 수준의 제작 단계다. 개별 요청의 성공/실패/대기 상태는 STEP 0-5의 Generation Run Model에서 관리한다.
+```text
+Cut definition approved
+        ↓
+Generation / Rendering
+        ↓
+Generated Asset review
+        ↓
+Representative Asset approved
+```
+
+Cut 정의가 승인된 뒤 여러 번 이미지를 생성할 수 있으며, 생성 결과의 성공·실패·승인 상태는 STEP 0-5 Generation Run Model과 STEP 0-7 Asset 정책에서 관리한다.
+
+### Cut 정의 승인 조건
+
+Cut의 `definition_status`를 `approved`로 만들기 위한 최소 조건은 다음과 같다.
+
+1. Cut 필수 Canonical Scene 데이터가 존재한다.
+2. 해당 Cut의 Storyboard entry가 존재한다.
+3. Storyboard의 `scripture_anchor`와 `beat`가 유효하다.
+4. Scene Intent와 required/forbidden elements가 본문과 충돌하지 않는지 검토되었다.
+5. 이미지 생성에 사용할 수 있을 만큼 장면 정의가 명확하다.
+
+대표 생성 이미지의 존재 여부는 **Cut 정의 승인 조건이 아니다.**
+
+Continuity 정의 관련 승인 조건은 STEP 0-3에서 추가될 수 있다.
 
 ## 7. 승인 후 수정과 Revision
 
@@ -1289,8 +1307,8 @@ Episode도 동일한 원칙을 따른다.
 
 승인된 정의에 의미 있는 변경이 생기면 revision만 증가시키고 `approved` 상태를 그대로 유지하지 않는다.
 
-- Episode: 새 revision 생성 → `in_progress`
-- Cut: 새 revision 생성 → `draft` 또는 이미 재생성 가능한 수준이면 `ready`
+- Episode: 새 revision 생성 → `definition_status: draft`
+- Cut: 새 revision 생성 → `definition_status: draft`
 
 새 revision은 다시 검토와 승인을 거쳐야 한다.
 
@@ -1415,7 +1433,41 @@ Display Text는 Canonical Scene과 별도로 관리한다.
 
 번역본 인용이나 본문 전문이 들어가는 경우 저작권 규칙을 따라야 한다.
 
-## 10. 이미지와 Cut의 관계
+## 10. Cut 정의 승인과 이미지 제작의 분리
+
+Episode/Cut의 Definition Status와 이미지 제작 상태는 서로 다른 축으로 관리한다.
+
+```text
+Episode / Cut Definition
+        ↓ approved
+Rendering / Generation
+        ↓
+Generated Asset Review
+        ↓
+Production Complete
+```
+
+원칙:
+
+1. Episode/Cut의 `approved`는 **정의 승인**을 뜻한다.
+2. 이미지 제작이 시작되거나 완료되어도 Episode/Cut의 Definition Status를 `in_production` 같은 값으로 바꾸지 않는다.
+3. 이미지 생성 진행률과 Run 성공/실패는 STEP 0-5 Generation Run Model이 책임진다.
+4. 대표 승인 이미지와 Asset 상태는 STEP 0-7 Image / Asset Storage Policy에서 책임진다.
+5. 필요하다면 향후 UI에서 `production_status`를 계산해 보여줄 수 있지만, STEP 0-2에서는 Episode/Cut Canonical 데이터에 이를 중복 저장하지 않는다.
+6. 따라서 설계는 승인됐지만 이미지가 아직 없는 Cut도 정상적인 상태다.
+7. 새 Provider로 이미지를 다시 생성하더라도 Canonical Scene 정의가 바뀌지 않았다면 Cut revision과 Definition Status는 그대로 유지할 수 있다.
+
+### Production Complete의 개념
+
+이미지 제작 완료 여부는 Definition Status와 별도로 판단한다.
+
+초기 개념상 Cut이 production complete가 되려면 현재 승인된 Cut revision을 기준으로 **대표 승인 Asset이 최소 하나 존재**해야 한다.
+
+Episode의 production complete는 active Cut 전체가 production complete일 때 도출할 수 있다.
+
+이 값의 정확한 저장/계산 방법은 STEP 0-5와 STEP 0-7에서 확정한다.
+
+## 11. 이미지와 Cut의 관계
 
 Cut과 이미지의 관계는 다음 원칙으로 정의한다.
 
@@ -1438,7 +1490,7 @@ Generation Run 3 → image C (approved)
 
 Generation Run과 Asset의 상세 식별 체계는 STEP 0-5와 STEP 0-7에서 확정한다.
 
-## 11. Active Cut과 종료 상태
+## 12. Active Cut과 종료 상태
 
 Storyboard에서 현재 제작 흐름에 포함되는 Cut을 **active Cut**으로 본다.
 
@@ -1448,7 +1500,7 @@ Storyboard에서 현재 제작 흐름에 포함되는 Cut을 **active Cut**으�
 
 Episode 승인 조건에서 말하는 “모든 active Cut 승인”은 이 정의를 따른다.
 
-## 12. Cut 삭제보다 Cancel / Supersede를 우선한다
+## 13. Cut 삭제보다 Cancel / Supersede를 우선한다
 
 ID가 발급되고 제작 기록이 생긴 Cut은 가급적 물리적으로 삭제하지 않는다.
 
@@ -1462,7 +1514,7 @@ ID가 발급되고 제작 기록이 생긴 Cut은 가급적 물리적으로 삭�
 
 Episode에도 동일한 원칙을 적용한다.
 
-## 13. STEP 0-2 불변 조건 후보
+## 14. STEP 0-2 불변 조건 후보
 
 이번 단계에서 확정할 핵심 invariant 후보는 다음과 같다.
 
@@ -1477,13 +1529,15 @@ Episode에도 동일한 원칙을 적용한다.
 9. 승인 후 의미 있는 정의 변경은 revision으로 추적하고 새 revision은 다시 승인을 거친다.
 10. `superseded`는 revision 변경이 아니라 다른 Episode/Cut ID에 의해 대체될 때 사용한다.
 11. 이미 이력이 생긴 Episode/Cut은 삭제보다 `cancelled` 또는 `superseded`를 우선한다.
-12. Episode가 승인되려면 Storyboard의 모든 active Cut이 승인되어야 한다.
-13. Cut이 승인되려면 현재 revision 기준의 대표 승인 결과가 최소 하나 존재해야 한다.
-14. 실제 Cut 수의 Source of Truth는 active Storyboard entry의 수이며 Episode에 별도 Cut count 값을 중복 저장하지 않는다.
-15. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
-16. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
+12. Episode/Cut의 `approved`는 이미지 제작 완료가 아니라 **Canonical 정의 승인**을 뜻한다.
+13. Episode가 승인되려면 Storyboard의 모든 active Cut 정의가 승인되어야 한다.
+14. Cut 정의 승인에는 대표 생성 이미지가 필요하지 않다.
+15. 이미지 제작 완료 여부는 Definition Status와 분리하며 Generation Run/Asset 데이터를 기준으로 판단한다.
+16. 실제 Cut 수의 Source of Truth는 active Storyboard entry의 수이며 Episode에 별도 Cut count 값을 중복 저장하지 않는다.
+17. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
+18. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
 
-## 14. STEP 0-2에서 의도적으로 미확정하는 항목
+## 15. STEP 0-2에서 의도적으로 미확정하는 항목
 
 다음은 이후 STEP에서 정한다.
 
@@ -1497,18 +1551,20 @@ Episode에도 동일한 원칙을 적용한다.
 - revision의 물리적 파일 저장 방식
 - 성경 번역본 전문 저장 및 저작권 규칙
 
-## 15. STEP 0-2 검토 포인트
+## 16. STEP 0-2 검토 포인트
 
 사용자 검토가 필요한 핵심 항목:
 
 - Episode 필수 데이터 범위
 - Cut 최소 Canonical Scene 데이터 범위
 - Storyboard를 `scripture_anchor`와 `beat`의 단일 Source of Truth로 두는 원칙
-- Episode 상태 모델
-- Cut 상태 모델
+- Episode Definition Status 모델
+- Cut Definition Status 모델
+- Definition 승인과 이미지 제작 완료를 분리하는 원칙
 - 승인 후 revision 정책과 revision 증가 시 상태 재진입 규칙
 - `superseded`를 다른 ID에 의한 대체에만 사용하는 원칙
-- Episode/Cut 승인 최소 조건
+- Episode/Cut 정의 승인 최소 조건
+- production complete를 Generation Run/Asset 기반으로 별도 판단하는 원칙
 - 고정 Cut 수를 두지 않고 본문 분량과 사건 흐름에 따라 Episode/Cut을 유연하게 분할하는 원칙
 - 긴 성경 장을 여러 Episode로 분할할 수 있는 원칙
 - 실제 Cut 수는 Storyboard에서 계산하고 Episode에 중복 저장하지 않는 원칙
