@@ -37,6 +37,7 @@ Content / Episode-Cut / Continuity / Library / Generation Run / Provider Integra
 - **STEP 0-7 — Image / Asset Storage Policy는 CONFIRMED 상태다.**
 - **STEP 0 전체는 COMPLETED 상태다.**
 - 현재 최우선 작업은 **확정된 아키텍처를 반영한 최종 디렉터리 구조 확정**이다.
+- 현재 검토 문서는 `repository_structure_v1_draft.md`이며 상태는 **REVIEW READY**다.
 
 ## 3. 저장소 범위
 
@@ -70,7 +71,7 @@ Canonical Scene, Character, Location, Object, Continuity 등 장기적으로 유
 
 ## 6. 다음 작업
 
-`architecture_v0_draft.md`의 STEP 0-1~0-7 CONFIRMED 결정을 읽고 다음 항목부터 진행한다.
+`architecture_v0_draft.md`의 STEP 0-1~0-7 CONFIRMED 결정과 `repository_structure_v1_draft.md`를 읽고 다음 항목부터 진행한다.
 
 **POST STEP 0 — 최종 디렉터리 구조 확정**
 
