@@ -622,9 +622,9 @@ STEP 0 진행 중 중요한 설계 결정은 대화에만 남기지 말고 이 �
 
 ---
 
-# STEP 0-1 — Content Model Working Draft v0.1
+# STEP 0-1 — Content Model Working Draft v0.2
 
-> 상태: **WORKING DRAFT / 사용자 검토 전**
+> 상태: **WORKING DRAFT / 구조 점검 반영**
 >
 > 목적: 성경 본문 → 제작 Episode → Cut으로 이어지는 콘텐츠 모델과 식별 체계를 먼저 안정화한다.
 >
@@ -638,12 +638,17 @@ STEP 0 진행 중 중요한 설계 결정은 대화에만 남기지 말고 이 �
 
 Scripture Reference는 이미지 제작의 **근거가 되는 본문 위치**를 가리키며, Episode ID나 Cut ID 자체에 장/절을 결합하지 않는다.
 
-한 Episode는 하나 이상의 본문 범위를 가질 수 있으며, 서로 떨어진 본문 범위를 함께 참조해야 할 경우 여러 범위를 등록할 수 있다.
+Episode의 본문 참조는 역할을 구분한다.
+
+- **primary_scripture**: Episode가 직접 시각화하는 기준 본문
+- **supporting_scripture**: 병행 본문, 보조 설명, 역사적 맥락 등 필요 시 함께 참고하는 본문
+
+Episode ID의 `BOOK`은 항상 `primary_scripture`의 책 코드를 기준으로 한다.
 
 본문 범위는 번역본의 문장 텍스트가 아니라 우선 다음과 같은 구조화된 위치 정보로 표현한다.
 
 ```yaml
-scripture_ranges:
+primary_scripture:
   - book: GEN
     start:
       chapter: 1
@@ -651,12 +656,14 @@ scripture_ranges:
     end:
       chapter: 1
       verse: 13
+
+supporting_scripture: []
 ```
 
-장 경계를 넘는 범위도 허용한다.
+주본문은 장 경계를 넘을 수 있다.
 
 ```yaml
-scripture_ranges:
+primary_scripture:
   - book: GEN
     start:
       chapter: 1
@@ -666,7 +673,11 @@ scripture_ranges:
       verse: 3
 ```
 
-서로 연속되지 않은 본문은 하나의 범위로 억지로 합치지 않고 여러 항목으로 기록한다.
+서로 연속되지 않은 구간은 하나의 범위로 억지로 합치지 않고 여러 항목으로 기록한다.
+
+병행 본문이나 다른 책의 관련 본문은 `supporting_scripture`에 별도 등록할 수 있다.
+
+이 구분은 "어떤 본문을 실제로 제작하는가"와 "어떤 본문을 참고하는가"가 섞이지 않도록 하기 위한 것이다.
 
 ### 1.2 Episode
 
@@ -678,7 +689,8 @@ Episode는 하나의 시각적·서사적 흐름으로 묶어 제작할 범위�
 
 - 한 성경 장을 여러 Episode로 분할
 - 하나의 Episode가 여러 장에 걸침
-- 필요에 따라 서로 떨어진 본문 범위를 하나의 Episode가 참조
+- 하나의 Episode가 서로 떨어진 여러 주본문 구간을 포함
+- 하나의 Episode가 다른 책의 병행·보조 본문을 함께 참조
 - 서로 다른 Episode가 일부 동일한 본문 구간을 참조
 
 사이트에서 보이는 `Chapter 1`, `빛과 하늘과 땅` 같은 제목은 표시 정보이며 내부 식별자가 아니다.
@@ -725,11 +737,15 @@ Scripture Reference
 
 실제로는 다음 관계를 허용한다.
 
-- 하나의 Episode → 여러 Scripture Range
+- 하나의 Episode → 하나 이상의 primary Scripture Range
+- 하나의 Episode → 0개 이상의 supporting Scripture Range
 - 하나의 Scripture Range → 여러 Episode에서 참조 가능
 - 하나의 Episode → 여러 Cut
-- 하나의 Cut → 하나의 Episode
+- 하나의 Cut → 정확히 하나의 Episode
 - 하나의 Cut → 하나 이상의 Scripture Anchor 가능
+
+Cut의 Scripture Anchor는 기본적으로 Episode의 `primary_scripture` 안에서 지정한다.
+보조 본문이 Cut 해석에 직접 필요한 경우 supporting reference를 추가할 수 있지만, 보조 본문만으로 Cut의 제작 근거를 대체하지 않는다.
 
 즉 **성경 본문은 Source이고 Episode/Cut은 Production Model**이다.
 
@@ -772,7 +788,7 @@ GEN-FLOOD-01
 
 규칙:
 
-1. `BOOK`은 Book Code를 사용한다.
+1. `BOOK`은 해당 Episode의 `primary_scripture` 기준 Book Code를 사용한다.
 2. `STORY_KEY`는 영문 대문자와 하이픈으로 구성한 안정적인 내부 키다.
 3. `NN`은 동일 STORY_KEY 안에서 Episode를 구분하기 위한 2자리 번호다.
 4. Episode ID에는 장/절 번호를 넣지 않는다.
@@ -860,13 +876,33 @@ storyboard:
 
 초기에는 10, 20, 30처럼 간격을 두고 작성할 수 있지만, 이후 재정렬 시 값을 다시 정리해도 식별자에는 영향이 없다.
 
-## 8. Episode 간 연결
+## 8. Episode 간 연결과 Canonical Sequence
 
 Episode 간 연결은 ID 번호 자체로 추론하지 않는다.
 
 예를 들어 `GEN-CREATION-01` 다음이 항상 `GEN-CREATION-02`라고 코드가 자동 추론하게 만들지 않는다.
 
-Episode의 실제 콘텐츠 순서는 별도 order/index 정보가 책임지도록 한다.
+프로젝트의 기본 역사 흐름은 별도의 **Canonical Episode Sequence**가 책임진다.
+
+개념 예:
+
+```yaml
+episodes:
+  - order: 10
+    episode_id: GEN-CREATION-01
+  - order: 20
+    episode_id: GEN-CREATION-02
+  - order: 30
+    episode_id: GEN-EDEN-01
+```
+
+원칙:
+
+1. Canonical Sequence가 Episode의 기본 역사·제작 순서의 Source of Truth다.
+2. Episode ID의 번호는 다음 Episode를 결정하지 않는다.
+3. `previous_episode_id` / `next_episode_id`를 각 Episode에 중복 저장해 양방향 링크를 관리하지 않는다.
+4. Episode 삽입이나 재배치는 sequence의 order만 조정하고 기존 Episode ID를 변경하지 않는다.
+5. 사이트가 향후 별도의 편집 순서나 컬렉션을 필요로 하면 Canonical Sequence를 덮어쓰지 않고 별도 presentation/collection 계층을 추가한다.
 
 이렇게 하면 다음 상황에 대응할 수 있다.
 
@@ -876,7 +912,7 @@ Episode의 실제 콘텐츠 순서는 별도 order/index 정보가 책임지도�
 - 특별편/보충 Episode 추가
 - 동일 본문을 다른 시각적 관점으로 재구성
 
-구체적인 Episode index 저장 위치와 포맷은 최종 디렉터리 구조를 확정할 때 결정한다.
+Canonical Sequence의 최종 파일명과 저장 위치는 최종 디렉터리 구조를 확정할 때 결정한다.
 
 Episode 사이의 시각적 continuity 연결은 STEP 0-3에서 별도로 정의한다.
 
@@ -885,14 +921,16 @@ Episode 사이의 시각적 continuity 연결은 STEP 0-3에서 별도로 정의
 STEP 0-1 기준 핵심 invariant는 다음과 같다.
 
 1. 성경 장/절과 Episode는 동일 개념이 아니다.
-2. Episode ID는 장/절 범위와 표시 제목에 종속되지 않는다.
-3. Cut은 정확히 하나의 Episode에 소속된다.
-4. Episode와 Cut의 ID는 생성 후 안정적으로 유지한다.
-5. 표시 순서는 ID와 별도로 관리한다.
-6. Scripture Range는 서로 겹칠 수 있다.
-7. Storyboard가 Episode 안의 Cut 표시 순서의 Source of Truth다.
-8. 폴더 경로나 파일 정렬 순서는 콘텐츠 identity가 아니다.
-9. 외부 이미지 생성 provider의 ID는 Content Model의 identity가 아니다.
+2. Episode는 실제 제작 기준인 `primary_scripture`와 필요 시 참고하는 `supporting_scripture`를 구분한다.
+3. Episode ID의 `BOOK`은 `primary_scripture` 기준으로 정한다.
+4. Episode ID는 장/절 범위와 표시 제목에 종속되지 않는다.
+5. Cut은 정확히 하나의 Episode에 소속된다.
+6. Episode와 Cut의 ID는 생성 후 안정적으로 유지한다.
+7. Cut 표시 순서는 ID와 별도로 관리하며 Storyboard가 Source of Truth다.
+8. Episode의 기본 역사 순서는 ID와 별도로 관리하며 Canonical Episode Sequence가 Source of Truth다.
+9. Scripture Range는 서로 겹칠 수 있다.
+10. 폴더 경로나 파일 정렬 순서는 콘텐츠 identity가 아니다.
+11. 외부 이미지 생성 provider의 ID는 Content Model의 identity가 아니다.
 
 ## 10. STEP 0-1에서 의도적으로 미확정하는 항목
 
@@ -920,7 +958,9 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 - Cut ID 형식 `<EPISODE_ID>-C<NN>` 유지 여부
 - ID와 표시 순서를 분리하는 원칙
 - Scripture Range를 구조화된 범위 정보로 관리하는 원칙
+- `primary_scripture` / `supporting_scripture`를 구분하는 원칙
 - Storyboard를 Episode 내부 Cut 순서의 Source of Truth로 두는 원칙
+- Canonical Episode Sequence를 Episode 기본 순서의 Source of Truth로 두는 원칙
 - v0에서는 별도의 Story Arc 엔터티를 만들지 않는 원칙
 
 이 항목들이 승인되면 STEP 0-1을 CONFIRMED로 전환하고 STEP 0-2 — Episode / Cut Model로 진행한다.
