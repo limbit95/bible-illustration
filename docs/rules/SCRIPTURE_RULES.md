@@ -1,6 +1,6 @@
-# Scripture Rules v1.0 Working Draft
+# Scripture Rules v1.0
 
-> 상태: **REVIEW READY**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 목적: 성경 본문을 시각화할 때 본문 직접 내용, 역사적 재구성, 해석적 추정을 구분하고 본문에 없는 내용을 사실처럼 고정하지 않기 위한 제작 규칙을 정의한다.
 
