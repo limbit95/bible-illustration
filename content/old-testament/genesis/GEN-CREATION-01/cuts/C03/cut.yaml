@@ -1,0 +1,31 @@
+cut_id: GEN-CREATION-01-C03
+episode_id: GEN-CREATION-01
+
+scene_intent: >
+  CUT 2의 원초적 수면 세계를 그대로 이어가면서,
+  오른쪽 부근에서 따뜻한 금백색 빛이 처음 등장하는 순간을 보여준다.
+
+scene:
+  summary: >
+    CUT 2와 동일한 원초적 수면과 넓은 어둠이 이어진다.
+    화면 오른쪽 부근에서 따뜻한 금백색 빛이 처음 나타나며,
+    아직 태양·달·별 같은 천체는 존재하지 않는다.
+  required_elements:
+    - "CUT 2와 이어지는 원초적 수면 세계"
+    - "오른쪽 부근에서 처음 등장하는 따뜻한 금백색 빛"
+    - "빛과 함께 여전히 남아 있는 어둠"
+  forbidden_elements:
+    - "태양, 달, 별 또는 빛의 원천을 천체로 확정하는 표현"
+    - "드러난 육지"
+    - "식물, 동물 또는 인간"
+    - "인간의 몸, 얼굴, 손 또는 실루엣으로 형상화된 하나님"
+
+library_refs:
+  characters: []
+  location: null
+  environments: []
+  objects: []
+  style: null
+
+definition_status: in_review
+revision: 1
