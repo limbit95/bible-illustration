@@ -1,4 +1,5 @@
 # Bible Illustration — Episode continuity template
+# Template status: v1.0 CONFIRMED / 2026-10-02 user approved
 # Continuity has no independent revision field in v1; Git history tracks changes.
 
 episode_id: null
