@@ -613,9 +613,9 @@ STEP 0의 7개 영역이 검토·승인되면 다음을 진행한다.
 
 다음 작업:
 
-> **STEP 0-5 — Generation Run Model 정의**
+> **STEP 0-6 — Provider Integration Model 정의**
 
-확정된 Content / Episode-Cut / Continuity / Library Model을 전제로 실제 생성 요청, 입력 snapshot, 결과, 평가 이력과 비용 기록 방식을 설계한다.
+확정된 Content / Episode-Cut / Continuity / Library / Generation Run Model을 전제로 OpenArt, Higgsfield, ChatGPT 등 외부 Provider의 binding, generation profile, prompt adapter, reference 전달 규칙과 교체 가능성을 설계한다.
 
 STEP 0 진행 중 중요한 설계 결정은 대화에만 남기지 말고 이 저장소에 기록한다.
 
@@ -2721,9 +2721,9 @@ OpenArt / Higgsfield / future provider
 
 ---
 
-# STEP 0-5 — Generation Run Model Working Draft v0.3
+# STEP 0-5 — Generation Run Model v1.0
 
-> 상태: **REVIEW READY / 구조 점검 완료**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -3333,7 +3333,7 @@ Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산�
 
 ## 24. STEP 0-5 검토 포인트
 
-사용자 검토가 필요한 핵심 항목:
+다음 항목은 사용자 승인으로 확정되었다:
 
 - Provider 요청 1회 = Run 1개 원칙
 - Run ID 형식: CUT_ID + RNNN
@@ -3354,4 +3354,8 @@ Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산�
 - 비용/Credit optional 기록
 - Run Result와 Asset 분리
 
-이 항목들이 확정되면 STEP 0-5를 CONFIRMED로 전환하고 STEP 0-6 — Provider Integration Model로 진행한다.
+위 항목은 2026-10-02 사용자 승인으로 확정되었다.
+
+**STEP 0-5 — Generation Run Model: COMPLETED / CONFIRMED**
+
+다음 작업은 **STEP 0-6 — Provider Integration Model**이다.
