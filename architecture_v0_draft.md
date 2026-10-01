@@ -613,9 +613,9 @@ STEP 0의 7개 영역이 검토·승인되면 다음을 진행한다.
 
 다음 작업:
 
-> **STEP 0-6 — Provider Integration Model 정의**
+> **STEP 0-7 — Image / Asset Storage Policy 정의**
 
-확정된 Content / Episode-Cut / Continuity / Library / Generation Run Model을 전제로 OpenArt, Higgsfield, ChatGPT 등 외부 Provider의 binding, generation profile, prompt adapter, reference 전달 규칙, input resolution과 교체 가능성을 설계한다.
+확정된 Content / Episode-Cut / Continuity / Library / Generation Run / Provider Integration Model을 전제로 원본·후보·최종·Reference 이미지의 Asset ID, 파일명, 저장 위치, 보존·폐기·파생본 정책과 Git/Git LFS/외부 저장소의 역할을 설계한다.
 
 STEP 0 진행 중 중요한 설계 결정은 대화에만 남기지 말고 이 저장소에 기록한다.
 
@@ -3363,9 +3363,9 @@ Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산�
 
 ---
 
-# STEP 0-6 — Provider Integration Model Working Draft v0.3
+# STEP 0-6 — Provider Integration Model v1.0
 
-> 상태: **REVIEW READY / 구조 점검 완료**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -4086,7 +4086,7 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 
 ## 29. STEP 0-6 검토 포인트
 
-사용자 검토가 필요한 핵심 항목:
+다음 항목은 사용자 승인으로 확정되었다:
 
 - Provider Integration을 Adapter Layer로 두는 원칙
 - Provider Registry / Capability 구조
@@ -4109,4 +4109,8 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 - Run에 Integration revision + 실제 resolved input을 함께 기록
 - 과도한 Provider 공통 추상화를 피하는 원칙
 
-이 항목들이 확정되면 STEP 0-6을 CONFIRMED로 전환하고 STEP 0-7 — Image / Asset Storage Policy로 진행한다.
+위 항목은 2026-10-02 사용자 승인으로 확정되었다.
+
+**STEP 0-6 — Provider Integration Model: COMPLETED / CONFIRMED**
+
+다음 작업은 **STEP 0-7 — Image / Asset Storage Policy**다.
