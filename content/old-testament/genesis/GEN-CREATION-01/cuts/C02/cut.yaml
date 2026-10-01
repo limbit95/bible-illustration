@@ -1,0 +1,33 @@
+cut_id: GEN-CREATION-01-C02
+episode_id: GEN-CREATION-01
+
+scene_intent: >
+  창세기 1:2의 혼돈과 공허, 깊은 어둠과 수면의 상태를
+  후대의 완성된 바다 풍경으로 앞당겨 표현하지 않고 원초적인 세계 상태로 보여준다.
+
+scene:
+  summary: >
+    짙은 흑청색의 원초적 수면이 넓게 펼쳐지고 깊은 어둠이 지배한다.
+    안개와 흐름이 존재하지만 강한 광원은 없으며,
+    완성된 현대적 바다 풍경처럼 보이지 않는 초기 세계의 상태다.
+  required_elements:
+    - "짙은 흑청색의 원초적 수면"
+    - "넓은 어둠"
+    - "안개 또는 흐름의 분위기"
+    - "강한 광원이 없는 상태"
+  forbidden_elements:
+    - "태양, 달, 별 또는 명확한 천체"
+    - "완성된 현대적 바다 풍경"
+    - "드러난 육지"
+    - "식물, 동물 또는 인간"
+    - "인간의 몸, 얼굴, 손 또는 실루엣으로 형상화된 하나님"
+
+library_refs:
+  characters: []
+  location: null
+  environments: []
+  objects: []
+  style: null
+
+definition_status: in_review
+revision: 1
