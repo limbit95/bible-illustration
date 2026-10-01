@@ -1,0 +1,13 @@
+# Canonical Cut-owned image Assets
+content/**/assets/*.png  filter=lfs diff=lfs merge=lfs -text
+content/**/assets/*.jpg  filter=lfs diff=lfs merge=lfs -text
+content/**/assets/*.jpeg filter=lfs diff=lfs merge=lfs -text
+content/**/assets/*.webp filter=lfs diff=lfs merge=lfs -text
+content/**/assets/*.avif filter=lfs diff=lfs merge=lfs -text
+
+# Canonical Library-owned image Assets
+library/**/assets/*.png  filter=lfs diff=lfs merge=lfs -text
+library/**/assets/*.jpg  filter=lfs diff=lfs merge=lfs -text
+library/**/assets/*.jpeg filter=lfs diff=lfs merge=lfs -text
+library/**/assets/*.webp filter=lfs diff=lfs merge=lfs -text
+library/**/assets/*.avif filter=lfs diff=lfs merge=lfs -text
