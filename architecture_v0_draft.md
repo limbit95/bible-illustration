@@ -978,9 +978,9 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 
 ---
 
-# STEP 0-2 — Episode / Cut Model Working Draft v0.1
+# STEP 0-2 — Episode / Cut Model Working Draft v0.2
 
-> 상태: **WORKING DRAFT / 구조 검토 중**
+> 상태: **WORKING DRAFT / 구조 점검 반영**
 >
 > 선행 조건: **STEP 0-1 — Content Model v1.0 CONFIRMED**
 >
@@ -1068,13 +1068,6 @@ Cut의 본질은 **어떤 순간과 의미를 시각적으로 표현해야 하�
 cut_id: GEN-CREATION-01-C01
 episode_id: GEN-CREATION-01
 
-scripture_anchor:
-  - book: GEN
-    start: { chapter: 1, verse: 1 }
-    end:   { chapter: 1, verse: 2 }
-
-beat: 태초의 혼돈과 수면 위의 어둠
-
 scene_intent: >
   관객이 이 Cut을 통해 반드시 이해해야 하는 사건·상태·정서를 설명한다.
 
@@ -1092,8 +1085,6 @@ revision: 1
 
 - `cut_id`: STEP 0-1에서 확정한 영구 식별자
 - `episode_id`: 정확히 하나의 소속 Episode
-- `scripture_anchor`: 이 Cut이 직접 표현하는 주본문 범위
-- `beat`: Storyboard에서 한눈에 흐름을 파악하기 위한 짧은 장면 요약
 - `scene_intent`: 장면의 의미와 반드시 전달되어야 할 제작 의도
 - `scene.summary`: 이미지 생성과 검토의 기준이 되는 장면 설명
 - `scene.required_elements`: 반드시 존재해야 하는 핵심 요소
@@ -1133,7 +1124,7 @@ STEP 0-1에서 Storyboard는 Episode 내부 Cut 순서의 Source of Truth로 확
 
 - Cut 표시 순서
 - Cut ID
-- Scripture Anchor의 요약/참조
+- Scripture Anchor
 - 짧은 beat
 - 필요 시 Cut 간 transition note
 
@@ -1147,9 +1138,9 @@ STEP 0-1에서 Storyboard는 Episode 내부 Cut 순서의 Source of Truth로 확
 
 Storyboard에 Cut의 상세 Scene Specification을 복사하지 않는다.
 
-Cut의 `beat`와 Storyboard의 beat가 물리적으로 중복 저장되는 최종 구조도 피한다.
+STEP 0-1에서 Storyboard의 최소 책임으로 확정된 `scripture_anchor`와 `beat`는 **Storyboard를 단일 Source of Truth로 둔다.**
 
-최종 저장 포맷을 정할 때 **beat의 단일 Source of Truth를 하나로 선택하고 다른 쪽은 참조**하도록 한다.
+Cut 문서가 해당 값을 필요로 할 때는 자신의 `cut_id`로 Storyboard entry를 참조한다. 동일한 `scripture_anchor`나 `beat`를 Cut에 다시 복사해 두 군데를 동기화하지 않는다.
 
 ## 5. Episode 상태 모델
 
@@ -1206,7 +1197,7 @@ draft
 ↓
 ready
 ↓
-generating
+in_production
 ↓
 in_review
 ↓
@@ -1232,7 +1223,7 @@ superseded
 
 - `draft`: Scene Specification 작성 중
 - `ready`: 생성 가능한 수준으로 Canonical Scene 정의가 준비됨
-- `generating`: 현재 revision을 기준으로 이미지 생성 작업이 진행 중
+- `in_production`: 현재 revision을 기준으로 이미지 제작/생성 시도가 진행 중
 - `in_review`: 생성 결과와 Canonical Scene의 일치 여부를 검토 중
 - `revision_requested`: Scene Specification 또는 생성 방향 수정이 필요함
 - `approved`: 해당 Cut의 현재 revision과 대표 결과가 승인됨
@@ -1242,6 +1233,8 @@ superseded
 `rejected`는 Cut 자체의 영구 상태로 사용하지 않는다.
 
 개별 생성 실패와 Reject는 Generation Run의 결과로 기록하고, Cut은 계속 다음 생성 시도를 이어갈 수 있기 때문이다.
+
+`in_production`은 특정 Provider 실행 상태가 아니라 Cut 수준의 제작 단계다. 개별 요청의 성공/실패/대기 상태는 STEP 0-5의 Generation Run Model에서 관리한다.
 
 ## 7. 승인 후 수정과 Revision
 
@@ -1263,11 +1256,12 @@ revision: 2
 
 원칙:
 
-1. 오탈자처럼 의미를 바꾸지 않는 수정은 revision 증가를 강제하지 않는다.
-2. Scripture Anchor, Scene Intent, 주요 등장 요소, 사건 표현처럼 생성 결과를 바꿀 수 있는 수정은 revision을 증가시킨다.
-3. Generation Run은 어떤 Cut revision을 기준으로 생성했는지 추적할 수 있어야 한다.
-4. 승인된 이전 revision의 기록을 삭제하지 않는다.
-5. Cut의 정체성 자체가 바뀌는 경우 revision으로 억지로 유지하지 않고 새 Cut ID를 발급한다.
+1. 최초 승인 전의 설계 수정은 기본적으로 `revision: 1` 안에서 진행한다.
+2. 오탈자처럼 의미를 바꾸지 않는 수정은 revision 증가를 강제하지 않는다.
+3. 승인 이후 Scripture Anchor, Scene Intent, 주요 등장 요소, 사건 표현처럼 생성 결과를 바꿀 수 있는 수정은 revision을 증가시킨다.
+4. Generation Run은 어떤 Cut revision을 기준으로 생성했는지 추적할 수 있어야 한다.
+5. 승인된 이전 revision의 기록을 삭제하지 않는다.
+6. Cut의 정체성 자체가 바뀌는 경우 revision으로 억지로 유지하지 않고 새 Cut ID를 발급한다.
 
 revision 이력의 실제 저장 방식은 최종 파일 구조와 Generation Run Model을 함께 검토한 뒤 확정한다.
 
@@ -1362,7 +1356,17 @@ Generation Run 3 → image C (approved)
 
 Generation Run과 Asset의 상세 식별 체계는 STEP 0-5와 STEP 0-7에서 확정한다.
 
-## 11. Cut 삭제보다 Cancel / Supersede를 우선한다
+## 11. Active Cut과 종료 상태
+
+Storyboard에서 현재 제작 흐름에 포함되는 Cut을 **active Cut**으로 본다.
+
+- `cancelled` Cut은 active Cut이 아니다.
+- `superseded` Cut은 active Cut이 아니다.
+- Storyboard의 현재 canonical sequence에 포함되어 있고 종료 상태가 아닌 Cut이 active Cut이다.
+
+Episode 승인 조건에서 말하는 “모든 active Cut 승인”은 이 정의를 따른다.
+
+## 12. Cut 삭제보다 Cancel / Supersede를 우선한다
 
 ID가 발급되고 제작 기록이 생긴 Cut은 가급적 물리적으로 삭제하지 않는다.
 
@@ -1376,7 +1380,7 @@ ID가 발급되고 제작 기록이 생긴 Cut은 가급적 물리적으로 삭�
 
 Episode에도 동일한 원칙을 적용한다.
 
-## 12. STEP 0-2 불변 조건 후보
+## 13. STEP 0-2 불변 조건 후보
 
 이번 단계에서 확정할 핵심 invariant 후보는 다음과 같다.
 
@@ -1385,15 +1389,16 @@ Episode에도 동일한 원칙을 적용한다.
 3. 이미지와 Prompt는 Cut의 원본 정의를 대체하지 않는다.
 4. Cut은 정확히 하나의 Episode에 소속된다.
 5. Storyboard가 active Cut의 실제 표시 순서를 결정한다.
-6. Episode당 8 Cut은 기본 목표치일 뿐 강제 제약이 아니다.
-7. 개별 생성 실패는 Cut의 `rejected` 상태로 표현하지 않고 Generation Run에서 기록한다.
-8. 승인 후 의미 있는 정의 변경은 revision으로 추적한다.
-9. 이미 이력이 생긴 Episode/Cut은 삭제보다 `cancelled` 또는 `superseded`를 우선한다.
-10. Episode가 승인되려면 Storyboard의 모든 active Cut이 승인되어야 한다.
-11. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
-12. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
+6. Storyboard가 `scripture_anchor`와 `beat`의 단일 Source of Truth다.
+7. Episode당 8 Cut은 기본 목표치일 뿐 강제 제약이 아니다.
+8. 개별 생성 실패는 Cut의 `rejected` 상태로 표현하지 않고 Generation Run에서 기록한다.
+9. 승인 후 의미 있는 정의 변경은 revision으로 추적한다.
+10. 이미 이력이 생긴 Episode/Cut은 삭제보다 `cancelled` 또는 `superseded`를 우선한다.
+11. Episode가 승인되려면 Storyboard의 모든 active Cut이 승인되어야 한다.
+12. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
+13. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
 
-## 13. STEP 0-2에서 의도적으로 미확정하는 항목
+## 14. STEP 0-2에서 의도적으로 미확정하는 항목
 
 다음은 이후 STEP에서 정한다.
 
@@ -1407,12 +1412,13 @@ Episode에도 동일한 원칙을 적용한다.
 - revision의 물리적 파일 저장 방식
 - 성경 번역본 전문 저장 및 저작권 규칙
 
-## 14. STEP 0-2 검토 포인트
+## 15. STEP 0-2 검토 포인트
 
 사용자 검토가 필요한 핵심 항목:
 
 - Episode 필수 데이터 범위
 - Cut 최소 Canonical Scene 데이터 범위
+- Storyboard를 `scripture_anchor`와 `beat`의 단일 Source of Truth로 두는 원칙
 - Episode 상태 모델
 - Cut 상태 모델
 - 승인 후 revision 정책
