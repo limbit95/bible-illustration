@@ -3363,9 +3363,9 @@ Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산�
 
 ---
 
-# STEP 0-6 — Provider Integration Model Working Draft v0.1
+# STEP 0-6 — Provider Integration Model Working Draft v0.2
 
-> 상태: **WORKING DRAFT / 구조 검토 중**
+> 상태: **WORKING DRAFT / Binding·Result 정규화 보완**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -3518,8 +3518,10 @@ binding_revision: 1
 
 canonical_ref:
   asset_id: CHR-MOSES
-  asset_revision: 2
   profile: EXODUS
+
+verified_against:
+  asset_revision: 2
 
 provider_resource:
   resource_type: character
@@ -3538,6 +3540,8 @@ notes: null
 - external_id는 Canonical Character ID가 아니다.
 - binding_key도 Library Asset ID가 아니다.
 - Canonical identity는 항상 CHR-MOSES 같은 Library ID가 소유한다.
+- binding_key는 provider_key + scope_alias 안에서 안정적으로 유지한다.
+- verified_against는 이 Binding이 마지막으로 검증된 Canonical Asset revision을 나타낸다.
 
 ## 6. Binding Scope
 
@@ -3582,9 +3586,10 @@ retired
 
 1. 외부 resource가 삭제되어도 Canonical Library Asset을 삭제하지 않는다.
 2. 동일 Character를 Provider에 재등록하면 기존 Library ID를 유지한다.
-3. external resource가 바뀌면 Binding revision을 증가시키거나 새 Binding을 만든다.
-4. 과거 Run은 당시 실제 external resource snapshot을 계속 보존한다.
-5. Binding 변경 때문에 Cut revision을 자동 증가시키지 않는다.
+3. 같은 Canonical ref와 같은 목적을 위한 외부 리소스를 재등록한 경우 binding_key는 유지하고 binding_revision을 증가시킨다.
+4. 같은 Canonical ref에 대해 병행 사용하려는 별도 목적/별도 외부 리소스라면 새 binding_key를 만든다.
+5. 과거 Run은 당시 실제 binding revision과 external resource snapshot을 계속 보존한다.
+6. Binding 변경 때문에 Cut revision을 자동 증가시키지 않는다.
 
 ## 8. Canonical Library Revision과 Binding 검증
 
@@ -3600,11 +3605,14 @@ OpenArt Binding rev1
 
 이후 CHR-MOSES가 rev3으로 바뀌었다고 해서 Binding을 자동 폐기하지 않는다.
 
+다만 verified_against가 rev2인 상태에서 Canonical Asset이 rev3이 되면 **검토가 필요한 후보**로 간주한다.
+
 대신 변경 영향에 따라:
 
 - 외형에 영향 없음 → 기존 Binding을 다시 검증하고 verified_against 갱신 가능
 - 외형에 영향 있음 → needs_review
-- Provider 재등록 필요 → Binding revision 증가 또는 새 Binding
+- 동일 목적 리소스의 Provider 재등록 필요 → 같은 binding_key의 binding_revision 증가
+- 별도 목적의 병행 리소스 필요 → 새 binding_key
 
 즉 Library revision과 Provider Binding revision은 서로 다른 축이다.
 
@@ -3849,7 +3857,33 @@ Run
 - API endpoint 세부 정보
 - Provider용 최적화 Prompt
 
-## 19. Provider Integration 변경과 Canonical Revision
+## 19. Provider Response Normalization
+
+Provider마다 반환하는 job 구조, output ID, 이미지 개수, metadata 형식이 다를 수 있다.
+
+Integration Layer는 이를 STEP 0-5의 공통 Run / Result 의미로 정규화한다.
+
+~~~text
+Provider-specific response
+        ↓
+Integration normalization
+        ↓
+Generation Run execution metadata
+        +
+Generated Result(s)
+~~~
+
+원칙:
+
+1. Provider job/request ID는 Run의 external metadata로 보존한다.
+2. Provider output/image ID는 가능한 경우 Result의 external metadata로 보존한다.
+3. 한 Provider 응답에서 여러 이미지가 반환되면 각 이미지를 별도 Result로 매핑한다.
+4. Provider가 일부 결과만 반환하면 execution_status를 partial로 표현할 수 있다.
+5. Provider 고유 metadata를 공통 필드에 억지로 끼워 맞추지 않고 provider_specific raw metadata 영역을 허용한다.
+6. raw metadata를 보존하더라도 인증 토큰이나 민감한 요청 헤더는 저장하지 않는다.
+7. Integration normalization이 Canonical Scene이나 Result 평가를 자동으로 변경하지 않는다.
+
+## 20. Provider Integration 변경과 Canonical Revision
 
 다음 변화는 일반적으로 Canonical revision을 요구하지 않는다.
 
@@ -3864,7 +3898,7 @@ Run
 
 즉 **Integration 변경과 Canonical 변경을 구분한다.**
 
-## 20. Provider 폐기 / 교체
+## 21. Provider 폐기 / 교체
 
 Provider를 더 이상 사용하지 않아도 과거 기록은 유지한다.
 
@@ -3886,7 +3920,7 @@ OpenArt integration retired
 4. Provider migration을 이유로 Episode/Cut/Library ID를 다시 만들지 않는다.
 5. 필요한 경우 새 Binding/Profile/Adapter만 추가한다.
 
-## 21. Secrets / Credential 규칙
+## 22. Secrets / Credential 규칙
 
 Provider Integration 문서와 Run 기록에는 다음을 저장하지 않는다.
 
@@ -3902,7 +3936,7 @@ Provider Integration 문서와 Run 기록에는 다음을 저장하지 않는다
 
 Credential은 저장소 밖의 안전한 실행 환경에서 관리한다.
 
-## 22. Provider Integration과 Generation Run의 관계
+## 23. Provider Integration과 Generation Run의 관계
 
 Integration은 **재사용 가능한 운영 정의**, Run은 **실제로 실행된 immutable snapshot**이다.
 
@@ -3924,7 +3958,7 @@ External Provider
 3. Run에는 최종 observable prompt/reference/settings도 별도로 기록한다.
 4. Integration 정의만 보고 과거 Run 입력을 추정하지 않는다.
 
-## 23. 초기 Provider별 적용 원칙
+## 24. 초기 Provider별 적용 원칙
 
 ### ChatGPT
 
@@ -3948,7 +3982,7 @@ Provider에서 재사용 가능한 외부 리소스나 profile이 필요해질 �
 
 세 Provider의 구체적인 기능·필드명은 실제 Integration을 구현할 때 당시 지원 상태를 확인하여 작성한다.
 
-## 24. 과도한 Provider 추상화 금지
+## 25. 과도한 Provider 추상화 금지
 
 Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의 완벽한 공통 스키마로 만들지 않는다.
 
@@ -3960,7 +3994,7 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 4. 공통화가 Canonical 의미 손실을 만들면 공통화하지 않는다.
 5. 새 Provider가 들어올 때 필요한 최소 확장만 한다.
 
-## 25. STEP 0-6 불변 조건 후보
+## 26. STEP 0-6 불변 조건 후보
 
 1. Provider Integration은 Canonical 정의와 외부 서비스를 연결하는 Adapter Layer다.
 2. Provider 내부 리소스는 Canonical Library identity가 아니다.
@@ -3975,12 +4009,13 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 11. Provider가 기능을 지원하지 않아도 Canonical 정의를 자동으로 축소하지 않는다.
 12. Provider 선택은 운영 결정이며 Canonical Content identity가 아니다.
 13. Integration 변경은 일반적으로 Cut/Library revision을 요구하지 않는다.
-14. Provider 폐기·교체 후에도 과거 Binding/Profile/Run 기록을 유지한다.
-15. Run은 사용한 Integration revision과 실제 resolved input snapshot을 함께 보존한다.
-16. 인증 비밀값을 GitHub Source of Truth에 저장하지 않는다.
-17. Provider-specific 기능은 필요 시 격리하되 과도한 공통 추상화를 만들지 않는다.
+14. Provider 응답은 STEP 0-5의 공통 Run / Result 의미로 정규화하되 Provider 고유 metadata를 필요 시 보존한다.
+15. Provider 폐기·교체 후에도 과거 Binding/Profile/Run 기록을 유지한다.
+16. Run은 사용한 Integration revision과 실제 resolved input snapshot을 함께 보존한다.
+17. 인증 비밀값을 GitHub Source of Truth에 저장하지 않는다.
+18. Provider-specific 기능은 필요 시 격리하되 과도한 공통 추상화를 만들지 않는다.
 
-## 26. STEP 0-6에서 의도적으로 미확정하는 항목
+## 27. STEP 0-6에서 의도적으로 미확정하는 항목
 
 다음은 이후 구현 또는 STEP 0-7에서 정한다.
 
@@ -3996,7 +4031,7 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 - 이미지 Asset ID / 저장 위치
 - 웹사이트 전달용 Asset pipeline
 
-## 27. STEP 0-6 검토 포인트
+## 28. STEP 0-6 검토 포인트
 
 사용자 검토가 필요한 핵심 항목:
 
@@ -4012,6 +4047,7 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 - Provider 선택을 운영 결정으로 두는 원칙
 - manual_ui / api / chat_native execution mode
 - Provider 변경이 Canonical revision을 자동 유발하지 않는 원칙
+- Provider 응답을 공통 Run/Result로 정규화하는 원칙
 - Provider 폐기·교체 후 과거 기록 유지
 - secrets / credential Git 저장 금지
 - Run에 Integration revision + 실제 resolved input을 함께 기록
