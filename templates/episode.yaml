@@ -1,0 +1,22 @@
+# Bible Illustration — Episode template
+# Copy to: content/<testament>/<book>/<EPISODE_ID>/episode.yaml
+
+episode_id: null
+title: null
+
+primary_scripture:
+  - book: null
+    start:
+      chapter: null
+      verse: null
+    end:
+      chapter: null
+      verse: null
+
+supporting_scripture: []
+
+production_intent: null
+
+# Allowed: draft | in_review | revision_requested | approved | cancelled | superseded
+definition_status: draft
+revision: 1
