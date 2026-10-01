@@ -13,7 +13,8 @@
 - 루트 `README.md` 생성: **COMPLETED**
 - 정식 Architecture 문서 분리: **COMPLETED**
 - Architecture 이관 검증: **PASSED — STEP 0-1~0-7 본문 exact match**
-- 현재 작업: **`docs/rules/` 제작 규칙 정식화 준비**
+- `docs/rules/` 제작 규칙 초안: **REVIEW READY**
+- 현재 작업: **Rules v1.0 사용자 검토 대기**
 
 ## 현재 Production 위치
 
@@ -43,6 +44,9 @@
 15. `docs/architecture/OVERVIEW.md` 생성
 16. STEP 0-1~0-7 정식 Architecture 문서 분리
 17. Architecture 이관 검증 통과
+18. `docs/rules/` 7개 정식화 초안 생성
+19. 과거 8컷 고정 규칙을 현재 Architecture와 충돌하는 legacy rule로 분리
+20. Rules 상호 충돌 및 Architecture 경계 자체 점검 완료
 
 ## 현재 Source of Truth
 
@@ -58,7 +62,7 @@
 
 ## 다음 작업
 
-1. `docs/rules/` 제작 규칙 정식화
+1. Rules v1.0 사용자 승인 및 CONFIRMED 전환
 2. Templates 생성
 3. Progress / Decision 기록 체계 보완
 4. Git LFS / ignore 정책 확정
