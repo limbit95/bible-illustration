@@ -68,11 +68,18 @@
 - `docs/decisions/DEC-*.md` = 중요한 선택의 이유·대안·영향 기록
 - STEP 0 세부 결정을 불필요하게 소급 중복 기록하지 않는 원칙 확정
 
+### 2026-10-02 — Git LFS / ignore 정책 확정
+
+- `DEC-0001-git-lfs-and-ignore-policy.md` accepted
+- Canonical `content/**/assets/` 및 `library/**/assets/` 이미지에만 Git LFS 적용
+- 일반 이미지 binary 기본 ignore
+- local working/cache/export 및 credential 제외 규칙 적용
+- 루트 `.gitattributes` / `.gitignore` 생성
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 이 문서에 추가한다.
 
-- Git LFS / ignore 정책 확정
 - Genesis Creation CUT 1–4 migration 완료
 - Genesis Creation migration 감사 완료
 - Genesis Creation CUT 5 제작 재개
