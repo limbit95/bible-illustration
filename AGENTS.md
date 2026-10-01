@@ -4,76 +4,125 @@
 
 ## 1. 작업 시작 전 필수 확인
 
-새로운 채팅이나 새로운 작업을 시작할 때 기억이나 이전 대화 요약만으로 진행하지 않는다.
+새로운 채팅이나 작업을 시작할 때 기억이나 이전 대화 요약만으로 진행하지 않는다.
 
-반드시 다음 순서로 현재 저장소 상태를 확인한다.
+반드시 현재 저장소를 먼저 읽고 다음 순서로 상태를 복원한다.
 
 1. 이 `AGENTS.md`
-2. `architecture_v0_draft.md`
-3. 이후 STEP 0에서 확정될 Architecture / Rules / Progress 문서
-4. 현재 작업 중인 Episode / Cut 문서
+2. `docs/progress/CURRENT.md`
+3. `docs/architecture/REPOSITORY_STRUCTURE.md`
+4. 필요한 정식 Architecture / Rules 문서
+5. 현재 작업 중인 Episode / Cut / Library / Integration 문서
 
-채팅 내용과 저장소 기록이 충돌할 경우 최신 저장소 상태를 우선 확인하고, 중요한 충돌은 임의로 해결하지 말고 사용자에게 알린다.
+정식 Architecture 문서 분리가 완료되기 전까지는 `architecture_v0_draft.md`의 **STEP 0-1~0-7 CONFIRMED 결정**도 함께 확인한다.
 
-## 2. 현재 단계
+채팅 내용, 기억, 과거 요약과 저장소 기록이 충돌할 경우 최신 저장소 상태를 우선한다. 중요한 충돌은 임의로 해결하지 말고 사용자에게 알린다.
 
-**STEP 0 — Architecture Definition은 완료되었다.**
+## 2. 확정된 기준
 
-Content / Episode-Cut / Continuity / Library / Generation Run / Provider Integration / Image-Asset Storage의 7개 설계 영역은 모두 사용자 승인으로 확정되었다.
+다음은 현재 확정 상태다.
 
-다만 실제 최종 디렉터리 구조와 정식 문서 분리는 아직 생성하지 않았다.
+- STEP 0 — Architecture Definition: **COMPLETED**
+- STEP 0-1 — Content Model: **CONFIRMED**
+- STEP 0-2 — Episode / Cut Model: **CONFIRMED**
+- STEP 0-3 — Continuity Model: **CONFIRMED**
+- STEP 0-4 — Library Model: **CONFIRMED**
+- STEP 0-5 — Generation Run Model: **CONFIRMED**
+- STEP 0-6 — Provider Integration Model: **CONFIRMED**
+- STEP 0-7 — Image / Asset Storage Policy: **CONFIRMED**
+- Repository Structure v1.0: **CONFIRMED**
 
-따라서 다음 원칙을 따른다.
+확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
-- 미래에 필요할 것이라는 이유만으로 디렉터리와 파일을 대량 생성하지 않는다.
-- `architecture_v0_draft.md`에 기록된 STEP 0-1~0-7의 **CONFIRMED 결정은 현재 아키텍처 기준**으로 사용한다.
-- 문서 상단의 초기 제안 디렉터리 트리는 그대로 확정 구조로 간주하지 않고, CONFIRMED 결정 전체를 반영해 최종 디렉터리 구조를 별도로 확정한다.
-- **STEP 0-1 — Content Model은 CONFIRMED 상태다.**
-- **STEP 0-2 — Episode / Cut Model은 CONFIRMED 상태다.**
-- **STEP 0-3 — Continuity Model은 CONFIRMED 상태다.**
-- **STEP 0-4 — Library Model은 CONFIRMED 상태다.**
-- **STEP 0-5 — Generation Run Model은 CONFIRMED 상태다.**
-- **STEP 0-6 — Provider Integration Model은 CONFIRMED 상태다.**
-- **STEP 0-7 — Image / Asset Storage Policy는 CONFIRMED 상태다.**
-- **STEP 0 전체는 COMPLETED 상태다.**
-- **Repository Structure v1.0은 CONFIRMED 상태다.**
-- 현재 최우선 작업은 **확정 구조를 기준으로 실제 저장소의 최소 필수 구조를 생성하고 루트 `AGENTS.md`를 정식화하는 것**이다.
-- `repository_structure_v1_draft.md`는 현재 승인된 Repository Structure v1.0의 기록이며, 이후 정식 `docs/architecture/REPOSITORY_STRUCTURE.md`로 이관할 때까지 기준 문서로 사용한다.
+## 3. 현재 단계
 
-## 3. 저장소 범위
+현재는 **POST STEP 0 — Repository Structure Implementation** 단계다.
 
-성경 일러스트 프로젝트의 지속적인 소스 작업은 이 `bible-illustration` 저장소에서만 수행한다.
+진행 위치와 다음 작업은 `docs/progress/CURRENT.md`가 Source of Truth다.
+
+현재 원칙:
+
+- 빈 미래 디렉터리와 파일을 필요 이상으로 대량 생성하지 않는다.
+- 실제 데이터나 정식 문서가 필요한 시점에만 구조를 생성한다.
+- Genesis Creation CUT 1–4는 새 구조에 아직 이관하지 않았다.
+- migration이 완료되기 전에는 CUT 5 제작을 재개하지 않는다.
+
+## 4. 저장소 범위
+
+성경 일러스트 프로젝트의 지속적인 소스 작업은 **`limbit95/bible-illustration` 저장소에서만** 수행한다.
 
 별도의 명시적 요청이 없는 한 다른 GitHub 저장소, 특히 다른 프로젝트 저장소에는 접근하거나 변경하지 않는다.
 
-## 4. 기록 원칙
+## 5. Source of Truth 책임
 
-장기적으로 유지해야 하는 다음 정보는 대화에만 남기지 않는다.
+### Canonical Production Data
+
+- Episode / Storyboard / Cut
+- Continuity
+- Library
+- Generation Run / Result Review metadata
+- Provider Integration metadata
+- Asset metadata / selection
+
+은 확정된 Repository Structure에 따라 GitHub에 기록한다.
+
+### Image Binary
+
+장기 보존 대상으로 승격된 production/reference 이미지 binary는 Git LFS를 Canonical 저장 방식으로 사용한다.
+
+모든 Provider output binary를 자동으로 장기 보존하지 않는다.
+
+### External Provider
+
+ChatGPT 이미지 생성, OpenArt, Higgsfield 등은 rendering provider다.
+
+Provider 내부의 character, model, prompt, slot, project structure는 Canonical Source of Truth가 아니다.
+
+## 6. 기록 원칙
+
+다음 정보는 대화에만 남기지 않는다.
 
 - 아키텍처 결정
 - 제작 규칙
-- 스토리보드
-- Cut 설계
-- Continuity 정보
-- Provider 연동 규칙
+- 진행 상태
+- Storyboard / Cut 정의
+- Continuity
+- Library 정의
+- Provider binding / profile
 - Prompt / Generation Run 기록
+- Result Review
+- Asset selection / promotion
 - 승인 / 수정 / 폐기 상태
-- 현재 진행 위치
 
-STEP 0은 완료되었다. 다음 작업에서 확정된 아키텍처를 기준으로 최종 기록 체계와 디렉터리 구조를 단계적으로 생성한다.
+현재 진행 위치가 바뀌면 `docs/progress/CURRENT.md`를 함께 갱신한다.
 
-## 5. 외부 생성 서비스
+## 7. 구조 변경 원칙
 
-ChatGPT 이미지 생성, OpenArt, Higgsfield 등은 외부 rendering provider로 취급한다.
+- ID가 identity이며 파일 경로는 identity가 아니다.
+- 기존 파일을 확인하지 않고 덮어쓰지 않는다.
+- 구조 변경 전 관련 Architecture / Rules / CURRENT 문서를 확인한다.
+- Canonical 정의와 Provider-specific 파생 데이터를 섞지 않는다.
+- Cut 순서는 Storyboard가 유일한 Source of Truth다.
+- 별도 전역 prompts 디렉터리를 만들지 않는다.
+- STORY_KEY를 독립 Story Arc entity로 승격하지 않는다.
+- Asset은 Cut 또는 Library primary owner 아래 등록한다.
+- 의미 있는 이미지 binary 변경은 기존 Asset을 overwrite하지 않고 새 Asset ID를 발급한다.
 
-특정 provider의 내부 캐릭터, 모델, prompt, 프로젝트 구조를 이 저장소의 원본 데이터로 간주하지 않는다.
+## 8. Historical Working Records
 
-Canonical Scene, Character, Location, Object, Continuity 등 장기적으로 유지되어야 하는 정의는 GitHub에 독립적으로 보존하는 방향으로 설계한다.
+다음 루트 문서는 설계 과정의 Working Record로 당분간 보존한다.
 
-## 6. 다음 작업
+- `architecture_v0_draft.md`
+- `repository_structure_v1_draft.md`
 
-`architecture_v0_draft.md`의 STEP 0-1~0-7 CONFIRMED 결정과 `repository_structure_v1_draft.md`의 Repository Structure v1.0을 읽고 다음 항목부터 진행한다.
+정식 Architecture 문서로 이관·검증이 끝난 뒤에도 임의 삭제하지 않는다. archive 이동이 필요하면 별도 결정 후 처리한다.
 
-**POST STEP 0 — 실제 저장소 구조 생성 및 AGENTS.md 정식화**
+## 9. 다음 작업
 
-확정된 Repository Structure v1.0에 따라 빈 미래 디렉터리를 대량 생성하지 않고 현재 필요한 최소 구조부터 만든다. 이어서 루트 `AGENTS.md`, `README.md`, Architecture 문서를 정식화한 뒤 Rules / Templates / Progress / Decision 체계를 생성하고 Genesis Creation CUT 1–4를 이관한다.
+`docs/progress/CURRENT.md`를 기준으로 이어서 진행한다.
+
+현재 다음 작업은:
+
+**루트 README.md 생성 → 정식 Architecture 문서 분리 및 검증**
+
+이다.
