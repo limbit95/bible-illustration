@@ -35,6 +35,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - Templates v1.0: **CONFIRMED**
 - Progress / Decision 기록 체계 v1.0: **CONFIRMED**
 - DEC-0001 — Git LFS and Ignore Policy: **ACCEPTED**
+- DEC-0002 — Presentation-only Cut Output Mode: **REJECTED** — CUT 1은 기존 illustration/Asset 모델 유지
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
@@ -177,6 +178,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**DEC-0002 Presentation-only Cut Output Mode 검토 → Genesis Creation CUT 1–4 migration**
+**Genesis Creation CUT 1–4 Canonical definition migration**
 
 이다.
