@@ -1,0 +1,26 @@
+# Bible Illustration — Provider Binding template
+# Binding connects a Canonical Library Asset/profile to a Provider resource.
+# Never store credentials here.
+
+provider_key: null
+binding_key: null
+binding_revision: 1
+
+canonical_ref:
+  asset_id: null
+  profile: null
+
+verified_against:
+  asset_revision: null
+
+provider_resource:
+  resource_type: null
+  external_id: null
+  external_name: null
+
+scope_alias: main
+
+# Allowed: active | needs_review | unavailable | retired
+status: active
+verified_at: null
+notes: null
