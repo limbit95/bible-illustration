@@ -36,8 +36,9 @@ Content / Episode-Cut / Continuity / Library / Generation Run / Provider Integra
 - **STEP 0-6 — Provider Integration Model은 CONFIRMED 상태다.**
 - **STEP 0-7 — Image / Asset Storage Policy는 CONFIRMED 상태다.**
 - **STEP 0 전체는 COMPLETED 상태다.**
-- 현재 최우선 작업은 **확정된 아키텍처를 반영한 최종 디렉터리 구조 확정**이다.
-- 현재 검토 문서는 `repository_structure_v1_draft.md`이며 상태는 **REVIEW READY**다.
+- **Repository Structure v1.0은 CONFIRMED 상태다.**
+- 현재 최우선 작업은 **확정 구조를 기준으로 실제 저장소의 최소 필수 구조를 생성하고 루트 `AGENTS.md`를 정식화하는 것**이다.
+- `repository_structure_v1_draft.md`는 현재 승인된 Repository Structure v1.0의 기록이며, 이후 정식 `docs/architecture/REPOSITORY_STRUCTURE.md`로 이관할 때까지 기준 문서로 사용한다.
 
 ## 3. 저장소 범위
 
@@ -71,8 +72,8 @@ Canonical Scene, Character, Location, Object, Continuity 등 장기적으로 유
 
 ## 6. 다음 작업
 
-`architecture_v0_draft.md`의 STEP 0-1~0-7 CONFIRMED 결정과 `repository_structure_v1_draft.md`를 읽고 다음 항목부터 진행한다.
+`architecture_v0_draft.md`의 STEP 0-1~0-7 CONFIRMED 결정과 `repository_structure_v1_draft.md`의 Repository Structure v1.0을 읽고 다음 항목부터 진행한다.
 
-**POST STEP 0 — 최종 디렉터리 구조 확정**
+**POST STEP 0 — 실제 저장소 구조 생성 및 AGENTS.md 정식화**
 
-확정된 아키텍처를 기준으로 실제 저장소 구조를 설계·확정한다. 이후 Architecture 문서 분리, Rules 문서 체계, Templates, Progress / Decision 기록 체계를 생성하고 기존 Genesis Creation CUT 1–4 작업을 이관한다.
+확정된 Repository Structure v1.0에 따라 빈 미래 디렉터리를 대량 생성하지 않고 현재 필요한 최소 구조부터 만든다. 이어서 루트 `AGENTS.md`, `README.md`, Architecture 문서를 정식화한 뒤 Rules / Templates / Progress / Decision 체계를 생성하고 Genesis Creation CUT 1–4를 이관한다.
