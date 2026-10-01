@@ -1,6 +1,6 @@
-# Visual Rules v1.0 Working Draft
+# Visual Rules v1.0
 
-> 상태: **REVIEW READY**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 목적: 장면별 유연성을 유지하면서 프로젝트 전체가 공유할 시각적 품질과 표현 기준을 정의한다.
 
