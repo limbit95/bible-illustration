@@ -1,6 +1,6 @@
-# Master Production Rules v1.0 Working Draft
+# Master Production Rules v1.0
 
-> 상태: **REVIEW READY**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 목적: Bible Illustration 제작 전반에서 공통으로 적용할 상위 판단 규칙과 세부 Rules 문서의 우선순위를 정의한다.
 >
