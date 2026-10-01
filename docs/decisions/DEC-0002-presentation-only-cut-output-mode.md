@@ -1,6 +1,6 @@
 # DEC-0002 — Presentation-only Cut Output Mode
 
-> 상태: **proposed / REVIEW READY**
+> 상태: **rejected / 2026-10-02 사용자 결정**
 > 날짜: 2026-10-02
 > 대체: none
 > 대체됨: none
@@ -26,7 +26,17 @@ Genesis Creation의 기존 확정 작업에는 CUT 1 — 창세기 1:1이 존재
 - 이미지와 presentation text 분리
 - Asset은 장기 보존 가치가 있는 실제 image identity라는 원칙
 
-## Decision
+## Resolution
+
+이 제안은 채택하지 않는다.
+
+사용자는 CUT 1의 검은 화면을 **실제 하나의 이미지 Asset으로 관리해도 괜찮다**고 확인했다. 따라서 기존 Architecture의 illustration → representative Asset → production complete 흐름을 그대로 유지한다.
+
+CUT 1을 위해 새로운 `presentation_only` output mode를 추가하지 않는다.
+
+검은 화면은 내용 요소를 억지로 추가하지 않는 최소 구현 원칙을 지키면서도, 실제 production image Asset으로 관리할 수 있다.
+
+## Rejected Proposal
 
 ### 1. Cut에 output mode를 둔다
 
@@ -154,13 +164,13 @@ v1에서는 채택하지 않는다.
 - production complete 도출 로직이 output mode에 따라 분기된다.
 - presentation/site text data의 최종 schema는 별도 구현 단계에서 여전히 필요하다.
 
-## Required Follow-up if Accepted
+## Follow-up After Rejection
 
-1. `docs/architecture/EPISODE_CUT_MODEL.md`에 Cut output mode 추가
-2. `docs/architecture/ASSET_STORAGE_POLICY.md` production complete 예외 추가
-3. `docs/rules/MASTER_RULES.md` 최소 구현과 presentation_only 연결
-4. `templates/cut.yaml` output block 추가
-5. Genesis Creation CUT 1 migration에 `presentation_only` 적용
+1. Architecture / Rules / Cut Template은 변경하지 않는다.
+2. Genesis Creation CUT 1은 기존 illustration 흐름으로 migration한다.
+3. CUT 1의 대표 Asset은 아무 장면 요소가 없는 실제 검은 이미지로 제작한다.
+4. 성경 직접 인용과 장·절 표시는 기존 원칙대로 이미지에 bake-in하지 않고 presentation layer에서 관리한다.
+5. 실제 이미지 생성 방식과 provenance는 제작 시 Generation Run / Asset metadata로 기록한다.
 
 ## Related Sources
 
