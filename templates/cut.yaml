@@ -1,0 +1,28 @@
+# Bible Illustration — Cut template
+# Do not duplicate scripture_anchor or beat here; Storyboard owns them.
+
+cut_id: null
+episode_id: null
+
+scene_intent: null
+
+scene:
+  summary: null
+  required_elements: []
+  forbidden_elements: []
+
+# Library definitions are referenced by ID instead of copied here.
+# Populate only the categories actually used by this Cut.
+library_refs:
+  characters: []
+  location: null
+  environments: []
+  objects: []
+  style: null
+
+# Character entries may include appearance_profile and a Cut-level costume_ref
+# when needed by the approved scene definition.
+
+# Allowed: draft | in_review | revision_requested | approved | cancelled | superseded
+definition_status: draft
+revision: 1
