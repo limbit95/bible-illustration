@@ -16,8 +16,18 @@ segments:
     baseline:
       world:
         environment: primordial-waters
+        absent_elements:
+          - sun
+          - moon
+          - stars
+          - land
+          - plants
+          - animals
+          - humans
       visual:
         camera_context: broad-world-view
+        primary_light_direction: none
+        light_presence: absent
 
 transitions:
   - from: GEN-CREATION-01-C01
@@ -29,17 +39,26 @@ transitions:
     mode: continue
     retain:
       - world.environment
+      - world.absent_elements
       - visual.camera_context
     change:
-      - visual.warm_light_appears_from_right
+      - path: visual.primary_light_direction
+        from: none
+        to: right
+      - path: visual.light_presence
+        from: absent
+        to: warm-gold-white
 
   - from: GEN-CREATION-01-C03
     to: GEN-CREATION-01-C04
     mode: continue
     retain:
       - world.environment
+      - world.absent_elements
       - visual.camera_context
-      - visual.primary_light_direction_right
-      - world.no_sun_moon_stars
+      - visual.primary_light_direction
+      - visual.light_presence
     change:
-      - visual.light_dark_distinction_strengthens
+      - path: visual.light_dark_distinction
+        from: emerging
+        to: strengthened
