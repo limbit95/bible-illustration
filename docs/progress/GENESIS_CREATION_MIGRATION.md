@@ -1,6 +1,6 @@
-# Genesis Creation CUT 1–4 Migration Readiness
+# Genesis Creation CUT 1–4 Migration
 
-> 상태: **READY FOR CANONICAL DEFINITION MIGRATION**
+> 상태: **CANONICAL DEFINITION MIGRATED / AUDIT PASSED / ASSET MIGRATION PARTIAL**
 > 마지막 갱신: 2026-10-02
 >
 > 목적: 기존 Genesis Creation CUT 1–4 작업을 현재 Canonical Repository Structure로 이관하기 전에, 기존 확정 정보와 이관 blocker를 명확히 기록한다.
@@ -243,3 +243,117 @@ migration audit 통과 후 현재 Canonical definition을 approved로 전환한�
 5. migration audit
 6. C01–C04 Canonical definition approval 검토
 7. CUT 5 설계 재개
+
+
+## 12. Canonical Definition Migration Result
+
+2026-10-02 기준 다음 Canonical 파일을 생성했다.
+
+~~~text
+content/old-testament/genesis/GEN-CREATION-01/
+├─ episode.yaml
+├─ storyboard.yaml
+├─ continuity.yaml
+└─ cuts/
+   ├─ C01/cut.yaml
+   ├─ C02/cut.yaml
+   ├─ C03/cut.yaml
+   └─ C04/cut.yaml
+~~~
+
+또한 `content/episode-sequence.yaml`에 `GEN-CREATION-01`을 order 10으로 등록했다.
+
+상태:
+
+- Episode: `draft / revision 1`
+- C01–C04: `in_review / revision 1`
+- 과거 handoff의 “확정” 상태를 현재 Architecture의 `approved`로 자동 변환하지 않음
+
+## 13. C01 Asset Migration Status
+
+C01용 Asset ID를 다음과 같이 예약했다.
+
+~~~text
+GEN-CREATION-01-C01-A001
+~~~
+
+metadata 위치:
+
+~~~text
+content/old-testament/genesis/GEN-CREATION-01/cuts/C01/assets/
+  GEN-CREATION-01-C01-A001.asset.yaml
+~~~
+
+현재 상태:
+
+~~~text
+availability: pending_ingest
+~~~
+
+실제 PNG binary는 아직 Canonical Git LFS에 ingest되지 않았다.
+
+현재 연결된 GitHub 도구에는 Git LFS object upload 기능이 없으므로 binary가 없는 상태에서 `available`로 허위 기록하거나 일반 Git blob으로 우회 커밋하지 않았다.
+
+따라서 아직 `asset-selection.yaml`도 만들지 않았다.
+
+## 14. Canonical Migration Audit
+
+2026-10-02 migration audit 결과:
+
+~~~text
+25 / 25 checks PASSED
+~~~
+
+검증 항목:
+
+- Canonical Episode Sequence에 Episode 등록
+- Episode ID / primary Scripture / revision 상태
+- Storyboard C01–C04 참조와 order 10/20/30/40
+- 모든 Cut의 Episode 소속 및 in_review / revision 1
+- 인접 active Cut 3쌍 transition 존재
+- C02–C04 primordial-waters Segment
+- 태양/달/별/육지/식물/동물/인간 부재 baseline
+- C01 Asset이 pending_ingest이며 available로 허위 기록되지 않음
+- C01 binary가 Git에 잘못 커밋되지 않음
+- binary ingest 전 representative selection이 생성되지 않음
+
+Canonical definition migration 자체는 audit를 통과했다.
+
+## 15. Remaining Work
+
+### Definition approval
+
+C01–C04의 현재 Canonical Scene 정의는 `in_review` 상태다.
+
+사용자 검토/승인 후 `approved` 전환 여부를 결정한다.
+
+Episode는 C05 이후 active Cut 정의가 아직 없으므로 현재 `draft`를 유지한다.
+
+### C01 binary
+
+실제 완전한 black-screen PNG를 생성하고 Git LFS object로 ingest해야 한다.
+
+그 후:
+
+1. SHA-256 / dimensions / size 기록
+2. availability를 `available`로 변경
+3. `asset-selection.yaml` 생성
+4. current Cut revision 기준 representative로 선정
+5. Review 기록
+
+### C02–C04 legacy binary
+
+기존 파일명의 실제 binary는 여전히 미확보다.
+
+binary가 복구되면 현재 Cut 정의에 대해 다시 Review한 뒤 Asset Promotion을 수행한다.
+
+복구되지 않으면 과거 filename/status 기록은 historical provenance로만 유지하며 새 Canonical 기준으로 재생성 여부를 결정한다.
+
+## 16. Next
+
+1. C01–C04 Canonical definition 사용자 검토
+2. 승인 시 C01–C04 `approved` 전환
+3. C01 Git LFS binary ingest
+4. C02–C04 legacy binary 복구 또는 재생성 방침 결정
+5. Asset migration / representative Review 완료
+6. C05 — Genesis 1:6–8 설계 재개
