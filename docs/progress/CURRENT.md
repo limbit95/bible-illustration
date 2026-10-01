@@ -8,7 +8,9 @@
 - STEP 0 — Architecture Definition: **COMPLETED**
 - STEP 0-1 ~ STEP 0-7: **ALL CONFIRMED**
 - Repository Structure v1.0: **CONFIRMED**
-- 현재 작업: **최소 필수 저장소 구조 생성 및 루트 AGENTS.md 정식화**
+- 최소 필수 저장소 구조 생성: **COMPLETED**
+- 루트 `AGENTS.md` 정식화: **COMPLETED**
+- 현재 작업: **루트 README.md 생성 및 정식 Architecture 문서 분리 준비**
 
 ## 현재 Production 위치
 
@@ -29,6 +31,11 @@
 6. STEP 0-6 — Provider Integration Model 확정
 7. STEP 0-7 — Image / Asset Storage Policy 확정
 8. Repository Structure v1.0 확정
+9. `docs/architecture/REPOSITORY_STRUCTURE.md` 정식 생성
+10. `docs/progress/CURRENT.md` 진행 복원 체계 시작
+11. `content/episode-sequence.yaml` 초기화
+12. `integrations/registry.yaml` 초기화
+13. 루트 `AGENTS.md` 정식화
 
 ## 현재 Source of Truth
 
