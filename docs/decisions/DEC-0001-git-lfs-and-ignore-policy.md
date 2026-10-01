@@ -1,6 +1,6 @@
 # DEC-0001 — Git LFS and Ignore Policy
 
-> 상태: **proposed / REVIEW READY**
+> 상태: **accepted / 2026-10-02 사용자 승인**
 > 날짜: 2026-10-02
 > 대체: none
 > 대체됨: none
@@ -15,7 +15,7 @@ STEP 0-7에서 다음 원칙은 이미 CONFIRMED 상태다.
 - 재생성 가능한 Derivative는 Canonical master가 아니다.
 - Asset은 Cut 또는 Library의 primary owner 아래 등록한다.
 
-Repository Structure v1.0은 루트에 \`.gitattributes\`와 \`.gitignore\`가 필요하다고 정의했지만 실제 추적 패턴과 제외 정책은 아직 확정하지 않았다.
+Repository Structure v1.0은 루트에 `.gitattributes`와 `.gitignore`가 필요하다고 정의했지만 실제 추적 패턴과 제외 정책은 아직 확정하지 않았다.
 
 이 결정을 통해 다음 문제를 해결해야 한다.
 
@@ -57,13 +57,13 @@ v1에서 Canonical Asset binary로 허용하고 LFS 추적하는 이미지 확�
 1. 확장자는 lowercase를 사용한다.
 2. Provider가 반환한 원본이 위 포맷 중 하나라면 Asset Promotion 시 가능하면 byte-for-byte 그대로 master로 보존한다.
 3. 단순히 포맷을 통일하기 위해 PNG나 JPEG로 강제 변환하지 않는다.
-4. 새로운 포맷이 실제로 필요해지면 먼저 정책과 \`.gitattributes\`를 검토한 뒤 추가한다.
+4. 새로운 포맷이 실제로 필요해지면 먼저 정책과 `.gitattributes`를 검토한 뒤 추가한다.
 5. PSD / TIFF / HEIC 등은 v1에서 자동 Canonical Asset 포맷으로 허용하지 않는다.
 6. 편집 source file을 장기 보존해야 하는 실제 사례가 생기면 별도 검토 후 LFS 패턴을 확장한다.
 
-### 3. 제안 \`.gitattributes\`
+### 3. 제안 `.gitattributes`
 
-승인 후 루트 \`.gitattributes\`에 다음 패턴을 적용한다.
+승인 후 루트 `.gitattributes`에 다음 패턴을 적용한다.
 
 ~~~gitattributes
 # Canonical Cut-owned image Assets
@@ -81,7 +81,7 @@ library/**/assets/*.webp filter=lfs diff=lfs merge=lfs -text
 library/**/assets/*.avif filter=lfs diff=lfs merge=lfs -text
 ~~~
 
-일반 \`*.png\` 전역 LFS 패턴은 사용하지 않는다.
+일반 `*.png` 전역 LFS 패턴은 사용하지 않는다.
 
 이렇게 하면 LFS 여부가 파일 확장자만이 아니라 프로젝트의 Canonical Asset 경계와 일치한다.
 
@@ -89,7 +89,7 @@ library/**/assets/*.avif filter=lfs diff=lfs merge=lfs -text
 
 Asset Promotion 전 Result, Provider 다운로드, 테스트 이미지, 비교용 임시 출력은 Canonical Asset이 아니다.
 
-따라서 루트 \`.gitignore\`는 일반 이미지 binary를 기본 ignore하고, Canonical Asset 경로만 명시적으로 허용한다.
+따라서 루트 `.gitignore`는 일반 이미지 binary를 기본 ignore하고, Canonical Asset 경로만 명시적으로 허용한다.
 
 제안:
 
@@ -140,7 +140,7 @@ Provider 다운로드와 임시 비교 파일은 저장소 루트의 다음 loca
 
 빈 디렉터리를 저장소에 생성하지 않는다.
 
-제안 \`.gitignore\`:
+제안 `.gitignore`:
 
 ~~~gitignore
 .work/
@@ -160,7 +160,7 @@ Provider credential은 저장소에 들어가면 안 된다.
 !.env.example
 ~~~
 
-실제 secret 값이 없는 예제 환경 파일이 필요할 때만 \`.env.example\`을 허용한다.
+실제 secret 값이 없는 예제 환경 파일이 필요할 때만 `.env.example`을 허용한다.
 
 ### 7. OS / editor / log 파일은 Git에서 제외한다
 
@@ -177,10 +177,10 @@ Thumbs.db
 
 다음은 일반 Git에서 계속 추적한다.
 
-- \`*.yaml\`
-- \`*.yml\`
-- \`*.md\`
-- 필요한 \`*.json\`
+- `*.yaml`
+- `*.yml`
+- `*.md`
+- 필요한 `*.json`
 - Asset metadata
 - Generation Run metadata
 - Result Review
@@ -225,7 +225,7 @@ Git LFS 추적 여부 확인
 commit
 ~~~
 
-Promotion되지 않은 Result를 단순히 \`assets/\` 폴더에 넣어 LFS 저장하는 것은 금지한다.
+Promotion되지 않은 Result를 단순히 `assets/` 폴더에 넣어 LFS 저장하는 것은 금지한다.
 
 ### 11. Git LFS 확인 절차
 
@@ -322,18 +322,18 @@ Genesis Creation CUT 1–4 migration 시 실제 기존 이미지 파일의 위�
 
 ## Related Sources
 
-- \`docs/architecture/ASSET_STORAGE_POLICY.md\`
-- \`docs/architecture/REPOSITORY_STRUCTURE.md\`
-- \`docs/rules/GENERATION_RULES.md\`
-- \`templates/asset-metadata.yaml\`
-- \`docs/progress/CURRENT.md\`
+- `docs/architecture/ASSET_STORAGE_POLICY.md`
+- `docs/architecture/REPOSITORY_STRUCTURE.md`
+- `docs/rules/GENERATION_RULES.md`
+- `templates/asset-metadata.yaml`
+- `docs/progress/CURRENT.md`
 
 ## Approval Effect
 
-이 Decision이 \`accepted\` 되면 다음을 수행한다.
+이 Decision이 `accepted` 되면 다음을 수행한다.
 
-1. 루트 \`.gitattributes\` 생성
-2. 루트 \`.gitignore\` 생성
-3. \`AGENTS.md\`에 Git LFS / ignore 운영 원칙 추가
-4. \`CURRENT.md\`와 \`MILESTONES.md\`에 정책 확정 기록
+1. 루트 `.gitattributes` 생성
+2. 루트 `.gitignore` 생성
+3. `AGENTS.md`에 Git LFS / ignore 운영 원칙 추가
+4. `CURRENT.md`와 `MILESTONES.md`에 정책 확정 기록
 5. Genesis Creation CUT 1–4 migration 단계로 이동
