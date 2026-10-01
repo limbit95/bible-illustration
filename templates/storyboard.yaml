@@ -1,0 +1,19 @@
+# Bible Illustration — Storyboard template
+# Storyboard is the single Source of Truth for Cut display order,
+# scripture_anchor, and beat.
+
+episode_id: null
+
+storyboard:
+  - order: 10
+    cut_id: null
+    scripture_anchor:
+      - book: null
+        start:
+          chapter: null
+          verse: null
+        end:
+          chapter: null
+          verse: null
+    beat: null
+    transition_note: null
