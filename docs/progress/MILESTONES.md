@@ -1,6 +1,6 @@
 # Project Milestones
 
-> 상태: **REVIEW READY**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 목적: Bible Illustration 프로젝트에서 장기적으로 의미가 있는 완료 기준점을 간결하게 기록한다.
 >
@@ -61,11 +61,17 @@
 - Architecture 필수 필드와 enum 교차 검증 통과
 - 신규 Episode / Cut / Run / Asset / Library / Provider 설정의 반복 생성 기준 마련
 
+### 2026-10-02 — Progress / Decision 기록 체계 v1.0 확정
+
+- `CURRENT.md` = 현재 작업 위치 복원
+- `MILESTONES.md` = 주요 완료 기준점 이력
+- `docs/decisions/DEC-*.md` = 중요한 선택의 이유·대안·영향 기록
+- STEP 0 세부 결정을 불필요하게 소급 중복 기록하지 않는 원칙 확정
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 이 문서에 추가한다.
 
-- Progress / Decision 기록 체계 v1.0 확정
 - Git LFS / ignore 정책 확정
 - Genesis Creation CUT 1–4 migration 완료
 - Genesis Creation migration 감사 완료
