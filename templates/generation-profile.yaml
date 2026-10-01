@@ -1,0 +1,25 @@
+# Bible Illustration — Provider Generation Profile template
+# This is Provider-specific execution configuration, not Canonical Visual Style.
+
+provider_key: null
+profile_key: null
+profile_revision: 1
+
+# Common v1 operation values: generate | edit | variation
+operation: generate
+
+model:
+  identifier: null
+  version: unknown
+
+defaults:
+  aspect_ratio: null
+  resolution: null
+  provider_specific: {}
+
+prompt_adapter:
+  key: null
+  revision: null
+
+# Provider-specific mapping policy. Add only roles actually supported/used.
+reference_policy: {}
