@@ -613,18 +613,18 @@ STEP 0의 7개 영역이 검토·승인되면 다음을 진행한다.
 
 다음 작업:
 
-> **STEP 0-1 — Content Model 정의**
+> **STEP 0-2 — Episode / Cut Model 정의**
 
-목표는 바로 파일이나 디렉터리를 생성하는 것이 아니라, 먼저 성경 본문 → Episode → Cut으로 이어지는 콘텐츠 모델을 충분히 검토하여 확정하는 것이다.
+STEP 0-1에서 확정한 Content Model을 전제로 Episode와 Cut이 실제 제작 과정에서 가져야 할 데이터와 상태 흐름을 설계한다.
 
 STEP 0 진행 중 중요한 설계 결정은 대화에만 남기지 말고 이 저장소에 기록한다.
 
 
 ---
 
-# STEP 0-1 — Content Model Working Draft v0.3
+# STEP 0-1 — Content Model v1.0
 
-> 상태: **REVIEW READY / 사용자 확정 대기**
+> 상태: **CONFIRMED / 2026-10-01 사용자 승인**
 >
 > 목적: 성경 본문 → 제작 Episode → Cut으로 이어지는 콘텐츠 모델과 식별 체계를 먼저 안정화한다.
 >
@@ -955,9 +955,9 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 
 이 항목들은 STEP 0-2 이후에서 순차적으로 정의한다.
 
-## 11. STEP 0-1 검토 포인트
+## 11. STEP 0-1 확정 사항
 
-사용자 검토가 필요한 핵심 항목은 다음과 같다.
+다음 항목은 사용자 승인으로 확정되었다.
 
 - Episode ID 형식 `<BOOK>-<STORY_KEY>-<NN>` 유지 여부
 - Cut ID 형식 `<EPISODE_ID>-C<NN>` 유지 여부
@@ -969,4 +969,8 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 - Canonical Episode Sequence를 Episode 기본 순서의 Source of Truth로 두는 원칙
 - v0에서는 별도의 Story Arc 엔터티를 만들지 않는 원칙
 
-이 항목들이 승인되면 STEP 0-1을 CONFIRMED로 전환하고 STEP 0-2 — Episode / Cut Model로 진행한다.
+위 항목은 2026-10-01 사용자 승인으로 확정되었다.
+
+**STEP 0-1 — Content Model: COMPLETED / CONFIRMED**
+
+다음 작업은 **STEP 0-2 — Episode / Cut Model**이다.
