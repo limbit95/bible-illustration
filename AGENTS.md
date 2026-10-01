@@ -26,7 +26,8 @@
 - 미래에 필요할 것이라는 이유만으로 디렉터리와 파일을 대량 생성하지 않는다.
 - `architecture_v0_draft.md`의 제안 구조를 확정 구조로 간주하지 않는다.
 - STEP 0의 각 설계 영역을 사용자와 검토한 뒤 필요한 구조만 단계적으로 생성한다.
-- 현재 최우선 작업은 **STEP 0-1 — Content Model 정의**다.
+- **STEP 0-1 — Content Model은 CONFIRMED 상태다.**
+- 현재 최우선 작업은 **STEP 0-2 — Episode / Cut Model 정의**다.
 
 ## 3. 저장소 범위
 
@@ -62,6 +63,6 @@ Canonical Scene, Character, Location, Object, Continuity 등 장기적으로 유
 
 `architecture_v0_draft.md`를 읽고 다음 항목부터 진행한다.
 
-**STEP 0-1 — Content Model**
+**STEP 0-2 — Episode / Cut Model**
 
-성경 본문 → 제작 Episode → Cut으로 이어지는 콘텐츠 모델과 식별 체계를 먼저 설계하고 검토한다.
+확정된 Content Model을 전제로 Episode와 Cut의 필수 데이터, 상태 값, 승인/수정/폐기 흐름, 기본 Cut 수 정책, 텍스트와 이미지의 관계를 설계하고 검토한다.
