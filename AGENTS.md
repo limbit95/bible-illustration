@@ -65,4 +65,4 @@ Canonical Scene, Character, Location, Object, Continuity 등 장기적으로 유
 
 **STEP 0-2 — Episode / Cut Model**
 
-확정된 Content Model을 전제로 Episode와 Cut의 필수 데이터, 상태 값, 승인/수정/폐기 흐름, 본문 기반 Episode/Cut 분할 정책, 텍스트와 이미지의 관계를 설계하고 검토한다.
+확정된 Content Model을 전제로 Episode와 Cut의 필수 데이터, 정의 상태와 revision, 승인/수정/폐기 흐름, 본문 기반 Episode/Cut 분할 정책, 텍스트와 이미지의 관계를 설계하고 검토한다. Episode/Cut의 정의 승인과 실제 이미지 제작 완료 상태는 분리한다.
