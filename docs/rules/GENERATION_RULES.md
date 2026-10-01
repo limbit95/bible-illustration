@@ -1,6 +1,6 @@
-# Generation Rules v1.0 Working Draft
+# Generation Rules v1.0
 
-> 상태: **REVIEW READY**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 목적: Canonical Scene을 실제 Provider 생성 요청으로 변환하고 Result를 검토·기록·보존하는 운영 규칙을 정의한다.
 
