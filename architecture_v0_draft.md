@@ -1581,9 +1581,9 @@ Episode에도 동일한 원칙을 적용한다.
 
 ---
 
-# STEP 0-3 — Continuity Model Working Draft v0.1
+# STEP 0-3 — Continuity Model Working Draft v0.2
 
-> 상태: **WORKING DRAFT / 구조 검토 중**
+> 상태: **REVIEW READY / 구조 점검 반영**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -1702,7 +1702,9 @@ Canonical Sequence 전체를 거대한 연속 장면처럼 취급하지 않는�
 
 같은 장면·공간·시간 흐름이 이어진다.
 
-이전 상태에서 변화한 것만 명시하고 나머지 핵심 상태는 유지한다.
+단, `continue`라고 해서 모든 시각 요소를 자동 상속하지 않는다.
+
+**Segment baseline과 명시적인 retain constraint만 유지 의무를 가진다.** 그 밖의 기록되지 않은 값은 생성 자유도를 유지한다.
 
 예:
 
@@ -1842,10 +1844,8 @@ episode_id: GEN-CREATION-01
 
 segments:
   - key: S01
-    cuts:
-      - GEN-CREATION-01-C01
-      - GEN-CREATION-01-C02
-      - GEN-CREATION-01-C03
+    start_cut_id: GEN-CREATION-01-C01
+    end_cut_id: GEN-CREATION-01-C03
 
     baseline:
       world:
@@ -1969,6 +1969,12 @@ Cross-Episode Continuity는 Canonical Episode Sequence에 있다고 자동 생�
 
 명시적 연결이 있을 때만 관리한다.
 
+동일한 경계 transition을 두 Episode에 중복 저장하지 않는다.
+
+개념적으로 **도착하는 Episode가 자신의 incoming boundary를 소유**하도록 한다.
+
+즉 이전 Episode의 마지막 Cut을 참조하되, 실제 transition 정의는 다음 Episode 쪽 continuity 데이터에서 한 번만 관리한다. 최종 물리 파일 배치는 STEP 0 전체 구조를 확정할 때 결정한다.
+
 ## 11. Continuity와 Revision
 
 Continuity는 이미지 생성에 영향을 주는 Canonical 정의의 일부다.
@@ -2048,12 +2054,13 @@ continuity mismatch
 6. transition은 baseline에서 달라지는 변화와 중요한 retain 조건을 기록한다.
 7. 기록되지 않은 값은 기본적으로 continuity constraint가 아니다.
 8. 모든 인접 active Cut 쌍은 \`continue / partial_reset / reset\` 중 하나로 분류된다.
-9. Episode 경계는 continuity를 자동으로 끊거나 자동으로 이어주지 않는다.
-10. Cross-Episode Continuity가 필요하면 명시적으로 정의한다.
-11. 의미 있는 Continuity 변경은 영향을 받는 Cut revision 재검토 대상이다.
-12. Generated Asset은 Continuity의 Source of Truth가 아니다.
-13. 생성 결과와 Canonical Continuity가 충돌하면 기본적으로 생성 결과를 수정한다.
-14. Continuity 검토는 Cut/Episode Definition Approval의 일부다.
+10. Episode 경계는 continuity를 자동으로 끊거나 자동으로 이어주지 않는다.
+11. Cross-Episode Continuity가 필요하면 명시적으로 정의하며 동일 경계는 한 번만 저장한다.
+12. Continuity Segment는 Cut 순서를 복제하지 않고 Storyboard 순서를 참조한다.
+13. 의미 있는 Continuity 변경은 영향을 받는 Cut revision 재검토 대상이다.
+14. Generated Asset은 Continuity의 Source of Truth가 아니다.
+15. 생성 결과와 Canonical Continuity가 충돌하면 기본적으로 생성 결과를 수정한다.
+16. Continuity 검토는 Cut/Episode Definition Approval의 일부다.
 
 ## 15. STEP 0-3에서 의도적으로 미확정하는 항목
 
@@ -2074,11 +2081,11 @@ continuity mismatch
 
 - Continuity를 Cut 사이 관계 데이터로 두는 원칙
 - World / Character / Object / Spatial / Event State / Visual 영역 구분
-- Episode 내부 Continuity Segment 사용
+- Episode 내부 Continuity Segment 사용과 Storyboard order 비중복 원칙
 - baseline + transition delta 방식
 - \`continue / partial_reset / reset\` 3단계 transition mode
 - 기록 없음은 constraint 없음으로 해석하는 원칙
-- Episode 경계 continuity를 자동 추론하지 않는 원칙
+- Episode 경계 continuity를 자동 추론하지 않고 incoming boundary를 한 곳에서만 관리하는 원칙
 - 의미 있는 Continuity 변경 시 영향을 받는 Cut revision을 다시 검토하는 원칙
 - Continuity를 Cut/Episode Definition Approval 조건에 포함하는 원칙
 - Generated Asset보다 Canonical Continuity 정의를 우선하는 원칙
