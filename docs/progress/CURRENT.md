@@ -14,7 +14,9 @@
 - 정식 Architecture 문서 분리: **COMPLETED**
 - Architecture 이관 검증: **PASSED — STEP 0-1~0-7 본문 exact match**
 - Production Rules v1.0: **CONFIRMED**
-- 현재 작업: **Templates 생성 준비**
+- Templates v1.0 초안: **REVIEW READY**
+- Template 필수 필드 교차 검증: **PASSED**
+- 현재 작업: **Templates v1.0 사용자 검토 대기**
 
 ## 현재 Production 위치
 
@@ -48,6 +50,9 @@
 19. 과거 8컷 고정 규칙을 현재 Architecture와 충돌하는 legacy rule로 분리
 20. Rules 상호 충돌 및 Architecture 경계 자체 점검 완료
 21. Production Rules v1.0 사용자 승인 및 7개 문서 CONFIRMED 전환
+22. `templates/` 핵심 YAML 템플릿 11개 생성
+23. Architecture 기준 필수 필드 및 enum 교차 검증 통과
+24. Template 단계 물리 스키마 구체화: `cut.library_refs`, `generation-run.integration`, `asset-selection.cut_id`
 
 ## 현재 Source of Truth
 
@@ -63,7 +68,7 @@
 
 ## 다음 작업
 
-1. Templates 생성
+1. Templates v1.0 사용자 승인 및 CONFIRMED 전환
 2. Progress / Decision 기록 체계 보완
 3. Git LFS / ignore 정책 확정
 4. Genesis Creation CUT 1–4 migration
