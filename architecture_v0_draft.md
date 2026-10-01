@@ -1022,7 +1022,7 @@ supporting_scripture: []
 production_intent: >
   이 Episode가 어떤 본문 흐름을 어떤 시각적 목적 아래 묶어 보여주는지 설명한다.
 
-status: draft
+definition_status: draft
 revision: 1
 ```
 
@@ -1074,7 +1074,7 @@ scene:
   required_elements: []
   forbidden_elements: []
 
-status: draft
+definition_status: draft
 revision: 1
 ```
 
@@ -1307,8 +1307,8 @@ Episode도 동일한 원칙을 따른다.
 
 승인된 정의에 의미 있는 변경이 생기면 revision만 증가시키고 `approved` 상태를 그대로 유지하지 않는다.
 
-- Episode: 새 revision 생성 → `definition_status: draft`
-- Cut: 새 revision 생성 → `definition_status: draft`
+- Episode: 새 revision 생성 → `definition_definition_status: draft`
+- Cut: 새 revision 생성 → `definition_definition_status: draft`
 
 새 revision은 다시 검토와 승인을 거쳐야 한다.
 
