@@ -613,9 +613,9 @@ STEP 0의 7개 영역이 검토·승인되면 다음을 진행한다.
 
 다음 작업:
 
-> **STEP 0-2 — Episode / Cut Model 정의**
+> **STEP 0-4 — Library Model 정의**
 
-STEP 0-1에서 확정한 Content Model을 전제로 Episode와 Cut이 실제 제작 과정에서 가져야 할 데이터와 상태 흐름을 설계한다.
+확정된 Content / Episode-Cut / Continuity Model을 전제로 재사용 가능한 Canonical Library Asset의 ID, 근거 계층, 참조 및 revision 규칙을 설계한다.
 
 STEP 0 진행 중 중요한 설계 결정은 대화에만 남기지 말고 이 저장소에 기록한다.
 
@@ -2123,9 +2123,9 @@ continuity mismatch
 
 ---
 
-# STEP 0-4 — Library Model Working Draft v0.2
+# STEP 0-4 — Library Model Working Draft v0.3
 
-> 상태: **WORKING DRAFT / 구조 점검 반영**
+> 상태: **REVIEW READY / 구조 점검 완료**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -2251,6 +2251,30 @@ revision: 1
 - uncertainties: 미확정 역사·시각 쟁점
 - definition_status: 설계·검토·승인 상태
 - revision: 승인된 정의 변경 이력
+
+### 4.1 Local Profile / Variant 원칙
+
+하나의 Canonical Asset이 생애·시대·형태에 따라 달라진다고 해서 무조건 새 전역 Asset ID를 만들지 않는다.
+
+정체성은 같고 표현 단계만 달라지는 경우 해당 Asset 내부의 local profile 또는 variant를 우선한다.
+
+~~~text
+CHR-MOSES
+  ├─ profile: MIDIAN
+  └─ profile: EXODUS
+
+LOC-JERUSALEM
+  ├─ profile: FIRST-TEMPLE
+  └─ profile: SECOND-TEMPLE
+~~~
+
+원칙:
+
+1. 전역 Asset ID는 identity를 나타낸다.
+2. local profile/variant는 같은 identity의 생애·시대·형태 변화를 나타낸다.
+3. local key는 해당 Asset 내부에서만 유일하면 된다.
+4. 독립적으로 여러 자산에서 재사용되어야 하는 정의라면 별도 Library Asset 승격을 검토한다.
+5. 상처, 먼지, 현재 위치, 파손처럼 사건 중 일시 상태는 profile이 아니라 Cut/Continuity가 관리한다.
 
 ## 5. 근거 계층
 
@@ -2545,6 +2569,20 @@ Reference image나 Provider 등록 완료 여부와는 별개다.
 
 승인 후 실제 시각 결과에 영향을 줄 수 있는 정의 변경은 revision 증가 대상으로 본다.
 
+### Library Definition 승인 조건
+
+Library Asset의 definition_status를 approved로 만들기 위한 최소 조건:
+
+1. 공통 필수 정의와 해당 asset type의 핵심 데이터가 존재한다.
+2. Scripture / Historical / Visual Reconstruction이 가능한 범위에서 구분되어 있다.
+3. 중요한 불확실성이 있다면 uncertainties에 기록되어 있다.
+4. Provider external ID나 특정 서비스 preset이 Canonical 정의를 대신하지 않는다.
+5. 동일 실체의 중복 Library Asset이 없는지 검토되었다.
+
+Episode/Cut 작성 중에는 draft Library Asset을 임시 참조할 수 있지만, **Cut definition을 최종 approved로 만들 때 해당 Cut이 의존하는 Canonical Library Asset과 사용 profile은 approved 상태여야 한다.**
+
+이 규칙은 승인된 장면이 아직 확정되지 않은 인물 외형이나 장소 정의에 기대는 것을 막기 위한 것이다.
+
 ## 14. Library 변경 영향 검토
 
 공유 Library Asset의 revision이 올라가면 참조 Cut의 영향 범위를 검토한다.
@@ -2636,6 +2674,7 @@ OpenArt / Higgsfield / future provider
 16. 승인된 Library 변경은 참조 Cut에 대한 영향 검토를 수행한다.
 17. Library revision 증가가 모든 참조 Cut revision 자동 증가를 의미하지 않는다.
 18. 재사용성과 일관성 가치가 없는 일회성 요소를 과도하게 Library Asset으로 만들지 않는다.
+19. 승인된 Cut은 자신이 의존하는 Canonical Library Asset과 사용 profile이 approved 상태여야 한다.
 
 ## 18. STEP 0-4에서 의도적으로 미확정하는 항목
 
@@ -2667,7 +2706,8 @@ OpenArt / Higgsfield / future provider
 - Object unique / type 구분
 - Visual Style을 Provider-independent Library Asset으로 관리하는 원칙
 - Episode/Cut/Continuity에서 Library ID를 참조하는 원칙
-- Library Definition Status / revision 정책
+- Library Definition Status / revision 및 승인 조건
+- 승인된 Cut이 참조하는 Library Asset도 approved여야 한다는 원칙
 - Library 변경 시 참조 Cut 영향 검토
 - Reference Image / Provider Binding을 Canonical Library에서 분리
 - 일회성 요소를 과도하게 Library Asset으로 만들지 않는 원칙
