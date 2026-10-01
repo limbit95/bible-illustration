@@ -19,7 +19,10 @@
 - Progress / Decision 기록 체계 v1.0: **CONFIRMED**
 - Git LFS / ignore 정책: **CONFIRMED — DEC-0001 accepted**
 - `.gitattributes` / `.gitignore`: **IMPLEMENTED**
-- 현재 작업: **Genesis Creation CUT 1–4 migration 준비**
+- Genesis Creation CUT 1–4 migration readiness: **REVIEW READY / BLOCKED**
+- DEC-0002 Presentation-only Cut Output Mode: **proposed / REVIEW READY**
+- C02–C04 legacy image binary: **NOT LOCATED**
+- 현재 작업: **DEC-0002 사용자 검토 대기**
 
 ## 현재 Production 위치
 
@@ -65,6 +68,10 @@
 31. Canonical Asset 경로 기반 LFS 추적 + 일반 이미지 기본 ignore 정책 자체 점검 완료
 32. DEC-0001 사용자 승인 및 accepted 전환
 33. 루트 `.gitattributes` / `.gitignore` 생성
+34. Genesis Creation CUT 1–4 historical source 복원
+35. `GENESIS_CREATION_MIGRATION.md` readiness 문서 생성
+36. DEC-0002 Presentation-only Cut Output Mode 제안 생성
+37. C02–C04 legacy image binary 현재 source에서 미확인
 
 ## 현재 Source of Truth
 
@@ -84,13 +91,21 @@
 - `docs/progress/MILESTONES.md` — 주요 완료 기준점
 - `docs/decisions/README.md` — Decision Record 생성·상태·번호 규칙
 - `DEC-0001-git-lfs-and-ignore-policy.md`: **accepted**
+- `DEC-0002-presentation-only-cut-output-mode.md`: **proposed / REVIEW READY**
+- `docs/progress/GENESIS_CREATION_MIGRATION.md`: migration readiness / blockers
 
 ## 다음 작업
 
-1. Genesis Creation CUT 1–4 migration
-2. migration 감사
-3. CUT 5 제작 재개
+1. DEC-0002 사용자 승인 및 accepted 전환
+2. 승인 시 Architecture / Rules / Cut Template 최소 수정
+3. Genesis Creation CUT 1–4 Canonical definition migration
+4. C02–C04 legacy image binary 확보 여부에 따라 Asset migration
+5. migration 감사
+6. CUT 5 제작 재개
 
 ## Blocker
 
-현재 blocker 없음.
+현재 blocker:
+
+1. DEC-0002 — Presentation-only Cut Output Mode 승인 필요
+2. C02–C04의 legacy 확정 이미지 binary를 현재 저장소/Project Library에서 찾지 못함
