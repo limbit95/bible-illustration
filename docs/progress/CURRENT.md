@@ -17,7 +17,8 @@
 - Templates v1.0: **CONFIRMED**
 - Template 필수 필드 교차 검증: **PASSED**
 - Progress / Decision 기록 체계 v1.0: **CONFIRMED**
-- 현재 작업: **Git LFS / ignore 정책 설계**
+- Git LFS / ignore 정책: **REVIEW READY — DEC-0001 proposed**
+- 현재 작업: **DEC-0001 사용자 검토 대기**
 
 ## 현재 Production 위치
 
@@ -59,6 +60,8 @@
 27. `docs/decisions/README.md` Decision Record 정책 생성
 28. CURRENT / MILESTONES / Decision 책임 분리 및 자체 점검 완료
 29. Progress / Decision 기록 체계 v1.0 사용자 승인 및 CONFIRMED 전환
+30. `DEC-0001-git-lfs-and-ignore-policy.md` 제안 생성
+31. Canonical Asset 경로 기반 LFS 추적 + 일반 이미지 기본 ignore 정책 자체 점검 완료
 
 ## 현재 Source of Truth
 
@@ -77,14 +80,15 @@
 
 - `docs/progress/MILESTONES.md` — 주요 완료 기준점
 - `docs/decisions/README.md` — Decision Record 생성·상태·번호 규칙
-- 현재 생성된 `DEC-*.md`: 없음
+- `DEC-0001-git-lfs-and-ignore-policy.md`: **proposed / REVIEW READY**
 
 ## 다음 작업
 
-1. Git LFS / ignore 정책 확정
-2. Genesis Creation CUT 1–4 migration
-3. migration 감사
-4. CUT 5 제작 재개
+1. DEC-0001 사용자 승인 및 accepted 전환
+2. `.gitattributes` / `.gitignore` 실제 생성
+3. Genesis Creation CUT 1–4 migration
+4. migration 감사
+5. CUT 5 제작 재개
 
 ## Blocker
 
