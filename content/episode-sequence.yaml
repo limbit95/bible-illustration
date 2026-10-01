@@ -1,5 +1,6 @@
 schema_version: 1
 
 # Canonical Episode Sequence
-# Episode migration 전이므로 아직 등록된 Episode가 없다.
-episodes: []
+episodes:
+  - order: 10
+    episode_id: GEN-CREATION-01
