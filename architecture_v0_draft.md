@@ -4118,9 +4118,9 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 
 ---
 
-# STEP 0-7 — Image / Asset Storage Policy Working Draft v0.2
+# STEP 0-7 — Image / Asset Storage Policy Working Draft v0.3
 
-> 상태: **WORKING DRAFT / Asset·External Reference 경계 보완**
+> 상태: **REVIEW READY / 구조 점검 완료**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -4288,7 +4288,8 @@ provenance:
   note: null
 
 rights:
-  status: project_generated
+  storage_status: permitted
+  basis: project_generated
   note: null
 ~~~
 
@@ -4359,7 +4360,7 @@ Asset metadata에는 가능한 한 binary 무결성을 확인할 수 있는 정�
 
 ## 8. Asset Availability
 
-Asset binary의 현재 보존 상태는 역할 승인과 별도로 관리한다.
+Asset binary의 현재 보존 상태는 사용 관계와 별도로 관리한다.
 
 기본 값:
 
@@ -4417,6 +4418,14 @@ representative_asset:
     cut_revision: 2
     repository_commit: ...
   selected_at: ...
+
+representative_history:
+  - asset_id: GEN-CREATION-01-C03-A002
+    selected_against:
+      cut_revision: 1
+      repository_commit: ...
+    selected_at: ...
+    replaced_at: ...
 ~~~
 
 규칙:
@@ -4500,19 +4509,43 @@ external_references:
 5. Provider Run에서 실제 remote reference로 사용했다면 Run snapshot에도 사용 사실과 확인 가능한 URL/metadata를 남긴다.
 6. 저장 권리와 장기 보존 가치가 확인되면 External Reference Record의 자료를 정식 Asset으로 import할 수 있다.
 
-정식 Asset으로 import된 외부 자료의 rights.status 후보:
+정식 Asset의 rights는 provenance와 분리한다.
+
+개념 예:
+
+~~~yaml
+rights:
+  storage_status: permitted
+  basis: licensed
+  note: ...
+~~~
+
+storage_status 후보:
 
 ~~~text
-licensed
-public_domain
-permission_granted
-user_provided
-project_generated
+permitted
 restricted
 unknown
 ~~~
 
-외부 자료를 Asset으로 import하는 경우 provenance와 권리 근거를 기록하며 public_domain / licensed 상태를 추측하지 않는다.
+basis 후보:
+
+~~~text
+project_generated
+licensed
+public_domain
+permission_granted
+user_asserted
+other
+unknown
+~~~
+
+원칙:
+
+1. user_supplied라는 provenance만으로 저장 권리가 자동 보장된다고 보지 않는다.
+2. external_import는 storage_status가 permitted라고 판단할 근거가 있을 때만 Canonical binary로 저장한다.
+3. public_domain / licensed / permission_granted를 추측하지 않는다.
+4. 권리 상태가 unknown 또는 restricted이면 External Reference Record 방식이 기본이다.
 
 ## 14. Git / Git LFS 역할 분리
 
@@ -4572,23 +4605,39 @@ STEP 0-5의 모든 Result metadata와 Review history는 유지하지만 binary �
 4. accepted Result도 자동 영구 보존하지 않는다. 장기 가치가 있으면 Asset으로 승격한다.
 5. 대표 후보 비교에 필요한 accepted Result는 선정 과정이 끝날 때까지 유지한다.
 
+### Run Reference Input 보존
+
+프로젝트가 직접 통제하는 이미지 binary를 Generation Run의 중요한 Reference input으로 사용할 경우 가능한 한 **Run 실행 전에 또는 실행과 동시에 Asset으로 등록**한다.
+
+이렇게 해야 Run이 참조한 실제 입력 이미지가 나중에 사라지지 않는다.
+
+원칙:
+
+1. Character / Continuity / Composition 등 재현성에 중요한 프로젝트 소유 Reference는 available Asset ID로 전달하는 것을 우선한다.
+2. 임시 로컬 파일을 중요한 Run input으로 사용한 뒤 기록 없이 버리는 흐름을 피한다.
+3. 권리 때문에 저장할 수 없는 외부 remote reference는 External Reference Record + Run snapshot으로 기록하고 재현성 한계를 인정한다.
+4. 과거 Run에서 사용된 Asset Reference는 해당 Run 기록이 유지되는 동안 기본 보존 대상이다.
+
 ## 16. Asset Promotion 규칙
 
 Generated Result를 Asset으로 승격하면 다음을 수행한다.
 
 1. 새 Asset ID 발급
 2. source.result_id 기록
-3. binary를 Canonical Git LFS 위치에 저장
-4. Git LFS ingest가 완료되기 전에는 availability를 pending_ingest로 둘 수 있음
-5. SHA-256 및 기본 파일 metadata 기록
-6. provenance / rights 기록
-7. 필요한 Cut / Library / Continuity 사용 관계를 연결
-8. Run Result에서 Asset ID를 역참조할 수 있게 연결
-9. binary와 metadata 확인이 끝나면 availability를 available로 전환
+3. generation_result를 승격하는 경우 가능하면 Provider가 반환한 해당 Result의 원본 binary를 byte-for-byte 그대로 Canonical master로 보존
+4. binary를 Canonical Git LFS 위치에 저장
+5. Git LFS ingest가 완료되기 전에는 availability를 pending_ingest로 둘 수 있음
+6. SHA-256 및 기본 파일 metadata 기록
+7. provenance / rights 기록
+8. 필요한 Cut / Library / Continuity 사용 관계를 연결
+9. Run Result에서 Asset ID를 역참조할 수 있게 연결
+10. binary와 metadata 확인이 끝나면 availability를 available로 전환
 
 Asset Promotion은 Result Review와 별개다.
 
 일반적으로 accepted Result를 승격하지만, rejected Result도 diagnostic 목적이라면 Asset으로 승격할 수 있다.
+
+Provider 원본을 표준 포맷으로 변환하거나 압축한 파일은 원본 Asset을 대체하지 않고 Derivative로 다루는 것을 우선한다.
 
 ## 17. Asset Binary의 불변성
 
@@ -4809,22 +4858,24 @@ CDN / site
 5. Asset binary는 immutable이며 의미 있는 pixel 변경은 새 Asset ID를 요구한다.
 6. Asset ID에는 final / approved / provider 등 가변 상태를 넣지 않는다.
 7. Cut-owned / Library-owned Asset ID를 owner 기반으로 발급한다.
-8. Asset metadata에 source / provenance / checksum / binary 정보 / rights를 추적한다.
+8. Asset metadata에 source / provenance / checksum / binary 정보와 provenance와 분리된 rights 정보를 추적한다.
 9. Cut의 대표 이미지는 파일명이 아니라 representative_asset 관계로 관리한다.
 10. production complete는 대표 Asset과 현재 Canonical revision의 적합성으로 도출한다.
 11. Library Reference image는 Canonical Library 정의를 대체하지 않는다.
 12. 저장 권리가 불명확한 외부 자료는 Asset이 아니라 External Reference Record로 관리한다.
 13. External Reference Record는 representative production master가 될 수 없다.
 14. 모든 Result metadata와 Review는 남기되 모든 Result binary를 영구 보존하지 않는다.
-15. 보존할 Result는 Asset Promotion을 통해 Git LFS에 등록한다.
-16. 재생성 가능한 Derivative는 Canonical master가 아니다.
-17. 외부 Storage/CDN은 전달·캐시·백업 용도이며 Source of Truth가 아니다.
-18. Asset 파일명은 안정적인 Asset ID 기반으로 한다.
-19. Asset의 현재 대표/Reference 역할은 소비자 쪽 명시적 관계가 Source of Truth다.
-20. 동일 Asset binary를 역할별로 중복 복사하지 않는다.
-21. 대표/Reference/Run dependency가 있는 Asset은 기본적으로 물리 삭제하지 않는다.
-22. 웹 배포본은 Production Master에서 재생성 가능해야 한다.
-23. 사이트용 성경 본문·내레이션·UI text는 기본적으로 이미지 binary와 분리한다.
+15. 중요한 Run Reference input인 프로젝트 소유 binary는 available Asset으로 보존하는 것을 우선한다.
+16. 보존할 Result는 Asset Promotion을 통해 Git LFS에 등록한다.
+17. generation_result를 Asset으로 승격할 때는 가능한 한 원본 Result binary를 그대로 보존한다.
+18. 재생성 가능한 Derivative는 Canonical master가 아니다.
+19. 외부 Storage/CDN은 전달·캐시·백업 용도이며 Source of Truth가 아니다.
+20. Asset 파일명은 안정적인 Asset ID 기반으로 한다.
+21. Asset의 현재 대표/Reference 역할은 소비자 쪽 명시적 관계가 Source of Truth다.
+22. 동일 Asset binary를 역할별로 중복 복사하지 않는다.
+23. 대표/Reference/Run dependency가 있는 Asset은 기본적으로 물리 삭제하지 않는다.
+24. 웹 배포본은 Production Master에서 재생성 가능해야 한다.
+25. 사이트용 성경 본문·내레이션·UI text는 기본적으로 이미지 binary와 분리한다.
 
 ## 28. STEP 0-7에서 의도적으로 미확정하는 항목
 
@@ -4856,8 +4907,10 @@ STEP 0 확정 후 실제 구조 생성 또는 운영 과정에서 정한다.
 - 저장 불가 외부 자료를 External Reference Record로 분리하는 원칙
 - representative_asset 관계와 selection history / production complete 도출 방식
 - Library Reference Asset 정책
-- 외부 Reference의 provenance / rights 기록
+- provenance와 rights 분리 및 External Reference 권리 처리
+- 중요한 Run Reference input의 Asset 보존
 - rejected/non-promoted Result binary 정리 가능 정책
+- generation_result 승격 시 원본 binary 보존 원칙
 - Derivative와 Production Master 분리
 - Asset ID 기반 파일명
 - owner 기반 논리적 파일 배치
