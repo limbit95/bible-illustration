@@ -978,9 +978,9 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 
 ---
 
-# STEP 0-2 — Episode / Cut Model Working Draft v0.5
+# STEP 0-2 — Episode / Cut Model v1.0
 
-> 상태: **REVIEW READY / 상태 모델 분리 반영**
+> 상태: **CONFIRMED / 2026-10-01 사용자 승인**
 >
 > 선행 조건: **STEP 0-1 — Content Model v1.0 CONFIRMED**
 >
@@ -1307,8 +1307,8 @@ Episode도 동일한 원칙을 따른다.
 
 승인된 정의에 의미 있는 변경이 생기면 revision만 증가시키고 `approved` 상태를 그대로 유지하지 않는다.
 
-- Episode: 새 revision 생성 → `definition_definition_status: draft`
-- Cut: 새 revision 생성 → `definition_definition_status: draft`
+- Episode: 새 revision 생성 → `definition_status: draft`
+- Cut: 새 revision 생성 → `definition_status: draft`
 
 새 revision은 다시 검토와 승인을 거쳐야 한다.
 
@@ -1572,4 +1572,8 @@ Episode에도 동일한 원칙을 적용한다.
 - Cut과 Generated Image를 분리하는 원칙
 - 삭제보다 Cancel / Supersede를 우선하는 원칙
 
-이 항목들이 확정되면 STEP 0-2를 CONFIRMED로 전환하고 STEP 0-3 — Continuity Model로 진행한다.
+위 항목은 2026-10-01 사용자 승인으로 확정되었다.
+
+**STEP 0-2 — Episode / Cut Model: COMPLETED / CONFIRMED**
+
+다음 작업은 **STEP 0-3 — Continuity Model**이다.
