@@ -1,0 +1,84 @@
+# Bible Illustration — Generation Run template
+# One actual Provider request = one Run.
+
+run_id: null
+
+target:
+  cut_id: null
+  cut_revision: null
+
+source_snapshot:
+  repository_commit: null
+  library: []
+  # Library snapshot entry:
+  # - asset_id: CHR-MOSES
+  #   revision: 2
+  #   profile: EXODUS
+
+# Allowed: generate | edit | variation
+operation: generate
+
+provider:
+  key: null
+  model: null
+  model_version: unknown
+  execution_mode: null
+  external_request_id: null
+
+# Snapshot reusable integration configuration actually used by this Run.
+integration:
+  generation_profile:
+    key: null
+    revision: null
+  prompt_adapter:
+    key: null
+    revision: null
+  bindings: []
+  fallbacks: []
+
+prompt:
+  observable_input_text: null
+  provider_internal_prompt: unavailable
+  negative_prompt: null
+
+# Each entry records the actual delivered reference and its role.
+# Roles include character, location, object, costume, environment,
+# style, continuity, composition, edit_source, other.
+references: []
+
+settings:
+  aspect_ratio: null
+  resolution: null
+  seed: null
+  provider_specific: {}
+
+submitted_at: null
+
+# Allowed: completed | partial | failed | cancelled
+execution_status: null
+
+usage:
+  credits: null
+  cost: null
+  currency: null
+
+# Result entry shape:
+# - result_id: <RUN_ID>-O01
+#   provider_output_id: null
+#   reviews:
+#     - sequence: 1
+#       reviewed_at: ...
+#       reviewed_against:
+#         cut_revision: 1
+#         repository_commit: ...
+#       decision: accepted | rejected
+#       evaluation:
+#         scripture_fidelity: pass | concern | fail | not_applicable
+#         historical_accuracy: pass | concern | fail | not_applicable
+#         continuity: pass | concern | fail | not_applicable
+#         library_consistency: pass | concern | fail | not_applicable
+#         visual_quality: pass | concern | fail | not_applicable
+#         technical_integrity: pass | concern | fail | not_applicable
+#       issues: []
+#       notes: null
+results: []
