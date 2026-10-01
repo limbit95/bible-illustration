@@ -16,8 +16,8 @@
 - Production Rules v1.0: **CONFIRMED**
 - Templates v1.0: **CONFIRMED**
 - Template 필수 필드 교차 검증: **PASSED**
-- Progress / Decision 기록 체계 v1.0 초안: **REVIEW READY**
-- 현재 작업: **Progress / Decision 기록 체계 사용자 검토 대기**
+- Progress / Decision 기록 체계 v1.0: **CONFIRMED**
+- 현재 작업: **Git LFS / ignore 정책 설계**
 
 ## 현재 Production 위치
 
@@ -58,6 +58,7 @@
 26. `docs/progress/MILESTONES.md` 생성
 27. `docs/decisions/README.md` Decision Record 정책 생성
 28. CURRENT / MILESTONES / Decision 책임 분리 및 자체 점검 완료
+29. Progress / Decision 기록 체계 v1.0 사용자 승인 및 CONFIRMED 전환
 
 ## 현재 Source of Truth
 
@@ -80,11 +81,10 @@
 
 ## 다음 작업
 
-1. Progress / Decision 기록 체계 v1.0 사용자 승인 및 CONFIRMED 전환
-2. Git LFS / ignore 정책 확정
-3. Genesis Creation CUT 1–4 migration
-4. migration 감사
-5. CUT 5 제작 재개
+1. Git LFS / ignore 정책 확정
+2. Genesis Creation CUT 1–4 migration
+3. migration 감사
+4. CUT 5 제작 재개
 
 ## Blocker
 
