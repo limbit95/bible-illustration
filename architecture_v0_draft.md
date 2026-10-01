@@ -974,3 +974,451 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 **STEP 0-1 — Content Model: COMPLETED / CONFIRMED**
 
 다음 작업은 **STEP 0-2 — Episode / Cut Model**이다.
+
+
+---
+
+# STEP 0-2 — Episode / Cut Model Working Draft v0.1
+
+> 상태: **WORKING DRAFT / 구조 검토 중**
+>
+> 선행 조건: **STEP 0-1 — Content Model v1.0 CONFIRMED**
+>
+> 목적: Episode와 Cut이 실제 제작 과정에서 가져야 할 최소 데이터, 상태 흐름, 기본 Cut 수 정책, 텍스트와 이미지의 관계를 정의한다.
+>
+> 이 단계에서는 Continuity의 상세 필드, Library 자산 스키마, Provider별 Prompt/Run, 이미지 저장 경로와 파일 정책은 확정하지 않는다.
+
+## 1. 설계 원칙
+
+STEP 0-2는 다음 원칙을 따른다.
+
+1. Episode와 Cut은 **제작 의도와 기준을 보존하는 Canonical Production Data**다.
+2. 생성된 이미지나 Provider Prompt가 Episode/Cut의 원본 정의를 대체하지 않는다.
+3. Episode는 전체 제작 단위의 범위와 목적을 정의하고, Cut은 개별 장면의 의도를 정의한다.
+4. 동일한 내용을 Episode, Storyboard, Cut에 반복 저장하지 않는다.
+5. 상태 값은 제작 진행을 이해할 수 있을 만큼만 두고 Provider 실행 상태와 혼합하지 않는다.
+6. 승인된 정의를 크게 바꿀 때 과거 승인 이력이 사라지지 않도록 revision 개념을 둔다.
+7. 현재의 “Episode당 8 Cut”은 기본 제작 가이드이지 데이터 구조의 강제 제약이 아니다.
+
+## 2. Episode Model
+
+Episode는 하나의 시각적·서사적 제작 범위를 정의한다.
+
+### 2.1 Episode 필수 데이터
+
+개념상 Episode가 가져야 하는 필수 데이터는 다음과 같다.
+
+```yaml
+episode_id: GEN-CREATION-01
+title: 빛과 하늘과 땅
+
+primary_scripture:
+  - book: GEN
+    start: { chapter: 1, verse: 1 }
+    end:   { chapter: 1, verse: 13 }
+
+supporting_scripture: []
+
+production_intent: >
+  이 Episode가 어떤 본문 흐름을 어떤 시각적 목적 아래 묶어 보여주는지 설명한다.
+
+target_cut_count: 8
+
+status: draft
+revision: 1
+```
+
+각 필드의 책임:
+
+- `episode_id`: STEP 0-1에서 확정한 영구 식별자
+- `title`: 사람에게 보여주는 작업/표시 제목. 변경 가능
+- `primary_scripture`: 직접 시각화하는 기준 본문
+- `supporting_scripture`: 병행·보조·역사적 맥락 참고 본문
+- `production_intent`: 왜 이 범위를 하나의 Episode로 묶었는지와 제작상의 핵심 목적
+- `target_cut_count`: 기획 단계의 목표 Cut 수
+- `status`: Episode 제작 상태
+- `revision`: Episode 정의의 승인 이력을 추적하기 위한 정수 revision
+
+### 2.2 Episode에 직접 저장하지 않는 데이터
+
+다음 정보는 Episode 자체에 중복 저장하지 않는다.
+
+- Cut의 실제 표시 순서 → Storyboard
+- Cut별 상세 장면 → 각 Cut
+- 인물·지역·사물의 Canonical 정의 → STEP 0-4 Library Model
+- Cut 간 광원·카메라·위치 연속성 → STEP 0-3 Continuity Model
+- Provider Prompt와 Generation Run → STEP 0-5/0-6
+- 실제 이미지 파일 위치와 파생본 → STEP 0-7
+
+Episode는 이 정보를 필요 시 **참조**할 수 있지만 원본 정의를 복제하지 않는다.
+
+## 3. Cut Model
+
+Cut은 하나의 Episode에 속하는 개별 시각 장면의 Canonical Specification이다.
+
+Cut은 단순히 “생성할 이미지 한 장”이 아니다.
+
+Cut의 본질은 **어떤 순간과 의미를 시각적으로 표현해야 하는지 정의하는 장면 단위**이며, 실제 생성 결과는 그 정의를 구현한 산출물이다.
+
+### 3.1 Cut 필수 데이터
+
+개념상 Cut이 가져야 하는 필수 데이터는 다음과 같다.
+
+```yaml
+cut_id: GEN-CREATION-01-C01
+episode_id: GEN-CREATION-01
+
+scripture_anchor:
+  - book: GEN
+    start: { chapter: 1, verse: 1 }
+    end:   { chapter: 1, verse: 2 }
+
+beat: 태초의 혼돈과 수면 위의 어둠
+
+scene_intent: >
+  관객이 이 Cut을 통해 반드시 이해해야 하는 사건·상태·정서를 설명한다.
+
+scene:
+  summary: >
+    화면에 표현되어야 하는 Canonical Scene의 핵심 요약.
+  required_elements: []
+  forbidden_elements: []
+
+status: draft
+revision: 1
+```
+
+각 필드의 책임:
+
+- `cut_id`: STEP 0-1에서 확정한 영구 식별자
+- `episode_id`: 정확히 하나의 소속 Episode
+- `scripture_anchor`: 이 Cut이 직접 표현하는 주본문 범위
+- `beat`: Storyboard에서 한눈에 흐름을 파악하기 위한 짧은 장면 요약
+- `scene_intent`: 장면의 의미와 반드시 전달되어야 할 제작 의도
+- `scene.summary`: 이미지 생성과 검토의 기준이 되는 장면 설명
+- `scene.required_elements`: 반드시 존재해야 하는 핵심 요소
+- `scene.forbidden_elements`: 본문 왜곡이나 잘못된 표현을 막기 위해 명시적으로 금지할 요소
+- `status`: Cut 제작 상태
+- `revision`: Canonical Cut Specification의 revision
+
+### 3.2 Cut의 상세 시각 필드는 단계적으로 확장한다
+
+다음은 Cut에 필요할 가능성이 높지만 STEP 0-2에서 세부 스키마를 확정하지 않는다.
+
+- 인물과 인물 상태
+- 장소
+- 주요 사물
+- 시간대
+- 사건/행동
+- 카메라
+- 구도
+- 조명
+- 날씨
+- 색감
+- 의상
+- 표정
+- 공간 방향
+
+이 중 무엇이 Cut 자체의 Canonical Scene 데이터이고 무엇이 Continuity/Library 참조인지는 STEP 0-3과 STEP 0-4에서 경계를 확정한다.
+
+따라서 지금은 `scene.summary / required_elements / forbidden_elements`를 최소 핵심으로 정의한다.
+
+## 4. Storyboard와 Cut의 책임 분리
+
+STEP 0-1에서 Storyboard는 Episode 내부 Cut 순서의 Source of Truth로 확정되었다.
+
+따라서 다음처럼 책임을 분리한다.
+
+### Storyboard
+
+- Cut 표시 순서
+- Cut ID
+- Scripture Anchor의 요약/참조
+- 짧은 beat
+- 필요 시 Cut 간 transition note
+
+### Cut
+
+- Cut의 Canonical Scene Specification
+- Scene intent
+- 필수/금지 요소
+- 상태
+- revision
+
+Storyboard에 Cut의 상세 Scene Specification을 복사하지 않는다.
+
+Cut의 `beat`와 Storyboard의 beat가 물리적으로 중복 저장되는 최종 구조도 피한다.
+
+최종 저장 포맷을 정할 때 **beat의 단일 Source of Truth를 하나로 선택하고 다른 쪽은 참조**하도록 한다.
+
+## 5. Episode 상태 모델
+
+Episode의 상태는 Provider의 생성 작업이 아니라 **Episode 전체 제작 진행 상태**를 나타낸다.
+
+기본 상태 후보:
+
+```text
+draft
+↓
+in_progress
+↓
+in_review
+↓
+approved
+```
+
+보조 종료 상태:
+
+```text
+cancelled
+superseded
+```
+
+의미:
+
+- `draft`: 범위와 Storyboard를 설계 중
+- `in_progress`: Cut 설계 또는 제작이 실제 진행 중
+- `in_review`: Episode 전체 범위와 Cut 구성을 최종 검토 중
+- `approved`: 현재 revision이 제작 기준으로 승인됨
+- `cancelled`: 승인 전에 제작 자체가 취소됨
+- `superseded`: 과거 승인 Episode가 새로운 Episode/구조로 대체되어 더 이상 현행 기준이 아님
+
+### Episode 승인 조건
+
+Episode를 `approved`로 만들기 위한 최소 조건은 다음으로 둔다.
+
+1. Episode 필수 데이터가 존재한다.
+2. Storyboard가 존재한다.
+3. Storyboard에 포함된 모든 active Cut이 승인 상태다.
+4. Storyboard 순서와 실제 Cut 참조가 유효하다.
+5. Episode의 주본문 범위를 의도적으로 누락하거나 중복한 부분이 없는지 검토되었다.
+
+Continuity 승인 조건은 STEP 0-3에서 추가될 수 있다.
+
+## 6. Cut 상태 모델
+
+Cut은 Episode보다 세부적인 제작 흐름을 가진다.
+
+기본 상태 후보:
+
+```text
+draft
+↓
+ready
+↓
+generating
+↓
+in_review
+↓
+approved
+```
+
+검토 후 수정이 필요하면:
+
+```text
+in_review
+→ revision_requested
+→ draft 또는 ready
+```
+
+보조 종료 상태:
+
+```text
+cancelled
+superseded
+```
+
+의미:
+
+- `draft`: Scene Specification 작성 중
+- `ready`: 생성 가능한 수준으로 Canonical Scene 정의가 준비됨
+- `generating`: 현재 revision을 기준으로 이미지 생성 작업이 진행 중
+- `in_review`: 생성 결과와 Canonical Scene의 일치 여부를 검토 중
+- `revision_requested`: Scene Specification 또는 생성 방향 수정이 필요함
+- `approved`: 해당 Cut의 현재 revision과 대표 결과가 승인됨
+- `cancelled`: 승인 전에 해당 Cut 제작이 취소됨
+- `superseded`: 이미 사용된/승인된 Cut이 새로운 Cut 또는 새 revision 정책으로 대체됨
+
+`rejected`는 Cut 자체의 영구 상태로 사용하지 않는다.
+
+개별 생성 실패와 Reject는 Generation Run의 결과로 기록하고, Cut은 계속 다음 생성 시도를 이어갈 수 있기 때문이다.
+
+## 7. 승인 후 수정과 Revision
+
+Episode와 Cut의 ID는 identity이고 revision은 정의의 버전이다.
+
+예:
+
+```text
+GEN-CREATION-01-C03
+revision: 1
+```
+
+승인 후 의미 있는 Canonical Scene 변경이 필요하면 같은 Cut ID 아래 revision을 증가시킨다.
+
+```text
+GEN-CREATION-01-C03
+revision: 2
+```
+
+원칙:
+
+1. 오탈자처럼 의미를 바꾸지 않는 수정은 revision 증가를 강제하지 않는다.
+2. Scripture Anchor, Scene Intent, 주요 등장 요소, 사건 표현처럼 생성 결과를 바꿀 수 있는 수정은 revision을 증가시킨다.
+3. Generation Run은 어떤 Cut revision을 기준으로 생성했는지 추적할 수 있어야 한다.
+4. 승인된 이전 revision의 기록을 삭제하지 않는다.
+5. Cut의 정체성 자체가 바뀌는 경우 revision으로 억지로 유지하지 않고 새 Cut ID를 발급한다.
+
+revision 이력의 실제 저장 방식은 최종 파일 구조와 Generation Run Model을 함께 검토한 뒤 확정한다.
+
+## 8. “Episode당 8 Cut” 정책
+
+현재 제작 경험에서 Episode당 8 Cut을 기본 단위로 사용해 왔지만 이를 하드 제약으로 만들지 않는다.
+
+정책:
+
+- 기본 `target_cut_count`: **8**
+- 실제 Cut 수: Storyboard가 결정
+- 본문 흐름상 6 Cut이 적절하면 6 Cut 사용 가능
+- 충분한 장면 분리가 필요하면 9개 이상도 가능
+- 숫자 8을 맞추기 위해 의미 없는 Cut을 추가하지 않는다.
+- 반대로 8개를 지키기 위해 서로 다른 핵심 사건을 한 Cut에 과도하게 압축하지 않는다.
+
+즉:
+
+> **8 Cut = planning default, not schema invariant**
+
+Episode 승인 시 `target_cut_count`와 실제 Cut 수가 다르더라도 그 자체는 오류가 아니다.
+
+필요하면 차이가 난 이유를 Episode 제작 메모에 기록할 수 있다.
+
+## 9. 텍스트와 이미지의 관계
+
+이 프로젝트에서 텍스트는 세 종류로 구분한다.
+
+### 9.1 Scripture Reference
+
+성경 본문의 위치 정보다.
+
+예:
+
+```text
+Genesis 1:1–2
+```
+
+Canonical Scene의 근거이며 이미지보다 상위의 Source다.
+
+특정 번역본의 본문 전문 저장 여부와 저작권 정책은 별도 Rules 단계에서 결정한다.
+
+### 9.2 Production Text
+
+제작을 위해 작성하는 텍스트다.
+
+예:
+
+- Episode production intent
+- Storyboard beat
+- Cut scene intent
+- Canonical Scene summary
+- 제작 메모
+
+이 텍스트는 내부 제작 정의이며 Scripture 자체가 아니다.
+
+### 9.3 Display Text
+
+사이트나 최종 결과물에서 사용자에게 보여줄 수 있는 텍스트다.
+
+예:
+
+- Episode 표시 제목
+- Cut caption
+- 설명문
+- 인용문
+
+Display Text는 Canonical Scene과 별도로 관리한다.
+
+번역본 인용이나 본문 전문이 들어가는 경우 저작권 규칙을 따라야 한다.
+
+## 10. 이미지와 Cut의 관계
+
+Cut과 이미지의 관계는 다음 원칙으로 정의한다.
+
+```text
+Cut Canonical Specification
+        ↓
+Generation Run 1 → image A (rejected)
+Generation Run 2 → image B (rejected)
+Generation Run 3 → image C (approved)
+```
+
+따라서:
+
+1. Cut 하나는 여러 Generation Run을 가질 수 있다.
+2. Run 하나는 하나 이상의 생성 결과를 만들 수 있다.
+3. 생성 이미지는 Cut 자체가 아니다.
+4. 승인 이미지가 존재해도 Cut의 Canonical Specification은 별도로 유지한다.
+5. 외부 Provider에서 이미지가 삭제되어도 Cut 정의는 남아 있어야 한다.
+6. 대표 승인 이미지가 어떤 Asset인지 연결할 수 있어야 한다.
+
+Generation Run과 Asset의 상세 식별 체계는 STEP 0-5와 STEP 0-7에서 확정한다.
+
+## 11. Cut 삭제보다 Cancel / Supersede를 우선한다
+
+ID가 발급되고 제작 기록이 생긴 Cut은 가급적 물리적으로 삭제하지 않는다.
+
+상황별 기본 원칙:
+
+- 아직 아무 이력도 없는 실수 생성 → 삭제 가능
+- Storyboard에서 제외됐지만 제작 이력이 존재 → `cancelled`
+- 승인되었거나 다른 기록에서 참조되는 Cut이 새 Cut으로 대체 → `superseded`
+
+이렇게 해야 과거 Prompt, Run, 이미지 평가, Continuity 참조가 고아 데이터가 되지 않는다.
+
+Episode에도 동일한 원칙을 적용한다.
+
+## 12. STEP 0-2 불변 조건 후보
+
+이번 단계에서 확정할 핵심 invariant 후보는 다음과 같다.
+
+1. Episode는 제작 범위와 목적의 Canonical Source다.
+2. Cut은 개별 장면 정의의 Canonical Source다.
+3. 이미지와 Prompt는 Cut의 원본 정의를 대체하지 않는다.
+4. Cut은 정확히 하나의 Episode에 소속된다.
+5. Storyboard가 active Cut의 실제 표시 순서를 결정한다.
+6. Episode당 8 Cut은 기본 목표치일 뿐 강제 제약이 아니다.
+7. 개별 생성 실패는 Cut의 `rejected` 상태로 표현하지 않고 Generation Run에서 기록한다.
+8. 승인 후 의미 있는 정의 변경은 revision으로 추적한다.
+9. 이미 이력이 생긴 Episode/Cut은 삭제보다 `cancelled` 또는 `superseded`를 우선한다.
+10. Episode가 승인되려면 Storyboard의 모든 active Cut이 승인되어야 한다.
+11. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
+12. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
+
+## 13. STEP 0-2에서 의도적으로 미확정하는 항목
+
+다음은 이후 STEP에서 정한다.
+
+- 카메라/광원/공간 방향 등 Continuity 상세 필드
+- Character / Location / Object 등 Library 참조 스키마
+- Provider별 Prompt 구조
+- Generation Run ID와 평가 필드
+- 이미지 Asset ID와 실제 저장 위치
+- 승인 이미지 여러 개/파생 비율/사이트별 variant 정책
+- Markdown/YAML 최종 저장 형식
+- revision의 물리적 파일 저장 방식
+- 성경 번역본 전문 저장 및 저작권 규칙
+
+## 14. STEP 0-2 검토 포인트
+
+사용자 검토가 필요한 핵심 항목:
+
+- Episode 필수 데이터 범위
+- Cut 최소 Canonical Scene 데이터 범위
+- Episode 상태 모델
+- Cut 상태 모델
+- 승인 후 revision 정책
+- `target_cut_count: 8`을 기본값으로만 두는 정책
+- Scripture / Production / Display Text의 분리
+- Cut과 Generated Image를 분리하는 원칙
+- 삭제보다 Cancel / Supersede를 우선하는 원칙
+
+이 항목들이 확정되면 STEP 0-2를 CONFIRMED로 전환하고 STEP 0-3 — Continuity Model로 진행한다.
