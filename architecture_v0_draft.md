@@ -978,9 +978,9 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 
 ---
 
-# STEP 0-2 — Episode / Cut Model Working Draft v0.2
+# STEP 0-2 — Episode / Cut Model Working Draft v0.3
 
-> 상태: **WORKING DRAFT / 구조 점검 반영**
+> 상태: **REVIEW READY / 사용자 확정 대기**
 >
 > 선행 조건: **STEP 0-1 — Content Model v1.0 CONFIRMED**
 >
@@ -1172,7 +1172,7 @@ superseded
 - `in_review`: Episode 전체 범위와 Cut 구성을 최종 검토 중
 - `approved`: 현재 revision이 제작 기준으로 승인됨
 - `cancelled`: 승인 전에 제작 자체가 취소됨
-- `superseded`: 과거 승인 Episode가 새로운 Episode/구조로 대체되어 더 이상 현행 기준이 아님
+- `superseded`: 과거 승인 Episode가 **다른 Episode ID**로 대체되어 더 이상 현행 기준이 아님
 
 ### Episode 승인 조건
 
@@ -1185,6 +1185,18 @@ Episode를 `approved`로 만들기 위한 최소 조건은 다음으로 둔다.
 5. Episode의 주본문 범위를 의도적으로 누락하거나 중복한 부분이 없는지 검토되었다.
 
 Continuity 승인 조건은 STEP 0-3에서 추가될 수 있다.
+
+### Cut 승인 조건
+
+Cut을 `approved`로 만들기 위한 최소 조건은 다음으로 둔다.
+
+1. Cut 필수 Canonical Scene 데이터가 존재한다.
+2. 해당 Cut의 Storyboard entry가 존재하고 `scripture_anchor`와 `beat`가 유효하다.
+3. 현재 Cut revision을 기준으로 생성된 결과 중 승인할 대표 결과가 최소 하나 존재한다.
+4. 대표 결과가 Scripture Anchor, Scene Intent, required/forbidden elements와 일치하는지 검토되었다.
+5. 생성 실패 기록이 있더라도 최종 승인 판단에 필요한 이력이 보존되어 있다.
+
+Continuity 관련 검토 조건은 STEP 0-3에서 추가될 수 있다.
 
 ## 6. Cut 상태 모델
 
@@ -1228,7 +1240,7 @@ superseded
 - `revision_requested`: Scene Specification 또는 생성 방향 수정이 필요함
 - `approved`: 해당 Cut의 현재 revision과 대표 결과가 승인됨
 - `cancelled`: 승인 전에 해당 Cut 제작이 취소됨
-- `superseded`: 이미 사용된/승인된 Cut이 새로운 Cut 또는 새 revision 정책으로 대체됨
+- `superseded`: 이미 승인된 Cut이 **다른 Cut ID**로 대체되어 더 이상 현행 기준이 아님
 
 `rejected`는 Cut 자체의 영구 상태로 사용하지 않는다.
 
@@ -1262,6 +1274,32 @@ revision: 2
 4. Generation Run은 어떤 Cut revision을 기준으로 생성했는지 추적할 수 있어야 한다.
 5. 승인된 이전 revision의 기록을 삭제하지 않는다.
 6. Cut의 정체성 자체가 바뀌는 경우 revision으로 억지로 유지하지 않고 새 Cut ID를 발급한다.
+
+### Episode revision 규칙
+
+Episode도 동일한 원칙을 따른다.
+
+승인 이후 다음과 같은 변경은 Episode revision 증가 대상으로 본다.
+
+- `primary_scripture`의 의미 있는 범위 변경
+- `production_intent`의 의미 있는 변경
+- active Cut 구성의 추가/삭제/교체
+- 이야기 흐름을 바꾸는 Storyboard 순서 변경
+
+단순 제목 수정이나 오탈자 수정처럼 제작 의미를 바꾸지 않는 변경은 revision 증가를 강제하지 않는다.
+
+### Revision 증가 시 상태 전환
+
+승인된 정의에 의미 있는 변경이 생기면 revision만 증가시키고 `approved` 상태를 그대로 유지하지 않는다.
+
+- Episode: 새 revision 생성 → `in_progress`
+- Cut: 새 revision 생성 → `draft` 또는 이미 재생성 가능한 수준이면 `ready`
+
+새 revision은 다시 검토와 승인을 거쳐야 한다.
+
+이때 이전 승인 revision은 기록으로 남지만 **현재 canonical revision은 최신 revision**이다.
+
+`superseded`는 revision 증가에 사용하지 않는다. 같은 ID의 revision 변경은 동일한 Episode/Cut의 발전이며, `superseded`는 다른 Episode ID 또는 Cut ID가 기존 항목을 대체할 때만 사용한다.
 
 revision 이력의 실제 저장 방식은 최종 파일 구조와 Generation Run Model을 함께 검토한 뒤 확정한다.
 
@@ -1374,7 +1412,7 @@ ID가 발급되고 제작 기록이 생긴 Cut은 가급적 물리적으로 삭�
 
 - 아직 아무 이력도 없는 실수 생성 → 삭제 가능
 - Storyboard에서 제외됐지만 제작 이력이 존재 → `cancelled`
-- 승인되었거나 다른 기록에서 참조되는 Cut이 새 Cut으로 대체 → `superseded`
+- 승인되었거나 다른 기록에서 참조되는 Cut이 **다른 Cut ID**로 대체 → `superseded`
 
 이렇게 해야 과거 Prompt, Run, 이미지 평가, Continuity 참조가 고아 데이터가 되지 않는다.
 
@@ -1392,11 +1430,13 @@ Episode에도 동일한 원칙을 적용한다.
 6. Storyboard가 `scripture_anchor`와 `beat`의 단일 Source of Truth다.
 7. Episode당 8 Cut은 기본 목표치일 뿐 강제 제약이 아니다.
 8. 개별 생성 실패는 Cut의 `rejected` 상태로 표현하지 않고 Generation Run에서 기록한다.
-9. 승인 후 의미 있는 정의 변경은 revision으로 추적한다.
-10. 이미 이력이 생긴 Episode/Cut은 삭제보다 `cancelled` 또는 `superseded`를 우선한다.
-11. Episode가 승인되려면 Storyboard의 모든 active Cut이 승인되어야 한다.
-12. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
-13. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
+9. 승인 후 의미 있는 정의 변경은 revision으로 추적하고 새 revision은 다시 승인을 거친다.
+10. `superseded`는 revision 변경이 아니라 다른 Episode/Cut ID에 의해 대체될 때 사용한다.
+11. 이미 이력이 생긴 Episode/Cut은 삭제보다 `cancelled` 또는 `superseded`를 우선한다.
+12. Episode가 승인되려면 Storyboard의 모든 active Cut이 승인되어야 한다.
+13. Cut이 승인되려면 현재 revision 기준의 대표 승인 결과가 최소 하나 존재해야 한다.
+14. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
+15. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
 
 ## 14. STEP 0-2에서 의도적으로 미확정하는 항목
 
@@ -1421,7 +1461,9 @@ Episode에도 동일한 원칙을 적용한다.
 - Storyboard를 `scripture_anchor`와 `beat`의 단일 Source of Truth로 두는 원칙
 - Episode 상태 모델
 - Cut 상태 모델
-- 승인 후 revision 정책
+- 승인 후 revision 정책과 revision 증가 시 상태 재진입 규칙
+- `superseded`를 다른 ID에 의한 대체에만 사용하는 원칙
+- Episode/Cut 승인 최소 조건
 - `target_cut_count: 8`을 기본값으로만 두는 정책
 - Scripture / Production / Display Text의 분리
 - Cut과 Generated Image를 분리하는 원칙
