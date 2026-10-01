@@ -28,7 +28,8 @@
 - STEP 0의 각 설계 영역을 사용자와 검토한 뒤 필요한 구조만 단계적으로 생성한다.
 - **STEP 0-1 — Content Model은 CONFIRMED 상태다.**
 - **STEP 0-2 — Episode / Cut Model은 CONFIRMED 상태다.**
-- 현재 최우선 작업은 **STEP 0-3 — Continuity Model 정의**다.
+- **STEP 0-3 — Continuity Model은 CONFIRMED 상태다.**
+- 현재 최우선 작업은 **STEP 0-4 — Library Model 정의**다.
 
 ## 3. 저장소 범위
 
@@ -64,6 +65,6 @@ Canonical Scene, Character, Location, Object, Continuity 등 장기적으로 유
 
 `architecture_v0_draft.md`를 읽고 다음 항목부터 진행한다.
 
-**STEP 0-3 — Continuity Model**
+**STEP 0-4 — Library Model**
 
-확정된 Content Model과 Episode / Cut Model을 전제로 컷 간에 유지되어야 할 세계 상태와 시각 상태, 의도적 변화, continuity reset 경계를 정의하고 검토한다.
+확정된 Content / Episode-Cut / Continuity Model을 전제로 반복 등장하는 Character, Location, Object, Costume, Environment, Visual Style의 Canonical 자산 식별자와 메타데이터, Episode/Cut에서의 참조 방식을 설계하고 검토한다.
