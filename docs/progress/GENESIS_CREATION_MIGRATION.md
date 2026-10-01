@@ -1,6 +1,6 @@
 # Genesis Creation CUT 1–4 Migration Readiness
 
-> 상태: **BLOCKED / REVIEW READY**
+> 상태: **READY FOR CANONICAL DEFINITION MIGRATION**
 > 마지막 갱신: 2026-10-02
 >
 > 목적: 기존 Genesis Creation CUT 1–4 작업을 현재 Canonical Repository Structure로 이관하기 전에, 기존 확정 정보와 이관 blocker를 명확히 기록한다.
@@ -60,14 +60,16 @@ Migration mapping:
 Cut ID: GEN-CREATION-01-C01
 Storyboard order: 10
 Scripture Anchor: GEN 1:1
-Asset: intentionally none
+Asset: required — actual black-screen illustration Asset
 ~~~
 
-Blocker:
+Resolution:
 
-현재 production complete 모델은 모든 active Cut에 representative Asset을 요구한다.
+`DEC-0002 — Presentation-only Cut Output Mode`는 채택하지 않는다.
 
-따라서 CUT 1을 억지로 검은 PNG Asset으로 만들지 않고 `DEC-0002 — Presentation-only Cut Output Mode` 승인 여부를 먼저 결정해야 한다.
+CUT 1은 기존 Architecture를 그대로 사용한다. 별도 장면 요소 없이 **완전한 검은 화면 자체를 실제 Cut-owned image Asset으로 제작**하고, 그 Asset을 representative로 선정한다.
+
+성경 직접 인용과 장·절 표시는 이미지에 bake-in하지 않고 presentation layer에서 분리한다.
 
 ## 5. CUT 2 — Genesis 1:2
 
@@ -160,7 +162,9 @@ Asset blocker:
 
 ### C01 → C02
 
-C01은 presentation-only 방향이므로 DEC-0002 결정 후 필요한 transition을 최소 정의한다.
+C01은 실제 검은 화면 Asset을 사용하지만 구체적 세계 요소를 담지 않는다.
+
+C02에서 원초적 수면 세계가 처음 구체적으로 시각화되므로, C01의 검정 화면 자체를 물리적 공간 Continuity로 강제 상속하지 않는다. Transition은 장면 도입의 성격을 반영해 migration audit에서 최소 제약으로 확정한다.
 
 ### C02 → C03
 
@@ -218,11 +222,7 @@ migration audit 통과 후 현재 Canonical definition을 approved로 전환한�
 
 ## 10. 현재 Blockers
 
-### BLOCKER A — presentation-only Cut 모델
-
-`DEC-0002` 승인 필요.
-
-### BLOCKER B — C02–C04 image binary
+### BLOCKER A — C02–C04 image binary
 
 현재 확인된 것은 파일명과 시각적 확정 기록뿐이다.
 
@@ -236,11 +236,10 @@ migration audit 통과 후 현재 Canonical definition을 approved로 전환한�
 
 ## 11. 다음 실행 순서
 
-1. DEC-0002 검토 및 승인
-2. 승인 시 Architecture / Rules / Cut Template 최소 수정
-3. GEN-CREATION-01 Episode / Storyboard / C01–C04 / Continuity 생성
-4. C02–C04 legacy binary가 확보되면 Asset Promotion + LFS ingest
-5. binary 미확보 시 Asset migration은 unresolved로 기록
-6. migration audit
-7. C01–C04 Canonical definition approval 검토
-8. CUT 5 설계 재개
+1. GEN-CREATION-01 Episode / Storyboard / C01–C04 / Continuity 생성
+2. C01 검은 화면 Asset 제작 및 representative 등록
+3. C02–C04 legacy binary가 확보되면 Asset Promotion + LFS ingest
+4. binary 미확보 시 C02–C04 Asset migration은 unresolved로 기록
+5. migration audit
+6. C01–C04 Canonical definition approval 검토
+7. CUT 5 설계 재개
