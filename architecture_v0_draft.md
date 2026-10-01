@@ -500,7 +500,7 @@ Reject / Revise / Approve
 - Cut이 가져야 하는 필수 데이터
 - 상태 값
 - 승인/수정/폐기 흐름
-- 컷 수가 8개라는 현재 기본값을 어떻게 취급할지
+- 본문 분량과 사건 흐름에 따라 Episode와 Cut 수를 유연하게 조절하는 기준
 - 텍스트와 이미지 관계
 
 ## 0-3. Continuity Model
@@ -978,13 +978,13 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 
 ---
 
-# STEP 0-2 — Episode / Cut Model Working Draft v0.3
+# STEP 0-2 — Episode / Cut Model Working Draft v0.4
 
-> 상태: **REVIEW READY / 사용자 확정 대기**
+> 상태: **REVIEW READY / 사용자 수정사항 반영**
 >
 > 선행 조건: **STEP 0-1 — Content Model v1.0 CONFIRMED**
 >
-> 목적: Episode와 Cut이 실제 제작 과정에서 가져야 할 최소 데이터, 상태 흐름, 기본 Cut 수 정책, 텍스트와 이미지의 관계를 정의한다.
+> 목적: Episode와 Cut이 실제 제작 과정에서 가져야 할 최소 데이터, 상태 흐름, 본문 기반 Episode/Cut 분할 정책, 텍스트와 이미지의 관계를 정의한다.
 >
 > 이 단계에서는 Continuity의 상세 필드, Library 자산 스키마, Provider별 Prompt/Run, 이미지 저장 경로와 파일 정책은 확정하지 않는다.
 
@@ -998,7 +998,7 @@ STEP 0-2는 다음 원칙을 따른다.
 4. 동일한 내용을 Episode, Storyboard, Cut에 반복 저장하지 않는다.
 5. 상태 값은 제작 진행을 이해할 수 있을 만큼만 두고 Provider 실행 상태와 혼합하지 않는다.
 6. 승인된 정의를 크게 바꿀 때 과거 승인 이력이 사라지지 않도록 revision 개념을 둔다.
-7. 현재의 “Episode당 8 Cut”은 기본 제작 가이드이지 데이터 구조의 강제 제약이 아니다.
+7. Episode와 Cut의 수는 미리 정한 숫자가 아니라 **성경 본문의 분량, 사건 흐름, 시각적 전환점**에 따라 결정한다.
 
 ## 2. Episode Model
 
@@ -1022,8 +1022,6 @@ supporting_scripture: []
 production_intent: >
   이 Episode가 어떤 본문 흐름을 어떤 시각적 목적 아래 묶어 보여주는지 설명한다.
 
-target_cut_count: 8
-
 status: draft
 revision: 1
 ```
@@ -1035,7 +1033,6 @@ revision: 1
 - `primary_scripture`: 직접 시각화하는 기준 본문
 - `supporting_scripture`: 병행·보조·역사적 맥락 참고 본문
 - `production_intent`: 왜 이 범위를 하나의 Episode로 묶었는지와 제작상의 핵심 목적
-- `target_cut_count`: 기획 단계의 목표 Cut 수
 - `status`: Episode 제작 상태
 - `revision`: Episode 정의의 승인 이력을 추적하기 위한 정수 revision
 
@@ -1303,26 +1300,73 @@ Episode도 동일한 원칙을 따른다.
 
 revision 이력의 실제 저장 방식은 최종 파일 구조와 Generation Run Model을 함께 검토한 뒤 확정한다.
 
-## 8. “Episode당 8 Cut” 정책
+## 8. 본문 기반 Episode / Cut 분할 정책
 
-현재 제작 경험에서 Episode당 8 Cut을 기본 단위로 사용해 왔지만 이를 하드 제약으로 만들지 않는다.
+이 프로젝트에서는 Episode당 Cut 수에 기본값, 최소값, 최대값을 두지 않는다.
 
-정책:
+Cut 수와 Episode 경계는 **성경 본문의 실제 분량과 사건 구조**를 기준으로 정한다.
 
-- 기본 `target_cut_count`: **8**
-- 실제 Cut 수: Storyboard가 결정
-- 본문 흐름상 6 Cut이 적절하면 6 Cut 사용 가능
-- 충분한 장면 분리가 필요하면 9개 이상도 가능
-- 숫자 8을 맞추기 위해 의미 없는 Cut을 추가하지 않는다.
-- 반대로 8개를 지키기 위해 서로 다른 핵심 사건을 한 Cut에 과도하게 압축하지 않는다.
+원칙:
 
-즉:
+1. 짧고 단순한 본문은 적은 수의 Cut으로 구성할 수 있다.
+2. 하나의 절이라도 시각적으로 서로 다른 순간이나 사건이 중요하면 여러 Cut으로 나눌 수 있다.
+3. 여러 절이 하나의 동일한 장면이나 사건을 설명하면 하나의 Cut으로 묶을 수 있다.
+4. 성경의 한 장이 길거나 여러 사건·장소·시간 전환을 포함하면 하나의 Episode에 모두 압축하지 않는다.
+5. 필요한 경우 **하나의 성경 장을 여러 Episode로 분할**한다.
+6. 반대로 짧은 장이나 연속된 사건은 필요하면 장 경계를 넘어 하나의 Episode로 구성할 수 있다. 단, STEP 0-1의 primary Scripture 규칙을 따른다.
+7. Cut을 늘리거나 줄이는 목적은 숫자를 맞추는 것이 아니라 본문 흐름을 정확하고 자연스럽게 시각화하는 것이다.
 
-> **8 Cut = planning default, not schema invariant**
+예:
 
-Episode 승인 시 `target_cut_count`와 실제 Cut 수가 다르더라도 그 자체는 오류가 아니다.
+```text
+짧은 본문
+성경 본문
+→ Episode 1
+   → C01
+   → C02
+   → C03
 
-필요하면 차이가 난 이유를 Episode 제작 메모에 기록할 수 있다.
+긴 성경 장
+성경 1장
+→ Episode 1
+   → C01 ... C05
+→ Episode 2
+   → C01 ... C07
+→ Episode 3
+   → C01 ... C04
+```
+
+위 숫자는 예시일 뿐 고정 규칙이 아니다.
+
+### 8.1 성경 Chapter와 사이트 Chapter의 구분
+
+성경의 Chapter 번호와 제작 Episode, 사이트에서 보여주는 Chapter는 동일한 개념으로 묶지 않는다.
+
+```text
+Biblical Chapter
+      ↓
+1개 이상의 Episode
+      ↓
+각 Episode의 Storyboard / Cuts
+      ↓
+필요 시 사이트용 Chapter 표시
+```
+
+따라서 성경의 한 장이 길다면 여러 Episode로 나눈 뒤 사이트에서도 여러 Chapter처럼 보여줄 수 있다.
+
+반대로 짧은 성경 장이라고 해서 반드시 하나의 독립 사이트 Chapter를 만들어야 하는 것은 아니다.
+
+사이트용 Chapter의 구체적인 표시·그룹핑 방식은 추후 presentation 계층을 설계할 때 결정한다.
+
+### 8.2 Cut 수의 Source of Truth
+
+Episode의 Cut 수는 별도 숫자 필드로 저장하지 않는다.
+
+현재 Episode에 속한 **active Storyboard entry의 수**가 실제 Cut 수다.
+
+따라서 `target_cut_count`, `cut_count` 같은 값을 Episode에 중복 저장하여 Storyboard와 동기화하지 않는다.
+
+필요한 경우 UI나 자동화에서 Storyboard를 기준으로 Cut 수를 계산한다.
 
 ## 9. 텍스트와 이미지의 관계
 
@@ -1428,15 +1472,16 @@ Episode에도 동일한 원칙을 적용한다.
 4. Cut은 정확히 하나의 Episode에 소속된다.
 5. Storyboard가 active Cut의 실제 표시 순서를 결정한다.
 6. Storyboard가 `scripture_anchor`와 `beat`의 단일 Source of Truth다.
-7. Episode당 8 Cut은 기본 목표치일 뿐 강제 제약이 아니다.
+7. Episode와 Cut의 수에는 고정 기본값·최소값·최대값을 두지 않고 본문 구조에 따라 결정한다.
 8. 개별 생성 실패는 Cut의 `rejected` 상태로 표현하지 않고 Generation Run에서 기록한다.
 9. 승인 후 의미 있는 정의 변경은 revision으로 추적하고 새 revision은 다시 승인을 거친다.
 10. `superseded`는 revision 변경이 아니라 다른 Episode/Cut ID에 의해 대체될 때 사용한다.
 11. 이미 이력이 생긴 Episode/Cut은 삭제보다 `cancelled` 또는 `superseded`를 우선한다.
 12. Episode가 승인되려면 Storyboard의 모든 active Cut이 승인되어야 한다.
 13. Cut이 승인되려면 현재 revision 기준의 대표 승인 결과가 최소 하나 존재해야 한다.
-14. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
-15. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
+14. 실제 Cut 수의 Source of Truth는 active Storyboard entry의 수이며 Episode에 별도 Cut count 값을 중복 저장하지 않는다.
+15. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
+16. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
 
 ## 14. STEP 0-2에서 의도적으로 미확정하는 항목
 
@@ -1464,7 +1509,9 @@ Episode에도 동일한 원칙을 적용한다.
 - 승인 후 revision 정책과 revision 증가 시 상태 재진입 규칙
 - `superseded`를 다른 ID에 의한 대체에만 사용하는 원칙
 - Episode/Cut 승인 최소 조건
-- `target_cut_count: 8`을 기본값으로만 두는 정책
+- 고정 Cut 수를 두지 않고 본문 분량과 사건 흐름에 따라 Episode/Cut을 유연하게 분할하는 원칙
+- 긴 성경 장을 여러 Episode로 분할할 수 있는 원칙
+- 실제 Cut 수는 Storyboard에서 계산하고 Episode에 중복 저장하지 않는 원칙
 - Scripture / Production / Display Text의 분리
 - Cut과 Generated Image를 분리하는 원칙
 - 삭제보다 Cancel / Supersede를 우선하는 원칙
