@@ -1,7 +1,7 @@
 # Current Project State
 
 > 마지막 갱신: 2026-10-02
-> 상태: **POST STEP 0 — Repository Structure Implementation**
+> 상태: **POST STEP 0 — Rules / Templates / Migration Preparation**
 
 ## 현재 Phase
 
@@ -10,7 +10,10 @@
 - Repository Structure v1.0: **CONFIRMED**
 - 최소 필수 저장소 구조 생성: **COMPLETED**
 - 루트 `AGENTS.md` 정식화: **COMPLETED**
-- 현재 작업: **루트 README.md 생성 및 정식 Architecture 문서 분리 준비**
+- 루트 `README.md` 생성: **COMPLETED**
+- 정식 Architecture 문서 분리: **COMPLETED**
+- Architecture 이관 검증: **PASSED — STEP 0-1~0-7 본문 exact match**
+- 현재 작업: **`docs/rules/` 제작 규칙 정식화 준비**
 
 ## 현재 Production 위치
 
@@ -36,28 +39,32 @@
 11. `content/episode-sequence.yaml` 초기화
 12. `integrations/registry.yaml` 초기화
 13. 루트 `AGENTS.md` 정식화
+14. 루트 `README.md` 생성
+15. `docs/architecture/OVERVIEW.md` 생성
+16. STEP 0-1~0-7 정식 Architecture 문서 분리
+17. Architecture 이관 검증 통과
 
 ## 현재 Source of Truth
 
 - 작업 진입점: `AGENTS.md`
 - 현재 진행 복원: `docs/progress/CURRENT.md`
 - 확정 Repository Structure: `docs/architecture/REPOSITORY_STRUCTURE.md`
-- STEP 0 상세 결정 원본: `architecture_v0_draft.md`
+- Architecture 진입점: `docs/architecture/OVERVIEW.md`
+- 세부 Architecture: `docs/architecture/*.md`
+- 확정 Repository Structure: `docs/architecture/REPOSITORY_STRUCTURE.md`
+- Historical working record: `architecture_v0_draft.md`, `repository_structure_v1_draft.md`
 
-정식 Architecture 문서 분리가 완료되기 전까지 `architecture_v0_draft.md`의 CONFIRMED STEP 0-1~0-7 결정은 계속 유효한 기준이다.
+현재 Architecture 판단에서는 정식 `docs/architecture/` 문서를 historical working record보다 우선한다.
 
 ## 다음 작업
 
-1. 루트 `README.md` 생성
-2. `docs/architecture/` 정식 Architecture 문서 분리
-3. Architecture 이관 검증
-4. `docs/rules/` 제작 규칙 정식화
-5. Templates 생성
-6. Progress / Decision 기록 체계 보완
-7. Git LFS / ignore 정책 확정
-8. Genesis Creation CUT 1–4 migration
-9. migration 감사
-10. CUT 5 제작 재개
+1. `docs/rules/` 제작 규칙 정식화
+2. Templates 생성
+3. Progress / Decision 기록 체계 보완
+4. Git LFS / ignore 정책 확정
+5. Genesis Creation CUT 1–4 migration
+6. migration 감사
+7. CUT 5 제작 재개
 
 ## Blocker
 
