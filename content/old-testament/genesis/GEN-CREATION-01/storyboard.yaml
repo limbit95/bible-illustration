@@ -1,0 +1,54 @@
+episode_id: GEN-CREATION-01
+
+storyboard:
+  - order: 10
+    cut_id: GEN-CREATION-01-C01
+    scripture_anchor:
+      - book: GEN
+        start:
+          chapter: 1
+          verse: 1
+        end:
+          chapter: 1
+          verse: 1
+    beat: "태초의 창조 선언"
+    transition_note: null
+
+  - order: 20
+    cut_id: GEN-CREATION-01-C02
+    scripture_anchor:
+      - book: GEN
+        start:
+          chapter: 1
+          verse: 2
+        end:
+          chapter: 1
+          verse: 2
+    beat: "혼돈과 공허, 어둠과 원초적 수면"
+    transition_note: "검은 화면 이후 원초적 수면 세계가 처음 구체적으로 드러난다."
+
+  - order: 30
+    cut_id: GEN-CREATION-01-C03
+    scripture_anchor:
+      - book: GEN
+        start:
+          chapter: 1
+          verse: 3
+        end:
+          chapter: 1
+          verse: 3
+    beat: "빛의 첫 등장"
+    transition_note: "CUT 2의 원초적 수면과 공간 흐름을 유지한 채 오른쪽에서 따뜻한 빛이 처음 등장한다."
+
+  - order: 40
+    cut_id: GEN-CREATION-01-C04
+    scripture_anchor:
+      - book: GEN
+        start:
+          chapter: 1
+          verse: 4
+        end:
+          chapter: 1
+          verse: 5
+    beat: "빛과 어둠의 구별과 질서화"
+    transition_note: "CUT 3의 오른쪽 광원을 유지하며 빛과 어둠의 구별이 더 분명해진다."
