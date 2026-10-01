@@ -622,9 +622,9 @@ STEP 0 진행 중 중요한 설계 결정은 대화에만 남기지 말고 이 �
 
 ---
 
-# STEP 0-1 — Content Model Working Draft v0.2
+# STEP 0-1 — Content Model Working Draft v0.3
 
-> 상태: **WORKING DRAFT / 구조 점검 반영**
+> 상태: **REVIEW READY / 사용자 확정 대기**
 >
 > 목적: 성경 본문 → 제작 Episode → Cut으로 이어지는 콘텐츠 모델과 식별 체계를 먼저 안정화한다.
 >
@@ -644,6 +644,8 @@ Episode의 본문 참조는 역할을 구분한다.
 - **supporting_scripture**: 병행 본문, 보조 설명, 역사적 맥락 등 필요 시 함께 참고하는 본문
 
 Episode ID의 `BOOK`은 항상 `primary_scripture`의 책 코드를 기준으로 한다.
+
+v0에서는 하나의 Episode에 속한 모든 `primary_scripture` 범위가 **같은 성경 책(Book Code)** 안에 있어야 한다. 다른 책의 병행·보조 본문은 `supporting_scripture`로 기록한다. 서로 다른 두 책의 본문을 모두 주본문으로 삼아야 하는 제작 단위가 실제로 필요해지면, 우선 Episode 분리를 검토하고 그것으로 해결되지 않을 때 Content Model 확장 여부를 다시 결정한다.
 
 본문 범위는 번역본의 문장 텍스트가 아니라 우선 다음과 같은 구조화된 위치 정보로 표현한다.
 
@@ -798,6 +800,8 @@ GEN-FLOOD-01
 
 `STORY_KEY`는 현재 ID를 안정화하기 위한 naming token으로만 사용한다.
 
+ID가 이미 발급된 뒤 제목이나 표현 방식이 바뀌었다는 이유로 `STORY_KEY`를 다시 이름 붙이지 않는다. Episode의 정체성이 달라질 정도로 주본문이나 제작 범위가 크게 재설계되는 경우 기존 ID를 억지로 개명하기보다 새 Episode ID를 부여하는 방향을 우선한다. 기존 Episode의 폐기·대체 상태 표현은 STEP 0-2에서 정의한다.
+
 STEP 0 v0 단계에서는 별도의 `Story Arc` 엔터티를 먼저 만들지 않는다. 실제로 독립된 Arc 데이터가 필요해질 때 도입 여부를 다시 검토한다.
 
 ## 5. Cut ID
@@ -922,15 +926,16 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 
 1. 성경 장/절과 Episode는 동일 개념이 아니다.
 2. Episode는 실제 제작 기준인 `primary_scripture`와 필요 시 참고하는 `supporting_scripture`를 구분한다.
-3. Episode ID의 `BOOK`은 `primary_scripture` 기준으로 정한다.
-4. Episode ID는 장/절 범위와 표시 제목에 종속되지 않는다.
-5. Cut은 정확히 하나의 Episode에 소속된다.
-6. Episode와 Cut의 ID는 생성 후 안정적으로 유지한다.
-7. Cut 표시 순서는 ID와 별도로 관리하며 Storyboard가 Source of Truth다.
-8. Episode의 기본 역사 순서는 ID와 별도로 관리하며 Canonical Episode Sequence가 Source of Truth다.
-9. Scripture Range는 서로 겹칠 수 있다.
-10. 폴더 경로나 파일 정렬 순서는 콘텐츠 identity가 아니다.
-11. 외부 이미지 생성 provider의 ID는 Content Model의 identity가 아니다.
+3. 하나의 Episode의 `primary_scripture`는 v0에서 하나의 Book Code 안에만 존재한다.
+4. Episode ID의 `BOOK`은 `primary_scripture` 기준으로 정한다.
+5. Episode ID는 장/절 범위와 표시 제목에 종속되지 않는다.
+6. Cut은 정확히 하나의 Episode에 소속된다.
+7. Episode와 Cut의 ID는 생성 후 안정적으로 유지한다.
+8. Cut 표시 순서는 ID와 별도로 관리하며 Storyboard가 Source of Truth다.
+9. Episode의 기본 역사 순서는 ID와 별도로 관리하며 Canonical Episode Sequence가 Source of Truth다.
+10. Scripture Range는 서로 겹칠 수 있다.
+11. 폴더 경로나 파일 정렬 순서는 콘텐츠 identity가 아니다.
+12. 외부 이미지 생성 provider의 ID는 Content Model의 identity가 아니다.
 
 ## 10. STEP 0-1에서 의도적으로 미확정하는 항목
 
@@ -959,6 +964,7 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 - ID와 표시 순서를 분리하는 원칙
 - Scripture Range를 구조화된 범위 정보로 관리하는 원칙
 - `primary_scripture` / `supporting_scripture`를 구분하는 원칙
+- v0에서 한 Episode의 `primary_scripture`를 하나의 Book Code로 제한하는 원칙
 - Storyboard를 Episode 내부 Cut 순서의 Source of Truth로 두는 원칙
 - Canonical Episode Sequence를 Episode 기본 순서의 Source of Truth로 두는 원칙
 - v0에서는 별도의 Story Arc 엔터티를 만들지 않는 원칙
