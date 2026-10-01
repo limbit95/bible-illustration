@@ -33,6 +33,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - Repository Structure v1.0: **CONFIRMED**
 - Production Rules v1.0: **CONFIRMED**
 - Templates v1.0: **CONFIRMED**
+- Progress / Decision 기록 체계 v1.0: **CONFIRMED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
@@ -151,12 +152,21 @@ Provider 내부의 character, model, prompt, slot, project structure는 Canonica
 
 Template은 Architecture와 Rules를 구현하기 위한 최소 물리 스키마다. 새로운 필드를 추가하거나 기존 책임을 바꾸기 전에 관련 Architecture / Rules를 먼저 확인한다.
 
-## 11. 다음 작업
+## 11. Progress / Decision Source of Truth
+
+- `docs/progress/CURRENT.md` — 현재 작업 위치와 다음 작업
+- `docs/progress/MILESTONES.md` — 주요 완료 기준점
+- `docs/decisions/README.md` — Decision Record 생성·상태·번호 규칙
+- `docs/decisions/DEC-*.md` — 중요한 선택의 이유와 대안 기록
+
+CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다.
+
+## 12. 다음 작업
 
 `docs/progress/CURRENT.md`를 기준으로 이어서 진행한다.
 
 현재 다음 작업은:
 
-**Progress / Decision 기록 체계 보완**
+**Git LFS / ignore 정책 확정**
 
 이다.
