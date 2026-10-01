@@ -1,0 +1,14 @@
+# Bible Illustration — External Reference Record template
+# Use for references whose binary is not stored as a Canonical Asset.
+
+external_references: []
+# Entry shape:
+# - key: XR01
+#   source_url: ...
+#   source_title: ...
+#   retrieved_at: ...
+#   rights_status: unknown
+#   note: ...
+#
+# When known, source creator/institution information should be preserved in note
+# until a dedicated field is formally introduced.
