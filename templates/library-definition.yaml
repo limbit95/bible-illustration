@@ -1,0 +1,23 @@
+# Bible Illustration — Common Library definition template
+# asset_type v1: character | location | object | costume | environment | visual_style
+
+asset_id: null
+asset_type: null
+name: null
+aliases: []
+
+canonical_summary: null
+
+basis:
+  scripture: []
+  historical: []
+  reconstruction: []
+
+uncertainties: []
+
+# Type-specific fields and local profiles/variants are added only when actually needed.
+# Do not put transient event state (current dirt, wound, position, breakage, etc.) here.
+
+# Allowed: draft | in_review | revision_requested | approved | cancelled | superseded
+definition_status: draft
+revision: 1
