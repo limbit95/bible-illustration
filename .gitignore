@@ -1,0 +1,44 @@
+# Image binaries are non-canonical by default.
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.avif
+*.psd
+*.tif
+*.tiff
+*.heic
+
+# Canonical Cut-owned Assets
+!content/**/assets/*.png
+!content/**/assets/*.jpg
+!content/**/assets/*.jpeg
+!content/**/assets/*.webp
+!content/**/assets/*.avif
+
+# Canonical Library-owned Assets
+!library/**/assets/*.png
+!library/**/assets/*.jpg
+!library/**/assets/*.jpeg
+!library/**/assets/*.webp
+!library/**/assets/*.avif
+
+# Local working areas
+.work/
+.cache/
+.tmp/
+.downloads/
+.exports/
+
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+
+# OS / editor / logs
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+*.log
