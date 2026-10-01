@@ -4118,9 +4118,9 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 
 ---
 
-# STEP 0-7 — Image / Asset Storage Policy Working Draft v0.1
+# STEP 0-7 — Image / Asset Storage Policy Working Draft v0.2
 
-> 상태: **WORKING DRAFT / 구조 검토 중**
+> 상태: **WORKING DRAFT / Asset·External Reference 경계 보완**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -4281,9 +4281,6 @@ binary:
 
 availability: available
 
-roles:
-  - cut_candidate
-
 created_at: ...
 
 provenance:
@@ -4307,7 +4304,7 @@ source.kind 후보:
 generation_result
 manual_edit
 user_supplied
-external_reference
+external_import
 derived_import
 ~~~
 
@@ -4329,11 +4326,11 @@ parent_asset_id와 편집 메모를 기록한다.
 
 가능한 경우 원본 파일명과 제공 시점을 기록한다.
 
-### external_reference
+### external_import
 
-외부 연구·고증·시각 참고 자료.
+외부 연구·고증·시각 참고 자료 중 **저장소에 binary를 장기 보존할 권리와 필요가 확인되어 실제 Asset으로 가져온 경우**에만 사용한다.
 
-출처와 권리 상태를 기록해야 한다.
+출처와 권리 근거를 기록해야 한다.
 
 ### derived_import
 
@@ -4367,42 +4364,45 @@ Asset binary의 현재 보존 상태는 역할 승인과 별도로 관리한다.
 기본 값:
 
 ~~~text
+pending_ingest
 available
 missing
 removed
 ~~~
 
+- pending_ingest: Asset ID/metadata는 준비됐지만 Canonical binary ingest가 아직 완료되지 않음
 - available: Canonical binary를 현재 조회할 수 있음
-- missing: metadata는 있으나 binary가 예상 위치에서 확인되지 않아 복구 필요
+- missing: available이어야 하지만 binary가 예상 위치에서 확인되지 않아 복구 필요
 - removed: 정책·권리·중복 등 명시적인 이유로 binary를 제거했으며 metadata tombstone만 유지
 
 대표 Asset이나 active Library Reference가 missing / removed 상태인 것은 오류로 취급한다.
 
-## 9. Asset Roles
+## 9. Asset Usage Relation
 
-Asset의 역할은 identity와 분리한다.
+Asset 자체가 cut_representative, character_reference 같은 **현재 역할의 Source of Truth를 소유하지 않는다.**
 
-초기 role 후보:
+그 역할은 Asset을 사용하는 쪽의 명시적인 관계 데이터가 소유한다.
+
+예:
 
 ~~~text
-cut_candidate
-cut_representative
-character_reference
-location_reference
-object_reference
-costume_reference
-environment_reference
-style_reference
-continuity_reference
-historical_reference
-diagnostic
+Cut
+  ├─ candidate Asset refs
+  └─ representative Asset selection
+
+Library Asset
+  └─ reference Asset refs
+
+Continuity
+  └─ continuity Reference Asset ref
+
+Generation Run
+  └─ actual input Reference Asset snapshot
 ~~~
 
-한 Asset은 여러 역할을 가질 수 있다.
+이 원칙을 두는 이유는 하나의 이미지가 여러 곳에서 사용될 때 Asset metadata 안의 roles 배열과 실제 사용 관계가 서로 어긋나는 문제를 막기 위해서다.
 
-역할이 바뀌었다고 binary를 복제하거나 Asset ID를 새로 만들지 않는다.
-
-단, 실제 Source of Truth 관계는 단순 roles 배열만으로 결정하지 않고 Cut / Library 쪽의 명시적 Selection/Reference 관계에서 관리한다.
+Asset metadata에는 필요하다면 검색 편의를 위한 비권위적 tag를 둘 수 있지만, 승인·대표·Reference 여부는 소비자 쪽 관계 데이터에서 판단한다.
 
 ## 10. Cut Representative Asset
 
@@ -4423,7 +4423,7 @@ representative_asset:
 
 1. 한 Cut revision에는 현재 대표 Asset을 최대 하나 둔다.
 2. 과거 대표 Asset 선택 기록은 삭제하지 않는다.
-3. 대표 Asset 교체가 Canonical Scene 정의 변경을 의미하지 않으면 Cut revision을 증가시키지 않는다.
+3. 대표 Asset 교체가 Canonical Scene 정의 변경을 의미하지 않으면 Cut revision을 증가시키지 않는다. 대신 대표 Asset selection history를 추가한다.
 4. 새 Cut revision이 생기면 이전 대표 Asset이 자동으로 새 revision의 대표 Asset이 되지 않는다.
 5. 새 revision의 Canonical 기준으로 다시 검토·선정한다.
 6. 대표 Asset은 available 상태여야 한다.
@@ -4440,8 +4440,8 @@ STEP 0-2에서 미뤄둔 production complete를 여기서 정의한다.
 1. Cut definition_status가 approved.
 2. 현재 approved Cut revision에 대해 representative_asset이 선택됨.
 3. 대표 Asset binary가 available.
-4. 대표 Asset이 현재 Cut revision / Canonical commit 기준의 검토를 통과함.
-5. 적용되는 Continuity / Library 기준과 충돌하지 않음.
+4. 대표 Asset이 현재 approved Cut revision과 해당 Library / Continuity 기준을 포함하는 Canonical snapshot에 대한 검토를 통과함.
+5. 이후 저장소에 관련 없는 문서 변경이 생겼다는 이유만으로 production complete가 자동 무효화되지는 않음.
 
 production complete는 Cut Definition Status와 별도의 **도출 상태**로 본다.
 
@@ -4473,29 +4473,46 @@ reference_assets:
 4. Reference가 바뀌어도 Library ID는 유지한다.
 5. Provider Binding은 Reference Asset을 사용할 수 있지만 외부 Provider 리소스가 Reference Asset을 대체하지 않는다.
 
-## 13. Reference Asset의 권리 / 출처
+## 13. External Reference Record와 권리 / 출처
 
-외부 이미지나 연구자료를 Reference로 사용할 경우 출처와 권리 상태를 추적한다.
+Asset은 장기 보존되는 실제 binary identity이므로, 권리 문제로 binary를 저장할 수 없는 외부 참고자료를 억지로 Asset으로 만들지 않는다.
 
-rights.status 후보:
+이런 자료는 Cut 또는 Library 아래의 **External Reference Record**로 관리한다.
 
-~~~text
-project_generated
-user_provided
-licensed
-public_domain
-link_only
-unknown
-restricted
+개념 예:
+
+~~~yaml
+external_references:
+  - key: XR01
+    source_url: ...
+    source_title: ...
+    retrieved_at: ...
+    rights_status: unknown
+    note: ...
 ~~~
 
 원칙:
 
-1. 프로젝트가 직접 생성한 이미지는 project_generated로 기록할 수 있다.
-2. 외부 이미지의 권리를 확신할 수 없으면 public_domain이나 licensed로 추측하지 않는다.
-3. 저장·재배포 권한이 불분명한 외부 자료는 binary를 저장소에 복제하지 않고 link_only metadata로 관리할 수 있다.
-4. link_only 자료는 Canonical production master가 될 수 없다.
-5. 권리 문제로 binary를 제거해야 하면 metadata와 출처 기록은 유지한다.
+1. External Reference Record의 local key는 해당 Cut/Library 범위에서만 유일하면 된다.
+2. 외부 자료를 Bible Illustration 저장소에 장기 보존할 권리가 명확하지 않다면 binary를 복제하지 않는다.
+3. 링크가 사라질 수 있으므로 가능한 범위에서 출처명, 작성자/기관, 조회 시점, 설명을 함께 기록한다.
+4. External Reference Record는 Canonical production master나 representative_asset이 될 수 없다.
+5. Provider Run에서 실제 remote reference로 사용했다면 Run snapshot에도 사용 사실과 확인 가능한 URL/metadata를 남긴다.
+6. 저장 권리와 장기 보존 가치가 확인되면 External Reference Record의 자료를 정식 Asset으로 import할 수 있다.
+
+정식 Asset으로 import된 외부 자료의 rights.status 후보:
+
+~~~text
+licensed
+public_domain
+permission_granted
+user_provided
+project_generated
+restricted
+unknown
+~~~
+
+외부 자료를 Asset으로 import하는 경우 provenance와 권리 근거를 기록하며 public_domain / licensed 상태를 추측하지 않는다.
 
 ## 14. Git / Git LFS 역할 분리
 
@@ -4549,7 +4566,7 @@ STEP 0-5의 모든 Result metadata와 Review history는 유지하지만 binary �
 
 원칙:
 
-1. Review 전 Result binary를 임의 삭제하지 않는다.
+1. Review 전 Result binary를 임의 삭제하지 않는다. Review 전까지의 binary는 Provider 보관함이나 로컬 working cache처럼 일시 영역에 있을 수 있지만 이는 Canonical 저장소로 간주하지 않는다.
 2. Review와 Asset Promotion 판단이 끝난 후 비보존 Result binary는 정리할 수 있다.
 3. binary를 정리해도 Result ID, Run metadata, Review, issue reason은 유지한다.
 4. accepted Result도 자동 영구 보존하지 않는다. 장기 가치가 있으면 Asset으로 승격한다.
@@ -4562,10 +4579,12 @@ Generated Result를 Asset으로 승격하면 다음을 수행한다.
 1. 새 Asset ID 발급
 2. source.result_id 기록
 3. binary를 Canonical Git LFS 위치에 저장
-4. SHA-256 및 기본 파일 metadata 기록
-5. provenance / rights 기록
-6. 필요한 역할 부여
-7. Run Result에서 Asset ID를 역참조할 수 있게 연결
+4. Git LFS ingest가 완료되기 전에는 availability를 pending_ingest로 둘 수 있음
+5. SHA-256 및 기본 파일 metadata 기록
+6. provenance / rights 기록
+7. 필요한 Cut / Library / Continuity 사용 관계를 연결
+8. Run Result에서 Asset ID를 역참조할 수 있게 연결
+9. binary와 metadata 확인이 끝나면 availability를 available로 전환
 
 Asset Promotion은 Result Review와 별개다.
 
@@ -4718,6 +4737,7 @@ library/characters/<CHARACTER>/assets/
 2. Asset role 때문에 파일을 다른 디렉터리에 중복 복사하지 않는다.
 3. 여러 곳에서 사용할 때 Asset ID로 참조한다.
 4. 실제 최종 폴더명은 전체 STEP 0 문서화 단계에서 통일한다.
+5. owner는 등록 위치를 정하기 위한 primary registration scope이며, 다른 Cut/Library가 동일 Asset ID를 참조하는 것을 막지 않는다.
 
 ## 23. Asset 삭제 / Retire 정책
 
@@ -4793,16 +4813,18 @@ CDN / site
 9. Cut의 대표 이미지는 파일명이 아니라 representative_asset 관계로 관리한다.
 10. production complete는 대표 Asset과 현재 Canonical revision의 적합성으로 도출한다.
 11. Library Reference image는 Canonical Library 정의를 대체하지 않는다.
-12. 외부 Reference의 권리 상태가 불명확하면 binary 저장을 강제하지 않는다.
-13. 모든 Result metadata와 Review는 남기되 모든 Result binary를 영구 보존하지 않는다.
-14. 보존할 Result는 Asset Promotion을 통해 Git LFS에 등록한다.
-15. 재생성 가능한 Derivative는 Canonical master가 아니다.
-16. 외부 Storage/CDN은 전달·캐시·백업 용도이며 Source of Truth가 아니다.
-17. Asset 파일명은 안정적인 Asset ID 기반으로 한다.
-18. 동일 Asset binary를 역할별로 중복 복사하지 않는다.
-19. 대표/Reference/Run dependency가 있는 Asset은 기본적으로 물리 삭제하지 않는다.
-20. 웹 배포본은 Production Master에서 재생성 가능해야 한다.
-21. 사이트용 성경 본문·내레이션·UI text는 기본적으로 이미지 binary와 분리한다.
+12. 저장 권리가 불명확한 외부 자료는 Asset이 아니라 External Reference Record로 관리한다.
+13. External Reference Record는 representative production master가 될 수 없다.
+14. 모든 Result metadata와 Review는 남기되 모든 Result binary를 영구 보존하지 않는다.
+15. 보존할 Result는 Asset Promotion을 통해 Git LFS에 등록한다.
+16. 재생성 가능한 Derivative는 Canonical master가 아니다.
+17. 외부 Storage/CDN은 전달·캐시·백업 용도이며 Source of Truth가 아니다.
+18. Asset 파일명은 안정적인 Asset ID 기반으로 한다.
+19. Asset의 현재 대표/Reference 역할은 소비자 쪽 명시적 관계가 Source of Truth다.
+20. 동일 Asset binary를 역할별로 중복 복사하지 않는다.
+21. 대표/Reference/Run dependency가 있는 Asset은 기본적으로 물리 삭제하지 않는다.
+22. 웹 배포본은 Production Master에서 재생성 가능해야 한다.
+23. 사이트용 성경 본문·내레이션·UI text는 기본적으로 이미지 binary와 분리한다.
 
 ## 28. STEP 0-7에서 의도적으로 미확정하는 항목
 
@@ -4830,8 +4852,9 @@ STEP 0 확정 후 실제 구조 생성 또는 운영 과정에서 정한다.
 - Cut-owned / Library-owned Asset ID 체계
 - Asset binary immutable 정책
 - SHA-256 기반 무결성 / 중복 확인
-- Asset availability와 역할 분리
-- representative_asset 관계와 production complete 도출 방식
+- Asset availability와 usage relation 분리
+- 저장 불가 외부 자료를 External Reference Record로 분리하는 원칙
+- representative_asset 관계와 selection history / production complete 도출 방식
 - Library Reference Asset 정책
 - 외부 Reference의 provenance / rights 기록
 - rejected/non-promoted Result binary 정리 가능 정책
