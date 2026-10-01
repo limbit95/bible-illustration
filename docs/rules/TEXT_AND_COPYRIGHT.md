@@ -1,6 +1,6 @@
-# Text and Copyright Rules v1.0 Working Draft
+# Text and Copyright Rules v1.0
 
-> 상태: **REVIEW READY**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 목적: 성경 직접 인용, 자체 내레이션, 이미지 내 텍스트, 외부 Reference와 이미지 권리를 분리하여 관리하는 규칙을 정의한다.
 
