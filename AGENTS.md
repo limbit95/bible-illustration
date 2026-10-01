@@ -177,6 +177,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**Genesis Creation CUT 1–4 migration**
+**DEC-0002 Presentation-only Cut Output Mode 검토 → Genesis Creation CUT 1–4 migration**
 
 이다.
