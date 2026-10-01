@@ -613,9 +613,9 @@ STEP 0의 7개 영역이 검토·승인되면 다음을 진행한다.
 
 다음 작업:
 
-> **STEP 0-4 — Library Model 정의**
+> **STEP 0-5 — Generation Run Model 정의**
 
-확정된 Content / Episode-Cut / Continuity Model을 전제로 재사용 가능한 Canonical Library Asset의 ID, 근거 계층, 참조 및 revision 규칙을 설계한다.
+확정된 Content / Episode-Cut / Continuity / Library Model을 전제로 실제 생성 요청, 입력 snapshot, 결과, 평가 이력과 비용 기록 방식을 설계한다.
 
 STEP 0 진행 중 중요한 설계 결정은 대화에만 남기지 말고 이 저장소에 기록한다.
 
@@ -2721,9 +2721,9 @@ OpenArt / Higgsfield / future provider
 
 ---
 
-# STEP 0-5 — Generation Run Model Working Draft v0.2
+# STEP 0-5 — Generation Run Model Working Draft v0.3
 
-> 상태: **WORKING DRAFT / 평가 이력 구조 보완**
+> 상태: **REVIEW READY / 구조 점검 완료**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -2835,9 +2835,12 @@ target:
 
 source_snapshot:
   repository_commit: abc123...
-  library_revisions:
-    CHR-MOSES: 2
-    CST-ANCIENT-HEBREW-MALE: 1
+  library:
+    - asset_id: CHR-MOSES
+      revision: 2
+      profile: EXODUS
+    - asset_id: CST-ANCIENT-HEBREW-MALE
+      revision: 1
 
 operation: generate
 
@@ -2879,7 +2882,7 @@ usage:
 - prompt: 프로젝트 쪽에서 실제 확인 가능한 생성 instruction / Prompt snapshot
 - references: 실제 전달된 Reference Asset
 - settings: 생성 시 사용한 주요 설정
-- submitted_at: 실행 시점
+- submitted_at: 실행 시점. ISO 8601 timestamp 사용을 원칙으로 함
 - execution_status: 요청 자체의 실행 결과
 - usage: 알 수 있는 경우 비용·크레딧 기록
 
@@ -3122,7 +3125,7 @@ not_applicable
 
 ## 14. Rejection Reason
 
-Result가 rejected이면 최소한 왜 폐기했는지 기록한다.
+Review decision이 rejected이면 최소한 왜 폐기했는지 기록한다.
 
 구조화된 issue category와 자유 메모를 함께 사용할 수 있다.
 
@@ -3130,6 +3133,8 @@ Result가 rejected이면 최소한 왜 폐기했는지 기록한다.
 
 ~~~text
 SCRIPTURE_MISMATCH
+REQUIRED_ELEMENT_MISSING
+FORBIDDEN_ELEMENT_PRESENT
 PREMATURE_ELEMENT
 HISTORICAL_MISMATCH
 CONTINUITY_MISMATCH
@@ -3150,17 +3155,18 @@ OTHER
 
 ## 15. accepted / rejected 기준
 
-Result 판정은 단순히 “예쁜가”로 결정하지 않는다.
+Review decision은 단순히 “예쁜가”로 결정하지 않는다.
 
 기본 원칙:
 
 1. Scripture mismatch가 핵심 장면 의미를 훼손하면 rejected.
-2. required element가 빠지거나 forbidden element가 들어가면 rejected.
-3. 중요한 Continuity constraint를 위반하면 rejected.
-4. 승인된 Library 정의와 중요한 충돌이 있으면 rejected.
-5. 기술적 결함이 장면 사용을 방해하면 rejected.
-6. 사소한 문제만 있고 후처리로 해결 가능한 경우의 Asset 처리 기준은 STEP 0-7에서 다룬다.
-7. visual quality가 높더라도 본문·Canonical 정의와 충돌하면 품질만으로 accepted 처리하지 않는다.
+2. required element가 빠지면 rejected.
+3. forbidden element가 들어가면 rejected.
+4. 중요한 Continuity constraint를 위반하면 rejected.
+5. 승인된 Library 정의와 중요한 충돌이 있으면 rejected.
+6. 기술적 결함이 장면 사용을 방해하면 rejected.
+7. 사소한 문제만 있고 후처리로 해결 가능한 경우의 Asset 처리 기준은 STEP 0-7에서 다룬다.
+8. visual quality가 높더라도 본문·Canonical 정의와 충돌하면 품질만으로 accepted 처리하지 않는다.
 
 ## 16. Run과 Cut Definition Status의 관계
 
@@ -3199,8 +3205,8 @@ Run operation은 최소 generate / edit / variation을 구분할 수 있어야 �
 
 - 결과 파일 다운로드
 - metadata 정리
-- review_status 변경
-- review note 추가
+- Result Review record 추가
+- Review note 추가
 - 동일 결과 파일명 변경
 - 파생 리사이즈 / 압축본 생성
 
@@ -3214,7 +3220,7 @@ Generation Run은 완료 후 “실제로 무엇을 제출했는가”라는 역
 - target snapshot
 - source commit
 - Provider / model snapshot
-- exact submitted prompt
+- observable generation instruction / prompt snapshot
 - references
 - generation settings
 - execution result metadata
@@ -3295,7 +3301,7 @@ Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산�
 4. 한 요청에서 여러 이미지가 반환되면 하나의 Run 아래 여러 Result로 관리한다.
 5. Run ID와 Result ID는 Provider external ID와 독립적이다.
 6. Run은 target Cut revision과 Git source commit을 함께 기록한다.
-7. 실제 제출 Prompt와 Reference input을 Run별 snapshot으로 보존한다.
+7. 프로젝트에서 확인 가능한 실제 generation instruction / Prompt와 Reference input을 Run별 snapshot으로 보존한다.
 8. 확인할 수 없는 Provider/model 내부 정보는 추측하지 않는다.
 9. Run execution status와 Result Review decision을 분리한다.
 10. Run에는 approved/rejected 상태를 사용하지 않는다.
@@ -3335,7 +3341,7 @@ Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산�
 - Run 하나에서 여러 Result 관리
 - Cut revision + Git commit SHA source snapshot
 - Library revision/profile snapshot
-- 실제 제출 Prompt snapshot 보존
+- 프로젝트에서 확인 가능한 실제 Prompt / generation instruction snapshot 보존
 - Reference 역할과 실제 사용 입력 기록, edit_source 구분
 - generate / edit / variation operation 구분
 - execution_status와 Result Review decision 분리
