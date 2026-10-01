@@ -13,8 +13,8 @@
 - 루트 `README.md` 생성: **COMPLETED**
 - 정식 Architecture 문서 분리: **COMPLETED**
 - Architecture 이관 검증: **PASSED — STEP 0-1~0-7 본문 exact match**
-- `docs/rules/` 제작 규칙 초안: **REVIEW READY**
-- 현재 작업: **Rules v1.0 사용자 검토 대기**
+- Production Rules v1.0: **CONFIRMED**
+- 현재 작업: **Templates 생성 준비**
 
 ## 현재 Production 위치
 
@@ -47,6 +47,7 @@
 18. `docs/rules/` 7개 정식화 초안 생성
 19. 과거 8컷 고정 규칙을 현재 Architecture와 충돌하는 legacy rule로 분리
 20. Rules 상호 충돌 및 Architecture 경계 자체 점검 완료
+21. Production Rules v1.0 사용자 승인 및 7개 문서 CONFIRMED 전환
 
 ## 현재 Source of Truth
 
@@ -62,13 +63,12 @@
 
 ## 다음 작업
 
-1. Rules v1.0 사용자 승인 및 CONFIRMED 전환
-2. Templates 생성
-3. Progress / Decision 기록 체계 보완
-4. Git LFS / ignore 정책 확정
-5. Genesis Creation CUT 1–4 migration
-6. migration 감사
-7. CUT 5 제작 재개
+1. Templates 생성
+2. Progress / Decision 기록 체계 보완
+3. Git LFS / ignore 정책 확정
+4. Genesis Creation CUT 1–4 migration
+5. migration 감사
+6. CUT 5 제작 재개
 
 ## Blocker
 
