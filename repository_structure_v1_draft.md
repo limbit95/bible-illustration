@@ -1,12 +1,14 @@
-# Bible Illustration — Final Repository Structure v1 Working Draft
+# Bible Illustration — Final Repository Structure v1.0
 
-> 상태: **REVIEW READY / POST STEP 0**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 기준: `architecture_v0_draft.md`의 STEP 0-1~0-7 CONFIRMED 결정 전체
 >
 > 목적: 확정된 Content / Episode-Cut / Continuity / Library / Generation Run / Provider Integration / Asset Storage 모델을 실제 `bible-illustration` 저장소의 물리 구조로 변환한다.
 >
-> 이 문서는 디렉터리 구조 승인 전 작업 문서다. 승인 전에는 아래 전체 트리를 대량 생성하지 않는다.
+> 이 문서는 STEP 0의 CONFIRMED 결정을 실제 저장소 구조로 변환한 **확정 Repository Structure v1.0**이다.
+>
+> 논리 구조는 확정되었지만, 빈 미래 디렉터리를 대량 생성하지 않는 원칙에 따라 실제 디렉터리와 파일은 필요한 순서대로 단계적으로 생성한다.
 
 ---
 
@@ -809,9 +811,9 @@ Repository Structure가 승인되면 다음 순서로 진행한다.
 
 ---
 
-## 22. 검토 포인트
+## 22. 확정 항목
 
-사용자 승인 전 확인할 핵심 항목:
+다음 핵심 항목은 사용자 승인으로 확정되었다:
 
 - docs / content / library / integrations / templates의 최상위 책임 분리
 - Architecture 8개 문서 + Repository Structure 문서 구성
@@ -830,4 +832,8 @@ Repository Structure가 승인되면 다음 순서로 진행한다.
 - 빈 미래 디렉터리를 대량 생성하지 않는 원칙
 - STEP 0 Working Record를 정식 문서 이관 완료 전까지 보존하는 원칙
 
-승인되면 이 문서를 v1.0 CONFIRMED로 전환하고 실제 저장소 구조 생성 단계로 진행한다.
+위 항목은 2026-10-02 사용자 승인으로 확정되었다.
+
+**Repository Structure v1.0: CONFIRMED**
+
+다음 단계는 이 구조를 기준으로 실제 저장소의 최소 필수 구조를 생성하고, `AGENTS.md` / `README.md` / 정식 Architecture 문서를 순서대로 정식화하는 것이다.
