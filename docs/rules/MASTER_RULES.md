@@ -6,20 +6,35 @@
 >
 > 이 문서는 Architecture를 대체하지 않는다. 데이터 구조와 Source of Truth 책임은 `docs/architecture/`가 소유하고, 이 문서는 실제 제작 판단을 규정한다.
 
-## 1. 규칙 계층
+## 1. 규칙 충돌 판단
 
-충돌 시 다음 순서로 판단한다.
+모든 정보를 억지로 하나의 단일 순위표로 정렬하지 않는다.
 
-1. 성경 본문의 명시적 내용과 현재 승인된 Canonical Production Data
-2. 정식 `docs/architecture/` 문서
-3. 이 `MASTER_RULES.md`
-4. 해당 영역의 세부 Rules 문서
-5. Episode / Cut / Library의 승인된 구체 정의
-6. Provider Integration / Prompt Adapter / Generation Profile
-7. 개별 Generation Run의 실행 입력
-8. 생성 결과 이미지
+충돌의 종류에 따라 Source of Truth를 구분한다.
 
-하위 계층이 상위 계층을 조용히 덮어쓰지 않는다.
+### 1.1 데이터 구조와 책임 경계
+
+파일 위치, ID, revision, 상태, Source of Truth 소유권처럼 **프로젝트 구조에 관한 문제**는 정식 `docs/architecture/` 문서가 최우선 기준이다.
+
+Rules, Episode/Cut 데이터, Provider 설정이 Architecture의 책임 경계를 조용히 변경할 수 없다.
+
+### 1.2 성경 내용과 장면 사실
+
+사건·인물·대사·순서 등 **성경 내용에 관한 문제**는 해당 Scripture Anchor의 본문 직접 내용이 최우선 근거다.
+
+승인된 Cut이나 Library 정의라도 본문 직접 내용과 중요한 충돌이 발견되면 기존 승인을 근거로 충돌을 유지하지 않고 revision 검토 대상으로 돌린다.
+
+### 1.3 제작 행동
+
+이미지 생성·고증·Continuity·텍스트·Review 같은 **제작 행동**은 이 `MASTER_RULES.md`와 해당 세부 Rules 문서를 따른다.
+
+Episode / Cut / Library의 구체 정의는 이 범위 안에서 장면별 세부 조건을 구체화한다.
+
+### 1.4 Provider와 생성 결과
+
+Provider Integration, Prompt Adapter, Generation Profile, 개별 Run, 생성 결과 이미지는 상위 Canonical 정의와 Rules를 구현하는 하위 계층이다.
+
+Provider의 한계나 생성 결과의 우연한 요소가 상위 정의를 조용히 덮어쓰지 않는다.
 
 중요한 충돌이 발견되면 임의로 합리화하지 않고 기록한 뒤 사용자 검토를 받는다.
 
