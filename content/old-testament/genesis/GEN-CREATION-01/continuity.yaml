@@ -1,0 +1,45 @@
+episode_id: GEN-CREATION-01
+
+episode_boundary: null
+
+segments:
+  - key: S01
+    start_cut_id: GEN-CREATION-01-C01
+    end_cut_id: GEN-CREATION-01-C01
+    baseline:
+      visual:
+        presentation: black-screen
+
+  - key: S02
+    start_cut_id: GEN-CREATION-01-C02
+    end_cut_id: GEN-CREATION-01-C04
+    baseline:
+      world:
+        environment: primordial-waters
+      visual:
+        camera_context: broad-world-view
+
+transitions:
+  - from: GEN-CREATION-01-C01
+    to: GEN-CREATION-01-C02
+    mode: reset
+
+  - from: GEN-CREATION-01-C02
+    to: GEN-CREATION-01-C03
+    mode: continue
+    retain:
+      - world.environment
+      - visual.camera_context
+    change:
+      - visual.warm_light_appears_from_right
+
+  - from: GEN-CREATION-01-C03
+    to: GEN-CREATION-01-C04
+    mode: continue
+    retain:
+      - world.environment
+      - visual.camera_context
+      - visual.primary_light_direction_right
+      - world.no_sun_moon_stars
+    change:
+      - visual.light_dark_distinction_strengthens
