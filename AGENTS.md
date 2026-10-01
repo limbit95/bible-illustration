@@ -31,6 +31,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - STEP 0-6 — Provider Integration Model: **CONFIRMED**
 - STEP 0-7 — Image / Asset Storage Policy: **CONFIRMED**
 - Repository Structure v1.0: **CONFIRMED**
+- Production Rules v1.0: **CONFIRMED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
@@ -129,12 +130,26 @@ Provider 내부의 character, model, prompt, slot, project structure는 Canonica
 
 현재 규칙을 판단할 때 historical working record보다 정식 Architecture 문서를 우선한다.
 
-## 9. 다음 작업
+## 9. Rules Source of Truth
+
+현재 제작 규칙의 정식 Source of Truth는 `docs/rules/` 아래 문서다.
+
+- `MASTER_RULES.md`
+- `SCRIPTURE_RULES.md`
+- `HISTORICAL_RULES.md`
+- `VISUAL_RULES.md`
+- `CONTINUITY_RULES.md`
+- `GENERATION_RULES.md`
+- `TEXT_AND_COPYRIGHT.md`
+
+과거 테스트 기준서나 채팅 인수인계 자료보다 정식 Rules 문서를 우선한다.
+
+## 10. 다음 작업
 
 `docs/progress/CURRENT.md`를 기준으로 이어서 진행한다.
 
 현재 다음 작업은:
 
-**`docs/rules/` 제작 규칙 정식화**
+**Templates 생성**
 
 이다.
