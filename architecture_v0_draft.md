@@ -2721,9 +2721,9 @@ OpenArt / Higgsfield / future provider
 
 ---
 
-# STEP 0-5 — Generation Run Model Working Draft v0.1
+# STEP 0-5 — Generation Run Model Working Draft v0.2
 
-> 상태: **WORKING DRAFT / 구조 검토 중**
+> 상태: **WORKING DRAFT / 평가 이력 구조 보완**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -2839,13 +2839,16 @@ source_snapshot:
     CHR-MOSES: 2
     CST-ANCIENT-HEBREW-MALE: 1
 
+operation: generate
+
 provider:
   key: openart
   model: ...
   model_version: unknown
 
 prompt:
-  exact_submitted_text: ...
+  observable_input_text: ...
+  provider_internal_prompt: unavailable
   negative_prompt: ...
 
 references: []
@@ -2871,8 +2874,9 @@ usage:
 - run_id: 영구 Run ID
 - target: 어떤 Cut revision을 렌더링하려 했는지
 - source_snapshot: 당시 Canonical 기준을 복원하기 위한 저장소 / Library 상태
+- operation: generate / edit / variation 등 실제 요청 유형
 - provider: 실제 사용한 서비스와 모델
-- prompt: 실제 제출된 Prompt snapshot
+- prompt: 프로젝트 쪽에서 실제 확인 가능한 생성 instruction / Prompt snapshot
 - references: 실제 전달된 Reference Asset
 - settings: 생성 시 사용한 주요 설정
 - submitted_at: 실행 시점
@@ -2909,22 +2913,24 @@ C03 revision 1 — approved C
 
 현재의 prompt 문서만 참조하면 과거 Run 재현성이 깨질 수 있다.
 
-따라서 각 Run은 **실제로 Provider에 제출된 Prompt를 immutable snapshot으로 추적**해야 한다.
+따라서 각 Run은 **프로젝트 쪽에서 실제 확인 가능한 생성 instruction / Prompt를 immutable snapshot으로 추적**해야 한다.
 
 최소 기록 대상:
 
-- exact submitted positive prompt
+- 프로젝트에서 Provider 인터페이스에 전달한 observable generation instruction / prompt
 - negative prompt가 있다면 해당 내용
-- 실제로 사용된 별도 style/system instruction이 확인 가능하면 그 참조
+- 실제로 사용된 별도 style instruction이 확인 가능하면 그 참조
 - Prompt template/version을 사용했다면 식별 정보
+- provider 내부에서 자동 확장된 prompt가 공개되는 경우 해당 값
 
 원칙:
 
 1. Run 생성 입력은 완료 후 수정하지 않는다.
 2. Prompt를 고쳐 다시 생성하면 새 Run이다.
 3. Provider별 Prompt 구조와 profile은 STEP 0-6에서 정한다.
-4. Provider가 내부적으로 추가하는 비공개 Prompt는 추측해서 기록하지 않는다.
-5. 실제로 확인 가능한 입력만 기록한다.
+4. ChatGPT처럼 내부에서 최종 생성 Prompt가 자동 구성되지만 그 값이 공개되지 않는 경우, 사용자가 제공한 생성 instruction과 확인 가능한 참조 context만 기록하고 내부 Prompt는 unavailable로 둔다.
+5. Provider가 내부적으로 추가하는 비공개 Prompt는 추측해서 기록하지 않는다.
+6. 실제로 확인 가능한 입력만 기록한다.
 
 ## 8. Reference Snapshot
 
@@ -2953,6 +2959,7 @@ role 후보:
 - style
 - continuity
 - composition
+- edit_source
 - other
 
 Reference strength / weight 같은 Provider별 수치는 settings 또는 STEP 0-6 Provider Integration에서 다룬다.
@@ -3010,41 +3017,75 @@ Run의 성공 여부와 결과 이미지의 품질 판단은 다른 개념이다
 result_id: GEN-CREATION-01-C03-R007-O01
 provider_output_id: ...
 
-review_status: unreviewed
-
-evaluation:
-  scripture_fidelity: pending
-  historical_accuracy: pending
-  continuity: pending
-  library_consistency: pending
-  visual_quality: pending
-  technical_integrity: pending
-
-issues: []
-review_notes: null
+reviews: []
 ~~~
 
 Provider output ID가 없다면 생략할 수 있다.
 
-## 12. Result Review Status
+Result 자체는 생성 당시의 출력 identity를 보존하며, 품질 판정은 별도의 Review 기록으로 누적한다.
 
-기본 review_status:
+## 12. Result Review Record
+
+이미지 판정을 Result 본문에 한 개의 mutable status로 덮어쓰지 않는다.
+
+하나의 Result는 시간이 지나면서 서로 다른 Canonical 기준으로 재검토될 수 있기 때문이다.
+
+예:
 
 ~~~text
-unreviewed
+처음 생성 당시
+C03 draft 기준 → accepted
+
+이후 Cut 정의 수정
+C03 approved 기준으로 재검토 → rejected
+~~~
+
+이때 최초 판단을 삭제하지 않고 새 Review를 추가한다.
+
+개념 예:
+
+~~~yaml
+reviews:
+  - sequence: 1
+    reviewed_at: ...
+    reviewed_against:
+      cut_revision: 1
+      repository_commit: abc123...
+    decision: accepted
+    evaluation:
+      scripture_fidelity: pass
+      historical_accuracy: pass
+      continuity: concern
+      library_consistency: pass
+      visual_quality: pass
+      technical_integrity: pass
+    issues: []
+    notes: ...
+
+  - sequence: 2
+    reviewed_at: ...
+    reviewed_against:
+      cut_revision: 2
+      repository_commit: def456...
+    decision: rejected
+    issues:
+      - CONTINUITY_MISMATCH
+~~~
+
+Review decision:
+
+~~~text
 accepted
 rejected
 ~~~
 
-- unreviewed: 아직 결과 검토 전
-- accepted: 현재 Canonical 기준에서 사용할 가치가 있는 결과로 통과
-- rejected: 최종 사용 후보에서 제외
+Review가 아직 하나도 없으면 Result는 unreviewed로 간주한다.
 
-accepted는 Cut Definition approved와 다른 개념이다.
+가장 최신 Canonical 기준에 대한 Review가 현재 사용 가능성을 판단하는 기준이 된다.
 
-accepted가 곧바로 “대표 최종 Asset”을 의미하지도 않는다.
+accepted는 Cut Definition approved와 다른 개념이며, 곧바로 “대표 최종 Asset”을 의미하지 않는다.
 
-한 Cut에서 accepted Result가 여러 개 존재할 수 있으며, 어떤 결과를 대표 Asset으로 사용할지는 STEP 0-7에서 정한다.
+한 Cut에서 현재 기준에 accepted인 Result가 여러 개 존재할 수 있으며 대표 Asset 선택은 STEP 0-7에서 정한다.
 
 ## 13. 평가 축
 
@@ -3067,6 +3108,8 @@ concern
 fail
 not_applicable
 ~~~
+
+평가하지 않은 축은 Review 자체에서 생략할 수 있다. pending을 별도 영구 판정값으로 저장하지 않는다.
 
 의미:
 
@@ -3148,6 +3191,10 @@ Generation Run을 만들기 위해 Cut이 반드시 approved일 필요는 없다
 - 주요 generation setting 변경
 - Provider retry가 실제 새 request/job을 생성
 
+Run operation은 최소 generate / edit / variation을 구분할 수 있어야 한다.
+
+의미 있는 image edit 요청이 Provider에 새 작업으로 제출되면 새 Run이며, edit_source Reference를 기록한다.
+
 다음은 새 Run이 아니다.
 
 - 결과 파일 다운로드
@@ -3173,13 +3220,12 @@ Generation Run은 완료 후 “실제로 무엇을 제출했는가”라는 역
 - execution result metadata
 - original Result identity
 
-검토 후 변경 가능한 영역:
+실행 이후 추가 가능한 영역:
 
-- Result review_status
-- evaluation
-- issues
-- review notes
+- 새로운 Result Review record
 - 이후 Asset 연결
+
+기존 Review도 당시 판단의 이력으로 보존하는 것을 원칙으로 하며, 새로운 Canonical 기준으로 판단이 바뀌면 기존 Review를 덮어쓰지 않고 새 Review를 추가한다.
 
 과거 Run 입력이 잘못 기록된 단순 오타 수정과 실제 실행 입력 변경을 구분해야 한다.
 
@@ -3251,16 +3297,18 @@ Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산�
 6. Run은 target Cut revision과 Git source commit을 함께 기록한다.
 7. 실제 제출 Prompt와 Reference input을 Run별 snapshot으로 보존한다.
 8. 확인할 수 없는 Provider/model 내부 정보는 추측하지 않는다.
-9. Run execution status와 Result review status를 분리한다.
+9. Run execution status와 Result Review decision을 분리한다.
 10. Run에는 approved/rejected 상태를 사용하지 않는다.
-11. Result accepted는 최종 대표 Asset 승인을 의미하지 않는다.
-12. 결과 평가는 Scripture / Historical / Continuity / Library / Visual / Technical 축을 구분한다.
-13. rejected Result는 가능한 한 실패 이유를 남긴다.
-14. draft/in_review Cut의 탐색 Run을 허용한다.
-15. 완료된 Run의 실행 입력 snapshot은 불변 역사 기록으로 취급한다.
-16. 의미 있는 실패 Run도 기본적으로 보존한다.
-17. 비용·Credit은 알 수 있을 때 기록하되 필수값으로 강제하지 않는다.
-18. Run Result와 장기 보존 Asset을 구분한다.
+11. Result Review는 reviewed_against Cut revision + Git commit을 기록하는 누적 이력이다.
+12. Result accepted는 최종 대표 Asset 승인을 의미하지 않는다.
+13. 결과 평가는 Scripture / Historical / Continuity / Library / Visual / Technical 축을 구분한다.
+14. rejected Review는 가능한 한 실패 이유를 남긴다.
+15. draft/in_review Cut의 탐색 Run을 허용한다.
+16. 완료된 Run의 실행 입력 snapshot은 불변 역사 기록으로 취급한다.
+17. Canonical 기준 변경 후 판정이 달라지면 기존 Review를 덮어쓰지 않고 새 Review를 추가한다.
+18. 의미 있는 실패 Run도 기본적으로 보존한다.
+19. 비용·Credit은 알 수 있을 때 기록하되 필수값으로 강제하지 않는다.
+20. Run Result와 장기 보존 Asset을 구분한다.
 
 ## 23. STEP 0-5에서 의도적으로 미확정하는 항목
 
@@ -3288,8 +3336,10 @@ Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산�
 - Cut revision + Git commit SHA source snapshot
 - Library revision/profile snapshot
 - 실제 제출 Prompt snapshot 보존
-- Reference 역할과 실제 사용 입력 기록
-- execution_status와 result review_status 분리
+- Reference 역할과 실제 사용 입력 기록, edit_source 구분
+- generate / edit / variation operation 구분
+- execution_status와 Result Review decision 분리
+- Result Review의 reviewed_against snapshot 및 누적 이력
 - accepted Result와 최종 Asset 승인 분리
 - 비숫자 중심 평가 축과 issue category
 - draft/in_review Cut의 탐색 Run 허용
