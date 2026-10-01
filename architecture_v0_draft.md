@@ -1581,9 +1581,9 @@ Episode에도 동일한 원칙을 적용한다.
 
 ---
 
-# STEP 0-3 — Continuity Model Working Draft v0.2
+# STEP 0-3 — Continuity Model Working Draft v0.3
 
-> 상태: **REVIEW READY / 구조 점검 반영**
+> 상태: **REVIEW READY / 구조 점검 완료**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -1605,13 +1605,13 @@ Continuity의 책임은 다음 질문에 답하는 것이다.
 
 기본 구조:
 
-\`\`\`text
+```text
 Cut A Canonical Scene
         ↓
 Continuity Transition
         ↓
 Cut B Canonical Scene
-\`\`\`
+```
 
 이미지 생성 결과는 Continuity의 Source of Truth가 아니다.
 
@@ -1654,11 +1654,11 @@ Cut B Canonical Scene
 
 즉:
 
-\`\`\`text
+```text
 Library = 무엇인가
 Cut = 지금 무엇을 보여주는가
 Continuity = 다음 장면으로 무엇이 이어지고 무엇이 변하는가
-\`\`\`
+```
 
 ## 3. Continuity의 범위
 
@@ -1672,9 +1672,9 @@ Continuity는 모든 Episode와 모든 Cut 사이에 무조건 동일하게 적�
 
 기본적으로 모든 인접 active Cut 쌍은 다음 중 하나로 분류되어야 한다.
 
-- \`continue\`
-- \`partial_reset\`
-- \`reset\`
+- `continue`
+- `partial_reset`
+- `reset`
 
 ### 3.2 Cross-Episode Continuity
 
@@ -1684,7 +1684,7 @@ Episode가 나뉘었다고 해서 continuity가 자동으로 끊기거나 자동
 
 이 경우 이전 Episode의 마지막 Cut과 다음 Episode의 첫 Cut 사이에 **명시적인 continuity transition**을 둔다.
 
-반대로 Canonical Episode Sequence상 바로 다음 Episode라도 시간·장소·사건이 크게 바뀐다면 \`reset\`이다.
+반대로 Canonical Episode Sequence상 바로 다음 Episode라도 시간·장소·사건이 크게 바뀐다면 `reset`이다.
 
 **Episode 순서 자체로 continuity를 추론하지 않는다.**
 
@@ -1708,13 +1708,13 @@ Canonical Sequence 전체를 거대한 연속 장면처럼 취급하지 않는�
 
 예:
 
-\`\`\`text
+```text
 C02
 빛이 오른쪽에서 등장
 ↓ continue
 C03
 같은 오른쪽 광원을 유지하며 밝기 증가
-\`\`\`
+```
 
 ### partial_reset
 
@@ -1735,7 +1735,7 @@ C03
 
 단, 반복 등장 인물의 Canonical 외형처럼 Library에서 오는 기본 정의는 별개다.
 
-\`reset\` 이후에도 반드시 유지해야 하는 요소가 있다면 명시적으로 다시 참조한다.
+`reset` 이후에도 반드시 유지해야 하는 요소가 있다면 명시적으로 다시 참조한다.
 
 ## 5. Continuity 데이터 영역
 
@@ -1831,7 +1831,7 @@ C03
 
 모든 Cut 전환마다 동일한 세계 상태를 반복 기록하지 않기 위해 Episode 안에 **Continuity Segment** 개념을 둔다.
 
-Continuity Segment는 같은 기본 시간·장소·장면 맥락을 공유하는 **연속된 active Cut들의 묶음**이다.
+Continuity Segment는 같은 기본 시간·장소·장면 맥락을 공유하는 **연속된 active Cut들의 범위**다.
 
 이는 전역 식별자를 가진 독립 콘텐츠 엔터티가 아니다.
 
@@ -1839,7 +1839,7 @@ Episode 내부 continuity 문서에서 사용하는 로컬 구조다.
 
 개념 예:
 
-\`\`\`yaml
+```yaml
 episode_id: GEN-CREATION-01
 
 segments:
@@ -1853,19 +1853,40 @@ segments:
       visual:
         primary_light_direction: right
 
-    transitions:
-      - from: GEN-CREATION-01-C01
-        to: GEN-CREATION-01-C02
-        mode: continue
+transitions:
+  - from: GEN-CREATION-01-C01
+    to: GEN-CREATION-01-C02
+    mode: continue
 
-      - from: GEN-CREATION-01-C02
-        to: GEN-CREATION-01-C03
-        mode: continue
-        change:
-          - visual.light_intensity
-\`\`\`
+  - from: GEN-CREATION-01-C02
+    to: GEN-CREATION-01-C03
+    mode: continue
+    change:
+      - visual.light_intensity
+```
 
-\`S01\` 같은 segment key는 Episode 내부에서만 사용하며 Content Model의 영구 ID로 취급하지 않는다.
+`S01` 같은 segment key는 Episode 내부에서만 사용하며 Content Model의 영구 ID로 취급하지 않는다.
+
+Segment에 Cut 목록이나 Cut 순서를 별도로 복제하지 않는다.
+
+`start_cut_id`와 `end_cut_id` 사이에 포함되는 Cut은 **Storyboard의 현재 active Cut 순서**를 기준으로 계산한다.
+
+따라서 Storyboard가 Cut order의 Source of Truth라는 STEP 0-1 원칙을 유지한다. Segment 내부에 새 Cut이 삽입되면 별도 목록 동기화 없이 해당 범위에 자연스럽게 포함된다.
+
+### Transition의 저장 위치
+
+Cut 간 transition은 특정 Segment 안에 소유시키지 않고 **Episode continuity의 단일 transition 목록**에서 관리한다.
+
+이렇게 하면:
+
+- 같은 Segment 내부 전환
+- 서로 다른 Segment 사이의 전환
+- partial reset
+- full reset
+
+을 모두 같은 규칙으로 표현할 수 있다.
+
+모든 인접 active Cut 쌍에는 transition이 정확히 하나만 존재해야 한다.
 
 ## 7. Baseline과 Transition Delta
 
@@ -1877,14 +1898,14 @@ Continuity 데이터는 **전체 상태 복사**보다 baseline + 변화량(delt
 
 예:
 
-\`\`\`yaml
+```yaml
 baseline:
   world:
     location_ref: ...
     weather: clear
   visual:
     primary_light_direction: right
-\`\`\`
+```
 
 ### Transition Delta
 
@@ -1892,7 +1913,7 @@ Cut 사이에서 실제로 달라지는 부분만 기록한다.
 
 개념 예:
 
-\`\`\`yaml
+```yaml
 from: C03
 to: C04
 mode: continue
@@ -1907,11 +1928,11 @@ change:
     to: center
 
 reason: 인물이 장면 중앙으로 이동하는 사건 진행
-\`\`\`
+```
 
-단, baseline에 이미 유지가 명확한 항목을 모든 transition의 \`retain\`에 반복 작성할 필요는 없다.
+단, baseline에 이미 유지가 명확한 항목을 모든 transition의 `retain`에 반복 작성할 필요는 없다.
 
-\`retain\`은 특히 중요해서 명시적으로 강조할 필요가 있는 continuity constraint에 사용한다.
+`retain`은 특히 중요해서 명시적으로 강조할 필요가 있는 continuity constraint에 사용한다.
 
 ## 8. 값이 없는 것의 의미
 
@@ -1954,7 +1975,7 @@ Continuity 문서에 특정 항목이 기록되어 있지 않다고 해서 “�
 
 개념 예:
 
-\`\`\`yaml
+```yaml
 episode_boundary:
   from_cut: GEN-CREATION-01-C07
   to_cut: GEN-CREATION-02-C01
@@ -1963,7 +1984,7 @@ episode_boundary:
   retain:
     - world.environment
     - visual.primary_light_direction
-\`\`\`
+```
 
 Cross-Episode Continuity는 Canonical Episode Sequence에 있다고 자동 생성하지 않는다.
 
@@ -2006,9 +2027,9 @@ Continuity는 **정의 승인 측**에 포함된다.
 
 첫 active Cut을 제외하고, 이전 장면과 continuity가 필요한 Cut은 다음 중 하나가 해결되어야 한다.
 
-- 유효한 \`continue\` transition
-- 유효한 \`partial_reset\` transition
-- 의도적인 \`reset\`
+- 유효한 `continue` transition
+- 유효한 `partial_reset` transition
+- 의도적인 `reset`
 
 즉 장면 사이 관계를 미결정 상태로 둔 채 Cut 정의를 최종 승인하지 않는다.
 
@@ -2024,7 +2045,7 @@ Cross-Episode Continuity가 필요한 경우 Episode 경계 transition도 정의
 
 예:
 
-\`\`\`text
+```text
 Canonical:
 primary light source = right
 
@@ -2033,7 +2054,7 @@ primary light source = left
 
 판정:
 continuity mismatch
-\`\`\`
+```
 
 이 경우 Canonical Continuity 데이터를 생성 이미지에 맞춰 자동으로 수정하지 않는다.
 
@@ -2051,16 +2072,18 @@ continuity mismatch
 3. Cut의 전체 Scene Specification을 Continuity에 복제하지 않는다.
 4. 같은 장면 맥락이 이어지는 구간은 Continuity Segment로 묶을 수 있다.
 5. Segment baseline은 공통 continuity constraint를 정의한다.
-6. transition은 baseline에서 달라지는 변화와 중요한 retain 조건을 기록한다.
-7. 기록되지 않은 값은 기본적으로 continuity constraint가 아니다.
-8. 모든 인접 active Cut 쌍은 \`continue / partial_reset / reset\` 중 하나로 분류된다.
-10. Episode 경계는 continuity를 자동으로 끊거나 자동으로 이어주지 않는다.
-11. Cross-Episode Continuity가 필요하면 명시적으로 정의하며 동일 경계는 한 번만 저장한다.
-12. Continuity Segment는 Cut 순서를 복제하지 않고 Storyboard 순서를 참조한다.
-13. 의미 있는 Continuity 변경은 영향을 받는 Cut revision 재검토 대상이다.
-14. Generated Asset은 Continuity의 Source of Truth가 아니다.
-15. 생성 결과와 Canonical Continuity가 충돌하면 기본적으로 생성 결과를 수정한다.
-16. Continuity 검토는 Cut/Episode Definition Approval의 일부다.
+6. Segment는 Cut 순서를 복제하지 않고 Storyboard의 active Cut 순서를 참조한다.
+7. 모든 인접 active Cut 쌍의 transition은 Episode continuity의 단일 목록에서 정확히 한 번 정의한다.
+8. transition은 baseline에서 달라지는 변화와 중요한 retain 조건을 기록한다.
+9. `continue`라도 Segment baseline 또는 명시적 retain에 없는 값까지 자동 상속하지 않는다.
+10. 기록되지 않은 값은 기본적으로 continuity constraint가 아니다.
+11. 모든 인접 active Cut 쌍은 `continue / partial_reset / reset` 중 하나로 분류된다.
+12. Episode 경계는 continuity를 자동으로 끊거나 자동으로 이어주지 않는다.
+13. Cross-Episode Continuity가 필요하면 명시적으로 정의하며 동일 경계는 한 번만 저장한다.
+14. 의미 있는 Continuity 변경은 영향을 받는 Cut revision 재검토 대상이다.
+15. Generated Asset은 Continuity의 Source of Truth가 아니다.
+16. 생성 결과와 Canonical Continuity가 충돌하면 기본적으로 생성 결과를 수정한다.
+17. Continuity 검토는 Cut/Episode Definition Approval의 일부다.
 
 ## 15. STEP 0-3에서 의도적으로 미확정하는 항목
 
@@ -2082,8 +2105,9 @@ continuity mismatch
 - Continuity를 Cut 사이 관계 데이터로 두는 원칙
 - World / Character / Object / Spatial / Event State / Visual 영역 구분
 - Episode 내부 Continuity Segment 사용과 Storyboard order 비중복 원칙
+- 모든 인접 Cut transition을 Episode-level 단일 목록에서 관리하는 원칙
 - baseline + transition delta 방식
-- \`continue / partial_reset / reset\` 3단계 transition mode
+- `continue / partial_reset / reset` 3단계 transition mode
 - 기록 없음은 constraint 없음으로 해석하는 원칙
 - Episode 경계 continuity를 자동 추론하지 않고 incoming boundary를 한 곳에서만 관리하는 원칙
 - 의미 있는 Continuity 변경 시 영향을 받는 Cut revision을 다시 검토하는 원칙
