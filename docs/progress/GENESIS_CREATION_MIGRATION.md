@@ -239,7 +239,7 @@ migration audit 통과 후 현재 Canonical definition을 approved로 전환한�
 1. DEC-0002 검토 및 승인
 2. 승인 시 Architecture / Rules / Cut Template 최소 수정
 3. GEN-CREATION-01 Episode / Storyboard / C01–C04 / Continuity 생성
-4. C02–C04 legacy binary가 उपलब्ध하면 Asset Promotion + LFS ingest
+4. C02–C04 legacy binary가 확보되면 Asset Promotion + LFS ingest
 5. binary 미확보 시 Asset migration은 unresolved로 기록
 6. migration audit
 7. C01–C04 Canonical definition approval 검토
