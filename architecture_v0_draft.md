@@ -2123,9 +2123,9 @@ continuity mismatch
 
 ---
 
-# STEP 0-4 — Library Model Working Draft v0.1
+# STEP 0-4 — Library Model Working Draft v0.2
 
-> 상태: **WORKING DRAFT / 구조 검토 중**
+> 상태: **WORKING DRAFT / 구조 점검 반영**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -2489,6 +2489,7 @@ library_refs:
   characters:
     - asset_id: CHR-MOSES
       appearance_profile: EXODUS
+      costume_ref: CST-ANCIENT-HEBREW-MALE
 
   location:
     asset_id: LOC-SINAI
@@ -2510,6 +2511,8 @@ library_refs:
 - 참조자는 Library ID를 저장한다.
 - Library의 긴 외형 설명을 Cut에 복사하지 않는다.
 - Cut-specific 상태만 Cut/Continuity에 추가한다.
+- 특정 Character가 실제 장면에서 어떤 Costume을 입는지 같은 **자산 간 배정 관계는 Cut의 장면 정의가 소유**한다.
+- Library는 Character와 Costume을 서로 영구 결합해 모든 장면에 강제하지 않는다.
 - Library 수정 시 참조 관계를 통해 영향 범위를 검토할 수 있어야 한다.
 
 ## 13. Definition Status와 Revision
@@ -2535,6 +2538,8 @@ superseded
 ~~~
 
 approved는 “현재 revision이 Canonical 기준으로 참조 가능”하다는 뜻이다.
+
+superseded는 같은 Asset의 새 revision에 사용하지 않고, 다른 Asset ID가 기존 identity를 대체하는 경우에만 사용한다.
 
 Reference image나 Provider 등록 완료 여부와는 별개다.
 
@@ -2619,16 +2624,18 @@ OpenArt / Higgsfield / future provider
 4. 동일 실체를 여러 asset type으로 중복 등록하지 않는다.
 5. Scripture Basis / Historical Basis / Visual Reconstruction을 구분한다.
 6. 불확실한 고증을 확정 사실처럼 숨기지 않는다.
-7. Character identity와 생애 단계별 appearance profile을 분리한다.
-8. Character와 Costume 원본 정의를 중복하지 않는다.
-9. Location과 Environment 책임을 분리한다.
-10. Object의 사건 중 상태는 Cut/Continuity가 관리한다.
-11. Visual Style은 역사적 사실과 분리된 Provider-independent 제작 자산이다.
-12. Episode/Cut/Continuity는 Library 정의를 복사하지 않고 ID로 참조한다.
-13. Library Definition Approval과 Reference Image / Provider 등록 상태를 분리한다.
-14. 승인된 Library 변경은 참조 Cut에 대한 영향 검토를 수행한다.
-15. Library revision 증가가 모든 참조 Cut revision 자동 증가를 의미하지 않는다.
-16. 재사용성과 일관성 가치가 없는 일회성 요소를 과도하게 Library Asset으로 만들지 않는다.
+7. 전역 Asset identity와 같은 Asset 내부의 local profile/variant를 분리한다.
+8. Character identity와 생애 단계별 appearance profile을 분리한다.
+9. Character와 Costume 원본 정의를 중복하지 않는다.
+10. Location과 Environment 책임을 분리한다.
+11. Object의 사건 중 상태는 Cut/Continuity가 관리한다.
+12. Visual Style은 역사적 사실과 분리된 Provider-independent 제작 자산이다.
+13. Episode/Cut/Continuity는 Library 정의를 복사하지 않고 ID로 참조한다.
+14. Character와 Costume 같은 자산 간 실제 장면 배정은 Cut이 소유한다.
+15. Library Definition Approval과 Reference Image / Provider 등록 상태를 분리한다.
+16. 승인된 Library 변경은 참조 Cut에 대한 영향 검토를 수행한다.
+17. Library revision 증가가 모든 참조 Cut revision 자동 증가를 의미하지 않는다.
+18. 재사용성과 일관성 가치가 없는 일회성 요소를 과도하게 Library Asset으로 만들지 않는다.
 
 ## 18. STEP 0-4에서 의도적으로 미확정하는 항목
 
@@ -2653,8 +2660,9 @@ OpenArt / Higgsfield / future provider
 - CHR / LOC / OBJ / CST / ENV / STY ID 체계
 - 공통 Library Asset Model
 - Scripture / Historical / Visual Reconstruction 근거 분리
+- 전역 Asset ID와 local profile/variant 분리 원칙
 - Character appearance profile 방식
-- Character와 Costume 분리
+- Character와 Costume 분리 및 실제 장면 배정은 Cut이 소유하는 원칙
 - Location과 Environment 분리
 - Object unique / type 구분
 - Visual Style을 Provider-independent Library Asset으로 관리하는 원칙
