@@ -1,0 +1,29 @@
+# Bible Illustration — Episode continuity template
+# Continuity has no independent revision field in v1; Git history tracks changes.
+
+episode_id: null
+
+# Destination Episode owns an incoming cross-Episode boundary when needed.
+# Confirmed shape:
+# episode_boundary:
+#   from_cut: ...
+#   to_cut: ...
+#   mode: continue | partial_reset | reset
+#   retain: []
+episode_boundary: null
+
+# Segment example:
+# - key: S01
+#   start_cut_id: ...
+#   end_cut_id: ...
+#   baseline: {}
+segments: []
+
+# Every adjacent active Cut pair must have exactly one transition.
+# Transition example:
+# - from: ...
+#   to: ...
+#   mode: continue | partial_reset | reset
+#   retain: []
+#   change: []
+transitions: []
