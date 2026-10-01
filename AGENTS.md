@@ -34,6 +34,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - Production Rules v1.0: **CONFIRMED**
 - Templates v1.0: **CONFIRMED**
 - Progress / Decision 기록 체계 v1.0: **CONFIRMED**
+- DEC-0001 — Git LFS and Ignore Policy: **ACCEPTED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
@@ -161,12 +162,21 @@ Template은 Architecture와 Rules를 구현하기 위한 최소 물리 스키마
 
 CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다.
 
-## 12. 다음 작업
+## 12. Git LFS / Ignore 운영 원칙
+
+- Canonical image binary만 `content/**/assets/` 또는 `library/**/assets/` 아래 등록한다.
+- 해당 Canonical Asset binary는 `.gitattributes`에 따라 Git LFS로 추적한다.
+- 일반 이미지 binary는 `.gitignore`로 기본 제외한다.
+- Asset Promotion 없이 Provider Result를 `assets/`에 넣지 않는다.
+- credential과 local working/cache/export 파일은 Git에 저장하지 않는다.
+- 세부 근거는 `docs/decisions/DEC-0001-git-lfs-and-ignore-policy.md`를 따른다.
+
+## 13. 다음 작업
 
 `docs/progress/CURRENT.md`를 기준으로 이어서 진행한다.
 
 현재 다음 작업은:
 
-**Git LFS / ignore 정책 확정**
+**Genesis Creation CUT 1–4 migration**
 
 이다.
