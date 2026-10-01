@@ -30,7 +30,8 @@
 - **STEP 0-2 — Episode / Cut Model은 CONFIRMED 상태다.**
 - **STEP 0-3 — Continuity Model은 CONFIRMED 상태다.**
 - **STEP 0-4 — Library Model은 CONFIRMED 상태다.**
-- 현재 최우선 작업은 **STEP 0-5 — Generation Run Model 정의**다.
+- **STEP 0-5 — Generation Run Model은 CONFIRMED 상태다.**
+- 현재 최우선 작업은 **STEP 0-6 — Provider Integration Model 정의**다.
 
 ## 3. 저장소 범위
 
@@ -66,6 +67,6 @@ Canonical Scene, Character, Location, Object, Continuity 등 장기적으로 유
 
 `architecture_v0_draft.md`를 읽고 다음 항목부터 진행한다.
 
-**STEP 0-5 — Generation Run Model**
+**STEP 0-6 — Provider Integration Model**
 
-확정된 Content / Episode-Cut / Continuity / Library Model을 전제로 각 이미지 생성 시도의 provider, model, prompt version, reference asset, 결과, 평가, 승인·실패 상태, 비용 및 여러 생성 결과 관리 방식을 설계하고 검토한다.
+확정된 Content / Episode-Cut / Continuity / Library / Generation Run Model을 전제로 ChatGPT, OpenArt, Higgsfield 등 외부 Provider의 binding, generation profile, prompt adapter, reference 전달 규칙과 Provider 교체 가능성을 설계하고 검토한다.
