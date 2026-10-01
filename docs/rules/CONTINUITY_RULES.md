@@ -1,6 +1,6 @@
-# Continuity Rules v1.0 Working Draft
+# Continuity Rules v1.0
 
-> 상태: **REVIEW READY**
+> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
 >
 > 목적: 연속된 Cut이 같은 사건과 세계의 다음 순간처럼 느껴지도록 유지·변화·reset 판단 규칙을 정의한다.
 >
