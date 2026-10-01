@@ -19,10 +19,11 @@
 - Progress / Decision 기록 체계 v1.0: **CONFIRMED**
 - Git LFS / ignore 정책: **CONFIRMED — DEC-0001 accepted**
 - `.gitattributes` / `.gitignore`: **IMPLEMENTED**
-- Genesis Creation CUT 1–4 migration readiness: **REVIEW READY / BLOCKED**
-- DEC-0002 Presentation-only Cut Output Mode: **proposed / REVIEW READY**
+- Genesis Creation CUT 1–4 migration readiness: **READY FOR CANONICAL DEFINITION MIGRATION**
+- DEC-0002 Presentation-only Cut Output Mode: **REJECTED — existing Asset model retained**
+- CUT 1 handling: **actual black-screen illustration Asset**
 - C02–C04 legacy image binary: **NOT LOCATED**
-- 현재 작업: **DEC-0002 사용자 검토 대기**
+- 현재 작업: **Genesis Creation CUT 1–4 Canonical definition migration 준비**
 
 ## 현재 Production 위치
 
@@ -72,6 +73,8 @@
 35. `GENESIS_CREATION_MIGRATION.md` readiness 문서 생성
 36. DEC-0002 Presentation-only Cut Output Mode 제안 생성
 37. C02–C04 legacy image binary 현재 source에서 미확인
+38. DEC-0002 제안 rejected — presentation-only mode 미도입
+39. CUT 1을 실제 black-screen Cut-owned Asset으로 관리하는 방향 확정
 
 ## 현재 Source of Truth
 
@@ -91,21 +94,21 @@
 - `docs/progress/MILESTONES.md` — 주요 완료 기준점
 - `docs/decisions/README.md` — Decision Record 생성·상태·번호 규칙
 - `DEC-0001-git-lfs-and-ignore-policy.md`: **accepted**
-- `DEC-0002-presentation-only-cut-output-mode.md`: **proposed / REVIEW READY**
+- `DEC-0002-presentation-only-cut-output-mode.md`: **rejected — 기존 illustration/Asset 모델 유지**
 - `docs/progress/GENESIS_CREATION_MIGRATION.md`: migration readiness / blockers
 
 ## 다음 작업
 
-1. DEC-0002 사용자 승인 및 accepted 전환
-2. 승인 시 Architecture / Rules / Cut Template 최소 수정
-3. Genesis Creation CUT 1–4 Canonical definition migration
-4. C02–C04 legacy image binary 확보 여부에 따라 Asset migration
-5. migration 감사
-6. CUT 5 제작 재개
+1. Genesis Creation CUT 1–4 Canonical definition migration
+2. CUT 1 black-screen Asset 제작 및 representative 등록
+3. C02–C04 legacy image binary 확보 여부에 따라 Asset migration
+4. migration 감사
+5. CUT 5 제작 재개
 
 ## Blocker
 
 현재 blocker:
 
-1. DEC-0002 — Presentation-only Cut Output Mode 승인 필요
-2. C02–C04의 legacy 확정 이미지 binary를 현재 저장소/Project Library에서 찾지 못함
+1. C02–C04의 legacy 확정 이미지 binary를 현재 저장소/Project Library에서 찾지 못함
+
+이 blocker는 Canonical definition migration 자체를 막지는 않으며 Asset migration / production complete 복원에만 영향을 준다.
