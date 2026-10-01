@@ -10,11 +10,11 @@
 
 1. 이 `AGENTS.md`
 2. `docs/progress/CURRENT.md`
-3. `docs/architecture/REPOSITORY_STRUCTURE.md`
-4. 필요한 정식 Architecture / Rules 문서
+3. `docs/architecture/OVERVIEW.md`
+4. 필요한 세부 Architecture / Rules 문서
 5. 현재 작업 중인 Episode / Cut / Library / Integration 문서
 
-정식 Architecture 문서 분리가 완료되기 전까지는 `architecture_v0_draft.md`의 **STEP 0-1~0-7 CONFIRMED 결정**도 함께 확인한다.
+Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_STRUCTURE.md`도 함께 확인한다.
 
 채팅 내용, 기억, 과거 요약과 저장소 기록이 충돌할 경우 최신 저장소 상태를 우선한다. 중요한 충돌은 임의로 해결하지 말고 사용자에게 알린다.
 
@@ -36,7 +36,7 @@
 
 ## 3. 현재 단계
 
-현재는 **POST STEP 0 — Repository Structure Implementation** 단계다.
+현재는 **POST STEP 0 — Rules / Templates / Migration Preparation** 단계다.
 
 진행 위치와 다음 작업은 `docs/progress/CURRENT.md`가 Source of Truth다.
 
@@ -108,14 +108,26 @@ Provider 내부의 character, model, prompt, slot, project structure는 Canonica
 - Asset은 Cut 또는 Library primary owner 아래 등록한다.
 - 의미 있는 이미지 binary 변경은 기존 Asset을 overwrite하지 않고 새 Asset ID를 발급한다.
 
-## 8. Historical Working Records
+## 8. Architecture Source of Truth
 
-다음 루트 문서는 설계 과정의 Working Record로 당분간 보존한다.
+현재 Architecture의 정식 Source of Truth는 `docs/architecture/` 아래 문서다.
+
+- `OVERVIEW.md`
+- `CONTENT_MODEL.md`
+- `EPISODE_CUT_MODEL.md`
+- `CONTINUITY_MODEL.md`
+- `LIBRARY_MODEL.md`
+- `GENERATION_RUN_MODEL.md`
+- `PROVIDER_INTEGRATION_MODEL.md`
+- `ASSET_STORAGE_POLICY.md`
+- `REPOSITORY_STRUCTURE.md`
+
+다음 루트 문서는 설계 과정의 historical working record로 보존한다.
 
 - `architecture_v0_draft.md`
 - `repository_structure_v1_draft.md`
 
-정식 Architecture 문서로 이관·검증이 끝난 뒤에도 임의 삭제하지 않는다. archive 이동이 필요하면 별도 결정 후 처리한다.
+현재 규칙을 판단할 때 historical working record보다 정식 Architecture 문서를 우선한다.
 
 ## 9. 다음 작업
 
@@ -123,6 +135,6 @@ Provider 내부의 character, model, prompt, slot, project structure는 Canonica
 
 현재 다음 작업은:
 
-**루트 README.md 생성 → 정식 Architecture 문서 분리 및 검증**
+**`docs/rules/` 제작 규칙 정식화**
 
 이다.
