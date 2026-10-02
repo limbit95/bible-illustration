@@ -1,6 +1,6 @@
 # Genesis Creation C01–C04 Canonical Production Validation
 
-> 상태: **IN PROGRESS — C02–C04 REV2 REVIEW READY**
+> 상태: **IN PROGRESS — C02–C04 REV2 APPROVED / RESULT RE-REVIEW PASSED / BINARY INGEST PENDING**
 > 마지막 갱신: 2026-10-02
 >
 > 목적: 새 Architecture / Rules / Templates가 실제 이미지 생성·검토·수정 흐름에서 충분히 작동하는지 Genesis Creation C01–C04를 통해 검증한다.
@@ -200,13 +200,37 @@ Git LFS binary가 아직 Canonical 저장소에 없으므로 representative sele
 
 C02–C04 revision 2가 승인되면 **같은 Result를 revision 2 기준으로 다시 Review**하여 재사용 가능 여부를 판단한다.
 
-## 9. Next
+## 9. Revision 2 Approval / Re-review Result
 
-1. C02–C04 revision 2 사용자 검토 / 승인
-2. 승인 후 기존 accepted Result를 rev2 기준으로 Review sequence 추가
-3. rev2 기준 pass이면 현재 Asset candidate 유지
-4. Git LFS binary ingest 가능 시 availability → available
-5. representative selection
-6. C01 black-screen Asset 완료
-7. C01–C04 Production Validation 종료
-8. C05 — Genesis 1:6–8 제작 재개
+2026-10-02 사용자 승인으로:
+
+- C02: `approved / revision 2`
+- C03: `approved / revision 2`
+- C04: `approved / revision 2`
+
+로 전환했다.
+
+그 후 기존 accepted Result를 revision 2 기준으로 다시 Review했다.
+
+기준 Canonical snapshot:
+
+```text
+a57b5a2e5eec71c27e2abb5ea2d1465d0e468f95
+```
+
+재검토 결과:
+
+- C02 `R002-O01`: **accepted / review sequence 2**
+- C03 `R001-O01`: **accepted / review sequence 2**
+- C04 `R001-O01`: **accepted / review sequence 2**
+
+따라서 세 결과 모두 재생성 없이 현재 Asset candidate를 유지한다.
+
+## 10. Next
+
+1. C02–C04 실제 PNG를 Git LFS Canonical binary로 ingest
+2. availability → `available`
+3. C02–C04 `asset-selection.yaml` 생성 및 representative 선정
+4. C01 black-screen Asset binary ingest / review / representative 처리
+5. C01–C04 Production Validation 최종 감사 및 종료
+6. C05 — Genesis 1:6–8 제작 재개
