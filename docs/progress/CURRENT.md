@@ -1,7 +1,7 @@
 # Current Project State
 
 > 마지막 갱신: 2026-10-02
-> 상태: **GENESIS CREATION — C05/C06 APPROVED / ACCEPTED ASSET CANDIDATES PENDING LFS INGEST**
+> 상태: **GENESIS CREATION — RAPID FULL-CHAPTER PROTOTYPE MODE / VISUAL CONTINUITY FIRST**
 
 ## 현재 Phase
 
@@ -45,17 +45,19 @@
 - C06 definition: **APPROVED / revision 1 — firmament established**
 - C05 final Result: **R004-O01 accepted**
 - C06 final Result: **R003-O01 accepted**
-- C05/C06 Asset candidates: **A001 / pending_ingest**
-- 현재 작업: **C05/C06 Canonical PNG Git LFS ingest → representative selection**
+- C05/C06 Asset candidates: **A001 / pending_ingest — historical candidates, LFS ingest deferred**
+- DEC-0004: **ACCEPTED — whole-chapter rapid prototype before Asset promotion**
+- Genesis working visual reference sequence: **00→06 user-selected / conversation-local binary**
+- 현재 작업: **새 채팅에서 Genesis 1 전체 rapid prototype pass를 처음부터 끝까지 완주**
 
 ## 현재 Production 위치
 
 새 Canonical 구조에 Genesis Creation C01–C04 definition을 이관했다.
 
 - current_episode: GEN-CREATION-01
-- current_cut: GEN-CREATION-01-C06 — C05/C06 approved; accepted binaries pending Git LFS ingest
+- current_cut: none fixed — next session restarts Genesis 1 from the beginning in rapid prototype mode
 - Genesis Creation CUT 1–4 definition migration: **COMPLETED / AUDIT PASSED**
-- C05/C06 production: **ACCEPTED RESULT / ASSET CANDIDATE REGISTERED / LFS INGEST PENDING**
+- C05/C06 prior production: **historical accepted candidates / current final selection deferred**
 
 ## 마지막 완료 항목
 
@@ -131,6 +133,10 @@
 70. C05/C06 탐색·실패·최종 accepted Generation Run 이력 기록
 71. C05 R004-O01 / C06 R003-O01 accepted
 72. C05 A001 / C06 A001 Asset candidate metadata 생성 — pending_ingest
+73. DEC-0004 — Genesis 전체 rapid prototype 후 Asset/LFS 선별 방침 accepted
+74. 사용자 선택 00→06 working reference sequence에서 incremental continuity 원칙 확정
+75. Continuity / Generation Rules에 retain + delta / prior-cut anchor 규칙 반영
+76. `GENESIS_CREATION_RAPID_PROTOTYPE.md` 생성
 
 ## 현재 Source of Truth
 
@@ -155,11 +161,12 @@
 
 ## 다음 작업
 
-1. C05/C06 최종 PNG를 Canonical Asset 경로로 Git LFS ingest
-2. pointer OID / size를 Asset metadata와 검증
-3. availability → `available`
-4. C05/C06 representative Asset 선정
-5. 다음 Genesis Creation 본문 Cut 정의 및 제작 재개
+1. 새 채팅에서 사용자 선택 00→06 reference sequence를 다시 첨부하거나 동등한 visual anchor를 제공
+2. `GENESIS_CREATION_RAPID_PROTOTYPE.md` 기준으로 창세기 1장 처음부터 끝까지 1차 완주
+3. 인접 Cut마다 retain / delta를 우선 적용하고 과도한 미래 상태 선행 묘사를 피함
+4. 전체 시퀀스 검토 후 디테일 2차 수정
+5. 최종 선별 후에만 Asset promotion / Git LFS ingest / representative 정리
+6. presentation layer에서 개역한글 직접 인용 + 별도 narration 테스트
 
 ## Blocker
 
@@ -171,5 +178,6 @@ Production Validation blocker:
 
 운영 제약:
 
-- GitHub connector는 Git LFS object upload를 지원하지 않으므로 실제 새 production Asset binary ingest는 별도 Git LFS-capable 경로가 필요하다.
-- 이는 migration 완료 여부와는 별개이며 새 Production Validation 단계의 binary 보존 제약이다.
+- 사용자 선택 00→06 working reference binary는 아직 Canonical Git LFS Asset이 아니므로 새 채팅에서 정확한 시각 anchoring이 필요하면 다시 첨부해야 한다.
+- Prototype pass에서는 LFS ingest를 진행 blocker로 사용하지 않는다.
+- 최종 선별 뒤 Canonical Asset으로 승격할 때만 Git LFS-capable 경로가 필요하다.
