@@ -24,7 +24,7 @@
 - DEC-0002 Presentation-only Cut Output Mode: **REJECTED — existing Asset model retained**
 - CUT 1 handling: **actual black-screen illustration Asset**
 - C02–C04 legacy image binary: **NOT LOCATED**
-- C01 Asset metadata: **pending_ingest — Git LFS binary not yet available**
+- C01 Asset metadata: **pending_ingest — deterministic pure-black PNG prepared / SHA-256 recorded / Git LFS ingest pending**
 - C01–C04 Canonical definition: **APPROVED / revision 1**
 - DEC-0003 Genesis C01–C04 regeneration strategy: **ACCEPTED**
 - Genesis Creation C01–C04 migration: **COMPLETED**
@@ -38,7 +38,7 @@
 - C02–C04 Assets: **AVAILABLE**
 - C02–C04 representative Assets: **SELECTED against revision 2**
 - C02–C04 Cut production complete: **YES**
-- 현재 작업: **C01 black-screen Asset 완료 및 C01–C04 Production Validation 최종 감사**
+- 현재 작업: **C01 deterministic black-screen PNG Git LFS ingest → representative → Production Validation 최종 감사**
 
 ## 현재 Production 위치
 
@@ -111,6 +111,8 @@
 58. C02–C04 canonical LFS pointer filename 정상화 및 checksum 재검증
 59. C02–C04 Asset availability `available` 전환
 60. C02–C04 representative Asset 선정 — revision 2 기준
+61. C01 deterministic pure-black PNG Production Master 준비 — 1672x941 / SHA-256 기록
+62. C01 deterministic Asset의 source-kind 공백을 Production Validation feedback으로 식별
 
 ## 현재 Source of Truth
 
