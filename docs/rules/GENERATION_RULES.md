@@ -86,7 +86,22 @@ Reference는 역할을 명시한다.
 
 프로젝트가 통제하는 중요한 Reference binary는 가능한 한 Run 전에 Asset으로 등록한다.
 
-## 7. 빠른 생성-검토 루프
+## 7. 인접 Cut 생성 입력
+
+같은 사건의 연속 Cut에서는 가능하면 바로 이전 Cut의 accepted / working image를 continuity reference로 사용한다.
+
+생성 instruction은 장면 전체를 새로 설명하기보다:
+
+- 이전 Cut에서 유지할 요소
+- 이번 Cut에서 바뀔 delta
+- 아직 등장하면 안 되는 미래 요소
+
+를 중심으로 작성한다.
+
+이전 Cut의 이미지 전체를 Canonical 사실로 승격하는 것은 아니며,
+Reference는 Canonical Continuity를 전달하기 위한 보조 입력이다.
+
+## 8. 빠른 생성-검토 루프
 
 설계를 지나치게 오래 끌지 않는다.
 
@@ -94,7 +109,7 @@ Reference는 역할을 명시한다.
 
 그러나 방향이 불명확한 상태에서 대량 생성으로 문제를 해결하려 하지 않는다.
 
-## 8. Result Review
+## 9. Result Review
 
 최소 평가 축:
 
@@ -119,7 +134,7 @@ Review decision:
 
 숫자 점수는 필수화하지 않는다.
 
-## 9. Rejection 우선 조건
+## 10. Rejection 우선 조건
 
 다음은 대표적인 rejection 사유다.
 
@@ -140,7 +155,7 @@ Review decision:
 
 시각적으로 예쁘더라도 핵심 Scripture / Canonical requirement에 실패하면 통과시키지 않는다.
 
-## 10. Review 이력
+## 11. Review 이력
 
 Review를 한 개의 mutable status로 덮어쓰지 않는다.
 
@@ -148,7 +163,7 @@ Canonical Cut revision이나 기준 commit이 달라져 판정이 달라지면 �
 
 과거 accepted가 현재도 자동 accepted라는 뜻은 아니다.
 
-## 11. 실패 Run
+## 12. 실패 Run
 
 실제로 Provider에 제출된 의미 있는 실패 Run은 보존한다.
 
@@ -163,7 +178,7 @@ Canonical Cut revision이나 기준 commit이 달라져 판정이 달라지면 �
 
 요청 자체가 Provider에 전달되지 않은 단순 UI 실패까지 Run으로 만들 필요는 없다.
 
-## 12. Asset Promotion
+## 13. Asset Promotion
 
 모든 Result를 Asset으로 승격하지 않는다.
 
@@ -179,7 +194,7 @@ Canonical Cut revision이나 기준 commit이 달라져 판정이 달라지면 �
 
 대표 Asset 선정과 Result accepted는 같은 개념이 아니다.
 
-## 13. 이미지 수정
+## 14. 이미지 수정
 
 생성형 edit가 실제 Provider 요청으로 제출되면 새 Run이다.
 
@@ -187,7 +202,7 @@ Canonical Cut revision이나 기준 commit이 달라져 판정이 달라지면 �
 
 의미 있는 pixel 변경 결과를 Asset으로 보존할 경우 기존 Asset binary를 덮어쓰지 않고 새 Asset ID를 사용한다.
 
-## 14. 비용과 보안
+## 15. 비용과 보안
 
 가능하면 cost / credit 정보를 기록하지만 필수값은 아니다.
 
