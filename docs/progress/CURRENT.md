@@ -35,8 +35,9 @@
 - C04 R001: **ACCEPTED against rev1 + chat refinement**
 - C02–C04 Canonical revision 2: **APPROVED — pre-separation world state reflected**
 - C02–C04 rev2 Result re-review: **PASSED / accepted**
-- C02–C04 Asset candidates: **pending_ingest / rev2 accepted**
-- 현재 작업: **C01–C04 Canonical binary ingest / representative 처리 대기**
+- C02–C04 LFS objects: **UPLOADED / SHA-256 + byte-size verified**
+- C02–C04 Asset candidates: **pending_ingest — canonical pointer path normalization required (`.png.png` → `.png`)**
+- 현재 작업: **C02–C04 LFS pointer filename normalization → availability / representative 처리**
 
 ## 현재 Production 위치
 
@@ -104,6 +105,8 @@
 53. `GENESIS_CREATION_PRODUCTION_VALIDATION.md` 생성
 54. C02–C04 revision 2 사용자 승인 및 approved 전환
 55. C02–C04 기존 accepted Result를 revision 2 기준 Review sequence 2로 재검토 — 모두 accepted
+56. C02–C04 Git LFS object upload 확인 — metadata SHA-256 / size 일치
+57. 업로드 pointer filename이 `.png.png`로 생성된 경로 불일치 확인
 
 ## 현재 Source of Truth
 
@@ -128,7 +131,7 @@
 
 ## 다음 작업
 
-1. C02–C04 PNG Git LFS binary ingest
+1. C02–C04 LFS pointer filename `.png.png` → `.png` 정상화
 2. C02–C04 availability → available 및 representative 선정
 3. C01 black-screen Asset binary / review / representative 완료
 4. C01–C04 Production Validation 최종 감사 및 종료
@@ -140,7 +143,8 @@
 
 Production Validation blocker:
 
-1. Canonical image binary Git LFS ingest 경로 필요
+1. C02–C04 LFS pointer filename을 Canonical metadata 경로와 일치시키는 rename 필요
+2. C01 Canonical image binary Git LFS ingest 필요
 
 운영 제약:
 
