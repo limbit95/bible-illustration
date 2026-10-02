@@ -122,3 +122,59 @@ SNS 카드 등 텍스트가 합성된 파생물이 필요할 수 있다.
 을 구분한다.
 
 배포용 파생본이 Production Master를 대체하지 않는다.
+
+
+## 11. Presentation Text Selection
+
+Presentation layer에서 직접 인용과 내레이션을 동시에 기본 노출하지 않는다.
+
+장면별로 먼저 다음 중 하나를 선택한다.
+
+### Key Scripture Frame
+
+본문의 선언·명령·언약·핵심 사건 문구처럼 그 구절 자체가 장면의 중심인 경우:
+
+- 성경 직접 인용을 우선한다.
+- 같은 화면에 설명용 내레이션을 덧붙이지 않는 것을 기본으로 한다.
+- 장절 표기는 작고 보조적인 위계로 둔다.
+- 직접 인용문은 원문 의미를 바꾸는 요약문으로 대체하지 않는다.
+
+### Explanatory / Transitional Frame
+
+본문의 역사적 정보, 배경, 시간 흐름, 장면 연결을 이해시키는 것이 주목적인 경우:
+
+- 필요한 내용을 자체 내레이션으로 설명할 수 있다.
+- 직접 인용이 핵심이 아닌 경우 화면을 긴 본문으로 과밀하게 만들지 않는다.
+- 내레이션은 성경 직접 인용과 혼동되지 않도록 데이터와 표현을 분리한다.
+
+어떤 Frame이 Key Scripture인지 여부는 Episode / Storyboard / Presentation 설계에서 판단하며, 모든 성경 구간을 동일 비율의 직접 인용으로 강제하지 않는다.
+
+Genesis Creation rapid prototype에서는 본문 자체가 창조 행위와 선언을 직접 구성하는 경우가 많으므로 대부분의 핵심 장면에서 **본문 직접 인용 우선**을 적용한다.
+
+## 12. Default Cinematic Presentation Typography
+
+별도 Episode-specific typography profile이 없는 경우 다음을 기본 presentation 방향으로 사용한다.
+
+- 장식적·화려한 성경체보다 깔끔하고 절제된 sans-serif 계열
+- Regular 또는 Light에 가까운 가벼운 인상
+- 영화 자막 / 오프닝 카드처럼 조용하고 시네마틱한 배치
+- 이미지 감상을 방해하지 않도록 작은 크기와 넉넉한 여백
+- 기본 위치는 좌하단 계열이며 장면의 중요한 피사체를 가리면 이동 가능
+- 불투명한 큰 텍스트 박스는 피하고, 필요할 때만 약한 shadow 또는 subtle gradient 사용
+- 장절 표기는 본문보다 작게
+- 본문과 내레이션의 시각적 위계를 분리
+
+현재 1672×941 테스트에서 사용자가 선호한 reference scale은 대략 다음과 같다.
+
+- 좌측 여백: 약 5~6%
+- 하단 여백: 약 7~8%
+- 장절 표기: 약 18 px 수준
+- 본문: 약 31 px 수준
+- 얇은 짧은 divider line 허용
+- off-white 계열 text + 매우 약한 shadow
+
+위 수치는 고정 픽셀 규칙이 아니라 **비율과 분위기를 재현하기 위한 reference**다. 해상도·화면 크기에 따라 비례 조정한다.
+
+중요한 본문을 검은 화면 위에 절제된 텍스트로 제시하는 intertitle 연출도 허용한다.
+
+이 Typography는 presentation derivative의 기본 방향이며, Production Master image 자체에는 계속 text를 bake-in하지 않는다.
