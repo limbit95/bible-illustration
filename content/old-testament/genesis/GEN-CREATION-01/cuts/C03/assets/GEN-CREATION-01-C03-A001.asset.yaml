@@ -1,0 +1,34 @@
+asset_id: GEN-CREATION-01-C03-A001
+
+owner:
+  type: cut
+  id: GEN-CREATION-01-C03
+
+source:
+  kind: generation_result
+  result_id: GEN-CREATION-01-C03-R001-O01
+  parent_asset_id: null
+
+binary:
+  storage: git_lfs
+  path: content/old-testament/genesis/GEN-CREATION-01/cuts/C03/assets/GEN-CREATION-01-C03-A001.png
+  sha256: aa8abe4c077acd37f0d866effd60d98884029e30cfa3a1fad9530db7aeae506e
+  media_type: image/png
+  width: 1672
+  height: 941
+  size_bytes: 2093355
+
+availability: pending_ingest
+
+created_at: "2026-10-02"
+
+provenance:
+  provider: chatgpt
+  note: >
+    GEN-CREATION-01-C03-R001-O01에서 승격한 Production Validation Asset 후보.
+    사용자 검토에서 accepted 되었으나 실제 PNG binary는 아직 Canonical Git LFS에 ingest되지 않았다.
+
+rights:
+  storage_status: permitted
+  basis: project_generated
+  note: "프로젝트의 ChatGPT image generation 결과."
