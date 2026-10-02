@@ -29,14 +29,20 @@
 - C01–C04 Canonical definition: **APPROVED / revision 1**
 - DEC-0003 Genesis C01–C04 regeneration strategy: **ACCEPTED**
 - Genesis Creation C01–C04 migration: **COMPLETED**
-- 현재 작업: **C01–C04 Canonical Production Validation 준비**
+- C02 R001: **REJECTED — modern sea / composition mismatch**
+- C02 R002: **ACCEPTED against rev1 + chat refinement**
+- C03 R001: **ACCEPTED against rev1 + chat refinement**
+- C04 R001: **ACCEPTED against rev1 + chat refinement**
+- C02–C04 Canonical revision 2: **IN_REVIEW — pre-separation world state reflected**
+- C02–C04 Asset candidates: **pending_ingest / rev2 re-review required**
+- 현재 작업: **C02–C04 revision 2 사용자 검토 대기**
 
 ## 현재 Production 위치
 
 새 Canonical 구조에 Genesis Creation C01–C04 definition을 이관했다.
 
 - current_episode: GEN-CREATION-01
-- current_cut: GEN-CREATION-01-C04 (migration review boundary)
+- current_cut: GEN-CREATION-01-C04 (production validation review boundary)
 - Genesis Creation CUT 1–4 definition migration: **COMPLETED / AUDIT PASSED**
 - CUT 5 production: **PAUSED UNTIL MIGRATION**
 
@@ -89,6 +95,12 @@
 45. C01–C04 Canonical definition 사용자 승인 및 approved 전환
 46. DEC-0003 — legacy binary 복구 대신 C01–C04 새 Canonical 재생성 방침 확정
 47. Genesis Creation C01–C04 migration 최종 완료 처리
+48. C01–C04 ChatGPT Canonical Production Validation Run 기록
+49. C02 첫 결과 rejected — modern sea 해석 문제 확인
+50. C02 두 번째 결과 및 C03/C04 결과 accepted
+51. C02–C04 Asset candidate metadata 생성 — pending_ingest
+52. Production Validation feedback으로 C02–C04 revision 2 / in_review 전환
+53. `GENESIS_CREATION_PRODUCTION_VALIDATION.md` 생성
 
 ## 현재 Source of Truth
 
@@ -113,14 +125,21 @@
 
 ## 다음 작업
 
-1. C01–C04 Canonical Production Validation 실행
-2. 생성 결과 기준 Cut / Continuity / Rules / Architecture 피드백 검토
-3. accepted Result Asset Promotion 및 representative 선정
-4. C05 제작 재개
+1. C02–C04 revision 2 사용자 승인 검토
+2. 승인 후 기존 accepted Result를 rev2 기준으로 재검토
+3. Git LFS binary ingest 및 representative 선정
+4. C01 black-screen Asset 완료
+5. C01–C04 Production Validation 종료
+6. C05 제작 재개
 
 ## Blocker
 
 현재 migration blocker 없음.
+
+Production Validation blocker:
+
+1. C02–C04 revision 2 사용자 승인 필요
+2. Canonical image binary Git LFS ingest 경로 필요
 
 운영 제약:
 
