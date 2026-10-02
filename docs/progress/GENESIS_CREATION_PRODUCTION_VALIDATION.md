@@ -268,3 +268,39 @@ Representative selection:
 2. C01 Result/Asset review 및 representative selection
 3. C01–C04 Production Validation 최종 감사
 4. C05 — Genesis 1:6–8 제작 재개
+
+
+## 12. Finding D — Deterministic project-generated Asset provenance gap
+
+C01은 Canonical 정의상 완전한 black screen이며, Provider의 창작적 생성보다
+모든 pixel을 정확히 #000000으로 만드는 deterministic rasterization이 더 정확하다.
+
+2026-10-02 다음 Production Master를 준비했다.
+
+- Asset: `GEN-CREATION-01-C01-A001`
+- size: 1672x941
+- RGB pixel: all `#000000`
+- SHA-256: `d66092c2077b9ed12b0d01ac313e28ff8ea20d55d288e875eea46e1d7f491535`
+- size bytes: 4654
+- availability: `pending_ingest`
+
+현재 Asset source kind 후보:
+
+- generation_result
+- manual_edit
+- user_supplied
+- external_import
+- derived_import
+
+중 어느 것도 "프로젝트가 Canonical 정의에서 직접 결정적으로 생성한 binary"를 정확히 표현하지 않는다.
+
+따라서 기존 enum에 억지로 매핑하지 않고 `source.kind: null`을 유지한다.
+이는 Production Validation에서 발견한 Architecture/metadata feedback이며,
+새 source kind 추가 여부는 별도 사용자 승인 없이 자동 확정하지 않는다.
+
+C01 binary 자체의 Canonical 적합성은 deterministic validation으로 확인한다:
+
+- 화면 전체 pure black
+- celestial / terrain / object / person 없음
+- embedded scripture / narration / label 없음
+- Cut C01 revision 1 요구사항과 일치
