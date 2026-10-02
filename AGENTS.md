@@ -37,12 +37,13 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - DEC-0001 — Git LFS and Ignore Policy: **ACCEPTED**
 - DEC-0002 — Presentation-only Cut Output Mode: **REJECTED** — CUT 1은 기존 illustration/Asset 모델 유지
 - DEC-0003 — Genesis C01–C04 regeneration strategy: **ACCEPTED**
+- DEC-0004 — Genesis rapid full-chapter prototype before Asset promotion: **ACCEPTED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
 ## 3. 현재 단계
 
-현재는 **Genesis Creation Canonical Production** 단계다.
+현재는 **Genesis Creation Rapid Full-Chapter Prototype** 단계다.
 
 진행 위치와 다음 작업은 `docs/progress/CURRENT.md`가 Source of Truth다.
 
@@ -59,9 +60,12 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - C02–C04 Asset은 `available`, representative 선정 완료 상태이며 revision 2 기준 production complete다.
 - C01 black-screen Asset은 Git LFS ingest / availability / representative 선정까지 완료되었다.
 - Genesis Creation C01–C04 Canonical Production Validation은 최종 완료되었다.
-- C05/C06는 창세기 1:6–8을 두 Cut으로 분리해 `approved / revision 1` 상태다.
-- 최종 accepted Result를 각각 C05 A001 / C06 A001 Asset 후보로 등록했고 Git LFS ingest를 기다린다.
-- 다음 작업은 C05/C06 Canonical PNG Git LFS ingest → representative 선정이다.
+- C05/C06의 기존 accepted Result / pending_ingest Asset 후보는 historical production-validation 기록으로 유지한다.
+- 현재는 해당 binary ingest를 진행 blocker로 사용하지 않는다.
+- 사용자 선택 00→06 working reference sequence에서 확인된 핵심은 개별 이미지보다 **인접 이미지의 자연스러운 단계적 연결**이다.
+- 다음 실전 제작은 `docs/progress/GENESIS_CREATION_RAPID_PROTOTYPE.md`를 따라 창세기 1장을 처음부터 끝까지 빠르게 완주한다.
+- 전체 시퀀스 선별 뒤 Asset promotion / Git LFS / representative를 정리한다.
+- Presentation text는 Production Master와 분리하고 직접 인용 / 장절 / 역본 / narration을 별도 layer에서 테스트한다.
 
 ## 4. 저장소 범위
 
@@ -189,6 +193,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**Genesis Creation C05/C06 accepted PNG Git LFS ingest → availability / representative 처리 → 다음 본문 제작**
+**새 채팅에서 Genesis Creation 전체 rapid prototype pass 시작 → 전체 시퀀스 검토 → 최종 선별 후 Asset/LFS 정리**
 
 이다.
