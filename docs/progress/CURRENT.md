@@ -26,7 +26,8 @@
 - C02–C04 legacy image binary: **NOT LOCATED**
 - C01 Asset metadata: **pending_ingest — Git LFS binary not yet available**
 - C02–C04 legacy image binary: **NOT LOCATED**
-- 현재 작업: **C01–C04 Canonical definition 사용자 검토 대기**
+- C01–C04 Canonical definition: **APPROVED / revision 1**
+- 현재 작업: **Genesis Creation Asset migration 방침 정리**
 
 ## 현재 Production 위치
 
@@ -83,6 +84,7 @@
 42. Canonical Episode Sequence에 GEN-CREATION-01 등록
 43. C01 Asset metadata 생성 — pending_ingest
 44. Genesis Creation definition migration audit 25/25 통과
+45. C01–C04 Canonical definition 사용자 승인 및 approved 전환
 
 ## 현재 Source of Truth
 
@@ -107,12 +109,11 @@
 
 ## 다음 작업
 
-1. C01–C04 Canonical definition 사용자 승인 검토
-2. 승인 시 C01–C04 approved 전환
-3. CUT 1 black-screen Git LFS binary ingest 및 representative 등록
-4. C02–C04 legacy image binary 복구 또는 재생성 방침 결정
-5. Asset migration / representative Review
-6. CUT 5 제작 재개
+1. CUT 1 black-screen Git LFS binary ingest 및 representative 등록
+2. C02–C04 legacy image binary 복구 또는 새 Canonical 기준 재생성 방침 결정
+3. Asset migration / representative Review
+4. migration 최종 감사 및 완료 처리
+5. CUT 5 제작 재개
 
 ## Blocker
 
