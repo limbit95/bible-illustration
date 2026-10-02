@@ -152,3 +152,30 @@ Result를 검토할 때:
 - 후대 요소가 Continuity를 이유로 선행 묘사되지 않았는가
 
 중요한 Continuity constraint 위반은 시각적 완성도가 높더라도 rejected 근거가 된다.
+
+
+## 11. 승인된 직전 장면과 제작 순서
+
+연속 시퀀스에서는 실제 제작 순서 자체를 Continuity 도구로 사용한다.
+
+기본 흐름:
+
+- 현재 장면 생성
+- 사용자 승인 또는 수정
+- 승인된 장면을 다음 Cut의 visual continuity reference로 사용
+- 다음 본문이 요구하는 DELTA만 추가
+
+한 구절이 여러 Cut으로 분리되는 경우에도 같은 원칙을 적용한다.
+
+직전 승인 이미지가 강한 시각 Anchor 역할을 하더라도
+이미지의 모든 세부가 Canonical Continuity가 되는 것은 아니다.
+
+다음 장면에 계승할 것은 명시적으로 구분한다.
+
+- retain: 계속 유지
+- delta: 이번 Cut에서 변화
+- discard: 이전 이미지의 우연한 요소 또는 오류
+- forbidden leap: 아직 등장하면 안 되는 상태
+
+사용자가 장면 연결이 어색하다고 판단하면
+개별 이미지의 미적 완성도가 높더라도 continuity concern으로 보고 재생성 또는 중간 Cut 분할을 검토한다.
