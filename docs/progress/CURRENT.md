@@ -1,7 +1,7 @@
 # Current Project State
 
 > 마지막 갱신: 2026-10-02
-> 상태: **POST STEP 0 — Rules / Templates / Migration Preparation**
+> 상태: **POST STEP 0 — Canonical Production Validation**
 
 ## 현재 Phase
 
@@ -24,8 +24,7 @@
 - DEC-0002 Presentation-only Cut Output Mode: **REJECTED — existing Asset model retained**
 - CUT 1 handling: **actual black-screen illustration Asset**
 - C02–C04 legacy image binary: **NOT LOCATED**
-- C01 Asset metadata: **pending_ingest — Git LFS binary not yet available**
-- C02–C04 legacy image binary: **NOT LOCATED**
+- C01 Asset metadata: **pending_ingest — deterministic pure-black PNG prepared / SHA-256 recorded / Git LFS ingest pending**
 - C01–C04 Canonical definition: **APPROVED / revision 1**
 - DEC-0003 Genesis C01–C04 regeneration strategy: **ACCEPTED**
 - Genesis Creation C01–C04 migration: **COMPLETED**
@@ -35,8 +34,11 @@
 - C04 R001: **ACCEPTED against rev1 + chat refinement**
 - C02–C04 Canonical revision 2: **APPROVED — pre-separation world state reflected**
 - C02–C04 rev2 Result re-review: **PASSED / accepted**
-- C02–C04 Asset candidates: **pending_ingest / rev2 accepted**
-- 현재 작업: **C01–C04 Canonical binary ingest / representative 처리 대기**
+- C02–C04 LFS objects: **UPLOADED / canonical paths normalized / SHA-256 + byte-size verified**
+- C02–C04 Assets: **AVAILABLE**
+- C02–C04 representative Assets: **SELECTED against revision 2**
+- C02–C04 Cut production complete: **YES**
+- 현재 작업: **C01 deterministic black-screen PNG Git LFS ingest → representative → Production Validation 최종 감사**
 
 ## 현재 Production 위치
 
@@ -45,7 +47,7 @@
 - current_episode: GEN-CREATION-01
 - current_cut: GEN-CREATION-01-C04 (production validation review boundary)
 - Genesis Creation CUT 1–4 definition migration: **COMPLETED / AUDIT PASSED**
-- CUT 5 production: **PAUSED UNTIL MIGRATION**
+- CUT 5 production: **PAUSED UNTIL C01–C04 PRODUCTION VALIDATION COMPLETE**
 
 ## 마지막 완료 항목
 
@@ -104,6 +106,13 @@
 53. `GENESIS_CREATION_PRODUCTION_VALIDATION.md` 생성
 54. C02–C04 revision 2 사용자 승인 및 approved 전환
 55. C02–C04 기존 accepted Result를 revision 2 기준 Review sequence 2로 재검토 — 모두 accepted
+56. C02–C04 Git LFS object upload 확인 — metadata SHA-256 / size 일치
+57. 업로드 pointer filename이 `.png.png`로 생성된 경로 불일치 확인
+58. C02–C04 canonical LFS pointer filename 정상화 및 checksum 재검증
+59. C02–C04 Asset availability `available` 전환
+60. C02–C04 representative Asset 선정 — revision 2 기준
+61. C01 deterministic pure-black PNG Production Master 준비 — 1672x941 / SHA-256 기록
+62. C01 deterministic Asset의 source-kind 공백을 Production Validation feedback으로 식별
 
 ## 현재 Source of Truth
 
@@ -128,11 +137,9 @@
 
 ## 다음 작업
 
-1. C02–C04 PNG Git LFS binary ingest
-2. C02–C04 availability → available 및 representative 선정
-3. C01 black-screen Asset binary / review / representative 완료
-4. C01–C04 Production Validation 최종 감사 및 종료
-5. C05 제작 재개
+1. C01 black-screen Asset binary / review / representative 완료
+2. C01–C04 Production Validation 최종 감사 및 종료
+3. C05 제작 재개
 
 ## Blocker
 
@@ -140,7 +147,7 @@
 
 Production Validation blocker:
 
-1. Canonical image binary Git LFS ingest 경로 필요
+1. C01 Canonical image binary Git LFS ingest 필요
 
 운영 제약:
 
