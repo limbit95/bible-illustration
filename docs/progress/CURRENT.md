@@ -33,9 +33,10 @@
 - C02 R002: **ACCEPTED against rev1 + chat refinement**
 - C03 R001: **ACCEPTED against rev1 + chat refinement**
 - C04 R001: **ACCEPTED against rev1 + chat refinement**
-- C02–C04 Canonical revision 2: **IN_REVIEW — pre-separation world state reflected**
-- C02–C04 Asset candidates: **pending_ingest / rev2 re-review required**
-- 현재 작업: **C02–C04 revision 2 사용자 검토 대기**
+- C02–C04 Canonical revision 2: **APPROVED — pre-separation world state reflected**
+- C02–C04 rev2 Result re-review: **PASSED / accepted**
+- C02–C04 Asset candidates: **pending_ingest / rev2 accepted**
+- 현재 작업: **C01–C04 Canonical binary ingest / representative 처리 대기**
 
 ## 현재 Production 위치
 
@@ -101,6 +102,8 @@
 51. C02–C04 Asset candidate metadata 생성 — pending_ingest
 52. Production Validation feedback으로 C02–C04 revision 2 / in_review 전환
 53. `GENESIS_CREATION_PRODUCTION_VALIDATION.md` 생성
+54. C02–C04 revision 2 사용자 승인 및 approved 전환
+55. C02–C04 기존 accepted Result를 revision 2 기준 Review sequence 2로 재검토 — 모두 accepted
 
 ## 현재 Source of Truth
 
@@ -125,12 +128,11 @@
 
 ## 다음 작업
 
-1. C02–C04 revision 2 사용자 승인 검토
-2. 승인 후 기존 accepted Result를 rev2 기준으로 재검토
-3. Git LFS binary ingest 및 representative 선정
-4. C01 black-screen Asset 완료
-5. C01–C04 Production Validation 종료
-6. C05 제작 재개
+1. C02–C04 PNG Git LFS binary ingest
+2. C02–C04 availability → available 및 representative 선정
+3. C01 black-screen Asset binary / review / representative 완료
+4. C01–C04 Production Validation 최종 감사 및 종료
+5. C05 제작 재개
 
 ## Blocker
 
@@ -138,8 +140,7 @@
 
 Production Validation blocker:
 
-1. C02–C04 revision 2 사용자 승인 필요
-2. Canonical image binary Git LFS ingest 경로 필요
+1. Canonical image binary Git LFS ingest 경로 필요
 
 운영 제약:
 
