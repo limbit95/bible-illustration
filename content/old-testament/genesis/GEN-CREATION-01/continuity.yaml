@@ -15,7 +15,8 @@ segments:
     end_cut_id: GEN-CREATION-01-C04
     baseline:
       world:
-        environment: primordial-waters
+        environment: primordial-undifferentiated-waters
+        separation_state: pre-firmament-pre-land-sea
         absent_elements:
           - sun
           - moon
@@ -25,6 +26,7 @@ segments:
           - animals
           - humans
       visual:
+        horizon_state: undefined
         camera_context: broad-world-view
         primary_light_direction: none
         light_presence: absent
@@ -39,7 +41,9 @@ transitions:
     mode: continue
     retain:
       - world.environment
+      - world.separation_state
       - world.absent_elements
+      - visual.horizon_state
       - visual.camera_context
     change:
       - path: visual.primary_light_direction
@@ -54,7 +58,9 @@ transitions:
     mode: continue
     retain:
       - world.environment
+      - world.separation_state
       - world.absent_elements
+      - visual.horizon_state
       - visual.camera_context
       - visual.primary_light_direction
       - visual.light_presence
