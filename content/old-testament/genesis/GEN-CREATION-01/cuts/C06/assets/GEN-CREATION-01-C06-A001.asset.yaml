@@ -1,0 +1,35 @@
+asset_id: GEN-CREATION-01-C06-A001
+
+owner:
+  type: cut
+  id: GEN-CREATION-01-C06
+
+source:
+  kind: generation_result
+  result_id: GEN-CREATION-01-C06-R003-O01
+  parent_asset_id: null
+
+binary:
+  storage: git_lfs
+  path: content/old-testament/genesis/GEN-CREATION-01/cuts/C06/assets/GEN-CREATION-01-C06-A001.png
+  sha256: 637d65e23ce66edfd4bf1962b3a18b1c406528546235d1dce260e7bbcdc75691
+  media_type: image/png
+  width: 1672
+  height: 941
+  size_bytes: 2366550
+
+availability: pending_ingest
+
+created_at: "2026-10-02"
+
+provenance:
+  provider: chatgpt
+  note: >
+    GEN-CREATION-01-C06-R003-O01에서 승격한 accepted Asset 후보.
+    C05보다 분리가 확연히 진전되어 궁창 공간이 분명한 다음 상태를 표현한다.
+    실제 PNG binary는 Canonical Git LFS ingest 대기 상태다.
+
+rights:
+  storage_status: permitted
+  basis: project_generated
+  note: "프로젝트의 ChatGPT image generation 결과."
