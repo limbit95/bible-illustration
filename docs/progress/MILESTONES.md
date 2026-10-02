@@ -83,11 +83,18 @@
 - Episode는 C05 이후 정의가 미완료이므로 `draft / revision 1` 유지
 - Asset migration은 별도 잔여 작업으로 유지
 
+### 2026-10-02 — Genesis Creation C01–C04 migration 완료
+
+- Canonical definition migration 완료
+- migration audit 25/25 통과
+- C01–C04 `approved / revision 1`
+- legacy C02–C04 binary는 미확보 상태를 historical provenance로 보존
+- DEC-0003에 따라 legacy binary 복구 대신 새 Canonical 기준 재생성으로 전환
+- 이후 작업은 migration이 아니라 C01–C04 Canonical Production Validation으로 진행
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 이 문서에 추가한다.
 
-- Genesis Creation CUT 1–4 migration 완료
-- Genesis Creation migration 감사 완료
 - Genesis Creation CUT 5 제작 재개
 - 특정 Episode production complete
