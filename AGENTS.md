@@ -63,6 +63,9 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - C05/C06의 기존 accepted Result / pending_ingest Asset 후보는 historical production-validation 기록으로 유지한다.
 - 현재는 해당 binary ingest를 진행 blocker로 사용하지 않는다.
 - 사용자 선택 00→06 working reference sequence에서 확인된 핵심은 개별 이미지보다 **인접 이미지의 자연스러운 단계적 연결**이다.
+- 00→06의 구체 progression과 Genesis Creation 전용 visual profile은 `docs/progress/GENESIS_CREATION_RAPID_PROTOTYPE.md`에 기록되어 있다.
+- Genesis Creation의 navy / blue-black → cool white → warm gold-white palette와 원초적 유체 질감은 **Genesis Creation 한정**이며 성경 전체 전역 Style이 아니다.
+- Presentation text 기본 reference는 작고 절제된 cinematic sans-serif이며, Key Scripture Frame은 직접 인용 우선 / narration은 설명용 Frame에서만 사용한다.
 - 다음 실전 제작은 `docs/progress/GENESIS_CREATION_RAPID_PROTOTYPE.md`를 따라 창세기 1장을 처음부터 끝까지 빠르게 완주한다.
 - 전체 시퀀스 선별 뒤 Asset promotion / Git LFS / representative를 정리한다.
 - Presentation text는 Production Master와 분리하고 직접 인용 / 장절 / 역본 / narration을 별도 layer에서 테스트한다.
@@ -193,6 +196,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**새 채팅에서 Genesis Creation 전체 rapid prototype pass 시작 → 전체 시퀀스 검토 → 최종 선별 후 Asset/LFS 정리**
+**새 채팅에서 최종 00→06 visual anchors 재첨부 → Genesis Creation 전체 rapid prototype pass 재시작 → 전체 시퀀스 검토 → 최종 선별 후 Asset/LFS 정리**
 
 이다.
