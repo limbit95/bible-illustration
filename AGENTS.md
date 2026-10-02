@@ -36,6 +36,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - Progress / Decision 기록 체계 v1.0: **CONFIRMED**
 - DEC-0001 — Git LFS and Ignore Policy: **ACCEPTED**
 - DEC-0002 — Presentation-only Cut Output Mode: **REJECTED** — CUT 1은 기존 illustration/Asset 모델 유지
+- DEC-0003 — Genesis C01–C04 regeneration strategy: **ACCEPTED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
@@ -50,7 +51,8 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - 빈 미래 디렉터리와 파일을 필요 이상으로 대량 생성하지 않는다.
 - 실제 데이터나 정식 문서가 필요한 시점에만 구조를 생성한다.
 - Genesis Creation CUT 1–4 Canonical definition은 새 구조로 이관되어 audit를 통과했고, 사용자 승인으로 `approved / revision 1` 상태다.
-- migration이 완료되기 전에는 CUT 5 제작을 재개하지 않는다.
+- Genesis Creation C01–C04 migration은 완료되었다.
+- CUT 5는 C01–C04 Canonical Production Validation을 먼저 수행한 뒤 재개한다.
 
 ## 4. 저장소 범위
 
@@ -178,6 +180,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**Genesis Creation Asset migration → migration 최종 감사**
+**Genesis Creation C01–C04 Canonical Production Validation**
 
 이다.
