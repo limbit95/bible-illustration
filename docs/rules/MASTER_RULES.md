@@ -155,3 +155,56 @@ Architecture가 허용하는 범위에서 draft / in_review Cut의 탐색 Run을
 현재는 본문 분량과 사건 흐름에 따라 Episode와 Cut 수를 유연하게 결정한다.
 
 Genesis Creation의 과거 CUT 1–4와 당시 8개 흐름 계획은 향후 migration 시 **기존 작업 데이터**로 검토하며, 전역 제작 규칙으로 일반화하지 않는다.
+
+
+## 9. Scripture Work Unit 운영
+
+실전 제작의 기본 입력은 사용자가 제시한 **한 구절 또는 의미 있는 본문 구간**이다.
+
+이 입력 단위를 편의상 Scripture Work Unit이라 부른다.
+
+Scripture Work Unit과 Cut의 관계는 1:1로 고정하지 않는다.
+
+- 한 Work Unit이 한 Cut으로 충분할 수 있다.
+- 한 구절 안에 단계적 변화가 있으면 여러 Cut으로 나눌 수 있다.
+- 서로 강하게 이어지는 여러 절이 하나의 시각적 beat라면 한 Cut으로 묶을 수 있다.
+
+Assistant는 실제 생성 전에 해당 본문을 보고 장면 수를 판단한다.
+
+- 한 장면으로 충분하면 바로 제작한다.
+- 여러 장면이 더 자연스러우면 짧은 Storyboard / Cut 분해안을 먼저 제안한다.
+- 사용자가 장면 수나 분할 방식을 직접 지정하면, Scripture / Architecture / Continuity와 충돌하지 않는 한 이를 우선한다.
+
+Storyboard 제안에는 필요한 만큼만 다음을 포함한다.
+
+- Cut 수
+- 각 Cut의 Scripture Anchor
+- 핵심 visual beat
+- RETAIN
+- DELTA
+- FORBIDDEN LEAP
+
+이 운영은 장면 수를 늘리기 위한 규칙이 아니라,
+본문 누락과 과도한 압축을 피하고 자연스러운 시각 전개를 확보하기 위한 규칙이다.
+
+## 10. 순차 생성 기본값
+
+여러 이미지를 한 번에 일괄 생성하는 것을 기본값으로 두지 않는다.
+
+기본 제작은:
+
+1. Scripture Work Unit 확인
+2. 장면 수 판단
+3. 필요 시 Storyboard 합의
+4. 첫 Cut 생성
+5. 사용자 승인 / 수정
+6. 직전 승인 장면을 참고해 다음 Cut 생성
+
+순서로 진행한다.
+
+한 번의 요청으로 여러 이미지를 생성하는 방식은 사용자가 명시적으로 원하거나,
+인접 장면 Continuity 위험이 낮다고 판단되는 경우에만 사용한다.
+
+빠른 제작의 의미는 대량 batch 생성이 아니라,
+과도한 사전 polish, Asset promotion, Git LFS ingest, representative 확정을 뒤로 미뤄
+본문과 장면 흐름을 먼저 완주하는 데 있다.
