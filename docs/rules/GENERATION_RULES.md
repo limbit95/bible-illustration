@@ -215,3 +215,68 @@ Canonical Cut revision이나 기준 commit이 달라져 판정이 달라지면 �
 - secret token
 
 알 수 없는 model/version/hidden setting은 추측하지 않는다.
+
+
+## 16. Scripture-unit sequential generation
+
+기본 실전 생성 흐름은 DEC-0005를 따른다.
+
+### 16.1 입력 단위
+
+사용자가 개역한글 본문 한 구절 또는 의미 있는 본문 구간을 제시하면
+이를 현재 작업의 Scripture Work Unit으로 취급한다.
+
+사용자가 직접 제공한 본문 문구는 임의로 현대화, 축약, 교정하지 않는다.
+직접 인용 표기는 `TEXT_AND_COPYRIGHT.md`를 따른다.
+
+### 16.2 장면 수 판단
+
+생성 전에 다음을 판단한다.
+
+- 한 장면으로 의미가 충분히 전달되는가
+- 시각적 변화가 여러 단계인가
+- 한 화면에 압축하면 Continuity가 급격히 뛰는가
+- 인접 본문과의 경계를 별도 Cut으로 나누는 편이 자연스러운가
+
+여러 장면이 필요하면 먼저 짧은 Storyboard를 제안하고 사용자와 조정한다.
+
+### 16.3 한 장면씩 생성
+
+기본적으로 실제 이미지는 한 장면씩 순차 생성한다.
+
+다음 장면 생성 전에는 바로 이전 장면에 대해:
+
+- 사용자 승인 여부
+- accepted / working status
+- 유지해야 할 RETAIN
+- 새로 바뀔 DELTA
+- 계승하면 안 되는 오류 또는 우연한 detail
+
+을 확인한다.
+
+### 16.4 승인 이미지의 역할
+
+직전 사용자 승인 이미지 또는 accepted Result는
+다음 장면의 primary visual continuity reference로 사용할 수 있다.
+
+그러나 우선순위는 다음과 같다.
+
+1. Scripture direct content
+2. Canonical Cut / Storyboard / Continuity
+3. approved working / accepted image reference
+4. Provider output의 우연한 detail
+
+따라서 승인 이미지라도 Canonical 정의와 충돌하는 요소는 자동 계승하지 않는다.
+
+### 16.5 Batch generation
+
+여러 Cut을 한 번에 생성하는 것은 opt-in 방식이다.
+
+- 사용자가 명시적으로 요청했거나
+- 각 Cut의 장면 정의가 충분히 독립적이며
+- Continuity 위험이 낮을 때
+
+사용할 수 있다.
+
+Batch 결과에서 인접 장면 연결이 깨지면 batch 효율을 이유로 유지하지 않고
+순차 생성 방식으로 되돌린다.
