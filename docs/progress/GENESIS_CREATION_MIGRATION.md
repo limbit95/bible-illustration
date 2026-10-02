@@ -266,7 +266,7 @@ content/old-testament/genesis/GEN-CREATION-01/
 상태:
 
 - Episode: `draft / revision 1`
-- C01–C04: `in_review / revision 1`
+- C01–C04: `approved / revision 1`
 - 과거 handoff의 “확정” 상태를 현재 Architecture의 `approved`로 자동 변환하지 않음
 
 ## 13. C01 Asset Migration Status
@@ -323,11 +323,9 @@ Canonical definition migration 자체는 audit를 통과했다.
 
 ### Definition approval
 
-C01–C04의 현재 Canonical Scene 정의는 `in_review` 상태다.
+2026-10-02 사용자 승인으로 C01–C04 Canonical Scene 정의를 모두 `approved / revision 1`로 전환했다.
 
-사용자 검토/승인 후 `approved` 전환 여부를 결정한다.
-
-Episode는 C05 이후 active Cut 정의가 아직 없으므로 현재 `draft`를 유지한다.
+Episode는 C05 이후 active Cut 정의가 아직 없으므로 현재 `draft / revision 1`을 유지한다.
 
 ### C01 binary
 
@@ -351,9 +349,8 @@ binary가 복구되면 현재 Cut 정의에 대해 다시 Review한 뒤 Asset Pr
 
 ## 16. Next
 
-1. C01–C04 Canonical definition 사용자 검토
-2. 승인 시 C01–C04 `approved` 전환
-3. C01 Git LFS binary ingest
-4. C02–C04 legacy binary 복구 또는 재생성 방침 결정
-5. Asset migration / representative Review 완료
-6. C05 — Genesis 1:6–8 설계 재개
+1. C01 Git LFS binary ingest 및 representative 등록
+2. C02–C04 legacy binary 복구 또는 새 Canonical 기준 재생성 방침 결정
+3. Asset migration / representative Review 완료
+4. migration 최종 감사 및 완료 처리
+5. C05 — Genesis 1:6–8 설계 재개
