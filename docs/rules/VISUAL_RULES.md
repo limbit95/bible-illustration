@@ -136,3 +136,18 @@ visual_quality와 technical_integrity를 구분한다.
 - 기타 생성 오류
 
 기술적으로 깨끗하더라도 Scripture / Historical / Continuity 기준에 실패하면 대표 Asset 후보가 될 수 없다.
+
+
+## 11. Episode-specific Visual Profile
+
+프로젝트 전체의 Visual Rules와 특정 Episode의 구체 미술 방향을 구분한다.
+
+- 프로젝트 전역 Rules는 품질, 본문 충실도, Continuity, 표현 경계처럼 장기적으로 공통 적용할 원칙을 소유한다.
+- 특정 Episode의 팔레트, 질감, 조명 진행, 렌즈감, 화면 비율, 구체적인 visual reference sequence는 **Episode-specific profile**로 취급한다.
+- 한 Episode에서 사용자가 선호한 색감·질감·광원·구도를 성경 전체의 기본 Style로 자동 승격하지 않는다.
+- Episode-specific profile은 해당 Episode의 Canonical Continuity 또는 승인된 working guide / reference record에 기록한다.
+- 다른 Episode에서 재사용하려면 별도 검토와 사용자 승인을 거친다.
+
+현재 Genesis Creation rapid prototype의 navy / blue-black → cool white → warm gold-white 진행, 원초적 유체 질감, widescreen 광각 구성, 00→06 working reference sequence는 **Genesis Creation 한정 기준**이며 성경 전체 전역 시각 규칙이 아니다.
+
+세부 Genesis Creation working profile은 docs/progress/GENESIS_CREATION_RAPID_PROTOTYPE.md를 따른다.
