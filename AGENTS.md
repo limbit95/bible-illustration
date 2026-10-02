@@ -42,7 +42,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 
 ## 3. 현재 단계
 
-현재는 **POST STEP 0 — Rules / Templates / Migration Preparation** 단계다.
+현재는 **Genesis Creation Canonical Production** 단계다.
 
 진행 위치와 다음 작업은 `docs/progress/CURRENT.md`가 Source of Truth다.
 
@@ -57,7 +57,9 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - 기존 accepted Result는 revision 2 기준 Review sequence 2에서도 모두 accepted 되었다.
 - C02–C04 LFS binary는 Canonical `.png` 경로에 정상화되었고 checksum / size 검증을 통과했다.
 - C02–C04 Asset은 `available`, representative 선정 완료 상태이며 revision 2 기준 production complete다.
-- C01 black-screen Asset 완료 후 C01–C04 Production Validation을 최종 종료한다.
+- C01 black-screen Asset은 Git LFS ingest / availability / representative 선정까지 완료되었다.
+- Genesis Creation C01–C04 Canonical Production Validation은 최종 완료되었다.
+- 다음 작업은 C05 Canonical definition 준비 및 제작 재개다.
 
 ## 4. 저장소 범위
 
@@ -185,6 +187,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**Genesis Creation C01 black-screen Asset 완료 → C01–C04 Production Validation 최종 감사 → C05 재개**
+**Genesis Creation C05 Canonical definition 준비 → 승인 후 제작 재개**
 
 이다.
