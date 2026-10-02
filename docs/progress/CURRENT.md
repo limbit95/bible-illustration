@@ -1,7 +1,7 @@
 # Current Project State
 
 > 마지막 갱신: 2026-10-02
-> 상태: **GENESIS CREATION — C01–C04 PRODUCTION VALIDATION COMPLETED / C05 PREPARATION**
+> 상태: **GENESIS CREATION — C05/C06 APPROVED / ACCEPTED ASSET CANDIDATES PENDING LFS INGEST**
 
 ## 현재 Phase
 
@@ -41,16 +41,21 @@
 - C01 representative Asset: **SELECTED against revision 1**
 - C01 Cut production complete: **YES**
 - Genesis Creation C01–C04 Production Validation: **COMPLETED / PASSED**
-- 현재 작업: **C05 Canonical definition review / approval**
+- C05 definition: **APPROVED / revision 1 — separation initiating**
+- C06 definition: **APPROVED / revision 1 — firmament established**
+- C05 final Result: **R004-O01 accepted**
+- C06 final Result: **R003-O01 accepted**
+- C05/C06 Asset candidates: **A001 / pending_ingest**
+- 현재 작업: **C05/C06 Canonical PNG Git LFS ingest → representative selection**
 
 ## 현재 Production 위치
 
 새 Canonical 구조에 Genesis Creation C01–C04 definition을 이관했다.
 
 - current_episode: GEN-CREATION-01
-- current_cut: GEN-CREATION-01-C05 — draft revision 1 / awaiting definition review
+- current_cut: GEN-CREATION-01-C06 — C05/C06 approved; accepted binaries pending Git LFS ingest
 - Genesis Creation CUT 1–4 definition migration: **COMPLETED / AUDIT PASSED**
-- CUT 5 production: **CANONICAL DRAFT PREPARED / AWAITING USER APPROVAL**
+- C05/C06 production: **ACCEPTED RESULT / ASSET CANDIDATE REGISTERED / LFS INGEST PENDING**
 
 ## 마지막 완료 항목
 
@@ -121,6 +126,11 @@
 65. C01 representative Asset 선정 — revision 1 기준
 66. Genesis Creation C01–C04 Production Validation 최종 감사 통과 및 완료
 67. C05 draft Canonical Scene / Storyboard / C04→C05 Continuity 준비
+68. Genesis 1:6–8을 C05/C06 두 Cut으로 분리하고 사용자 피드백에 따라 진행 단계 차이를 Canonical에 반영
+69. C05/C06 `approved / revision 1` 전환
+70. C05/C06 탐색·실패·최종 accepted Generation Run 이력 기록
+71. C05 R004-O01 / C06 R003-O01 accepted
+72. C05 A001 / C06 A001 Asset candidate metadata 생성 — pending_ingest
 
 ## 현재 Source of Truth
 
@@ -145,9 +155,11 @@
 
 ## 다음 작업
 
-1. C05 draft Canonical Scene 사용자 검토
-2. 승인 시 `definition_status: approved` 전환
-3. 승인된 C05 기준으로 이미지 제작 시작
+1. C05/C06 최종 PNG를 Canonical Asset 경로로 Git LFS ingest
+2. pointer OID / size를 Asset metadata와 검증
+3. availability → `available`
+4. C05/C06 representative Asset 선정
+5. 다음 Genesis Creation 본문 Cut 정의 및 제작 재개
 
 ## Blocker
 
