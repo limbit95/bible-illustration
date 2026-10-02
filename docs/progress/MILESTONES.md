@@ -123,6 +123,17 @@
 - Production Master와 presentation derivative 분리 원칙 유지
 - 정확한 working visual binary는 아직 Canonical Asset이 아니므로 새 채팅에서 필요 시 재첨부
 
+### 2026-10-03 — Scripture-unit sequential production workflow 확정
+
+- DEC-0005 accepted
+- 실전 입력 단위를 사용자가 제시한 개역한글 본문 한 구절 또는 의미 있는 구간으로 설정
+- 한 구절 = 한 이미지 고정을 폐기하고 본문 의미에 따라 1:N Cut 분해 허용
+- 장면 분할이 필요한 경우 Assistant가 먼저 짧은 Storyboard를 제안하고 사용자와 조정
+- 실제 이미지는 한 장면씩 순차 생성하고 직전 승인 이미지를 visual continuity anchor로 활용
+- 승인 이미지보다 Scripture / Canonical Cut / Continuity가 우선한다는 경계 유지
+- 여러 이미지 batch generation은 opt-in으로 제한
+- rapid prototype의 속도는 Asset/LFS/final polish 지연으로 확보
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 이 문서에 추가한다.
