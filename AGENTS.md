@@ -53,6 +53,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - Genesis Creation CUT 1–4 Canonical definition은 새 구조로 이관되어 audit를 통과했고, 사용자 승인으로 `approved / revision 1` 상태다.
 - Genesis Creation C01–C04 migration은 완료되었다.
 - CUT 5는 C01–C04 Canonical Production Validation을 먼저 수행한 뒤 재개한다.
+- C02–C04는 실제 생성 feedback을 반영한 `revision 2 / in_review` 상태이며 사용자 승인 전에는 representative 확정을 진행하지 않는다.
 
 ## 4. 저장소 범위
 
@@ -180,6 +181,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**Genesis Creation C01–C04 Canonical Production Validation**
+**Genesis Creation C02–C04 revision 2 사용자 검토 → rev2 Result 재검토 → Asset/Representative 처리**
 
 이다.
