@@ -1,7 +1,7 @@
 # Current Project State
 
 > 마지막 갱신: 2026-10-03
-> 상태: **GENESIS CREATION — RAPID FULL-CHAPTER PROTOTYPE MODE / VISUAL CONTINUITY FIRST**
+> 상태: **GENESIS CREATION — SCRIPTURE-UNIT SEQUENTIAL RAPID PROTOTYPE / VISUAL CONTINUITY FIRST**
 
 ## 현재 Phase
 
@@ -47,10 +47,11 @@
 - C06 final Result: **R003-O01 accepted**
 - C05/C06 Asset candidates: **A001 / pending_ingest — historical candidates, LFS ingest deferred**
 - DEC-0004: **ACCEPTED — whole-chapter rapid prototype before Asset promotion**
+- DEC-0005: **ACCEPTED — scripture-unit sequential generation / flexible one-to-many scene decomposition**
 - Genesis working visual reference sequence: **00→06 user-selected / conversation-local binary / sequence behavior documented**
 - Genesis-specific visual profile: **DOCUMENTED — widescreen + blue-black→cool-white→warm-gold progression / Genesis Creation only**
 - Presentation text reference: **APPROVED — restrained cinematic sans-serif / key Scripture direct-quote first / narration only when explanatory**
-- 현재 작업: **새 채팅에서 최종 00→06 visual anchors를 다시 제공하고 Genesis 1 전체 rapid prototype pass를 처음부터 끝까지 재시작**
+- 현재 작업: **새 채팅에서 사용자가 제시하는 개역한글 본문 단위로 장면 수를 판단하고, 필요 시 Storyboard 후 한 장면씩 순차 생성하여 Genesis 1 전체를 완주**
 
 ## 현재 Production 위치
 
@@ -142,6 +143,8 @@
 77. 사용자 최종 선택 00→06 sequence의 단계별 시각 흐름을 working guide에 명문화
 78. Genesis Creation 전용 palette / texture / lighting progression을 전역 Visual Rule과 분리해 기록
 79. 사용자 승인 cinematic presentation text reference를 `TEXT_AND_COPYRIGHT.md`와 Genesis working guide에 반영
+80. DEC-0005 — Scripture Work Unit 기반 순차 생성 + 유연한 one-to-many Cut 분해 방침 accepted
+81. Master / Generation / Continuity Rules에 본문 단위 장면 수 판단, Storyboard advisory, 한 장면씩 순차 생성 규칙 반영
 
 ## 현재 Source of Truth
 
@@ -162,16 +165,19 @@
 - `docs/decisions/README.md` — Decision Record 생성·상태·번호 규칙
 - `DEC-0001-git-lfs-and-ignore-policy.md`: **accepted**
 - `DEC-0002-presentation-only-cut-output-mode.md`: **rejected — 기존 illustration/Asset 모델 유지**
+- `DEC-0004-genesis-rapid-full-chapter-prototype.md`: **accepted**
+- `DEC-0005-scripture-unit-sequential-generation.md`: **accepted — 본문 단위 순차 생성 / 유연한 장면 분해**
 - `docs/progress/GENESIS_CREATION_MIGRATION.md`: migration readiness / blockers
 
 ## 다음 작업
 
-1. 새 채팅에서 사용자 선택 00→06 reference sequence를 다시 첨부하거나 동등한 visual anchor를 제공
-2. `GENESIS_CREATION_RAPID_PROTOTYPE.md` 기준으로 창세기 1장 처음부터 끝까지 1차 완주
-3. 인접 Cut마다 retain / delta를 우선 적용하고 과도한 미래 상태 선행 묘사를 피함
-4. 전체 시퀀스 검토 후 디테일 2차 수정
-5. 최종 선별 후에만 Asset promotion / Git LFS ingest / representative 정리
-6. presentation layer는 승인된 cinematic text reference를 사용하고, Key Scripture Frame은 직접 인용 우선 / narration은 설명 Frame에서만 사용
+1. 새 채팅에서 필요한 경우 사용자 선택 00→06 reference sequence를 다시 첨부하거나 동등한 visual anchor를 제공
+2. 사용자가 개역한글 본문 한 구절 또는 의미 있는 구간을 Scripture Work Unit으로 제시
+3. Assistant가 1장면 / 다중 장면 필요 여부를 판단하고, 다중 장면이면 짧은 Storyboard를 먼저 제안
+4. 사용자 승인 후 한 장면씩 순차 생성하며 인접 Cut마다 retain / delta를 우선 적용하고 과도한 미래 상태 선행 묘사를 피함
+5. Genesis 1 전체 완주 후 전체 시퀀스 검토 및 디테일 2차 수정
+6. 최종 선별 후에만 Asset promotion / Git LFS ingest / representative 정리
+7. presentation layer는 승인된 cinematic text reference를 사용하고, Key Scripture Frame은 직접 인용 우선 / narration은 설명 Frame에서만 사용
 
 ## Blocker
 
