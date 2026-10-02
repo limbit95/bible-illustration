@@ -59,7 +59,9 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - C02–C04 Asset은 `available`, representative 선정 완료 상태이며 revision 2 기준 production complete다.
 - C01 black-screen Asset은 Git LFS ingest / availability / representative 선정까지 완료되었다.
 - Genesis Creation C01–C04 Canonical Production Validation은 최종 완료되었다.
-- 다음 작업은 C05 Canonical definition 준비 및 제작 재개다.
+- C05/C06는 창세기 1:6–8을 두 Cut으로 분리해 `approved / revision 1` 상태다.
+- 최종 accepted Result를 각각 C05 A001 / C06 A001 Asset 후보로 등록했고 Git LFS ingest를 기다린다.
+- 다음 작업은 C05/C06 Canonical PNG Git LFS ingest → representative 선정이다.
 
 ## 4. 저장소 범위
 
@@ -187,6 +189,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**Genesis Creation C05 Canonical definition 준비 → 승인 후 제작 재개**
+**Genesis Creation C05/C06 accepted PNG Git LFS ingest → availability / representative 처리 → 다음 본문 제작**
 
 이다.
