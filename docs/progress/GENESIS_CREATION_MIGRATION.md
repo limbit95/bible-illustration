@@ -1,6 +1,6 @@
 # Genesis Creation CUT 1–4 Migration
 
-> 상태: **CANONICAL DEFINITION MIGRATED / AUDIT PASSED / ASSET MIGRATION PARTIAL**
+> 상태: **MIGRATION COMPLETE — CANONICAL DEFINITIONS APPROVED / LEGACY BINARIES NOT MIGRATED BY DECISION**
 > 마지막 갱신: 2026-10-02
 >
 > 목적: 기존 Genesis Creation CUT 1–4 작업을 현재 Canonical Repository Structure로 이관하기 전에, 기존 확정 정보와 이관 blocker를 명확히 기록한다.
@@ -354,3 +354,45 @@ binary가 복구되면 현재 Cut 정의에 대해 다시 Review한 뒤 Asset Pr
 3. Asset migration / representative Review 완료
 4. migration 최종 감사 및 완료 처리
 5. C05 — Genesis 1:6–8 설계 재개
+
+
+## 17. Legacy Asset Migration Disposition
+
+2026-10-02 `DEC-0003`에 따라 C01–C04의 legacy image binary 복구를 migration 완료 조건에서 제외했다.
+
+결론:
+
+- C01: 새 Canonical 기준으로 black-screen image를 새 production generation으로 만든다.
+- C02–C04: legacy binary를 기다리지 않고 새 Canonical 기준으로 재생성한다.
+- legacy filename과 과거 확정 기록은 historical provenance로만 보존한다.
+- 과거 binary가 나중에 발견되어도 자동 representative로 복원하지 않는다.
+
+따라서 **legacy Asset migration은 의도적으로 종료**하며, 이후 작업은 migration이 아니라 현재 Canonical 기준의 새 production / Architecture validation으로 취급한다.
+
+## 18. Migration Final Audit
+
+2026-10-02 최종 migration closure 확인:
+
+- C01–C04: `approved / revision 1`
+- Canonical definition audit: 25/25 PASSED
+- C01 provisional Asset metadata: `pending_ingest`
+- C01–C04에 available/representative Asset을 허위로 복원하지 않음
+- C02–C04 legacy binary 미확보 상태를 historical record에 보존
+- DEC-0003로 regeneration 방침 확정
+- CUT 5는 C01–C04 새 production validation 이후 재개
+
+**Genesis Creation C01–C04 migration: COMPLETED**
+
+## 19. Post-Migration Next Phase
+
+다음 단계는 migration이 아니라 **C01–C04 Canonical Production Validation**이다.
+
+권장 실행 순서:
+
+1. C01 black-screen generation / ingest / review
+2. C02 generation / review
+3. C03 generation using C02 continuity context / review
+4. C04 generation using C03 continuity context / review
+5. Cut / Continuity / Rules / Architecture feedback 반영
+6. 대표 Asset 선정
+7. C05 제작 재개
