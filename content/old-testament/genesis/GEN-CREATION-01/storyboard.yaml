@@ -52,3 +52,16 @@ storyboard:
           verse: 5
     beat: "빛과 어둠의 구별과 질서화"
     transition_note: "CUT 3의 오른쪽 광원을 유지하며 빛과 어둠의 구별이 더 분명해진다."
+
+  - order: 50
+    cut_id: GEN-CREATION-01-C05
+    scripture_anchor:
+      - book: GEN
+        start:
+          chapter: 1
+          verse: 6
+        end:
+          chapter: 1
+          verse: 8
+    beat: "물 위와 아래가 나뉘고 그 사이에 궁창이 형성됨"
+    transition_note: "C04까지의 분리 이전 원초적 물 세계가 위와 아래의 물로 나뉘며 공간 구조가 처음 형성된다."
