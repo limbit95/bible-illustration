@@ -1,0 +1,73 @@
+run_id: GEN-CREATION-01-C05-R001
+
+target:
+  cut_id: GEN-CREATION-01-C05
+  cut_revision: 1
+
+source_snapshot:
+  repository_commit: eedc11c4137f82bd0169fe04f98e7781e481aaa4
+  library: []
+
+operation: generate
+
+provider:
+  key: chatgpt
+  model: unknown
+  model_version: unknown
+  execution_mode: chat_native
+  external_request_id: dca6f8a6-3266-49f8-b6c3-e26554cb5a29
+
+integration:
+  generation_profile:
+    key: null
+    revision: null
+  prompt_adapter:
+    key: null
+    revision: null
+  bindings: []
+  fallbacks: []
+
+prompt:
+  observable_input_text: >
+    창세기 1:6–8을 한 장면으로 표현하는 초기 탐색 생성. 위와 아래의 물, 그 사이의 궁창을 한 화면에 담되 현대적 하늘·바다·육지로 읽히지 않게 하는 방향이었다.
+  provider_internal_prompt: unavailable
+  negative_prompt: null
+
+references: []
+
+settings:
+  aspect_ratio: null
+  resolution: null
+  seed: null
+  provider_specific: {}
+
+submitted_at: null
+execution_status: completed
+
+usage:
+  credits: null
+  cost: null
+  currency: null
+
+results:
+  - result_id: GEN-CREATION-01-C05-R001-O01
+    provider_output_id: dca6f8a6-3266-49f8-b6c3-e26554cb5a29
+    reviews:
+      - sequence: 1
+        reviewed_at: "2026-10-02"
+        reviewed_against:
+          cut_revision: 1
+          repository_commit: d6f677aaf8308045ec124ec9f391147b61665379
+        decision: rejected
+        evaluation:
+          scripture_fidelity: concern
+          historical_accuracy: not_applicable
+          continuity: concern
+          library_consistency: not_applicable
+          visual_quality: concern
+          technical_integrity: pass
+        issues:
+          - COMPOSITION_ISSUE
+          - CONTINUITY_MISMATCH
+        notes: >
+          한 장에 분리 과정 전체를 담으면서 현대적인 바다/하늘 수평선 인상이 강해졌고, 이후 사용자가 두 장으로 나누어 과정 자체를 보여주기로 결정했다.
