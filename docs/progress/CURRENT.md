@@ -27,7 +27,9 @@
 - C01 Asset metadata: **pending_ingest — Git LFS binary not yet available**
 - C02–C04 legacy image binary: **NOT LOCATED**
 - C01–C04 Canonical definition: **APPROVED / revision 1**
-- 현재 작업: **Genesis Creation Asset migration 방침 정리**
+- DEC-0003 Genesis C01–C04 regeneration strategy: **ACCEPTED**
+- Genesis Creation C01–C04 migration: **COMPLETED**
+- 현재 작업: **C01–C04 Canonical Production Validation 준비**
 
 ## 현재 Production 위치
 
@@ -85,6 +87,8 @@
 43. C01 Asset metadata 생성 — pending_ingest
 44. Genesis Creation definition migration audit 25/25 통과
 45. C01–C04 Canonical definition 사용자 승인 및 approved 전환
+46. DEC-0003 — legacy binary 복구 대신 C01–C04 새 Canonical 재생성 방침 확정
+47. Genesis Creation C01–C04 migration 최종 완료 처리
 
 ## 현재 Source of Truth
 
@@ -109,17 +113,16 @@
 
 ## 다음 작업
 
-1. CUT 1 black-screen Git LFS binary ingest 및 representative 등록
-2. C02–C04 legacy image binary 복구 또는 새 Canonical 기준 재생성 방침 결정
-3. Asset migration / representative Review
-4. migration 최종 감사 및 완료 처리
-5. CUT 5 제작 재개
+1. C01–C04 Canonical Production Validation 실행
+2. 생성 결과 기준 Cut / Continuity / Rules / Architecture 피드백 검토
+3. accepted Result Asset Promotion 및 representative 선정
+4. C05 제작 재개
 
 ## Blocker
 
-현재 blocker:
+현재 migration blocker 없음.
 
-1. C01 black-screen PNG의 Git LFS object ingest를 현재 GitHub connector로 수행할 수 없음
-2. C02–C04의 legacy 확정 이미지 binary를 현재 저장소/Project Library에서 찾지 못함
+운영 제약:
 
-두 blocker 모두 Canonical definition audit에는 영향을 주지 않으며 Asset migration / production complete에만 영향을 준다.
+- GitHub connector는 Git LFS object upload를 지원하지 않으므로 실제 새 production Asset binary ingest는 별도 Git LFS-capable 경로가 필요하다.
+- 이는 migration 완료 여부와는 별개이며 새 Production Validation 단계의 binary 보존 제약이다.
