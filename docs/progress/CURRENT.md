@@ -1,6 +1,6 @@
 # Current Project State
 
-> 마지막 갱신: 2026-10-02
+> 마지막 갱신: 2026-10-03
 > 상태: **GENESIS CREATION — RAPID FULL-CHAPTER PROTOTYPE MODE / VISUAL CONTINUITY FIRST**
 
 ## 현재 Phase
@@ -47,8 +47,10 @@
 - C06 final Result: **R003-O01 accepted**
 - C05/C06 Asset candidates: **A001 / pending_ingest — historical candidates, LFS ingest deferred**
 - DEC-0004: **ACCEPTED — whole-chapter rapid prototype before Asset promotion**
-- Genesis working visual reference sequence: **00→06 user-selected / conversation-local binary**
-- 현재 작업: **새 채팅에서 Genesis 1 전체 rapid prototype pass를 처음부터 끝까지 완주**
+- Genesis working visual reference sequence: **00→06 user-selected / conversation-local binary / sequence behavior documented**
+- Genesis-specific visual profile: **DOCUMENTED — widescreen + blue-black→cool-white→warm-gold progression / Genesis Creation only**
+- Presentation text reference: **APPROVED — restrained cinematic sans-serif / key Scripture direct-quote first / narration only when explanatory**
+- 현재 작업: **새 채팅에서 최종 00→06 visual anchors를 다시 제공하고 Genesis 1 전체 rapid prototype pass를 처음부터 끝까지 재시작**
 
 ## 현재 Production 위치
 
@@ -137,6 +139,9 @@
 74. 사용자 선택 00→06 working reference sequence에서 incremental continuity 원칙 확정
 75. Continuity / Generation Rules에 retain + delta / prior-cut anchor 규칙 반영
 76. `GENESIS_CREATION_RAPID_PROTOTYPE.md` 생성
+77. 사용자 최종 선택 00→06 sequence의 단계별 시각 흐름을 working guide에 명문화
+78. Genesis Creation 전용 palette / texture / lighting progression을 전역 Visual Rule과 분리해 기록
+79. 사용자 승인 cinematic presentation text reference를 `TEXT_AND_COPYRIGHT.md`와 Genesis working guide에 반영
 
 ## 현재 Source of Truth
 
@@ -166,7 +171,7 @@
 3. 인접 Cut마다 retain / delta를 우선 적용하고 과도한 미래 상태 선행 묘사를 피함
 4. 전체 시퀀스 검토 후 디테일 2차 수정
 5. 최종 선별 후에만 Asset promotion / Git LFS ingest / representative 정리
-6. presentation layer에서 개역한글 직접 인용 + 별도 narration 테스트
+6. presentation layer는 승인된 cinematic text reference를 사용하고, Key Scripture Frame은 직접 인용 우선 / narration은 설명 Frame에서만 사용
 
 ## Blocker
 
