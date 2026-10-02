@@ -31,6 +31,25 @@ segments:
         primary_light_direction: none
         light_presence: absent
 
+  - key: S03
+    start_cut_id: GEN-CREATION-01-C05
+    end_cut_id: GEN-CREATION-01-C05
+    baseline:
+      world:
+        environment: primordial-waters-divided-by-expanse
+        separation_state: firmament-established-pre-land
+        absent_elements:
+          - sun
+          - moon
+          - stars
+          - land
+          - plants
+          - animals
+          - humans
+      visual:
+        camera_context: broad-world-view
+        horizon_state: undefined
+
 transitions:
   - from: GEN-CREATION-01-C01
     to: GEN-CREATION-01-C02
@@ -68,3 +87,21 @@ transitions:
       - path: visual.light_dark_distinction
         from: emerging
         to: strengthened
+
+  - from: GEN-CREATION-01-C04
+    to: GEN-CREATION-01-C05
+    mode: partial_reset
+    retain:
+      - world.absent_elements
+      - visual.camera_context
+    reset:
+      - visual.primary_light_direction
+      - visual.light_presence
+      - visual.light_dark_distinction
+    change:
+      - path: world.environment
+        from: primordial-undifferentiated-waters
+        to: primordial-waters-divided-by-expanse
+      - path: world.separation_state
+        from: pre-firmament-pre-land-sea
+        to: firmament-established-pre-land
