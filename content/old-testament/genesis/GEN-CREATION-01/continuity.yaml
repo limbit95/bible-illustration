@@ -36,6 +36,30 @@ segments:
     end_cut_id: GEN-CREATION-01-C05
     baseline:
       world:
+        environment: primordial-waters-separating
+        separation_state: separation-initiating
+        absent_elements:
+          - sun
+          - moon
+          - stars
+          - land
+          - plants
+          - animals
+          - humans
+      visual:
+        horizon_state: undefined
+        camera_context: broad-world-view
+        primary_light_direction: right
+        light_presence: warm-gold-white
+        palette: deep-navy-warm-gold-white
+        surface_texture: painterly-fluid-organic
+        separation_gap: narrow-irregular
+
+  - key: S04
+    start_cut_id: GEN-CREATION-01-C06
+    end_cut_id: GEN-CREATION-01-C06
+    baseline:
+      world:
         environment: primordial-waters-divided-by-expanse
         separation_state: firmament-established-pre-land
         absent_elements:
@@ -47,8 +71,13 @@ segments:
           - animals
           - humans
       visual:
-        camera_context: broad-world-view
         horizon_state: undefined
+        camera_context: broad-world-view
+        primary_light_direction: right
+        light_presence: warm-gold-white
+        palette: deep-navy-warm-gold-white
+        surface_texture: painterly-fluid-organic
+        separation_gap: broad-distinct
 
 transitions:
   - from: GEN-CREATION-01-C01
@@ -94,14 +123,36 @@ transitions:
     retain:
       - world.absent_elements
       - visual.camera_context
-    reset:
       - visual.primary_light_direction
       - visual.light_presence
+    reset:
       - visual.light_dark_distinction
     change:
       - path: world.environment
         from: primordial-undifferentiated-waters
-        to: primordial-waters-divided-by-expanse
+        to: primordial-waters-separating
       - path: world.separation_state
         from: pre-firmament-pre-land-sea
+        to: separation-initiating
+
+  - from: GEN-CREATION-01-C05
+    to: GEN-CREATION-01-C06
+    mode: continue
+    retain:
+      - world.absent_elements
+      - visual.camera_context
+      - visual.primary_light_direction
+      - visual.light_presence
+      - visual.palette
+      - visual.surface_texture
+      - visual.horizon_state
+    change:
+      - path: world.environment
+        from: primordial-waters-separating
+        to: primordial-waters-divided-by-expanse
+      - path: world.separation_state
+        from: separation-initiating
         to: firmament-established-pre-land
+      - path: visual.separation_gap
+        from: narrow-irregular
+        to: broad-distinct
