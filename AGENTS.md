@@ -38,6 +38,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - DEC-0002 — Presentation-only Cut Output Mode: **REJECTED** — CUT 1은 기존 illustration/Asset 모델 유지
 - DEC-0003 — Genesis C01–C04 regeneration strategy: **ACCEPTED**
 - DEC-0004 — Genesis rapid full-chapter prototype before Asset promotion: **ACCEPTED**
+- DEC-0005 — Scripture-unit sequential generation with flexible scene decomposition: **ACCEPTED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
@@ -67,6 +68,10 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - Genesis Creation의 navy / blue-black → cool white → warm gold-white palette와 원초적 유체 질감은 **Genesis Creation 한정**이며 성경 전체 전역 Style이 아니다.
 - Presentation text 기본 reference는 작고 절제된 cinematic sans-serif이며, Key Scripture Frame은 직접 인용 우선 / narration은 설명용 Frame에서만 사용한다.
 - 다음 실전 제작은 `docs/progress/GENESIS_CREATION_RAPID_PROTOTYPE.md`를 따라 창세기 1장을 처음부터 끝까지 빠르게 완주한다.
+- 사용자가 개역한글 본문 한 구절 또는 의미 있는 구간을 가져오면 이를 Scripture Work Unit으로 삼는다.
+- Assistant는 생성 전에 해당 본문이 1장면으로 충분한지, 여러 장면 Storyboard가 필요한지 판단한다.
+- 실제 이미지는 기본적으로 한 장면씩 순차 생성하며, 직전 사용자 승인 이미지를 visual continuity anchor로 사용한다. 단 Canonical Scripture / Cut / Continuity가 항상 우선한다.
+- 여러 이미지를 한 번에 일괄 생성하는 방식은 기본값이 아니며 사용자가 명시적으로 원하거나 Continuity 위험이 낮은 경우에만 사용한다.
 - 전체 시퀀스 선별 뒤 Asset promotion / Git LFS / representative를 정리한다.
 - Presentation text는 Production Master와 분리하고 직접 인용 / 장절 / 역본 / narration을 별도 layer에서 테스트한다.
 
@@ -196,6 +201,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**새 채팅에서 최종 00→06 visual anchors 재첨부 → Genesis Creation 전체 rapid prototype pass 재시작 → 전체 시퀀스 검토 → 최종 선별 후 Asset/LFS 정리**
+**새 채팅에서 필요한 visual anchor 확인 → 사용자가 제시하는 개역한글 본문 단위로 장면 수 판단 / 필요 시 Storyboard → 한 장면씩 순차 생성 → Genesis 1 전체 완주 → 최종 선별 후 Asset/LFS 정리**
 
 이다.
