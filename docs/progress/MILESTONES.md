@@ -76,6 +76,13 @@
 - local working/cache/export 및 credential 제외 규칙 적용
 - 루트 `.gitattributes` / `.gitignore` 생성
 
+### 2026-10-02 — Genesis Creation C01–C04 Canonical definitions 승인
+
+- `GEN-CREATION-01` Canonical definition migration audit 25/25 통과
+- C01–C04 `approved / revision 1` 전환
+- Episode는 C05 이후 정의가 미완료이므로 `draft / revision 1` 유지
+- Asset migration은 별도 잔여 작업으로 유지
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 이 문서에 추가한다.
