@@ -1,0 +1,35 @@
+asset_id: GEN-CREATION-01-C05-A001
+
+owner:
+  type: cut
+  id: GEN-CREATION-01-C05
+
+source:
+  kind: generation_result
+  result_id: GEN-CREATION-01-C05-R004-O01
+  parent_asset_id: null
+
+binary:
+  storage: git_lfs
+  path: content/old-testament/genesis/GEN-CREATION-01/cuts/C05/assets/GEN-CREATION-01-C05-A001.png
+  sha256: 338b66fa04e4872a11c4b6aa7978d8384379158621a02f2c6769102b8dc743ee
+  media_type: image/png
+  width: 1672
+  height: 941
+  size_bytes: 2249310
+
+availability: pending_ingest
+
+created_at: "2026-10-02"
+
+provenance:
+  provider: chatgpt
+  note: >
+    GEN-CREATION-01-C05-R004-O01에서 승격한 accepted Asset 후보.
+    위아래 물의 분리가 막 시작되는 순간과 C04의 회화적 질감 연속성을 충족한다.
+    실제 PNG binary는 Canonical Git LFS ingest 대기 상태다.
+
+rights:
+  storage_status: permitted
+  basis: project_generated
+  note: "프로젝트의 ChatGPT image generation 결과."
