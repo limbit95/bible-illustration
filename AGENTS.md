@@ -55,7 +55,8 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - CUT 5는 C01–C04 Canonical Production Validation을 먼저 수행한 뒤 재개한다.
 - C02–C04는 실제 생성 feedback을 반영한 `approved / revision 2` 상태다.
 - 기존 accepted Result는 revision 2 기준 Review sequence 2에서도 모두 accepted 되었다.
-- representative 확정은 Canonical Git LFS binary가 available 상태가 된 후 진행한다.
+- C02–C04 LFS object는 업로드·checksum 검증까지 완료되었으나 pointer filename이 `.png.png`여서 Canonical `.png` 경로로 rename이 필요하다.
+- representative 확정은 Canonical Git LFS binary가 metadata 경로에서 available 상태가 된 후 진행한다.
 
 ## 4. 저장소 범위
 
@@ -183,6 +184,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**Genesis Creation C01–C04 Canonical binary ingest → representative 처리 → Production Validation 최종 감사**
+**Genesis Creation C02–C04 LFS pointer filename 정상화 → availability / representative 처리 → C01 완료 → Production Validation 최종 감사**
 
 이다.
