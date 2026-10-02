@@ -112,6 +112,17 @@
 - Asset promotion / Git LFS ingest는 전체 시퀀스 선별 이후로 연기
 - 본문·내레이션 합성본은 Presentation derivative로 별도 테스트
 
+### 2026-10-03 — Genesis Creation visual / presentation reference 확정
+
+- 사용자 최종 선택 00→06 working reference sequence의 단계별 연결 흐름 문서화
+- 개별 이미지 복제보다 인접 장면의 retain + delta 연출을 우선하는 기준 재확인
+- widescreen, blue-black → cool white → warm gold-white, 원초적 유체 질감을 **Genesis Creation 전용 profile**로 한정
+- 해당 palette / texture / lighting progression을 성경 전체 Visual Style로 일반화하지 않도록 규칙화
+- Presentation text는 작고 절제된 cinematic sans-serif reference로 확정
+- Key Scripture Frame은 직접 인용 우선, narration은 설명 / 전환 Frame에서만 사용하는 원칙 확정
+- Production Master와 presentation derivative 분리 원칙 유지
+- 정확한 working visual binary는 아직 Canonical Asset이 아니므로 새 채팅에서 필요 시 재첨부
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 이 문서에 추가한다.
