@@ -18,7 +18,7 @@ binary:
   height: 941
   size_bytes: 4654
 
-availability: pending_ingest
+availability: available
 
 created_at: "2026-10-02"
 
@@ -30,6 +30,7 @@ provenance:
     모든 픽셀은 #000000이며 이미지 내부 text 또는 다른 시각 요소가 없다.
     현재 Source Kind enum에는 이 deterministic project-generated binary를
     정확히 나타내는 값이 없어 source.kind는 확장 승인 전까지 null로 유지한다.
+    Canonical PNG는 Git LFS에 ingest되었고 pointer OID / size가 metadata와 일치함을 확인했다.
 
 rights:
   storage_status: permitted
