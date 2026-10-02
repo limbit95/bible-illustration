@@ -1,0 +1,53 @@
+run_id: GEN-CREATION-01-C01-R001
+
+target:
+  cut_id: GEN-CREATION-01-C01
+  cut_revision: 1
+
+source_snapshot:
+  repository_commit: 8c4520892cf52e5a6154f6f716a6566be9ab0bc2
+  library: []
+
+operation: generate
+
+provider:
+  key: chatgpt
+  model: unknown
+  model_version: unknown
+  execution_mode: chat_native
+  external_request_id: 8f550b7e-4ae9-4f86-8584-b979ce11bc31
+
+integration:
+  generation_profile:
+    key: null
+    revision: null
+  prompt_adapter:
+    key: null
+    revision: null
+  bindings: []
+  fallbacks: []
+
+prompt:
+  observable_input_text: >
+    사용자가 "C01 테스트 제작 시작하자"라고 요청했다.
+    당시 Canonical C01은 별도 장면 요소 없이 완전한 검은 화면을 요구했다.
+  provider_internal_prompt: unavailable
+  negative_prompt: null
+
+references: []
+
+settings:
+  aspect_ratio: null
+  resolution: null
+  seed: null
+  provider_specific: {}
+
+submitted_at: null
+execution_status: partial
+
+usage:
+  credits: null
+  cost: null
+  currency: null
+
+results: []
