@@ -18,7 +18,7 @@ binary:
   height: 941
   size_bytes: 2175397
 
-availability: pending_ingest
+availability: available
 
 created_at: "2026-10-02"
 
@@ -26,7 +26,7 @@ provenance:
   provider: chatgpt
   note: >
     GEN-CREATION-01-C04-R001-O01에서 승격한 Production Validation Asset 후보.
-    revision 1 기준 accepted 후, revision 2 승인 Canonical 기준으로 Review sequence 2를 수행해 다시 accepted 되었다. 실제 PNG binary는 아직 Canonical Git LFS에 ingest되지 않았다.
+    revision 1 기준 accepted 후, revision 2 승인 Canonical 기준으로 Review sequence 2를 수행해 다시 accepted 되었다. Canonical PNG binary는 Git LFS에 ingest되었고 metadata SHA-256 / size와 일치함을 확인했다.
 
 rights:
   storage_status: permitted
