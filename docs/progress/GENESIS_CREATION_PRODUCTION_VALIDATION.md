@@ -234,3 +234,37 @@ a57b5a2e5eec71c27e2abb5ea2d1465d0e468f95
 4. C01 black-screen Asset binary ingest / review / representative 처리
 5. C01–C04 Production Validation 최종 감사 및 종료
 6. C05 — Genesis 1:6–8 제작 재개
+
+
+## 10. C02–C04 Canonical Asset Completion
+
+Git LFS pointer filename을 Canonical metadata 경로인 `.png`로 정상화한 뒤 다시 확인했다.
+
+- C02: `GEN-CREATION-01-C02-A001.png`
+- C03: `GEN-CREATION-01-C03-A001.png`
+- C04: `GEN-CREATION-01-C04-A001.png`
+
+세 pointer 모두 기존 metadata의 SHA-256과 size가 일치한다.
+
+Asset 상태:
+
+- C02 A001: `available`
+- C03 A001: `available`
+- C04 A001: `available`
+
+Representative selection:
+
+- C02 → `GEN-CREATION-01-C02-A001`
+- C03 → `GEN-CREATION-01-C03-A001`
+- C04 → `GEN-CREATION-01-C04-A001`
+
+모두 `cut_revision: 2` 기준으로 선정했다.
+
+따라서 C02–C04는 현재 Architecture의 production complete 조건을 충족한다.
+
+## 11. Remaining Work
+
+1. C01 black-screen Asset binary ingest
+2. C01 Result/Asset review 및 representative selection
+3. C01–C04 Production Validation 최종 감사
+4. C05 — Genesis 1:6–8 제작 재개
