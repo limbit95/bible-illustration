@@ -26,7 +26,7 @@ provenance:
   provider: chatgpt
   note: >
     GEN-CREATION-01-C02-R002-O01에서 승격한 Production Validation Asset 후보.
-    사용자 검토에서 revision 1 기준 accepted 되었으나 실제 PNG binary는 아직 Canonical Git LFS에 ingest되지 않았다. C02–C04 revision 2 승인 후 현재 Canonical 기준으로 재검토가 필요하다.
+    revision 1 기준 accepted 후, revision 2 승인 Canonical 기준으로 Review sequence 2를 수행해 다시 accepted 되었다. 실제 PNG binary는 아직 Canonical Git LFS에 ingest되지 않았다.
 
 rights:
   storage_status: permitted
