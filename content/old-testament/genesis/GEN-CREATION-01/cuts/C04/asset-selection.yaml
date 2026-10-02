@@ -1,0 +1,10 @@
+cut_id: GEN-CREATION-01-C04
+
+representative_asset:
+  asset_id: GEN-CREATION-01-C04-A001
+  selected_against:
+    cut_revision: 2
+    repository_commit: 6340b4e837024e1af3a60b832bc8b4b9e89cb5ad
+  selected_at: "2026-10-02"
+
+representative_history: []
