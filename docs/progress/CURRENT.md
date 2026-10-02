@@ -1,7 +1,7 @@
 # Current Project State
 
 > 마지막 갱신: 2026-10-02
-> 상태: **POST STEP 0 — Canonical Production Validation**
+> 상태: **GENESIS CREATION — C01–C04 PRODUCTION VALIDATION COMPLETED / C05 PREPARATION**
 
 ## 현재 Phase
 
@@ -24,7 +24,7 @@
 - DEC-0002 Presentation-only Cut Output Mode: **REJECTED — existing Asset model retained**
 - CUT 1 handling: **actual black-screen illustration Asset**
 - C02–C04 legacy image binary: **NOT LOCATED**
-- C01 Asset metadata: **pending_ingest — deterministic pure-black PNG prepared / SHA-256 recorded / Git LFS ingest pending**
+- C01 Asset: **AVAILABLE — deterministic pure-black PNG / Git LFS OID + size verified**
 - C01–C04 Canonical definition: **APPROVED / revision 1**
 - DEC-0003 Genesis C01–C04 regeneration strategy: **ACCEPTED**
 - Genesis Creation C01–C04 migration: **COMPLETED**
@@ -38,16 +38,19 @@
 - C02–C04 Assets: **AVAILABLE**
 - C02–C04 representative Assets: **SELECTED against revision 2**
 - C02–C04 Cut production complete: **YES**
-- 현재 작업: **C01 deterministic black-screen PNG Git LFS ingest → representative → Production Validation 최종 감사**
+- C01 representative Asset: **SELECTED against revision 1**
+- C01 Cut production complete: **YES**
+- Genesis Creation C01–C04 Production Validation: **COMPLETED / PASSED**
+- 현재 작업: **C05 Canonical definition 준비 및 제작 재개**
 
 ## 현재 Production 위치
 
 새 Canonical 구조에 Genesis Creation C01–C04 definition을 이관했다.
 
 - current_episode: GEN-CREATION-01
-- current_cut: GEN-CREATION-01-C04 (production validation review boundary)
+- current_cut: C01–C04 validation complete; next target is C05 definition preparation
 - Genesis Creation CUT 1–4 definition migration: **COMPLETED / AUDIT PASSED**
-- CUT 5 production: **PAUSED UNTIL C01–C04 PRODUCTION VALIDATION COMPLETE**
+- CUT 5 production: **READY TO RESUME AFTER CANONICAL DEFINITION PREPARATION / APPROVAL**
 
 ## 마지막 완료 항목
 
@@ -113,6 +116,10 @@
 60. C02–C04 representative Asset 선정 — revision 2 기준
 61. C01 deterministic pure-black PNG Production Master 준비 — 1672x941 / SHA-256 기록
 62. C01 deterministic Asset의 source-kind 공백을 Production Validation feedback으로 식별
+63. C01 Git LFS pointer OID / size metadata 일치 검증
+64. C01 Asset availability `available` 전환
+65. C01 representative Asset 선정 — revision 1 기준
+66. Genesis Creation C01–C04 Production Validation 최종 감사 통과 및 완료
 
 ## 현재 Source of Truth
 
@@ -137,9 +144,9 @@
 
 ## 다음 작업
 
-1. C01 black-screen Asset binary / review / representative 완료
-2. C01–C04 Production Validation 최종 감사 및 종료
-3. C05 제작 재개
+1. C05 Scripture Anchor / beat / Canonical Scene 정의 준비
+2. C05 definition 사용자 승인
+3. 승인된 C05 기준으로 이미지 제작 재개
 
 ## Blocker
 
@@ -147,7 +154,7 @@
 
 Production Validation blocker:
 
-1. C01 Canonical image binary Git LFS ingest 필요
+없음 — C01–C04 Production Validation 완료
 
 운영 제약:
 
