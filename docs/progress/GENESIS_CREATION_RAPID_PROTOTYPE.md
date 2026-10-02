@@ -1,6 +1,6 @@
 # Genesis Creation — Rapid Full-Chapter Prototype Guide
 
-> 상태: **ACTIVE WORKING GUIDE / 2026-10-02**
+> 상태: **ACTIVE WORKING GUIDE / 2026-10-03**
 >
 > 목적: 창세기 1장 천지창조 전체를 빠르게 1차 완주하면서,
 > 사용자 선택 레퍼런스에서 확인된 시각적 연결 원칙을 실제 시퀀스에 적용한다.
@@ -21,23 +21,64 @@
 
 ## 2. 사용자 선택 Working Reference Sequence
 
-현재 대화에서 사용자가 00→06 순서로 직접 선별한 이미지 묶음을
-Genesis Creation prototype의 **working visual reference sequence**로 사용한다.
+사용자가 2026-10-03 최종 첨부한 00→06 이미지 묶음을 Genesis Creation rapid prototype의 **working visual reference sequence**로 사용한다.
 
-이 binary들은 아직 Canonical Asset으로 승격하지 않는다.
-정확한 이미지 reference가 필요한 새 채팅에서는 사용자가 00→06 세트를 다시 첨부하거나,
-추후 선별 완료 뒤 Git LFS Reference Asset으로 승격해야 한다.
+이 sequence의 가장 중요한 목적은 각 이미지의 독립적 디자인 복제가 아니라 **인접 이미지 사이의 변화량과 연결 연출을 재현하는 것**이다.
 
-### Reference에서 추출한 핵심
+이 binary들은 아직 Canonical Asset으로 승격하지 않는다. 새 채팅에서 정확한 visual anchoring이 필요하면 사용자가 00→06 세트를 다시 첨부한다. 전체 prototype 선별 뒤에만 필요한 reference / production binary를 Git LFS Asset으로 승격한다.
+
+### 2.1 00→06 연결 흐름
+
+00 — **완전한 흑암**
+- pure black에 가까운 시작 화면
+- 형체·공간·광원·천체를 드러내지 않는다
+
+01 — **흑암 속 원초적 구조가 아주 약하게 감지됨**
+- 짙은 blue-black / navy
+- 물·안개·구름처럼 보이지만 어느 하나로 고정되지 않는 원초적 유체 덩어리
+- 광원은 사실상 없음
+- 현대적 바다 / 뚜렷한 수평선으로 읽히지 않게 한다
+
+02 — **동일한 세계에 차가운 빛이 처음 스며듦**
+- 01의 큰 덩어리 배치와 카메라를 최대한 유지
+- 우측 계열에서 작은 cool blue-white light가 나타남
+- 빛은 공간을 일부만 드러내며 어둠이 여전히 우세
+
+03 — **같은 위치의 빛이 따뜻해지기 시작**
+- 02의 구조를 유지
+- 광원의 위치와 흐름은 이어지고 warm gold-white가 처음 섞임
+- 전체 세계를 한 번에 밝히지 않는다
+
+04 — **금빛 광휘가 확장되고 빛/어둠 대비가 커짐**
+- 이전 물/안개/구름 덩어리와 표면 언어 유지
+- 동일 방향의 빛이 강해지며 반사 영역이 넓어짐
+- 갑작스러운 새로운 지형·천체·현대적 풍경을 추가하지 않는다
+
+05 — **밝은 영역과 열린 공간감이 한 단계 더 확대됨**
+- 04와 같은 세계의 다음 순간이어야 한다
+- warm gold-white의 비중이 증가하지만 blue-black 영역도 남김
+- 질감과 카메라를 이유 없이 바꾸지 않는다
+
+06 — **같은 장면 언어가 더 안정된 밝은 상태로 진행**
+- 05의 덩어리·광원 방향·표면 질감을 유지
+- 밝음의 진행은 명확하지만 별도의 새 세계처럼 보이지 않는다
+- 이후 궁창·물의 분리·뭍 등장 같은 사건을 만들 때도 이 연속성을 출발점으로 삼는다
+
+### 2.2 Genesis Creation 전용 Visual Profile
+
+다음은 **Genesis Creation 한정** working profile이다. 성경 전체 프로젝트의 전역 Style로 사용하지 않는다.
 
 - widescreen 16:9 계열
-- 넓은 시야와 광각적 공간감
-- 짙은 navy / blue-black 기반
-- 물·안개·구름의 경계가 명확한 현실 물체라기보다 서로 섞이는 원초적 유체 덩어리
-- 일반적인 현대 바다처럼 읽히는 깨끗한 수평선은 피함
-- 밝은 단계에서도 태양 자체가 아니라 warm gold-white light가 세계 속에서 퍼짐
-- 물과 빛의 표면은 지나치게 crystal / glass처럼 변하지 않고 같은 재질 언어를 유지
-- 현실 풍경으로 갑자기 전환하지 않음
+- 넓은 시야 / 광각적 공간감
+- 초기 palette: pure black / blue-black / deep navy
+- 빛의 progression: 거의 없음 → cool blue-white → warm gold-white
+- 원초적 water / mist / cloud가 서로 섞이는 유기적 유체 질감
+- 고정된 현실 사물보다 거대한 흐름과 덩어리의 움직임을 우선
+- 지나치게 glass / crystal처럼 반짝이는 표면 금지
+- 현실적인 현대 바다 사진처럼 정돈된 수평선·해변·산악 풍경으로 갑자기 변하지 않음
+- 후속 상태는 이전 장면의 구조를 보존한 채 Scripture가 요구하는 delta만 추가
+
+이 profile은 docs/rules/VISUAL_RULES.md의 전역 규칙을 대체하지 않는다.
 
 ## 3. 가장 중요한 Continuity 원칙
 
@@ -141,31 +182,43 @@ rapid generation / edit
 기존 C05/C06 pending_ingest 후보는 historical record로 남기고,
 현재 prototype pass를 막는 blocker로 사용하지 않는다.
 
-## 8. Presentation Text Test
+## 8. Presentation Text Reference
 
-Production Master는 계속 text-free다.
+Production Master는 계속 text-free다. 텍스트가 포함된 결과는 **presentation derivative**다.
 
-텍스트 테스트는 별도 presentation derivative로 만든다.
+사용자가 2026-10-03 승인한 텍스트 분위기를 현재 Genesis Creation prototype의 presentation reference로 사용한다.
 
-한 장면의 presentation 데이터는 최소 다음을 분리한다.
+### 8.1 선택 원칙
 
-- scripture_anchor
-- direct_quote
-- translation
-- narration
+Genesis Creation은 본문 자체가 핵심 창조 선언과 행위를 구성하는 경우가 많으므로:
 
-기본 공개 직접 인용 역본은 현재 규칙대로 개역한글이다.
+- 중요한 본문 장면은 **개역한글 직접 인용 우선**
+- Key Scripture Frame에서는 본문과 나레이션을 동시에 넣지 않는 것을 기본으로 함
+- 역사·배경·장면 연결 설명이 주목적인 별도 Frame에서만 narration 사용
+- 장절 / direct_quote / translation / narration 데이터는 분리 관리
 
-시각 테스트 권장 구조:
+### 8.2 시각 분위기
 
-~~~text
-[성경 직접 인용 — 가장 높은 위계]
-[창세기 1:3 · 개역한글]
+- 작고 절제된 sans-serif
+- 화려한 장식체 금지
+- 영화 자막 / 오프닝 카드 같은 조용한 인상
+- 기본 좌하단 배치
+- 넉넉한 여백
+- 장절 표기는 본문보다 작게
+- off-white text
+- 아주 약한 shadow 또는 필요 시 subtle gradient
+- 이미지의 주요 시각 요소를 가리지 않음
+- pure-black 장면에서 절제된 intertitle 사용 가능
 
-[짧은 자체 내레이션 — 별도 위계]
-~~~
+1672×941 reference 기준:
+- left margin 약 5~6%
+- bottom margin 약 7~8%
+- reference label 약 18 px 수준
+- body 약 31 px 수준
 
-본문 직접 인용과 내레이션이 같은 문장처럼 보이지 않도록 시각적으로 분리한다.
+수치는 고정값이 아니라 비례 재현을 위한 기준이다.
+
+세부 전역 규칙은 docs/rules/TEXT_AND_COPYRIGHT.md를 따른다.
 
 ## 9. 새 채팅 시작 절차
 
