@@ -102,6 +102,16 @@
 - 실제 제작 feedback이 기존 Architecture / Rules / Asset model 안에서 처리 가능함을 검증
 - 다음 제작 대상은 C05 — Genesis 1:6–8
 
+### 2026-10-02 — Genesis Creation rapid full-chapter prototype workflow 확정
+
+- DEC-0004 accepted
+- 사용자 선택 00→06 working reference에서 인접 Cut의 단계적 연결을 핵심 제작 기준으로 확정
+- retain / delta / forbidden leap 원칙을 Continuity Rules에 반영
+- 이전 Cut을 continuity anchor로 사용하는 생성 규칙 반영
+- 개별 Cut production complete보다 창세기 1장 전체 1차 완주를 먼저 수행
+- Asset promotion / Git LFS ingest는 전체 시퀀스 선별 이후로 연기
+- 본문·내레이션 합성본은 Presentation derivative로 별도 테스트
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 이 문서에 추가한다.
