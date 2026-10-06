@@ -2,6 +2,12 @@
 # Template status: v1.0 CONFIRMED / 2026-10-02 user approved
 # Storyboard is the single Source of Truth for Cut display order,
 # scripture_anchor, and beat.
+# transition_note records only high-level narrative/visual transition intent.
+# Detailed scene specification belongs to cut.yaml.
+# Detailed continue/partial_reset/reset and retain/change/reset constraints
+# belong to continuity.yaml.
+# No extra field is required for coverage, beat-granularity, repetition,
+# rhythm, or Key Scripture/explanatory review; those are Production Rules.
 
 episode_id: null
 

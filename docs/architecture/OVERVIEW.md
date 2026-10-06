@@ -65,6 +65,23 @@ Provider가 반환한 모든 Result를 장기 보존하지 않는다.
 
 장기 가치가 있는 Result만 Asset Promotion을 거쳐 Canonical Asset으로 등록한다.
 
+### Storyboard vs Cut vs Continuity
+
+Storyboard는 **무엇을 어떤 순서와 의미 단위로 보여줄지 계획**한다.
+
+- 표시 순서
+- Cut ID
+- Scripture Anchor
+- 짧은 beat
+- 필요 시 high-level transition intent
+
+Cut은 각 장면의 상세 Canonical Scene Specification을 소유한다.
+
+Continuity는 인접 장면 사이의 실제 `continue / partial_reset / reset` 및 retain / change / reset constraint를 소유한다.
+
+Storyboard Production Review에서 coverage / granularity / relation / visual repetition / Episode rhythm을 검토할 수 있지만,
+그 판단을 이유로 Cut 상세값이나 Continuity constraint를 Storyboard에 중복 저장하지 않는다.
+
 ### Library vs Continuity
 
 Library는 “무엇인가”를 정의한다.

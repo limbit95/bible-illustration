@@ -159,6 +159,44 @@ STEP 0-1에서 Storyboard의 최소 책임으로 확정된 `scripture_anchor`와
 
 Cut 문서가 해당 값을 필요로 할 때는 자신의 `cut_id`로 Storyboard entry를 참조한다. 동일한 `scripture_anchor`나 `beat`를 Cut에 다시 복사해 두 군데를 동기화하지 않는다.
 
+### 4.1 Storyboard Production Planning
+
+Storyboard는 단순 순서표가 아니라 Cut 정의 전에 전체 제작 흐름을 점검하는 planning surface로도 사용한다.
+
+다만 이 역할은 **새 Canonical 필드를 추가하는 것**과 다르다.
+
+현재 최소 필드만으로 다음을 검토한다.
+
+- Episode / Work Unit의 Scripture coverage
+- Cut boundary와 beat granularity
+- 인접 Cut의 high-level Scene Relation
+- 전체 시퀀스의 visual repetition 가능성
+- Episode-level rhythm
+- 필요 시 Key Scripture / explanatory presentation intent
+
+이 검토 결과가 구체적인 장면 요구사항으로 이어지면 Cut이 소유하고,
+인접 Cut 사이의 retain / change / reset 요구사항으로 이어지면 Continuity가 소유한다.
+
+### 4.2 `transition_note`의 책임
+
+`transition_note`는 앞뒤 Cut 사이의 **서사적·연출적 전환 의도**를 짧게 기록한다.
+
+적절한 예:
+
+- 같은 사건의 직접적인 다음 단계이므로 연결감을 우선한다.
+- 새로운 사건이 시작되므로 visual reset을 허용한다.
+- Story chronology는 이어지지만 새로운 scale의 장면으로 전환한다.
+
+다음 상세 데이터는 `transition_note`에 Canonical constraint로 중복 저장하지 않는다.
+
+- 정확한 continuity mode
+- retain path
+- change path와 값
+- reset path
+- Segment baseline
+
+이 값들은 Continuity Model이 Source of Truth다.
+
 ## 5. Episode Definition Status
 
 Episode의 상태는 이미지 제작 진행률이 아니라 **Episode 정의 자체의 설계·검토·승인 상태**만 나타낸다.

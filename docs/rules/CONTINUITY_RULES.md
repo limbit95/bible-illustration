@@ -1,6 +1,6 @@
-# Continuity Rules v1.0
+# Continuity Rules v1.1
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
 >
 > 목적: 연속된 Cut이 같은 사건과 세계의 다음 순간처럼 느껴지도록 유지·변화·reset 판단 규칙을 정의한다.
 >
@@ -203,3 +203,43 @@ Scripture상 시간·사건·인과는 유지하되 시각 언어를 새롭게 �
 - Continuity가 중요한가, Visual Reset이 더 중요한가
 
 사용자가 Relation 방식을 지정하지 않아도 Assistant가 기본 판단한다.
+
+
+## 13. Storyboard Relation Planning과 Canonical Continuity 경계
+
+Storyboard 단계에서는 인접 Cut의 관계를 먼저 **Continuity-oriented / Transition-oriented** 관점으로 판단할 수 있다.
+
+이 판단은 제작 방향을 정하는 planning layer이며 별도 Canonical enum을 만들지 않는다.
+
+### Storyboard가 기록할 수 있는 것
+
+`transition_note`에는 다음처럼 high-level intent를 기록할 수 있다.
+
+- 동일 사건의 직접적인 다음 단계이므로 연결감을 우선한다.
+- 새로운 사건 또는 핵심 subject가 시작되므로 시각적 전환을 허용한다.
+- 이전 장면과 Story chronology는 이어지지만 구도와 스케일을 새로 설계한다.
+
+### Storyboard가 소유하지 않는 것
+
+다음은 Storyboard에 중복 저장하지 않는다.
+
+- 정확한 transition mode
+- retain path 목록
+- change path와 from / to 값
+- reset path 목록
+- Segment baseline
+- 구체적인 continuity constraint
+
+위 데이터의 Source of Truth는 `continuity.yaml`이다.
+
+### Canonical mapping
+
+Storyboard의 high-level relation intent를 실제 Canonical 정의로 옮길 때:
+
+- Continuity-oriented → `continue` 또는 `partial_reset`
+- Transition-oriented → `partial_reset` 또는 `reset`
+
+중 하나를 Scripture / Cut / Continuity 기준으로 결정한다.
+
+`transition_note`와 Continuity가 충돌하면 상세 Canonical constraint를 소유하는 Continuity를 우선하되,
+Storyboard의 이야기 의도 자체가 달라졌다면 Storyboard도 함께 수정한다.

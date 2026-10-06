@@ -1,6 +1,6 @@
-# Visual Rules v1.0
+# Visual Rules v1.1
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
 >
 > 목적: 장면별 유연성을 유지하면서 프로젝트 전체가 공유할 시각적 품질과 표현 기준을 정의한다.
 
@@ -149,3 +149,53 @@ visual_quality와 technical_integrity를 구분한다.
 - 다른 Episode에서 재사용하려면 별도 검토와 사용자 승인을 거친다.
 
 폐기된 production iteration의 구체 visual profile은 새 Episode의 기본값으로 계승하지 않는다. 새 Episode-specific profile은 해당 Episode를 새로 설계할 때 Scripture와 현재 Rules를 기준으로 다시 정한다.
+
+
+## 12. Storyboard 단계의 Visual Repetition Prevention
+
+시각적 반복 문제는 생성 결과를 본 뒤에만 발견하는 것이 아니라 Storyboard 단계에서도 먼저 검토한다.
+
+연속 Cut의 본문 의미가 달라지는데도 다음이 계속 동일하면 repetition concern으로 본다.
+
+- dominant visual subject
+- camera distance
+- viewpoint
+- scale
+- composition
+- lighting concept
+- visual rhythm
+
+반복 자체가 잘못은 아니다.
+
+같은 사건의 점진적 변화처럼 continuity가 의미의 핵심이면 반복되는 시각 구조가 오히려 필요할 수 있다.
+
+반대로 본문의 핵심이 달라졌는데 이전 구도와 subject를 습관적으로 유지해서 장면 간 의미 차이가 약해지면
+Transition-oriented relation이나 새로운 visual treatment를 검토한다.
+
+**다양성 자체를 목표로 삼지 않는다.**
+본문 의미의 차이를 더 정확하게 전달하기 위해 필요한 경우에만 시각 축을 변화시킨다.
+
+구체 카메라·구도·조명 값은 Storyboard에 장황하게 저장하지 않고
+실제 Cut Canonical Scene과 필요 시 Continuity에서 구체화한다.
+
+## 13. Episode-level Visual Rhythm Review
+
+여러 Cut을 가진 Episode는 개별 Cut의 완성도뿐 아니라 전체 시퀀스의 시각 리듬도 검토한다.
+
+검토 항목:
+
+- 넓은 establishing 장면, 중간 거리 장면, detail 장면이 본문 목적에 맞게 배치되는가
+- 동일한 카메라 거리나 viewpoint가 이유 없이 길게 반복되는가
+- Continuity 구간이 필요한 만큼 이어지고 적절한 지점에서 Transition이 발생하는가
+- visual climax가 본문의 중요도와 맞는가
+- 강한 장면이 연속될 때 rest / breathing frame이 필요한가
+- 동일한 조명·팔레트·분위기가 본문 변화와 무관하게 관성적으로 계속되는가
+- Episode의 시작과 끝이 시각적으로 같은 강도로 평평하게 느껴지지 않는가
+
+다음과 같은 기계적 quota는 만들지 않는다.
+
+- N Cut마다 반드시 close-up
+- establishing / medium / detail을 동일 비율로 배치
+- 일정 간격마다 palette 변경
+
+Storyboard rhythm은 항상 Scripture와 production intent를 우선한다.
