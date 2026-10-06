@@ -51,9 +51,11 @@ templates/     반복 제작 데이터 템플릿
 
 ## 현재 상태
 
-STEP 0 — Architecture Definition과 Repository Structure v1.0은 완료·확정되었다.
+STEP 0 — Architecture Definition, Repository Structure v1.0, Production Rules v1.0, Templates v1.0은 완료·확정되었다.
 
-현재 실제 저장소 구조와 제작 규칙을 정식화하는 POST STEP 0 단계다.
+현재는 **Storyboard Production Rules를 강화하는 Architecture refinement 단계**다.
+
+이전 Genesis production/test iteration은 현재 production tree에서 retired 처리되었으며 active Episode / Cut / Asset은 없다. 새 production은 refinement 완료 후 Scripture부터 다시 설계한다.
 
 최신 진행 위치는 반드시 `docs/progress/CURRENT.md`에서 확인한다.
 
