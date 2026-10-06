@@ -126,11 +126,11 @@ Canonical Sequence 전체를 거대한 연속 장면처럼 취급하지 않는�
 예:
 
 ```text
-C02
-빛이 오른쪽에서 등장
+Cut A
+인물이 길의 왼쪽에서 이동을 시작
 ↓ continue
-C03
-같은 오른쪽 광원을 유지하며 밝기 증가
+Cut B
+같은 이동 방향과 공간 관계를 유지하며 중앙으로 진행
 ```
 
 ### partial_reset
@@ -257,29 +257,29 @@ Episode 내부 continuity 문서에서 사용하는 로컬 구조다.
 개념 예:
 
 ```yaml
-episode_id: GEN-CREATION-01
+episode_id: BOOK-STORY-01
 
 segments:
   - key: S01
-    start_cut_id: GEN-CREATION-01-C01
-    end_cut_id: GEN-CREATION-01-C03
+    start_cut_id: BOOK-STORY-01-C01
+    end_cut_id: BOOK-STORY-01-C03
 
     baseline:
       world:
-        environment: primordial-waters
+        location_ref: LOC-EXAMPLE
       visual:
-        primary_light_direction: right
+        camera_axis: forward
 
 transitions:
-  - from: GEN-CREATION-01-C01
-    to: GEN-CREATION-01-C02
+  - from: BOOK-STORY-01-C01
+    to: BOOK-STORY-01-C02
     mode: continue
 
-  - from: GEN-CREATION-01-C02
-    to: GEN-CREATION-01-C03
+  - from: BOOK-STORY-01-C02
+    to: BOOK-STORY-01-C03
     mode: continue
     change:
-      - visual.light_intensity
+      - character.position
 ```
 
 `S01` 같은 segment key는 Episode 내부에서만 사용하며 Content Model의 영구 ID로 취급하지 않는다.
@@ -320,8 +320,8 @@ baseline:
   world:
     location_ref: ...
     weather: clear
-  visual:
-    primary_light_direction: right
+  spatial:
+    movement_direction: left-to-right
 ```
 
 ### Transition Delta
@@ -337,7 +337,7 @@ mode: continue
 
 retain:
   - world.location
-  - visual.primary_light_direction
+  - spatial.movement_direction
 
 change:
   - path: character.CHR-XXX.position

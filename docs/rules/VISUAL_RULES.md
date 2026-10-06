@@ -148,6 +148,4 @@ visual_quality와 technical_integrity를 구분한다.
 - Episode-specific profile은 해당 Episode의 Canonical Continuity 또는 승인된 working guide / reference record에 기록한다.
 - 다른 Episode에서 재사용하려면 별도 검토와 사용자 승인을 거친다.
 
-현재 Genesis Creation rapid prototype의 navy / blue-black → cool white → warm gold-white 진행, 원초적 유체 질감, widescreen 광각 구성, 00→06 working reference sequence는 **Genesis Creation 한정 기준**이며 성경 전체 전역 시각 규칙이 아니다.
-
-세부 Genesis Creation working profile은 docs/progress/GENESIS_CREATION_RAPID_PROTOTYPE.md를 따른다.
+폐기된 production iteration의 구체 visual profile은 새 Episode의 기본값으로 계승하지 않는다. 새 Episode-specific profile은 해당 Episode를 새로 설계할 때 Scripture와 현재 Rules를 기준으로 다시 정한다.

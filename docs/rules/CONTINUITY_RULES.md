@@ -104,11 +104,9 @@ Continuity는 사건 진행 중의 상태를 소유한다.
 
 ## 8. 이전 제작 Anchor의 취급
 
-Genesis Creation CUT 2→3→4에서 확인된 원초적 수면과 오른쪽 광원 계승은 중요한 실제 사례다.
+폐기된 production iteration의 reference image나 장면별 continuity 값은 새 Episode의 Canonical 기준으로 자동 복원하지 않는다.
 
-하지만 이 값은 **전역 Continuity Rule이 아니라 해당 Episode/Cut migration 시 복원해야 할 구체 Continuity 데이터**다.
-
-다른 Episode에 동일한 오른쪽 광원을 적용하지 않는다.
+과거 결과에서 일반화된 원칙만 현재 Rules로 유지하며, 새 제작의 retain / change / reset 값은 새 Storyboard와 Cut 정의를 기준으로 다시 결정한다.
 
 ## 9. 단계적 변화와 변화량
 
@@ -116,30 +114,15 @@ Genesis Creation CUT 2→3→4에서 확인된 원초적 수면과 오른쪽 광
 
 제작 전 인접 Cut 사이에서 최소한 다음을 분리한다.
 
-- retain: 그대로 남아야 하는 구조 / 질감 / 위치 / 방향
+- retain: 그대로 남아야 하는 구조 / 상태 / 위치 / 방향
 - delta: 이번 Cut에서 새로 변해야 하는 요소
 - forbidden leap: 아직 등장하면 안 되는 미래 상태
 
-같은 사건을 여러 Cut으로 나눈 경우 변화량이 너무 커서 중간 단계를 건너뛰지 않도록 한다.
+같은 사건을 여러 Cut으로 나눈 경우 변화량이 너무 커서 의미 있는 중간 단계를 건너뛰지 않도록 한다.
 
-예:
+반대로 본문상 변화가 거의 없고 별도 시각적 의미도 없다면 동일 상태를 여러 Cut으로 불필요하게 세분화하지 않는다.
 
-~~~text
-완전한 흑암
-→ 같은 구조에 아주 약한 빛
-→ 같은 위치에서 빛의 강도 증가
-→ 빛과 어둠의 구분이 분명해짐
-~~~
-
-~~~text
-원초적 물만 존재
-→ 물의 흐름이 모이기 시작
-→ 기존 수면보다 낮고 젖은 지형이 처음 드러남
-→ 이후에야 땅의 면적과 높이가 증가
-~~~
-
-특히 이전 Cut에 없던 큰 지형, 구조물, 인물, 강한 광원, 완성된 공간 상태가
-다음 Cut에서 갑자기 등장하면 Scripture상 이유가 없는 한 Continuity mismatch로 본다.
+이전 Cut에 없던 중요한 지형, 구조물, 인물, 광원, 사건 결과가 다음 Cut에서 갑자기 등장하면 Scripture상 근거가 있는지 먼저 검토한다.
 
 ## 10. Continuity Review
 

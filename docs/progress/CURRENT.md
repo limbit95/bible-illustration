@@ -1,207 +1,81 @@
 # Current Project State
 
 > 마지막 갱신: 2026-10-06
-> 상태: **ARCHITECTURE REFINEMENT — STORYBOARD RULES NEXT / IMAGE TESTING PAUSED**
+> 상태: **ARCHITECTURE REFINEMENT — STORYBOARD RULES / PRIOR GENESIS PRODUCTION RETIRED**
 
 ## 현재 Phase
 
 - STEP 0 — Architecture Definition: **COMPLETED**
 - STEP 0-1 ~ STEP 0-7: **ALL CONFIRMED**
 - Repository Structure v1.0: **CONFIRMED**
-- 최소 필수 저장소 구조 생성: **COMPLETED**
-- 루트 `AGENTS.md` 정식화: **COMPLETED**
-- 루트 `README.md` 생성: **COMPLETED**
-- 정식 Architecture 문서 분리: **COMPLETED**
-- Architecture 이관 검증: **PASSED — STEP 0-1~0-7 본문 exact match**
 - Production Rules v1.0: **CONFIRMED**
 - Templates v1.0: **CONFIRMED**
-- Template 필수 필드 교차 검증: **PASSED**
 - Progress / Decision 기록 체계 v1.0: **CONFIRMED**
 - Git LFS / ignore 정책: **CONFIRMED — DEC-0001 accepted**
-- `.gitattributes` / `.gitignore`: **IMPLEMENTED**
-- Genesis Creation CUT 1–4 Canonical definition migration: **COMPLETED**
-- Genesis Creation definition migration audit: **PASSED — 25/25**
-- DEC-0002 Presentation-only Cut Output Mode: **REJECTED — existing Asset model retained**
-- CUT 1 handling: **actual black-screen illustration Asset**
-- C02–C04 legacy image binary: **NOT LOCATED**
-- C01 Asset: **AVAILABLE — deterministic pure-black PNG / Git LFS OID + size verified**
-- C01–C04 Canonical definition: **APPROVED / revision 1**
-- DEC-0003 Genesis C01–C04 regeneration strategy: **ACCEPTED**
-- Genesis Creation C01–C04 migration: **COMPLETED**
-- C02 R001: **REJECTED — modern sea / composition mismatch**
-- C02 R002: **ACCEPTED against rev1 + chat refinement**
-- C03 R001: **ACCEPTED against rev1 + chat refinement**
-- C04 R001: **ACCEPTED against rev1 + chat refinement**
-- C02–C04 Canonical revision 2: **APPROVED — pre-separation world state reflected**
-- C02–C04 rev2 Result re-review: **PASSED / accepted**
-- C02–C04 LFS objects: **UPLOADED / canonical paths normalized / SHA-256 + byte-size verified**
-- C02–C04 Assets: **AVAILABLE**
-- C02–C04 representative Assets: **SELECTED against revision 2**
-- C02–C04 Cut production complete: **YES**
-- C01 representative Asset: **SELECTED against revision 1**
-- C01 Cut production complete: **YES**
-- Genesis Creation C01–C04 Production Validation: **COMPLETED / PASSED**
-- C05 definition: **APPROVED / revision 1 — separation initiating**
-- C06 definition: **APPROVED / revision 1 — firmament established**
-- C05 final Result: **R004-O01 accepted**
-- C06 final Result: **R003-O01 accepted**
-- C05/C06 Asset candidates: **A001 / pending_ingest — historical candidates, LFS ingest deferred**
-- DEC-0004: **ACCEPTED — whole-chapter rapid prototype before Asset promotion**
-- DEC-0005: **ACCEPTED — scripture-unit sequential generation / flexible one-to-many scene decomposition**
-- DEC-0006: **ACCEPTED — scene relation judgment / continuity when progression matters, transition when new visual treatment is stronger**
-- Genesis working visual reference sequence: **00→06 user-selected / conversation-local binary / sequence behavior documented**
-- Genesis-specific visual profile: **DOCUMENTED — widescreen + blue-black→cool-white→warm-gold progression / Genesis Creation only**
-- Presentation text reference: **APPROVED — restrained cinematic sans-serif / key Scripture direct-quote first / narration only when explanatory**
-- 현재 작업: **이미지 테스트를 일시 중지하고 Storyboard 제작 규칙을 강화하는 Architecture refinement를 새 채팅에서 재개**
+- DEC-0005: **ACCEPTED — Scripture Work Unit / sequential generation / flexible Cut decomposition**
+- DEC-0006: **ACCEPTED — Scene Relation / Continuity vs Transition**
+- 현재 작업: **Storyboard Production Rules 강화**
 
-## Architecture refinement handoff
+## Genesis Production Reset
 
-- 새 진행 기록: `docs/progress/ARCHITECTURE_REFINEMENT_HANDOFF.md`
-- 이미지 테스트: **PAUSED**
-- 테스트 산출물: working output — 별도 승인 없이는 Canonical Asset으로 자동 승격하지 않음
-- 다음 최우선 작업: **Storyboard production rules 강화**
-- 강화 범위: Scripture coverage / Cut boundary / beat granularity / Continuity vs Transition planning / visual repetition prevention / Episode rhythm / Storyboard-Cut-Continuity 책임 경계
-- `templates/storyboard.yaml` 필드 추가 여부는 Rules 설계 이후 검토하며, 현재 단계에서 자동 변경하지 않음
+이전 Genesis Creation production/test iteration은 현재 Canonical production tree에서 폐기했다.
+
+현재 tree에서 제거 대상:
+
+- 이전 Genesis Episode / Storyboard / Continuity 데이터
+- 이전 C01–C06 Cut 정의
+- 이전 Generation Run / Result Review 기록
+- 이전 Asset metadata / representative selection
+- 이전 Git LFS image pointer
+- 이전 Genesis 제작 전용 migration / production-validation / rapid-prototype 문서
+- 이전 이미지에 종속된 팔레트 / 광원 / 카메라 / 구도 / 질감 / progression 등 production-specific 규칙
+
+보존 대상:
+
+- Repository / Architecture / Rules / Templates의 구조 자체
+- Git history
+- 이전 실험에서 일반화되어 현재 Architecture / Rules / accepted Decision으로 승격된 원칙
+
+과거 production 상세를 현재 tree 안에 별도 archive로 복제하지 않는다. 필요 시 Git history로 확인한다.
 
 ## 현재 Production 위치
 
-새 Canonical 구조에 Genesis Creation C01–C04 definition을 이관했다.
+- current_episode: **none**
+- current_cut: **none**
+- active storyboard: **none**
+- active continuity: **none**
+- active Genesis production assets: **none**
 
-- current_episode: GEN-CREATION-01
-- current_cut: none fixed — next session restarts Genesis 1 from the beginning in rapid prototype mode
-- Genesis Creation CUT 1–4 definition migration: **COMPLETED / AUDIT PASSED**
-- C05/C06 prior production: **historical accepted candidates / current final selection deferred**
+Genesis Creation을 다시 시작할 경우 이전 production data나 이미지를 기준으로 복원하지 않는다.
 
-## 마지막 완료 항목
-
-1. STEP 0-1 — Content Model 확정
-2. STEP 0-2 — Episode / Cut Model 확정
-3. STEP 0-3 — Continuity Model 확정
-4. STEP 0-4 — Library Model 확정
-5. STEP 0-5 — Generation Run Model 확정
-6. STEP 0-6 — Provider Integration Model 확정
-7. STEP 0-7 — Image / Asset Storage Policy 확정
-8. Repository Structure v1.0 확정
-9. `docs/architecture/REPOSITORY_STRUCTURE.md` 정식 생성
-10. `docs/progress/CURRENT.md` 진행 복원 체계 시작
-11. `content/episode-sequence.yaml` 초기화
-12. `integrations/registry.yaml` 초기화
-13. 루트 `AGENTS.md` 정식화
-14. 루트 `README.md` 생성
-15. `docs/architecture/OVERVIEW.md` 생성
-16. STEP 0-1~0-7 정식 Architecture 문서 분리
-17. Architecture 이관 검증 통과
-18. `docs/rules/` 7개 정식화 초안 생성
-19. 과거 8컷 고정 규칙을 현재 Architecture와 충돌하는 legacy rule로 분리
-20. Rules 상호 충돌 및 Architecture 경계 자체 점검 완료
-21. Production Rules v1.0 사용자 승인 및 7개 문서 CONFIRMED 전환
-22. `templates/` 핵심 YAML 템플릿 11개 생성
-23. Architecture 기준 필수 필드 및 enum 교차 검증 통과
-24. Template 단계 물리 스키마 구체화: `cut.library_refs`, `generation-run.integration`, `asset-selection.cut_id`
-25. Templates v1.0 사용자 승인 및 11개 YAML CONFIRMED 전환
-26. `docs/progress/MILESTONES.md` 생성
-27. `docs/decisions/README.md` Decision Record 정책 생성
-28. CURRENT / MILESTONES / Decision 책임 분리 및 자체 점검 완료
-29. Progress / Decision 기록 체계 v1.0 사용자 승인 및 CONFIRMED 전환
-30. `DEC-0001-git-lfs-and-ignore-policy.md` 제안 생성
-31. Canonical Asset 경로 기반 LFS 추적 + 일반 이미지 기본 ignore 정책 자체 점검 완료
-32. DEC-0001 사용자 승인 및 accepted 전환
-33. 루트 `.gitattributes` / `.gitignore` 생성
-34. Genesis Creation CUT 1–4 historical source 복원
-35. `GENESIS_CREATION_MIGRATION.md` readiness 문서 생성
-36. DEC-0002 Presentation-only Cut Output Mode 제안 생성
-37. C02–C04 legacy image binary 현재 source에서 미확인
-38. DEC-0002 제안 rejected — presentation-only mode 미도입
-39. CUT 1을 실제 black-screen Cut-owned Asset으로 관리하는 방향 확정
-40. GEN-CREATION-01 Episode / Storyboard / Continuity 생성
-41. C01–C04 Canonical cut.yaml 생성
-42. Canonical Episode Sequence에 GEN-CREATION-01 등록
-43. C01 Asset metadata 생성 — pending_ingest
-44. Genesis Creation definition migration audit 25/25 통과
-45. C01–C04 Canonical definition 사용자 승인 및 approved 전환
-46. DEC-0003 — legacy binary 복구 대신 C01–C04 새 Canonical 재생성 방침 확정
-47. Genesis Creation C01–C04 migration 최종 완료 처리
-48. C01–C04 ChatGPT Canonical Production Validation Run 기록
-49. C02 첫 결과 rejected — modern sea 해석 문제 확인
-50. C02 두 번째 결과 및 C03/C04 결과 accepted
-51. C02–C04 Asset candidate metadata 생성 — pending_ingest
-52. Production Validation feedback으로 C02–C04 revision 2 / in_review 전환
-53. `GENESIS_CREATION_PRODUCTION_VALIDATION.md` 생성
-54. C02–C04 revision 2 사용자 승인 및 approved 전환
-55. C02–C04 기존 accepted Result를 revision 2 기준 Review sequence 2로 재검토 — 모두 accepted
-56. C02–C04 Git LFS object upload 확인 — metadata SHA-256 / size 일치
-57. 업로드 pointer filename이 `.png.png`로 생성된 경로 불일치 확인
-58. C02–C04 canonical LFS pointer filename 정상화 및 checksum 재검증
-59. C02–C04 Asset availability `available` 전환
-60. C02–C04 representative Asset 선정 — revision 2 기준
-61. C01 deterministic pure-black PNG Production Master 준비 — 1672x941 / SHA-256 기록
-62. C01 deterministic Asset의 source-kind 공백을 Production Validation feedback으로 식별
-63. C01 Git LFS pointer OID / size metadata 일치 검증
-64. C01 Asset availability `available` 전환
-65. C01 representative Asset 선정 — revision 1 기준
-66. Genesis Creation C01–C04 Production Validation 최종 감사 통과 및 완료
-67. C05 draft Canonical Scene / Storyboard / C04→C05 Continuity 준비
-68. Genesis 1:6–8을 C05/C06 두 Cut으로 분리하고 사용자 피드백에 따라 진행 단계 차이를 Canonical에 반영
-69. C05/C06 `approved / revision 1` 전환
-70. C05/C06 탐색·실패·최종 accepted Generation Run 이력 기록
-71. C05 R004-O01 / C06 R003-O01 accepted
-72. C05 A001 / C06 A001 Asset candidate metadata 생성 — pending_ingest
-73. DEC-0004 — Genesis 전체 rapid prototype 후 Asset/LFS 선별 방침 accepted
-74. 사용자 선택 00→06 working reference sequence에서 incremental continuity 원칙 확정
-75. Continuity / Generation Rules에 retain + delta / prior-cut anchor 규칙 반영
-76. `GENESIS_CREATION_RAPID_PROTOTYPE.md` 생성
-77. 사용자 최종 선택 00→06 sequence의 단계별 시각 흐름을 working guide에 명문화
-78. Genesis Creation 전용 palette / texture / lighting progression을 전역 Visual Rule과 분리해 기록
-79. 사용자 승인 cinematic presentation text reference를 `TEXT_AND_COPYRIGHT.md`와 Genesis working guide에 반영
-80. DEC-0005 — Scripture Work Unit 기반 순차 생성 + 유연한 one-to-many Cut 분해 방침 accepted
-81. Master / Generation / Continuity Rules에 본문 단위 장면 수 판단, Storyboard advisory, 한 장면씩 순차 생성 규칙 반영
-82. DEC-0006 — 모든 장면 강제 연결 대신 Continuity / Transition 관계를 사전 판단하는 방침 accepted
-83. Master / Generation / Continuity Rules와 Genesis working guide에 Scene Relation 판단 규칙 반영
-84. Genesis Creation 이미지 테스트를 일시 중지하고 Architecture refinement 단계로 복귀
-85. `ARCHITECTURE_REFINEMENT_HANDOFF.md` 생성 — Storyboard Rules 강화 범위와 새 채팅 복원 순서 기록
+Architecture refinement 완료 후 Scripture Work Unit에서 Storyboard를 새로 설계하고, 기존 ID 불변 조건을 지키면서 새 production identity를 결정한다.
 
 ## 현재 Source of Truth
 
 - 작업 진입점: `AGENTS.md`
 - 현재 진행 복원: `docs/progress/CURRENT.md`
-- 확정 Repository Structure: `docs/architecture/REPOSITORY_STRUCTURE.md`
 - Architecture 진입점: `docs/architecture/OVERVIEW.md`
 - 세부 Architecture: `docs/architecture/*.md`
+- Production Rules: `docs/rules/*.md`
+- Templates: `templates/*.yaml`
+- Architecture refinement handoff: `docs/progress/ARCHITECTURE_REFINEMENT_HANDOFF.md`
 - Milestone 이력: `docs/progress/MILESTONES.md`
-- Decision 정책/인덱스: `docs/decisions/README.md`
-- Historical working record: `architecture_v0_draft.md`, `repository_structure_v1_draft.md`
-
-현재 Architecture 판단에서는 정식 `docs/architecture/` 문서를 historical working record보다 우선한다.
-
-## 관련 결정 / 문서
-
-- `docs/progress/MILESTONES.md` — 주요 완료 기준점
-- `docs/decisions/README.md` — Decision Record 생성·상태·번호 규칙
-- `DEC-0001-git-lfs-and-ignore-policy.md`: **accepted**
-- `DEC-0002-presentation-only-cut-output-mode.md`: **rejected — 기존 illustration/Asset 모델 유지**
-- `DEC-0004-genesis-rapid-full-chapter-prototype.md`: **accepted**
-- `DEC-0005-scripture-unit-sequential-generation.md`: **accepted — 본문 단위 순차 생성 / 유연한 장면 분해**
-- `docs/progress/GENESIS_CREATION_MIGRATION.md`: migration readiness / blockers
+- Decision 정책: `docs/decisions/README.md`
 
 ## 다음 작업
 
-1. 새 채팅에서 `AGENTS.md` → `CURRENT.md` → Architecture / Rules → `ARCHITECTURE_REFINEMENT_HANDOFF.md` 순서로 상태 복원
-2. Storyboard production rules 강화안 설계
-3. Scripture coverage / Cut boundary / beat granularity / Scene Relation / visual repetition / Episode rhythm 기준 명문화
-4. Storyboard / Cut / Continuity 책임 중복 여부 감사
-5. `templates/storyboard.yaml` 변경 필요성 검토 — 필요성이 입증될 때만 수정
-6. 관련 Architecture / Rules / Template 교차 검증 후 사용자 승인
-7. 승인 뒤 Genesis Creation 이미지 테스트 재개 여부 결정
+1. Storyboard Production Rules 강화안 확정
+2. Scripture coverage 검증 규칙 명문화
+3. Cut boundary / beat granularity 규칙 명문화
+4. Storyboard 단계 Scene Relation planning 규칙 명문화
+5. visual repetition prevention / Episode-level rhythm 규칙 명문화
+6. Key Scripture / explanatory frame 판단 책임 정리
+7. Storyboard / Cut / Continuity 책임 중복 감사
+8. `templates/storyboard.yaml` 변경 필요 여부 최종 판단
+9. 사용자 승인 후 새로운 Genesis production 시작 여부 결정
+
 ## Blocker
 
-현재 migration blocker 없음.
+현재 production blocker 없음.
 
-Production Validation blocker:
-
-없음 — C01–C04 Production Validation 완료
-
-운영 제약:
-
-- 사용자 선택 00→06 working reference binary는 아직 Canonical Git LFS Asset이 아니므로 새 채팅에서 정확한 시각 anchoring이 필요하면 다시 첨부해야 한다.
-- Prototype pass에서는 LFS ingest를 진행 blocker로 사용하지 않는다.
-- 최종 선별 뒤 Canonical Asset으로 승격할 때만 Git LFS-capable 경로가 필요하다.
+이미지 생성은 Architecture refinement가 끝날 때까지 재개하지 않는다.
