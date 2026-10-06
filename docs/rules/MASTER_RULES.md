@@ -1,6 +1,6 @@
-# Master Production Rules v1.1
+# Master Production Rules v1.2
 
-> 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 목적: Bible Illustration 제작 전반에서 공통으로 적용할 상위 판단 규칙과 세부 Rules 문서의 우선순위를 정의한다.
 >
@@ -114,20 +114,22 @@ C는 최소화하며 필요한 경우 사실이 아니라 해석/연출임을 �
 기본 제작 루프는 다음 흐름을 따른다.
 
 1. 본문 범위와 Scripture Work Unit 확인
-2. 필요한 경우 Storyboard / Cut 분해안 작성
-3. Multi-Cut이면 Storyboard Production Preflight 수행
-4. Episode / Storyboard / Cut의 책임과 현재 정의 확인
-5. 필요한 Library / Historical Research 확인
-6. 이전·다음 Cut과 Canonical Continuity 확인
-7. Canonical Scene의 required / forbidden 요소 확인
-8. Provider Adapter / Profile을 통해 생성 입력 준비
-9. Generation Run 실행
-10. Scripture / Historical / Continuity / Library / Visual / Technical 검토
-11. Result Review 기록
-12. 필요 시 새 Run
-13. 장기 보존 가치가 있는 결과만 Asset Promotion
-14. 대표 Asset 선정
-15. Progress 기록 후 다음 Cut 진행
+2. 새 identity가 필요하면 current tree와 `content/identity-tombstones.yaml`에서 ID 재사용 여부 확인
+3. 필요한 경우 Storyboard / Cut 분해안 작성
+4. Multi-Cut이면 Storyboard Production Preflight 수행
+5. Episode / Storyboard / Cut의 책임과 현재 정의 확인
+6. 필요한 Library Entity / Historical Research 확인
+7. 이전·다음 Cut과 Canonical Continuity 확인
+8. Canonical Scene의 required / forbidden 요소 확인
+9. Provider Adapter / Profile을 통해 생성 입력 준비
+10. Generation Run 실행
+11. Scripture / Historical / Continuity / Library / Visual / Technical 검토
+12. Result Review 기록
+13. 필요 시 새 Run
+14. 장기 보존 가치가 있는 결과만 Asset Promotion
+15. downstream actual reference가 되는 working Result는 다음 Run 전에 Asset Promotion
+16. 대표 Asset 선정
+17. Progress 기록 후 다음 Cut 진행
 
 ## 6. 과도한 사전 설계 금지
 
@@ -172,7 +174,7 @@ Scripture Work Unit과 Cut의 관계는 1:1로 고정하지 않는다.
 
 Assistant는 실제 생성 전에 해당 본문을 보고 장면 수를 판단한다.
 
-- 한 장면으로 충분하면 바로 제작한다.
+- 한 장면으로 충분하면 multi-Cut advisory를 생략할 수 있지만, 최소 Episode + 1-entry Storyboard + Cut Canonical Scene을 먼저 정의한 뒤 제작한다.
 - 여러 장면이 더 자연스러우면 짧은 Storyboard / Cut 분해안을 먼저 제안한다.
 - 사용자가 장면 수나 분할 방식을 직접 지정하면, Scripture / Architecture / Continuity와 충돌하지 않는 한 이를 우선한다.
 
@@ -209,8 +211,11 @@ Storyboard 단계에서 상세 RETAIN / change / reset constraint를 복제하�
 인접 장면 Continuity 위험이 낮다고 판단되는 경우에만 사용한다.
 
 빠른 제작의 의미는 대량 batch 생성이 아니라,
-과도한 사전 polish, Asset promotion, Git LFS ingest, representative 확정을 뒤로 미뤄
+과도한 사전 polish, 일반적인 Asset promotion, representative 확정을 뒤로 미뤄
 본문과 장면 흐름을 먼저 완주하는 데 있다.
+
+단, 어떤 working/accepted Result가 다음 Run의 actual project-owned binary reference가 되면
+DEC-0009에 따라 해당 Result의 Asset Promotion과 Git LFS ingest는 다음 Run 전에 먼저 완료한다.
 
 
 ## 11. Scene Relation 판단
@@ -226,7 +231,8 @@ Storyboard 단계에서 상세 RETAIN / change / reset constraint를 복제하�
 - RETAIN을 보존한다.
 - 이번 본문이 요구하는 DELTA만 추가한다.
 - 중간 단계를 건너뛰는 FORBIDDEN LEAP를 피한다.
-- 직전 승인 이미지를 continuity reference로 사용할 수 있다.
+- 직전 승인 이미지를 continuity anchor 후보로 사용할 수 있다.
+- 실제 Provider binary reference로 사용할 때는 available Asset으로 먼저 Promotion한다.
 
 ### Transition-oriented
 

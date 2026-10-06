@@ -8,7 +8,7 @@
 
 - 성경 본문과 제작 Episode 구조를 분리한다.
 - Cut은 장면의 Canonical 정의이며 생성된 이미지와 동일하지 않다.
-- 반복 인물·장소·사물·의복·환경·시각 스타일은 Library에서 관리한다.
+- 반복 인물·장소·사물·의복·환경·시각 스타일의 Canonical semantic identity는 Library Entity로 관리한다.
 - Cut 사이 연속성은 Continuity 데이터로 명시한다.
 - ChatGPT, OpenArt, Higgsfield 등은 교체 가능한 rendering provider로 취급한다.
 - 실제 생성 시도는 Generation Run으로 기록한다.
@@ -34,8 +34,9 @@ templates/     반복 제작 데이터 템플릿
 1. `AGENTS.md`
 2. `docs/progress/CURRENT.md`
 3. `docs/architecture/OVERVIEW.md`
-4. 필요한 세부 Architecture / Rules 문서
-5. 현재 Episode / Cut / Library / Integration 데이터
+4. `docs/progress/PREPRODUCTION_HARDENING_AUDIT.md`
+5. 필요한 세부 Architecture / Rules 문서
+6. 현재 Episode / Cut / Library / Integration 데이터
 
 ## Architecture
 
@@ -51,13 +52,13 @@ templates/     반복 제작 데이터 템플릿
 
 ## 현재 상태
 
-STEP 0 — Architecture Definition, Repository Structure v1.0, Production Rules v1.0, Templates v1.0은 완료·확정되었다.
+STEP 0 Architecture와 Storyboard refinement 이후 **Pre-Production Architecture Hardening**까지 완료되었다.
 
-Storyboard Production Rules refinement와 Architecture Completion Audit까지 완료되었다.
+현재 기준은 Repository Structure v1.1 / Templates v1.1이며 최신 hardening audit과 synthetic lifecycle dry-run이 모두 PASS다.
 
-현재 Architecture blocker는 없으며 이전 Genesis production/test iteration은 current tree에서 retired 상태다. active Episode / Cut / Asset은 없다.
+이전 Genesis production/test iteration은 current tree에서 retired 상태이고 active Episode / Cut / Asset은 없다. 과거 ID는 `content/identity-tombstones.yaml`에 등록되어 재사용하지 않는다.
 
-새 production은 Scripture부터 Storyboard를 새로 설계한 뒤 시작한다.
+현재 Architecture blocker는 없으며 새 production은 Scripture부터 새 Episode identity와 Storyboard를 설계해 시작한다.
 
 최신 진행 위치는 반드시 `docs/progress/CURRENT.md`에서 확인한다.
 

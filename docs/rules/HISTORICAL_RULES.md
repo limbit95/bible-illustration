@@ -1,6 +1,6 @@
-# Historical Rules v1.0
+# Historical Rules v1.1
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 목적: 성경 시대의 지역·환경·복식·건축·도구·생활상을 시각화할 때 시대착오와 근거 없는 확정을 줄이기 위한 고증 규칙을 정의한다.
 

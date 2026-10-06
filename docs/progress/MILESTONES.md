@@ -91,6 +91,22 @@
 - Architecture Completion Audit 통과
 - Architecture blocker 없이 새 production 시작 가능한 상태 확정
 
+### 2026-10-06 — Pre-Production Architecture Hardening 완료
+
+- DEC-0008 accepted — Library Entity / Image Asset identity 분리
+- DEC-0009 accepted — downstream actual reference 전 Asset Promotion
+- DEC-0010 accepted — retired identity tombstone registry
+- DEC-0011 accepted — Episode visual direction owner 분해
+- Repository Structure v1.1
+- Templates v1.1 / 11개 유지
+- Continuity reset schema 정합성 확보
+- Storyboard transition_note incoming 방향 확정
+- 이전 Genesis production identity 36개 tombstone 등록
+- ChatGPT 최소 Integration 구성
+- synthetic end-to-end production lifecycle dry-run PASS
+- Pre-Production Hardening Audit PASS
+- active Genesis production 없이 새 제작 준비 완료
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 추가한다.

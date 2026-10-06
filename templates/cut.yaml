@@ -1,5 +1,5 @@
 # Bible Illustration — Cut template
-# Template status: v1.0 CONFIRMED / 2026-10-02 user approved
+# Template status: v1.1 CONFIRMED / 2026-10-06 pre-production hardening
 # Do not duplicate scripture_anchor or beat here; Storyboard owns them.
 
 cut_id: null
@@ -12,7 +12,7 @@ scene:
   required_elements: []
   forbidden_elements: []
 
-# Library definitions are referenced by ID instead of copied here.
+# Library Entities are referenced by library_id instead of copied here.
 # Populate only the categories actually used by this Cut.
 library_refs:
   characters: []

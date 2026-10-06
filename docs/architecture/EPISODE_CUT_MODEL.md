@@ -1,6 +1,6 @@
-# Episode / Cut Model v1.0
+# Episode / Cut Model v1.1
 
-> 상태: **CONFIRMED / 2026-10-01 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 선행 조건: **STEP 0-1 — Content Model v1.0 CONFIRMED**
 >
@@ -29,7 +29,7 @@ Episode는 하나의 시각적·서사적 제작 범위를 정의한다.
 개념상 Episode가 가져야 하는 필수 데이터는 다음과 같다.
 
 ```yaml
-episode_id: GEN-CREATION-01
+episode_id: BOOK-STORY-01
 title: 빛과 하늘과 땅
 
 primary_scripture:
@@ -82,8 +82,8 @@ Cut의 본질은 **어떤 순간과 의미를 시각적으로 표현해야 하�
 개념상 Cut이 가져야 하는 필수 데이터는 다음과 같다.
 
 ```yaml
-cut_id: GEN-CREATION-01-C01
-episode_id: GEN-CREATION-01
+cut_id: BOOK-STORY-01-C01
+episode_id: BOOK-STORY-01
 
 scene_intent: >
   관객이 이 Cut을 통해 반드시 이해해야 하는 사건·상태·정서를 설명한다.
@@ -111,7 +111,7 @@ revision: 1
 
 ### 3.2 Cut의 상세 시각 필드는 단계적으로 확장한다
 
-다음은 Cut에 필요할 가능성이 높지만 STEP 0-2에서 세부 스키마를 확정하지 않는다.
+다음 시각 정보는 필요할 수 있지만 v1에서는 모두를 고정 필드로 강제하지 않는다. Library Entity reference, Continuity constraint, `scene.summary / required_elements / forbidden_elements` 조합으로 필요한 만큼만 표현한다.
 
 - 인물과 인물 상태
 - 장소
@@ -127,9 +127,9 @@ revision: 1
 - 표정
 - 공간 방향
 
-이 중 무엇이 Cut 자체의 Canonical Scene 데이터이고 무엇이 Continuity/Library 참조인지는 STEP 0-3과 STEP 0-4에서 경계를 확정한다.
+Cut 자체의 상세 Scene과 Continuity / Library Entity reference 경계는 `CONTINUITY_MODEL.md`와 `LIBRARY_MODEL.md`를 따른다.
 
-따라서 지금은 `scene.summary / required_elements / forbidden_elements`를 최소 핵심으로 정의한다.
+`scene.summary / required_elements / forbidden_elements`는 Cut의 최소 핵심 Canonical Scene 데이터다.
 
 ## 4. Storyboard와 Cut의 책임 분리
 
@@ -179,7 +179,9 @@ Storyboard는 단순 순서표가 아니라 Cut 정의 전에 전체 제작 흐�
 
 ### 4.2 `transition_note`의 책임
 
-`transition_note`는 앞뒤 Cut 사이의 **서사적·연출적 전환 의도**를 짧게 기록한다.
+`transition_note`는 **직전 active Storyboard Cut → 현재 entry의 Cut**으로 들어오는 서사적·연출적 전환 의도를 짧게 기록한다.
+
+첫 active Cut의 `transition_note`는 기본적으로 `null`이다. Cross-Episode incoming boundary의 Canonical 상세는 `continuity.yaml`이 소유한다.
 
 적절한 예:
 
@@ -252,7 +254,8 @@ Episode를 `approved`로 만들기 위한 최소 조건은 다음으로 둔다.
 5. Episode의 주본문 범위를 의도적으로 누락하거나 중복한 부분이 없는지 검토되었다.
 6. Storyboard Production Preflight에서 coverage / granularity / relation / visual repetition / Episode rhythm의 blocking concern이 해결되었다.
 
-Continuity 정의 승인 조건은 STEP 0-3에서 추가될 수 있다.
+7. 모든 인접 active Cut 쌍의 Continuity mode가 결정되어 있다.
+8. Cross-Episode Continuity가 필요한 경우 incoming episode boundary가 정의되어 있다.
 
 ## 6. Cut Definition Status
 
@@ -320,7 +323,7 @@ Cut의 `definition_status`를 `approved`로 만들기 위한 최소 조건은 �
 
 대표 생성 이미지의 존재 여부는 **Cut 정의 승인 조건이 아니다.**
 
-Continuity 정의 관련 승인 조건은 STEP 0-3에서 추가될 수 있다.
+6. 첫 active Cut이 아닌 경우 직전 active Cut에서 들어오는 유효한 Continuity transition이 정의되어 있다.
 
 ## 7. 승인 후 수정과 Revision
 
@@ -329,14 +332,14 @@ Episode와 Cut의 ID는 identity이고 revision은 정의의 버전이다.
 예:
 
 ```text
-GEN-CREATION-01-C03
+BOOK-STORY-01-C03
 revision: 1
 ```
 
 승인 후 의미 있는 Canonical Scene 변경이 필요하면 같은 Cut ID 아래 revision을 증가시킨다.
 
 ```text
-GEN-CREATION-01-C03
+BOOK-STORY-01-C03
 revision: 2
 ```
 
@@ -375,7 +378,7 @@ Episode도 동일한 원칙을 따른다.
 
 `superseded`는 revision 증가에 사용하지 않는다. 같은 ID의 revision 변경은 동일한 Episode/Cut의 발전이며, `superseded`는 다른 Episode ID 또는 Cut ID가 기존 항목을 대체할 때만 사용한다.
 
-revision 이력의 실제 저장 방식은 최종 파일 구조와 Generation Run Model을 함께 검토한 뒤 확정한다.
+v1에서는 별도 revision 파일을 병렬 보관하지 않는다. 현재 YAML의 `revision`이 current canonical revision을 나타내고 과거 내용은 Git history와 Run source snapshot이 보존한다.
 
 ## 8. 본문 기반 Episode / Cut 분할 정책
 
@@ -510,9 +513,9 @@ Production Complete
 
 1. Episode/Cut의 `approved`는 **정의 승인**을 뜻한다.
 2. 이미지 제작이 시작되거나 완료되어도 Episode/Cut의 Definition Status를 `in_production` 같은 값으로 바꾸지 않는다.
-3. 이미지 생성 진행률과 Run 성공/실패는 STEP 0-5 Generation Run Model이 책임진다.
-4. 대표 승인 이미지와 Asset 상태는 STEP 0-7 Image / Asset Storage Policy에서 책임진다.
-5. 필요하다면 향후 UI에서 `production_status`를 계산해 보여줄 수 있지만, STEP 0-2에서는 Episode/Cut Canonical 데이터에 이를 중복 저장하지 않는다.
+3. 이미지 생성 진행률과 Run 성공/실패는 `GENERATION_RUN_MODEL.md`가 책임진다.
+4. 대표 승인 이미지와 Asset 상태는 `ASSET_STORAGE_POLICY.md`가 책임진다.
+5. 필요하다면 UI에서 `production_status`를 도출해 보여줄 수 있지만 Episode/Cut Canonical 데이터에 이를 중복 저장하지 않는다.
 6. 따라서 설계는 승인됐지만 이미지가 아직 없는 Cut도 정상적인 상태다.
 7. 새 Provider로 이미지를 다시 생성하더라도 Canonical Scene 정의가 바뀌지 않았다면 Cut revision과 Definition Status는 그대로 유지할 수 있다.
 
@@ -524,7 +527,7 @@ Production Complete
 
 Episode의 production complete는 active Cut 전체가 production complete일 때 도출할 수 있다.
 
-이 값의 정확한 저장/계산 방법은 STEP 0-5와 STEP 0-7에서 확정한다.
+production complete는 `ASSET_STORAGE_POLICY.md`의 대표 Asset / availability / current canonical revision 조건으로 도출한다.
 
 ## 11. 이미지와 Cut의 관계
 
@@ -547,7 +550,7 @@ Generation Run 3 → image C (approved)
 5. 외부 Provider에서 이미지가 삭제되어도 Cut 정의는 남아 있어야 한다.
 6. 대표 승인 이미지가 어떤 Asset인지 연결할 수 있어야 한다.
 
-Generation Run과 Asset의 상세 식별 체계는 STEP 0-5와 STEP 0-7에서 확정한다.
+Generation Run과 Image Asset의 상세 식별 체계는 `GENERATION_RUN_MODEL.md`와 `ASSET_STORAGE_POLICY.md`를 따른다.
 
 ## 12. Active Cut과 종료 상태
 
@@ -573,6 +576,8 @@ ID가 발급되고 제작 기록이 생긴 Cut은 가급적 물리적으로 삭�
 
 Episode에도 동일한 원칙을 적용한다.
 
+물리 삭제 또는 retire로 current tree에서 사라지는 Episode / Cut ID는 `content/identity-tombstones.yaml`에 등록해 재사용을 막는다.
+
 ## 14. STEP 0-2 불변 조건 후보
 
 이번 단계에서 확정할 핵심 invariant 후보는 다음과 같다.
@@ -597,46 +602,37 @@ Episode에도 동일한 원칙을 적용한다.
 18. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
 19. Storyboard Production Review는 새 필드를 요구하지 않으며, 구체 Scene Specification과 Continuity constraint를 Storyboard에 중복 저장하지 않는다.
 
-## 15. STEP 0-2에서 의도적으로 미확정하는 항목
+## 15. STEP 0-2 후속 책임의 현재 해소 상태
 
-다음은 이후 STEP에서 정한다.
+STEP 0-2 당시 후속 단계로 넘긴 항목은 현재 다음 문서에서 해소되었다.
 
-- 카메라/광원/공간 방향 등 Continuity 상세 필드
-- Character / Location / Object 등 Library 참조 스키마
-- Provider별 Prompt 구조
-- Generation Run ID와 평가 필드
-- 이미지 Asset ID와 실제 저장 위치
-- 승인 이미지 여러 개/파생 비율/사이트별 variant 정책
-- Markdown/YAML 최종 저장 형식
-- revision의 물리적 파일 저장 방식
-- 성경 번역본 전문 저장 및 저작권 규칙
+- Continuity field / reset → `CONTINUITY_MODEL.md`
+- Library Entity reference → `LIBRARY_MODEL.md`
+- Provider Prompt → `PROVIDER_INTEGRATION_MODEL.md`
+- Run ID / Result Review → `GENERATION_RUN_MODEL.md`
+- Image Asset ID / storage / representative → `ASSET_STORAGE_POLICY.md`
+- physical YAML layout → `REPOSITORY_STRUCTURE.md`, `templates/`
+- Scripture direct quote / copyright → `TEXT_AND_COPYRIGHT.md`
+- revision history → current revision field + Git history + Run source snapshot
 
-## 16. STEP 0-2 검토 포인트
+현재 의도적으로 별도 schema를 만들지 않는 항목:
 
-다음 항목은 사용자 승인으로 확정되었다:
+- 사이트별 presentation variant
+- production complete mutable status field
 
-- Episode 필수 데이터 범위
-- Cut 최소 Canonical Scene 데이터 범위
-- Storyboard를 `scripture_anchor`와 `beat`의 단일 Source of Truth로 두는 원칙
-- Episode Definition Status 모델
-- Cut Definition Status 모델
-- Definition 승인과 이미지 제작 완료를 분리하는 원칙
-- 승인 후 revision 정책과 revision 증가 시 상태 재진입 규칙
-- `superseded`를 다른 ID에 의한 대체에만 사용하는 원칙
-- Episode/Cut 정의 승인 최소 조건
-- production complete를 Generation Run/Asset 기반으로 별도 판단하는 원칙
-- 고정 Cut 수를 두지 않고 본문 분량과 사건 흐름에 따라 Episode/Cut을 유연하게 분할하는 원칙
-- 긴 성경 장을 여러 Episode로 분할할 수 있는 원칙
-- 실제 Cut 수는 Storyboard에서 계산하고 Episode에 중복 저장하지 않는 원칙
-- Scripture / Production / Display Text의 분리
-- Cut과 Generated Image를 분리하는 원칙
-- 삭제보다 Cancel / Supersede를 우선하는 원칙
+production complete는 Image Asset / representative relation으로 도출한다.
 
-위 항목은 2026-10-01 사용자 승인으로 확정되었다.
+## 16. 현재 확정 상태
 
-**STEP 0-2 — Episode / Cut Model: COMPLETED / CONFIRMED**
+- Episode는 제작 범위/목적의 Canonical Source
+- Cut은 장면 정의의 Canonical Source
+- Storyboard는 active Cut order / scripture_anchor / beat의 Source of Truth
+- `transition_note`는 previous active Cut → current Cut의 incoming high-level intent
+- Episode/Cut Definition Approval과 image production complete 분리
+- 모든 active Cut 승인 + Continuity relation 확정 후 Episode 승인
+- 고정 Cut 수 없음
+- revision은 같은 identity의 정의 발전
+- 다른 identity로 대체될 때만 superseded
+- retired ID는 tombstone registry에 등록
 
-다음 작업은 **STEP 0-3 — Continuity Model**이다.
-
-
----
+**Episode / Cut Model v1.1 — COMPLETED / CONFIRMED**

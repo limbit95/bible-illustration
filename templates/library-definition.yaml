@@ -1,9 +1,9 @@
 # Bible Illustration — Common Library definition template
-# Template status: v1.0 CONFIRMED / 2026-10-02 user approved
-# asset_type v1: character | location | object | costume | environment | visual_style
+# Template status: v1.1 CONFIRMED / 2026-10-06 pre-production hardening
+# library_type v1: character | location | object | costume | environment | visual_style
 
-asset_id: null
-asset_type: null
+library_id: null
+library_type: null
 name: null
 aliases: []
 

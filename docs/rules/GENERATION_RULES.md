@@ -1,6 +1,6 @@
-# Generation Rules v1.1
+# Generation Rules v1.2
 
-> 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 목적: Canonical Scene을 실제 Provider 생성 요청으로 변환하고 Result를 검토·기록·보존하는 운영 규칙을 정의한다.
 
@@ -11,7 +11,7 @@
 - Cut scene intent
 - required / forbidden elements
 - Storyboard Scripture Anchor / beat
-- 관련 Library definition / profile
+- 관련 Library Entity definition / profile
 - Continuity constraint
 - 필요한 Historical / External Reference
 
@@ -84,11 +84,12 @@ Reference는 역할을 명시한다.
 
 특정 이미지 하나를 모든 목적의 Reference로 사용하지 않는다.
 
-프로젝트가 통제하는 중요한 Reference binary는 가능한 한 Run 전에 Asset으로 등록한다.
+프로젝트가 통제하는 binary를 actual Run Reference로 제출하려면 Run 전에 available Asset으로 등록한다.
 
 ## 7. 인접 Cut 생성 입력
 
-같은 사건의 연속 Cut에서는 가능하면 바로 이전 Cut의 accepted / working image를 continuity reference로 사용한다.
+같은 사건의 연속 Cut에서는 바로 이전 Cut의 accepted Result 또는 사용자 승인 working image를 continuity anchor 후보로 우선 검토한다.
+그 binary를 실제 Provider reference로 제출할 때는 DEC-0009에 따라 먼저 Asset Promotion하여 available Asset ID로 사용한다.
 
 생성 instruction은 장면 전체를 새로 설명하기보다:
 
@@ -188,7 +189,7 @@ Canonical Cut revision이나 기준 commit이 달라져 판정이 달라지면 �
 2. source Result 연결
 3. 원본 binary 보존
 4. checksum / provenance / rights 기록
-5. Cut / Library / Continuity 관계 연결
+5. Cut / Library Entity / Continuity 관계 연결
 
 을 거쳐 Asset으로 등록한다.
 
@@ -240,6 +241,10 @@ Canonical Cut revision이나 기준 commit이 달라져 판정이 달라지면 �
 
 여러 장면이 필요하면 먼저 짧은 Storyboard를 제안하고 사용자와 조정한다.
 
+한 장면으로 충분한 경우에도 Canonical First 원칙은 생략하지 않는다.
+최소한 Episode가 존재하고, 해당 Cut의 한-entry Storyboard와 Cut Canonical Scene이 정의된 뒤 Generation으로 들어간다.
+단일 Cut에는 Multi-Cut Storyboard Preflight를 강제하지 않는다.
+
 ### 16.3 한 장면씩 생성
 
 기본적으로 실제 이미지는 한 장면씩 순차 생성한다.
@@ -256,8 +261,11 @@ Canonical Cut revision이나 기준 commit이 달라져 판정이 달라지면 �
 
 ### 16.4 승인 이미지의 역할
 
-직전 사용자 승인 이미지 또는 accepted Result는
-다음 장면의 primary visual continuity reference로 사용할 수 있다.
+직전 사용자 승인 image 또는 accepted Result는
+다음 장면의 primary visual continuity anchor 후보로 사용할 수 있다.
+
+실제 binary reference로 Provider에 전달하는 순간에는 해당 결과를 available Asset으로 먼저 Promotion한다.
+단순 비교·계획 단계에서는 Promotion을 미룰 수 있다.
 
 그러나 우선순위는 다음과 같다.
 
@@ -293,7 +301,7 @@ Batch 결과에서 인접 장면 연결이 깨지면 batch 효율을 이유로 �
 
 ### Continuity 생성 입력
 
-- 직전 승인 이미지를 primary continuity reference로 사용
+- 직전 승인 image를 실제 reference로 사용할 경우 먼저 available Asset으로 Promotion
 - RETAIN 명시
 - DELTA 명시
 - FORBIDDEN LEAP 명시

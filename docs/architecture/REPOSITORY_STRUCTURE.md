@@ -1,12 +1,12 @@
-# Repository Structure v1.0
+# Repository Structure v1.1
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 기준: `architecture_v0_draft.md`의 STEP 0-1~0-7 CONFIRMED 결정과 Repository Structure 승인 기록
 >
 > 목적: 확정된 Content / Episode-Cut / Continuity / Library / Generation Run / Provider Integration / Asset Storage 모델을 실제 `bible-illustration` 저장소의 물리 구조로 변환한다.
 >
-> 이 문서는 STEP 0의 CONFIRMED 결정을 실제 저장소 구조로 변환한 **확정 Repository Structure v1.0**이다.
+> 이 문서는 STEP 0과 pre-production hardening 결정을 실제 저장소 구조로 변환한 **확정 Repository Structure v1.1**이다.
 >
 > 논리 구조는 확정되었지만, 빈 미래 디렉터리를 대량 생성하지 않는 원칙에 따라 실제 디렉터리와 파일은 필요한 순서대로 단계적으로 생성한다.
 
@@ -73,10 +73,11 @@ bible-illustration/
 │
 ├─ content/
 │  ├─ episode-sequence.yaml
+│  ├─ identity-tombstones.yaml
 │  │
 │  ├─ old-testament/
 │  │  └─ genesis/
-│  │     └─ GEN-CREATION-01/
+│  │     └─ BOOK-STORY-01/
 │  │        ├─ episode.yaml
 │  │        ├─ storyboard.yaml
 │  │        ├─ continuity.yaml
@@ -88,10 +89,10 @@ bible-illustration/
 │  │           │  ├─ asset-selection.yaml   # 대표 Asset이 생길 때
 │  │           │  ├─ references.yaml        # 필요할 때만
 │  │           │  ├─ runs/
-│  │           │  │  └─ GEN-CREATION-01-C01-R001.yaml
+│  │           │  │  └─ BOOK-STORY-01-C01-R001.yaml
 │  │           │  └─ assets/
-│  │           │     ├─ GEN-CREATION-01-C01-A001.asset.yaml
-│  │           │     └─ GEN-CREATION-01-C01-A001.<ext>
+│  │           │     ├─ BOOK-STORY-01-C01-A001.asset.yaml
+│  │           │     └─ BOOK-STORY-01-C01-A001.<ext>
 │  │           └─ C02/
 │  │
 │  └─ new-testament/
@@ -118,7 +119,9 @@ bible-illustration/
 │  │  ├─ provider.yaml
 │  │  ├─ bindings/                     # 실제 Binding이 있을 때
 │  │  ├─ generation-profiles/
+│  │  │  └─ chat-native-standard.yaml
 │  │  └─ prompt-adapters/
+│  │     └─ canonical-cut-v1.md
 │  │
 │  ├─ openart/
 │  │  ├─ provider.yaml
@@ -280,13 +283,22 @@ v1에서는 단일 sequence 파일로 시작한다.
 
 규모가 실제로 커져 유지가 어려워질 때만 분할을 검토한다.
 
-### 6.2 Testament / Book 디렉터리
+### 6.2 identity-tombstones.yaml
+
+Retired Episode / Cut / Run / Result / Asset ID의 재사용 방지 Source of Truth다.
+
+- active production data가 아니다.
+- 과거 장면 정의나 Prompt를 보존하지 않는다.
+- 새 ID 발급 전 current tree와 함께 확인한다.
+- 상세 과거 기록은 Git history가 소유한다.
+
+### 6.3 Testament / Book 디렉터리
 
 ~~~text
 content/
 └─ old-testament/
    └─ genesis/
-      └─ GEN-CREATION-01/
+      └─ BOOK-STORY-01/
 ~~~
 
 성경 책 구조는 **탐색 경로**이며 Episode identity는 항상 Episode ID가 소유한다.
@@ -298,14 +310,14 @@ STORY_KEY를 별도 Story Arc entity 디렉터리로 만들지 않는다.
 ~~~text
 genesis/
 └─ creation/
-   └─ GEN-CREATION-01/
+   └─ BOOK-STORY-01/
 ~~~
 
 대신:
 
 ~~~text
 genesis/
-└─ GEN-CREATION-01/
+└─ BOOK-STORY-01/
 ~~~
 
 로 둔다.
@@ -319,7 +331,7 @@ genesis/
 예:
 
 ~~~text
-GEN-CREATION-01/
+BOOK-STORY-01/
 ├─ episode.yaml
 ├─ storyboard.yaml
 ├─ continuity.yaml
@@ -349,7 +361,7 @@ Cut 순서의 Source of Truth.
 - cut_id
 - scripture_anchor
 - beat
-- transition note
+- transition note — previous active Cut → current Cut의 incoming high-level intent
 
 ### continuity.yaml
 
@@ -421,8 +433,8 @@ STEP 0-5의 Generation Run을 저장한다.
 
 ~~~text
 runs/
-├─ GEN-CREATION-01-C01-R001.yaml
-├─ GEN-CREATION-01-C01-R002.yaml
+├─ BOOK-STORY-01-C01-R001.yaml
+├─ BOOK-STORY-01-C01-R002.yaml
 └─ ...
 ~~~
 
@@ -453,8 +465,8 @@ Cut 또는 Library의 장기 보존 Asset을 저장한다.
 
 ~~~text
 assets/
-├─ GEN-CREATION-01-C01-A001.asset.yaml
-└─ GEN-CREATION-01-C01-A001.png
+├─ BOOK-STORY-01-C01-A001.asset.yaml
+└─ BOOK-STORY-01-C01-A001.png
 ~~~
 
 원칙:
@@ -537,7 +549,7 @@ Provider key와 integration status의 전역 registry.
 
 ### bindings/
 
-Canonical Library Asset과 Provider external resource 연결.
+Canonical Library Entity과 Provider external resource 연결.
 
 파일은 실제 Binding이 생길 때 생성한다.
 
@@ -561,7 +573,7 @@ Provider별 Prompt 변환 규칙.
 
 Prompt Adapter가 주로 텍스트 규칙이면 Markdown을 사용할 수 있고, 기계적 설정 중심이면 YAML을 사용할 수 있다.
 
-최종 adapter 파일 형식은 실제 첫 Adapter 구현 시 최소 형태로 결정한다.
+현재 ChatGPT의 첫 정식 Adapter는 `integrations/chatgpt/prompt-adapters/canonical-cut-v1.md`의 Markdown 형식을 사용한다. 다른 Provider는 실제 요구에 따라 최소 형태를 선택한다.
 
 ### Secrets
 
@@ -801,7 +813,7 @@ Repository Structure v1.0이 확정된 뒤에는 특정 Episode를 전제로 한
 2. 필요한 Architecture / Rules / Template을 확인한다.
 3. 새 production entity가 실제로 필요할 때만 해당 Episode / Cut / Run / Asset 경로를 생성한다.
 4. 폐기된 production iteration의 디렉터리나 파일은 새 작업의 출발점으로 복원하지 않는다.
-5. production identity는 기존 ID 불변 조건을 지켜 새로 발급한다.
+5. production identity는 current tree와 `content/identity-tombstones.yaml`을 모두 확인한 뒤 기존 ID 불변 조건을 지켜 새로 발급한다.
 
 ---
 
@@ -813,6 +825,7 @@ Repository Structure v1.0이 확정된 뒤에는 특정 Episode를 전제로 한
 - Architecture 8개 문서 + Repository Structure 문서 구성
 - Rules 문서 7종 구성
 - 전역 `content/episode-sequence.yaml`
+- retired identity용 `content/identity-tombstones.yaml`
 - 성경 Book 아래에 STORY_KEY 중간 폴더를 두지 않는 구조
 - Episode의 episode / storyboard / continuity 분리
 - Cut의 cut.yaml과 asset-selection.yaml 분리

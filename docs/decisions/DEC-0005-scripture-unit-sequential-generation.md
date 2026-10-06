@@ -57,6 +57,15 @@ Storyboard 제안은 필요한 만큼만 다음을 포함한다.
 
 따라서 이전 이미지가 본문 또는 Canonical 정의와 충돌하면 해당 요소는 다음 장면에 계승하지 않는다.
 
+## 2026-10-06 Hardening Clarification
+
+DEC-0009에 따라 다음을 명확히 한다.
+
+- accepted Result / 사용자 승인 working image는 다음 장면의 visual anchor 후보가 될 수 있다.
+- 그 binary를 실제 downstream Provider request의 reference input으로 사용하려면 먼저 Canonical Asset으로 Promotion하여 available 상태를 확보한다.
+- 따라서 Asset Promotion을 뒤로 미루는 원칙은 **실제 downstream reference dependency가 없는 Result**에 적용된다.
+- representative selection은 reference용 Promotion 이후에도 뒤로 미룰 수 있다.
+
 ## Alternatives Considered
 
 ### 여러 Cut을 기본적으로 일괄 생성
@@ -81,3 +90,4 @@ Storyboard 제안은 필요한 만큼만 다음을 포함한다.
 - `docs/rules/CONTINUITY_RULES.md`
 - `docs/rules/GENERATION_RULES.md`
 - `docs/architecture/EPISODE_CUT_MODEL.md`
+- `docs/decisions/DEC-0009-reference-dependency-promotion-before-downstream-run.md`

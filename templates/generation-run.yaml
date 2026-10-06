@@ -1,5 +1,5 @@
 # Bible Illustration — Generation Run template
-# Template status: v1.0 CONFIRMED / 2026-10-02 user approved
+# Template status: v1.1 CONFIRMED / 2026-10-06 pre-production hardening
 # One actual Provider request = one Run.
 
 run_id: null
@@ -11,8 +11,8 @@ target:
 source_snapshot:
   repository_commit: null
   library: []
-  # Library snapshot entry:
-  # - asset_id: CHR-MOSES
+  # Library Entity snapshot entry:
+  # - library_id: CHR-MOSES
   #   revision: 2
   #   profile: EXODUS
 
@@ -43,6 +43,9 @@ prompt:
   negative_prompt: null
 
 # Each entry records the actual delivered reference and its role.
+# Project-owned binary references MUST use an available Canonical Asset ID in asset_ref.
+# A working Result that will become an actual downstream reference is promoted first.
+# When the reference represents a Library Entity, library_id/library_revision/profile may be added.
 # Roles include character, location, object, costume, environment,
 # style, continuity, composition, edit_source, other.
 references: []
@@ -65,6 +68,8 @@ usage:
 
 # Result entry shape:
 # - result_id: <RUN_ID>-O01
+#   # Asset promotion is linked canonically from asset metadata source.result_id.
+#   # Do not duplicate a mutable promoted_asset_ids reverse link here.
 #   provider_output_id: null
 #   reviews:
 #     - sequence: 1

@@ -1,6 +1,6 @@
-# Continuity Rules v1.1
+# Continuity Rules v1.2
 
-> 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 목적: 연속된 Cut이 같은 사건과 세계의 다음 순간처럼 느껴지도록 유지·변화·reset 판단 규칙을 정의한다.
 >
@@ -208,6 +208,8 @@ Scripture상 시간·사건·인과는 유지하되 시각 언어를 새롭게 �
 ## 13. Storyboard Relation Planning과 Canonical Continuity 경계
 
 Storyboard 단계에서는 인접 Cut의 관계를 먼저 **Continuity-oriented / Transition-oriented** 관점으로 판단할 수 있다.
+
+각 Storyboard entry의 `transition_note`는 **직전 active Cut → 현재 Cut으로 들어오는 관계**를 설명한다. 첫 active Cut은 기본적으로 null이다.
 
 이 판단은 제작 방향을 정하는 planning layer이며 별도 Canonical enum을 만들지 않는다.
 

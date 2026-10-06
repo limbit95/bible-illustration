@@ -1,5 +1,5 @@
 # Bible Illustration — Episode template
-# Template status: v1.0 CONFIRMED / 2026-10-02 user approved
+# Template status: v1.1 CONFIRMED / 2026-10-06 pre-production hardening
 # Copy to: content/<testament>/<book>/<EPISODE_ID>/episode.yaml
 
 episode_id: null

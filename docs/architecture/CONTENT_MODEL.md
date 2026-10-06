@@ -1,10 +1,10 @@
-# Content Model v1.0
+# Content Model v1.1
 
-> 상태: **CONFIRMED / 2026-10-01 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 목적: 성경 본문 → 제작 Episode → Cut으로 이어지는 콘텐츠 모델과 식별 체계를 먼저 안정화한다.
 >
-> 이 단계에서는 Episode/Cut의 세부 필드, 승인 상태, Continuity, Provider, 이미지 저장 정책까지 확정하지 않는다. 해당 항목은 이후 STEP 0-2~0-7에서 다룬다.
+> Episode/Cut 세부 모델, Continuity, Library Entity, Run, Provider, Image Asset 책임은 현재 각 정식 Architecture 문서에서 확정되어 있다.
 
 ## 1. 핵심 모델
 
@@ -81,7 +81,7 @@ Cut은 한 Episode 안에서 제작되는 **개별 시각 장면의 최소 관�
 
 하나의 본문 절이 여러 Cut으로 나뉠 수 있고, 하나의 Cut이 여러 절을 함께 시각화할 수도 있다.
 
-Cut의 상세 Canonical Scene Specification은 STEP 0-2에서 정의한다.
+Cut의 상세 Canonical Scene Specification은 `EPISODE_CUT_MODEL.md`가 Source of Truth다.
 
 ### 1.4 Storyboard
 
@@ -95,7 +95,7 @@ Storyboard가 책임지는 최소 정보는 다음으로 한정한다.
 - Cut ID
 - 해당 Cut의 Scripture Anchor
 - 장면의 짧은 서사적 목적 또는 beat
-- 필요 시 앞뒤 Cut 전환 메모
+- 필요 시 **직전 active Cut → 현재 Cut**으로 들어오는 high-level transition note
 
 상세 카메라, 조명, 인물 배치, 환경, Continuity 등은 Cut/Continuity 모델에서 관리한다.
 
@@ -156,12 +156,12 @@ DEU  Deuteronomy
 예:
 
 ```text
-GEN-CREATION-01
-GEN-CREATION-02
-GEN-EDEN-01
-GEN-FALL-01
-GEN-CAIN-ABEL-01
-GEN-FLOOD-01
+GEN-EXAMPLE-01
+GEN-EXAMPLE-02
+GEN-EXAMPLE-03
+GEN-EXAMPLE-04
+GEN-EXAMPLE-05
+GEN-EXAMPLE-06
 ```
 
 규칙:
@@ -176,7 +176,7 @@ GEN-FLOOD-01
 
 `STORY_KEY`는 현재 ID를 안정화하기 위한 naming token으로만 사용한다.
 
-ID가 이미 발급된 뒤 제목이나 표현 방식이 바뀌었다는 이유로 `STORY_KEY`를 다시 이름 붙이지 않는다. Episode의 정체성이 달라질 정도로 주본문이나 제작 범위가 크게 재설계되는 경우 기존 ID를 억지로 개명하기보다 새 Episode ID를 부여하는 방향을 우선한다. 기존 Episode의 폐기·대체 상태 표현은 STEP 0-2에서 정의한다.
+ID가 이미 발급된 뒤 제목이나 표현 방식이 바뀌었다는 이유로 `STORY_KEY`를 다시 이름 붙이지 않는다. Episode의 정체성이 달라질 정도로 주본문이나 제작 범위가 크게 재설계되는 경우 기존 ID를 억지로 개명하기보다 새 Episode ID를 부여하는 방향을 우선한다. 기존 Episode의 폐기·대체 상태는 `EPISODE_CUT_MODEL.md`를 따른다.
 
 STEP 0 v0 단계에서는 별도의 `Story Arc` 엔터티를 먼저 만들지 않는다. 실제로 독립된 Arc 데이터가 필요해질 때 도입 여부를 다시 검토한다.
 
@@ -191,9 +191,9 @@ STEP 0 v0 단계에서는 별도의 `Story Arc` 엔터티를 먼저 만들지 �
 예:
 
 ```text
-GEN-CREATION-01-C01
-GEN-CREATION-01-C02
-GEN-CREATION-01-C03
+GEN-EXAMPLE-01-C01
+GEN-EXAMPLE-01-C02
+GEN-EXAMPLE-01-C03
 ```
 
 규칙:
@@ -209,7 +209,21 @@ GEN-CREATION-01-C03
 
 새 Cut에는 새로운 ID를 부여하고 Storyboard order만 조정한다.
 
-## 6. 표시 순서와 ID 분리
+## 6. Retired Identity Tombstone
+
+한 번 발급되어 이력이 생긴 Episode / Cut ID는 current tree에서 production data가 제거되더라도 재사용하지 않는다.
+
+과거 Git history만으로 재사용 여부를 매번 추론하지 않도록 `content/identity-tombstones.yaml`을 current-tree registry로 사용한다.
+
+새 Episode / Cut ID를 발급하기 전:
+
+1. current active tree에서 동일 ID가 없는지 확인한다.
+2. `content/identity-tombstones.yaml`에 동일 ID가 없는지 확인한다.
+3. 둘 중 하나에 존재하면 새 identity에 재사용하지 않는다.
+
+tombstone은 상세 production archive가 아니며 과거 장면 정의·Prompt를 복제하지 않는다.
+
+## 7. 표시 순서와 ID 분리
 
 ID는 **identity**, order는 **presentation sequence**로 분리한다.
 
@@ -227,16 +241,16 @@ ID는 **identity**, order는 **presentation sequence**로 분리한다.
 
 이 원칙을 통해 이미지, Prompt, Generation Run, 승인 기록, 외부 provider mapping 등이 축적된 이후에도 참조가 깨지지 않도록 한다.
 
-## 7. Storyboard 기본 구조
+## 8. Storyboard 기본 구조
 
 개념 예:
 
 ```yaml
-episode_id: GEN-CREATION-01
+episode_id: GEN-EXAMPLE-01
 
 storyboard:
   - order: 10
-    cut_id: GEN-CREATION-01-C01
+    cut_id: GEN-EXAMPLE-01-C01
     scripture_anchor:
       - book: GEN
         start: { chapter: 1, verse: 1 }
@@ -244,7 +258,7 @@ storyboard:
     beat: 태초의 혼돈과 수면 위의 어둠
 
   - order: 20
-    cut_id: GEN-CREATION-01-C02
+    cut_id: GEN-EXAMPLE-01-C02
     scripture_anchor:
       - book: GEN
         start: { chapter: 1, verse: 3 }
@@ -256,11 +270,11 @@ storyboard:
 
 초기에는 10, 20, 30처럼 간격을 두고 작성할 수 있지만, 이후 재정렬 시 값을 다시 정리해도 식별자에는 영향이 없다.
 
-## 8. Episode 간 연결과 Canonical Sequence
+## 9. Episode 간 연결과 Canonical Sequence
 
 Episode 간 연결은 ID 번호 자체로 추론하지 않는다.
 
-예를 들어 `GEN-CREATION-01` 다음이 항상 `GEN-CREATION-02`라고 코드가 자동 추론하게 만들지 않는다.
+예를 들어 `GEN-EXAMPLE-01` 다음이 항상 `GEN-EXAMPLE-02`라고 코드가 자동 추론하게 만들지 않는다.
 
 프로젝트의 기본 역사 흐름은 별도의 **Canonical Episode Sequence**가 책임진다.
 
@@ -269,11 +283,11 @@ Episode 간 연결은 ID 번호 자체로 추론하지 않는다.
 ```yaml
 episodes:
   - order: 10
-    episode_id: GEN-CREATION-01
+    episode_id: GEN-EXAMPLE-01
   - order: 20
-    episode_id: GEN-CREATION-02
+    episode_id: GEN-EXAMPLE-02
   - order: 30
-    episode_id: GEN-EDEN-01
+    episode_id: GEN-EXAMPLE-03
 ```
 
 원칙:
@@ -292,11 +306,11 @@ episodes:
 - 특별편/보충 Episode 추가
 - 동일 본문을 다른 시각적 관점으로 재구성
 
-Canonical Sequence의 최종 파일명과 저장 위치는 최종 디렉터리 구조를 확정할 때 결정한다.
+Canonical Sequence의 물리 Source of Truth는 `content/episode-sequence.yaml`이다.
 
-Episode 사이의 시각적 continuity 연결은 STEP 0-3에서 별도로 정의한다.
+Episode 사이의 시각적 continuity 연결은 `CONTINUITY_MODEL.md`의 incoming episode boundary 규칙을 따른다.
 
-## 9. Content Model 불변 조건
+## 10. Content Model 불변 조건
 
 STEP 0-1 기준 핵심 invariant는 다음과 같다.
 
@@ -313,43 +327,37 @@ STEP 0-1 기준 핵심 invariant는 다음과 같다.
 11. 폴더 경로나 파일 정렬 순서는 콘텐츠 identity가 아니다.
 12. 외부 이미지 생성 provider의 ID는 Content Model의 identity가 아니다.
 
-## 10. STEP 0-1에서 의도적으로 미확정하는 항목
+## 11. STEP 0-1 후속 책임의 현재 해소 상태
 
-다음은 이번 단계에서 확정하지 않는다.
+STEP 0-1 당시 후속 단계로 넘긴 항목은 현재 다음 정식 문서에서 해소되었다.
 
-- Episode 필수 메타데이터 전체
-- Cut 필수 메타데이터 전체
-- Draft / Approved / Rejected 등의 상태 값
-- 승인·수정·폐기 흐름
-- Episode당 기본 Cut 수 8개의 취급
-- Cut의 Canonical Scene Specification 필드
-- Continuity 필드와 reset 규칙
-- Markdown/YAML 최종 저장 포맷
-- Storyboard/episode/cut 파일의 최종 경로
-- Provider prompt 구조
-- 이미지 저장 방식
+- Episode / Cut metadata, 상태, revision, 분할 정책 → `EPISODE_CUT_MODEL.md`
+- Continuity / reset → `CONTINUITY_MODEL.md`
+- Library reference → `LIBRARY_MODEL.md`
+- Run / Prompt snapshot → `GENERATION_RUN_MODEL.md`, `PROVIDER_INTEGRATION_MODEL.md`
+- Image Asset 저장 → `ASSET_STORAGE_POLICY.md`
+- 최종 물리 경로 / YAML → `REPOSITORY_STRUCTURE.md`, `templates/`
+- 본문 직접 인용 / copyright → `TEXT_AND_COPYRIGHT.md`
 
-이 항목들은 STEP 0-2 이후에서 순차적으로 정의한다.
+현재 의도적으로 열어두는 Content Model 항목:
 
-## 11. STEP 0-1 확정 사항
+- 66권 전체 Book Code registry의 별도 파일화
+- 여러 Book을 동시에 primary Scripture로 갖는 Episode가 실제 필요할 때의 확장
+- 사이트용 별도 collection / editorial sequence
 
-다음 항목은 사용자 승인으로 확정되었다.
+현재 Genesis production 시작에는 위 항목이 blocker가 아니다.
 
-- Episode ID 형식 `<BOOK>-<STORY_KEY>-<NN>` 유지 여부
-- Cut ID 형식 `<EPISODE_ID>-C<NN>` 유지 여부
-- ID와 표시 순서를 분리하는 원칙
-- Scripture Range를 구조화된 범위 정보로 관리하는 원칙
-- `primary_scripture` / `supporting_scripture`를 구분하는 원칙
-- v0에서 한 Episode의 `primary_scripture`를 하나의 Book Code로 제한하는 원칙
-- Storyboard를 Episode 내부 Cut 순서의 Source of Truth로 두는 원칙
-- Canonical Episode Sequence를 Episode 기본 순서의 Source of Truth로 두는 원칙
-- v0에서는 별도의 Story Arc 엔터티를 만들지 않는 원칙
+## 12. 현재 확정 상태
 
-위 항목은 2026-10-01 사용자 승인으로 확정되었다.
+- Episode ID: `<BOOK>-<STORY_KEY>-<NN>`
+- Cut ID: `<EPISODE_ID>-C<NN>`
+- ID와 표시 순서 분리
+- Scripture Range 구조화
+- primary / supporting Scripture 분리
+- v1에서 한 Episode의 primary Scripture는 하나의 Book Code
+- Storyboard가 Cut order / scripture_anchor / beat의 Source of Truth
+- Canonical Episode Sequence는 `content/episode-sequence.yaml`
+- retired ID는 `content/identity-tombstones.yaml`과 current tree를 함께 확인
+- 별도 Story Arc entity는 만들지 않음
 
-**STEP 0-1 — Content Model: COMPLETED / CONFIRMED**
-
-다음 작업은 **STEP 0-2 — Episode / Cut Model**이다.
-
-
----
+**Content Model v1.1 — COMPLETED / CONFIRMED**

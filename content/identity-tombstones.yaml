@@ -1,0 +1,47 @@
+schema_version: 1
+
+# Retired identity registry.
+# These IDs were used by a removed production iteration and must never be reused.
+# Detailed production data remains available only in Git history.
+
+tombstones:
+  - { kind: episode, id: GEN-CREATION-01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+
+  - { kind: cut, id: GEN-CREATION-01-C01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: cut, id: GEN-CREATION-01-C02, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: cut, id: GEN-CREATION-01-C03, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: cut, id: GEN-CREATION-01-C04, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: cut, id: GEN-CREATION-01-C05, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: cut, id: GEN-CREATION-01-C06, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+
+  - { kind: run, id: GEN-CREATION-01-C01-R001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C02-R001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C02-R002, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C03-R001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C04-R001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C05-R001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C05-R002, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C05-R003, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C05-R004, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C06-R001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C06-R002, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: run, id: GEN-CREATION-01-C06-R003, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+
+  - { kind: result, id: GEN-CREATION-01-C02-R001-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: result, id: GEN-CREATION-01-C02-R002-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: result, id: GEN-CREATION-01-C03-R001-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: result, id: GEN-CREATION-01-C04-R001-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: result, id: GEN-CREATION-01-C05-R001-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: result, id: GEN-CREATION-01-C05-R002-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: result, id: GEN-CREATION-01-C05-R003-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: result, id: GEN-CREATION-01-C05-R004-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: result, id: GEN-CREATION-01-C06-R001-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: result, id: GEN-CREATION-01-C06-R002-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: result, id: GEN-CREATION-01-C06-R003-O01, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+
+  - { kind: asset, id: GEN-CREATION-01-C01-A001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: asset, id: GEN-CREATION-01-C02-A001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: asset, id: GEN-CREATION-01-C03-A001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: asset, id: GEN-CREATION-01-C04-A001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: asset, id: GEN-CREATION-01-C05-A001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }
+  - { kind: asset, id: GEN-CREATION-01-C06-A001, retired_at: "2026-10-06", reason: prior_genesis_production_retired, last_known_commit: ecfb7311c8bb966930d5597b40c97383ebd52f34 }

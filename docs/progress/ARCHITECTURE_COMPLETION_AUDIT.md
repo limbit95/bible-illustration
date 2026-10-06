@@ -1,5 +1,9 @@
 # Architecture Completion Audit — 2026-10-06
 
+> **SUPERSEDED BY PRE-PRODUCTION HARDENING AUDIT**
+>
+> 이 문서는 Storyboard refinement 직후의 감사 기록으로 보존한다. 이후 더 깊은 end-to-end 구조 감사와 hardening이 수행되었으므로 현재 production readiness 판정은 `docs/progress/PREPRODUCTION_HARDENING_AUDIT.md`를 따른다.
+
 > 상태: **PASSED / ARCHITECTURE REFINEMENT COMPLETE**
 >
 > 목적: STEP 0 이후 정식화된 Architecture / Rules / Templates와 Storyboard Production Rules refinement를 교차검증하고, 새로운 production을 시작할 수 있는 기준선인지 확인한다.
