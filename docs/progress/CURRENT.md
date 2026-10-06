@@ -20,10 +20,18 @@
 - DEC-0009 — downstream reference requires prior Asset Promotion: **ACCEPTED**
 - DEC-0010 — retired identity tombstone registry: **ACCEPTED**
 - DEC-0011 — Episode visual direction ownership: **ACCEPTED**
+- DEC-0012 — enforced Generation Entry Gate: **ACCEPTED**
+- Enforced Generation Entry Gate: **ACTIVE**
 - Synthetic lifecycle dry-run: **PASSED**
 - Pre-Production Hardening Audit: **PASSED**
 
 ## Hardening 완료 내용
+
+- 실제 Provider 요청 전 `entry_gate` snapshot 강제
+- Storyboard / Continuity / text-free master / Provider readiness 미충족 시 Run submission 금지
+- 자동화 요청에서도 Architecture traversal 생략 금지
+- 의미 있는 visual beat는 Cut 수 최소화보다 충분한 분해를 우선
+- 별도 non-production test branch에서만 same-session working reference 예외 허용
 
 - stale STEP 0 handoff / unresolved 문구 정리
 - Continuity `reset: []` 물리 schema 정합성 확보
@@ -75,7 +83,9 @@
 
 ## 다음 작업
 
-다음 단계는 **새 Genesis production 설계**다.
+다음 단계는 **강제 Generation Gate를 적용한 Genesis 1 자동화 재테스트**다.
+
+재테스트는 main이 아닌 별도 non-production test branch에서 수행하고, test production data/image는 정식 production으로 merge하지 않는다.
 
 1. 사용자가 제시하는 개역한글 Scripture Work Unit 확인
 2. current tree + identity tombstone에서 ID 사용 이력 확인

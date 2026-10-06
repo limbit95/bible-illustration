@@ -1,5 +1,5 @@
 # Bible Illustration — Generation Run template
-# Template status: v1.1 CONFIRMED / 2026-10-06 pre-production hardening
+# Template status: v1.2 CONFIRMED / 2026-10-06 enforced generation gate
 # One actual Provider request = one Run.
 
 run_id: null
@@ -7,6 +7,18 @@ run_id: null
 target:
   cut_id: null
   cut_revision: null
+
+entry_gate:
+  scripture_work_unit_ready: null
+  episode_ready: null
+  storyboard_ready: null
+  storyboard_preflight_passed: null
+  cut_ready: null
+  scene_relation_ready: null
+  continuity_ready: null
+  text_free_production_master: null
+  provider_ready: null
+  automation_test_mode: false
 
 source_snapshot:
   repository_commit: null

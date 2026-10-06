@@ -1,4 +1,4 @@
-# Generation Run Model v1.1
+# Generation Run Model v1.2
 
 > 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
@@ -99,7 +99,32 @@ Result ID는 Generated Asset ID가 아니다.
 
 Result는 Provider가 반환한 개별 생성 결과의 기록이고, Image Asset identity와 promotion은 `ASSET_STORAGE_POLICY.md`를 따른다.
 
-## 5. Generation Run 공통 데이터
+## 5. Generation Entry Gate Snapshot
+
+모든 실제 Provider Run은 제출 직전의 Generation Gate 상태를 immutable snapshot으로 기록한다.
+
+~~~yaml
+entry_gate:
+  scripture_work_unit_ready: true
+  episode_ready: true
+  storyboard_ready: true
+  storyboard_preflight_passed: true
+  cut_ready: true
+  scene_relation_ready: true
+  continuity_ready: true
+  text_free_production_master: true
+  provider_ready: true
+  automation_test_mode: false
+~~~
+
+단일 Cut은 `storyboard_preflight_passed`를 `not_applicable`로 둘 수 있다.
+첫 Cut은 `scene_relation_ready`와 `continuity_ready`를 `not_applicable`로 둘 수 있다.
+
+적용 항목에 false / unresolved가 하나라도 있으면 Provider submission은 유효한 Generation Run으로 시작할 수 없다.
+
+`automation_test_mode: true`는 별도 non-production test branch에서만 허용한다.
+
+## 6. Generation Run 공통 데이터
 
 개념 예:
 

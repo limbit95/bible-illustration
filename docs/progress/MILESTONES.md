@@ -107,6 +107,15 @@
 - Pre-Production Hardening Audit PASS
 - active Genesis production 없이 새 제작 준비 완료
 
+### 2026-10-06 — Enforced Generation Entry Gate 도입
+
+- DEC-0012 accepted
+- 모든 실제 Provider Run에 `entry_gate` snapshot 추가
+- Canonical / Storyboard / Preflight / Cut / Relation / Continuity / text-free master / Provider readiness 강제
+- 자동화 요청에서도 Architecture 단계 생략 금지
+- 의미 있는 visual beat는 Cut 수 최소화보다 충분한 분해 우선
+- non-production test branch 전용 same-session working reference 예외 정의
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 추가한다.
