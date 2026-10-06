@@ -144,6 +144,15 @@
 - 기존 Architecture의 continue / partial_reset / reset으로 Canonical 표현하며 새 enum은 추가하지 않음
 - 사용자가 별도 지시하지 않아도 Assistant가 relation을 먼저 판단
 
+### 2026-10-06 — 이미지 테스트 Pause / Architecture refinement 복귀
+
+- Genesis Creation 이미지 반복 테스트를 통해 실제 Architecture 적용 문제와 개선 방향 확인
+- Scripture-unit sequential generation / flexible Cut decomposition / Continuity vs Transition 정책을 실제 이미지 생성으로 검증
+- 이미지 테스트를 일시 중지하고 Architecture 구조 보완 단계로 복귀
+- 다음 최우선 과제를 Storyboard production rules 강화로 지정
+- 현재 테스트 이미지는 working output으로 유지하고 자동 Asset promotion / LFS ingest하지 않음
+- 새 채팅 인수인계를 위해 `ARCHITECTURE_REFINEMENT_HANDOFF.md` 생성
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 이 문서에 추가한다.
