@@ -1,11 +1,25 @@
 # Genesis Creation — Rapid Full-Chapter Prototype Guide
 
-> 상태: **ACTIVE WORKING GUIDE / 2026-10-03**
+> 상태: **PAUSED WORKING GUIDE / 2026-10-06 — Architecture refinement 우선**
 >
 > 목적: 창세기 1장 천지창조 전체를 빠르게 1차 완주하면서,
 > 사용자 선택 레퍼런스에서 확인된 시각적 연결 원칙을 실제 시퀀스에 적용한다.
 >
-> 관련 결정: `DEC-0004`, `DEC-0005`
+> 관련 결정: `DEC-0004`, `DEC-0005`, `DEC-0006`
+
+## 0. Pause note
+
+2026-10-06 사용자 결정으로 이미지 생성 테스트를 일시 중지한다.
+
+테스트를 통해 Scripture-unit sequential generation, flexible scene decomposition, Continuity vs Transition relation, Genesis-specific visual profile, cinematic presentation text 방향을 검증했다.
+
+다음 작업은 이미지 생성이 아니라 Storyboard production rules 강화 및 Architecture / Rules / Template 책임 검토다.
+
+재개 조건:
+- Storyboard Rules 강화안 검토 / 승인
+- 관련 Architecture / Rules / Template 교차 검증 완료
+
+현재 테스트 이미지는 working output이며 별도 승격 결정 없이는 Canonical Asset으로 자동 취급하지 않는다.
 
 ## 1. 이번 Pass의 목표
 
