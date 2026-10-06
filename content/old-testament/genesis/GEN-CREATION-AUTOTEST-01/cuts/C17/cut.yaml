@@ -1,0 +1,28 @@
+cut_id: GEN-CREATION-AUTOTEST-01-C17
+episode_id: GEN-CREATION-AUTOTEST-01
+
+scene_intent: >
+  같은 창조 세계에서 남자와 여자가 하나님의 형상대로 창조되어 처음 서 있는 장면.
+
+scene:
+  summary: >
+    같은 창조 세계에서 남자와 여자가 하나님의 형상대로 창조되어 처음 서 있는 장면.
+  required_elements:
+    - 현재 Scripture Anchor 시점까지 형성된 world state
+    - 이번 beat의 핵심 시각 변화
+    - text-free Production Master
+  forbidden_elements:
+    - Scripture Anchor 이후에만 등장하는 후대 creation state
+    - 현대 물건 또는 현대 UI
+    - 성경 구절, 장절, 자막, 내레이션, 로고, 워터마크 등 이미지 내 문자
+    - 하나님을 일반 인간의 몸이나 얼굴로 직접 형상화
+
+library_refs:
+  characters: []
+  location: null
+  environments: []
+  objects: []
+  style: STY-BIBLICAL-PAINTERLY-TEST-01
+
+definition_status: approved
+revision: 1

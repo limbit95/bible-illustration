@@ -1,0 +1,17 @@
+library_id: STY-BIBLICAL-PAINTERLY-TEST-01
+library_type: visual_style
+name: Biblical Painterly Historical Test Style
+aliases: []
+canonical_summary: >
+  고품질 2D 디지털 일러스트. 회화적 질감과 설득력 있는 원근·깊이를 유지하고
+  성경 역사 서사에 어울리는 장엄함을 지향한다. 과도한 포토리얼리즘, 현대 광고 UI,
+  만화풍, 장면 내 문자 표현을 피한다. 16:9 widescreen composition을 사용한다.
+basis:
+  scripture: []
+  historical: []
+  reconstruction:
+    - project visual rules
+    - automation test requirement
+uncertainties: []
+definition_status: approved
+revision: 1

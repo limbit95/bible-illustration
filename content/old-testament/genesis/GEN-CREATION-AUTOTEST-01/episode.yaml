@@ -1,0 +1,13 @@
+episode_id: GEN-CREATION-AUTOTEST-01
+title: 창세기 1장 창조 자동화 테스트
+primary_scripture:
+  - book: GEN
+    start: { chapter: 1, verse: 1 }
+    end:   { chapter: 1, verse: 31 }
+supporting_scripture: []
+production_intent: >
+  Enforced Generation Entry Gate 이후 자동화 능력을 검증하는 non-production test.
+  창세기 1장을 의미 있는 visual beat로 충분히 분해하고, 하나의 세계가 단계적으로
+  완성되는 continuity를 우선한다. Production Master는 모든 Cut에서 text-free로 생성한다.
+definition_status: approved
+revision: 1

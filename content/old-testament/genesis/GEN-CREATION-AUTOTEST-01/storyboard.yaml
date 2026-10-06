@@ -1,0 +1,202 @@
+episode_id: GEN-CREATION-AUTOTEST-01
+
+storyboard:
+  - order: 10
+    cut_id: GEN-CREATION-AUTOTEST-01-C01
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 1 }
+        end:   { chapter: 1, verse: 2 }
+    beat: >
+      태초의 창조 직후, 땅이 혼돈하고 공허하며 흑암이 깊음 위에 있고 하나님의 신이 수면에 운행하는 원초 상태를 보여준다.
+    transition_note: null
+  - order: 20
+    cut_id: GEN-CREATION-AUTOTEST-01-C02
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 3 }
+        end:   { chapter: 1, verse: 3 }
+    beat: >
+      같은 원초 세계에 빛이 처음 나타나 어둠을 가르기 시작한다.
+    transition_note: >
+      같은 수면과 흑암의 세계에 빛이 새롭게 등장하는 직접 연속
+  - order: 30
+    cut_id: GEN-CREATION-AUTOTEST-01-C03
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 4 }
+        end:   { chapter: 1, verse: 5 }
+    beat: >
+      빛과 어두움이 구분되어 낮과 밤의 질서가 성립하는 상태를 보여준다.
+    transition_note: >
+      방금 생긴 빛이 같은 세계 안에서 빛과 어두움의 구분으로 정돈됨
+  - order: 40
+    cut_id: GEN-CREATION-AUTOTEST-01-C04
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 6 }
+        end:   { chapter: 1, verse: 7 }
+    beat: >
+      물 가운데 궁창이 생기며 위의 물과 아래의 물이 분리되는 과정을 보여준다.
+    transition_note: >
+      같은 원초의 물 세계에서 새로운 수직 구조가 형성되는 연속
+  - order: 50
+    cut_id: GEN-CREATION-AUTOTEST-01-C05
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 8 }
+        end:   { chapter: 1, verse: 8 }
+    beat: >
+      분리된 물 사이에 넓고 안정된 하늘의 공간이 확립된 상태를 보여준다.
+    transition_note: >
+      C04의 분리 과정이 완료되어 궁창이 안정된 세계 상태로 이어짐
+  - order: 60
+    cut_id: GEN-CREATION-AUTOTEST-01-C06
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 9 }
+        end:   { chapter: 1, verse: 9 }
+    beat: >
+      궁창 아래의 물이 한 곳으로 모이기 시작하며 수면과 지형의 큰 변화가 일어난다.
+    transition_note: >
+      같은 아래 물이 이동·집결하는 직접 연속
+  - order: 70
+    cut_id: GEN-CREATION-AUTOTEST-01-C07
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 10 }
+        end:   { chapter: 1, verse: 10 }
+    beat: >
+      모인 물과 드러난 뭍이 서로 분명히 구분된 세계를 보여준다.
+    transition_note: >
+      C06의 집결 결과로 동일 세계에서 땅과 바다가 확립됨
+  - order: 80
+    cut_id: GEN-CREATION-AUTOTEST-01-C08
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 11 }
+        end:   { chapter: 1, verse: 11 }
+    beat: >
+      막 드러난 땅에서 풀과 씨 맺는 식물이 처음 돋아나는 시작 단계를 보여준다.
+    transition_note: >
+      같은 땅에서 식생이 새로 발생하는 직접 연속
+  - order: 90
+    cut_id: GEN-CREATION-AUTOTEST-01-C09
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 12 }
+        end:   { chapter: 1, verse: 13 }
+    beat: >
+      같은 땅에 식생이 충만해지고 씨 맺는 채소와 열매 맺는 나무가 종류대로 자리 잡은 상태를 보여준다.
+    transition_note: >
+      C08의 초기 싹이 성숙한 식생 세계로 진행됨
+  - order: 100
+    cut_id: GEN-CREATION-AUTOTEST-01-C10
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 14 }
+        end:   { chapter: 1, verse: 15 }
+    beat: >
+      완성된 땅과 바다 위 궁창에 광명들이 나타나 낮과 밤, 징조와 시기를 위한 질서를 준비하는 장면.
+    transition_note: >
+      핵심 초점이 땅의 식생에서 하늘의 광명으로 이동하지만 이미 형성된 세계는 유지
+  - order: 110
+    cut_id: GEN-CREATION-AUTOTEST-01-C11
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 16 }
+        end:   { chapter: 1, verse: 16 }
+    beat: >
+      큰 광명과 작은 광명과 별들이 각자의 역할을 가진 천체 질서로 분명히 자리 잡는 장면.
+    transition_note: >
+      C10에 나타난 광명들이 같은 하늘에서 구체적 질서로 확정됨
+  - order: 120
+    cut_id: GEN-CREATION-AUTOTEST-01-C12
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 17 }
+        end:   { chapter: 1, verse: 19 }
+    beat: >
+      광명들이 하늘에 놓여 낮과 밤을 비추고 주관하는 질서가 세계 전체에 작동하는 모습을 보여준다.
+    transition_note: >
+      같은 천체와 세계를 유지한 채 그 기능이 세계 전체에 적용되는 연속
+  - order: 130
+    cut_id: GEN-CREATION-AUTOTEST-01-C13
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 20 }
+        end:   { chapter: 1, verse: 21 }
+    beat: >
+      이미 존재하는 바다에 물고기와 큰 바다 생물 등 수중 생명이 풍성하게 나타나는 장면.
+    transition_note: >
+      초점은 천체에서 바다 생명으로 전환되지만 기존 하늘·바다·땅의 세계 상태는 유지
+  - order: 140
+    cut_id: GEN-CREATION-AUTOTEST-01-C14
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 20 }
+        end:   { chapter: 1, verse: 21 }
+    beat: >
+      같은 세계의 하늘에 새들이 날며 공중이 생명으로 채워지는 장면.
+    transition_note: >
+      바다 생명에서 하늘 생명으로 시선이 이동하며 같은 바다·하늘 세계를 유지
+  - order: 150
+    cut_id: GEN-CREATION-AUTOTEST-01-C15
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 22 }
+        end:   { chapter: 1, verse: 23 }
+    beat: >
+      바다와 하늘에 생명들이 번성하여 공간을 충만히 채운 넓은 장면으로 다섯째 날의 풍성함을 보여준다.
+    transition_note: >
+      앞 두 장면의 생명들이 같은 세계에서 충만해진 결과를 넓게 보여주는 연속
+  - order: 160
+    cut_id: GEN-CREATION-AUTOTEST-01-C16
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 24 }
+        end:   { chapter: 1, verse: 25 }
+    beat: >
+      이미 식생이 있는 땅에 짐승과 가축과 땅에 기는 생물이 종류대로 등장하는 장면.
+    transition_note: >
+      바다·하늘에서 육지로 핵심 subject가 이동하지만 기존 완성 세계와 식생은 유지
+  - order: 170
+    cut_id: GEN-CREATION-AUTOTEST-01-C17
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 26 }
+        end:   { chapter: 1, verse: 27 }
+    beat: >
+      같은 창조 세계에서 남자와 여자가 하나님의 형상대로 창조되어 처음 서 있는 장면.
+    transition_note: >
+      육지 생물과 환경을 유지한 동일 세계에서 인간이 새롭게 등장
+  - order: 180
+    cut_id: GEN-CREATION-AUTOTEST-01-C18
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 28 }
+        end:   { chapter: 1, verse: 28 }
+    beat: >
+      같은 남자와 여자가 생명으로 가득한 세계를 바라보며 생육·번성·다스림의 사명을 부여받은 상태를 보여준다.
+    transition_note: >
+      같은 인물·장소·동물 관계를 유지한 직접 다음 순간
+  - order: 190
+    cut_id: GEN-CREATION-AUTOTEST-01-C19
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 29 }
+        end:   { chapter: 1, verse: 30 }
+    beat: >
+      같은 세계에서 사람과 동물에게 주어진 식물과 열매의 풍성한 공급을 강조하는 장면.
+    transition_note: >
+      같은 인물과 환경을 유지하고 초점을 식물·열매·생명의 공급으로 이동
+  - order: 200
+    cut_id: GEN-CREATION-AUTOTEST-01-C20
+    scripture_anchor:
+      - book: GEN
+        start: { chapter: 1, verse: 31 }
+        end:   { chapter: 1, verse: 31 }
+    beat: >
+      창조된 하늘과 땅, 바다, 식생, 동물, 사람이 하나의 조화로운 세계로 완성된 모습을 넓게 보여준다.
+    transition_note: >
+      C19의 동일 세계를 유지한 채 카메라를 크게 빼 전체 완성을 총결산

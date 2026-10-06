@@ -1,0 +1,274 @@
+episode_id: GEN-CREATION-AUTOTEST-01
+
+episode_boundary: null
+
+segments:
+  - key: S01
+    start_cut_id: GEN-CREATION-AUTOTEST-01-C01
+    end_cut_id: GEN-CREATION-AUTOTEST-01-C03
+    baseline:
+      visual:
+        style_ref: STY-BIBLICAL-PAINTERLY-TEST-01
+      narrative_state: >
+        원초적 수면과 흑암에서 빛과 낮/밤 질서가 형성되는 단계
+  - key: S02
+    start_cut_id: GEN-CREATION-AUTOTEST-01-C04
+    end_cut_id: GEN-CREATION-AUTOTEST-01-C05
+    baseline:
+      visual:
+        style_ref: STY-BIBLICAL-PAINTERLY-TEST-01
+      narrative_state: >
+        물의 분리와 궁창의 확립
+  - key: S03
+    start_cut_id: GEN-CREATION-AUTOTEST-01-C06
+    end_cut_id: GEN-CREATION-AUTOTEST-01-C09
+    baseline:
+      visual:
+        style_ref: STY-BIBLICAL-PAINTERLY-TEST-01
+      narrative_state: >
+        물이 모이고 땅이 드러난 뒤 식생이 충만해지는 단계
+  - key: S04
+    start_cut_id: GEN-CREATION-AUTOTEST-01-C10
+    end_cut_id: GEN-CREATION-AUTOTEST-01-C12
+    baseline:
+      visual:
+        style_ref: STY-BIBLICAL-PAINTERLY-TEST-01
+      narrative_state: >
+        광명이 하늘에 배치되고 낮과 밤을 주관하는 단계
+  - key: S05
+    start_cut_id: GEN-CREATION-AUTOTEST-01-C13
+    end_cut_id: GEN-CREATION-AUTOTEST-01-C15
+    baseline:
+      visual:
+        style_ref: STY-BIBLICAL-PAINTERLY-TEST-01
+      narrative_state: >
+        바다와 하늘이 생명으로 충만해지는 단계
+  - key: S06
+    start_cut_id: GEN-CREATION-AUTOTEST-01-C16
+    end_cut_id: GEN-CREATION-AUTOTEST-01-C20
+    baseline:
+      visual:
+        style_ref: STY-BIBLICAL-PAINTERLY-TEST-01
+      narrative_state: >
+        육지 생물과 인간이 등장하고 세계가 완성되는 단계
+
+transitions:
+  - from: GEN-CREATION-AUTOTEST-01-C01
+    to: GEN-CREATION-AUTOTEST-01-C02
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C01
+        to: C02
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C02
+    to: GEN-CREATION-AUTOTEST-01-C03
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C02
+        to: C03
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C03
+    to: GEN-CREATION-AUTOTEST-01-C04
+    mode: partial_reset
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C03
+        to: C04
+    reset:
+      - visual.camera_axis
+      - visual.dominant_subject
+  - from: GEN-CREATION-AUTOTEST-01-C04
+    to: GEN-CREATION-AUTOTEST-01-C05
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C04
+        to: C05
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C05
+    to: GEN-CREATION-AUTOTEST-01-C06
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C05
+        to: C06
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C06
+    to: GEN-CREATION-AUTOTEST-01-C07
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C06
+        to: C07
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C07
+    to: GEN-CREATION-AUTOTEST-01-C08
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C07
+        to: C08
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C08
+    to: GEN-CREATION-AUTOTEST-01-C09
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C08
+        to: C09
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C09
+    to: GEN-CREATION-AUTOTEST-01-C10
+    mode: partial_reset
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C09
+        to: C10
+    reset:
+      - visual.camera_axis
+      - visual.dominant_subject
+  - from: GEN-CREATION-AUTOTEST-01-C10
+    to: GEN-CREATION-AUTOTEST-01-C11
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C10
+        to: C11
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C11
+    to: GEN-CREATION-AUTOTEST-01-C12
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C11
+        to: C12
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C12
+    to: GEN-CREATION-AUTOTEST-01-C13
+    mode: partial_reset
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C12
+        to: C13
+    reset:
+      - visual.camera_axis
+      - visual.dominant_subject
+  - from: GEN-CREATION-AUTOTEST-01-C13
+    to: GEN-CREATION-AUTOTEST-01-C14
+    mode: partial_reset
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C13
+        to: C14
+    reset:
+      - visual.camera_axis
+      - visual.dominant_subject
+  - from: GEN-CREATION-AUTOTEST-01-C14
+    to: GEN-CREATION-AUTOTEST-01-C15
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C14
+        to: C15
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C15
+    to: GEN-CREATION-AUTOTEST-01-C16
+    mode: partial_reset
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C15
+        to: C16
+    reset:
+      - visual.camera_axis
+      - visual.dominant_subject
+  - from: GEN-CREATION-AUTOTEST-01-C16
+    to: GEN-CREATION-AUTOTEST-01-C17
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C16
+        to: C17
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C17
+    to: GEN-CREATION-AUTOTEST-01-C18
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C17
+        to: C18
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C18
+    to: GEN-CREATION-AUTOTEST-01-C19
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C18
+        to: C19
+    reset: []
+  - from: GEN-CREATION-AUTOTEST-01-C19
+    to: GEN-CREATION-AUTOTEST-01-C20
+    mode: continue
+    retain:
+      - world.accumulated_creation_state
+      - visual.style_identity
+    change:
+      - path: narrative.current_beat
+        from: C19
+        to: C20
+    reset: []
