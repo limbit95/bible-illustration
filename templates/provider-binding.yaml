@@ -1,6 +1,6 @@
 # Bible Illustration — Provider Binding template
 # Template status: v1.1 CONFIRMED / 2026-10-06 pre-production hardening
-# Binding connects a Canonical Library Asset/profile to a Provider resource.
+# Binding connects a Canonical Library Entity/profile to a Provider resource.
 # Never store credentials here.
 
 provider_key: null

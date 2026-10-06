@@ -74,7 +74,7 @@ BOOK-STORY-01-C03-R003
 5. Run 번호는 품질 순위나 승인 순서를 뜻하지 않는다.
 6. Provider가 바뀌어도 같은 Cut의 Run sequence를 이어간다.
 
-Library Reference용 별도 이미지 생성 Run이 필요해질 경우 v1 Cut Run 규칙을 억지로 재사용하지 않고 STEP 0-7과 함께 target 모델 확장을 검토한다.
+Library Reference용 별도 이미지 생성 Run이 실제로 필요해질 경우 v1 Cut Run 규칙을 억지로 재사용하지 않고 별도 target 모델 확장을 검토한다.
 
 ## 4. Result ID
 
@@ -113,10 +113,10 @@ target:
 source_snapshot:
   repository_commit: abc123...
   library:
-    - asset_id: CHR-MOSES
+    - library_id: CHR-MOSES
       revision: 2
       profile: EXODUS
-    - asset_id: CST-ANCIENT-HEBREW-MALE
+    - library_id: CST-ANCIENT-HEBREW-MALE
       revision: 1
 
 operation: generate
@@ -186,7 +186,7 @@ C03 revision 1 — approved C
 1. Run에 사용되는 Cut / Storyboard / Continuity / Library의 의미 있는 정의는 가능한 한 생성 전에 GitHub Source of Truth에 반영한다.
 2. Run은 해당 입력 기준의 Git commit SHA를 기록한다.
 3. commit SHA는 Cut revision을 대체하지 않는다. 둘 다 기록한다.
-4. Library Entity은 실제 사용한 asset revision과 local profile도 함께 추적할 수 있어야 한다.
+4. Library Entity는 실제 사용한 library revision과 local profile도 함께 추적할 수 있어야 한다.
 5. Provider 실행 후 Canonical 정의가 바뀌어도 과거 Run의 source snapshot은 변경하지 않는다.
 
 ## 7. Prompt Snapshot
@@ -268,7 +268,7 @@ Run은 Provider 종속 설정을 Canonical Scene과 분리해서 보존한다.
 2. UI가 내부 모델을 노출하지 않으면 unknown으로 남길 수 있다.
 3. Provider external job ID는 Run ID를 대체하지 않는다.
 4. Provider 설정은 확장 가능한 provider_specific 영역을 허용한다.
-5. Provider별 공통 profile/binding 정의는 STEP 0-6이 Source of Truth다.
+5. Provider별 공통 profile/binding 정의는 `PROVIDER_INTEGRATION_MODEL.md`가 Source of Truth다.
 
 ## 10. Execution Status
 
