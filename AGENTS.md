@@ -39,6 +39,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - DEC-0003 — Genesis C01–C04 regeneration strategy: **ACCEPTED**
 - DEC-0004 — Genesis rapid full-chapter prototype before Asset promotion: **ACCEPTED**
 - DEC-0005 — Scripture-unit sequential generation with flexible scene decomposition: **ACCEPTED**
+- DEC-0006 — Scene relation policy: continuity vs transition: **ACCEPTED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
@@ -72,6 +73,8 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - Assistant는 생성 전에 해당 본문이 1장면으로 충분한지, 여러 장면 Storyboard가 필요한지 판단한다.
 - 실제 이미지는 기본적으로 한 장면씩 순차 생성하며, 직전 사용자 승인 이미지를 visual continuity anchor로 사용한다. 단 Canonical Scripture / Cut / Continuity가 항상 우선한다.
 - 여러 이미지를 한 번에 일괄 생성하는 방식은 기본값이 아니며 사용자가 명시적으로 원하거나 Continuity 위험이 낮은 경우에만 사용한다.
+- 각 새 Cut 생성 전 직전 장면과의 Scene Relation을 판단한다: 동일 사건의 단계적 변화는 Continuity, 새로운 사건/visual subject는 Transition을 허용한다.
+- Transition에서는 Story/Scripture continuity는 유지하되 카메라·구도·스케일·팔레트·분위기를 새롭게 설계할 수 있다.
 - 전체 시퀀스 선별 뒤 Asset promotion / Git LFS / representative를 정리한다.
 - Presentation text는 Production Master와 분리하고 직접 인용 / 장절 / 역본 / narration을 별도 layer에서 테스트한다.
 
