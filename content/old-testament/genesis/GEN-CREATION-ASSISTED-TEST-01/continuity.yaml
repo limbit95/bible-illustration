@@ -1,0 +1,8 @@
+episode_id: GEN-CREATION-ASSISTED-TEST-01
+
+episode_boundary: null
+
+# 첫 Cut 이전에는 Continuity relation이 없다.
+# 두 번째 Cut부터 직전 accepted Cut과의 관계를 추가한다.
+segments: []
+transitions: []

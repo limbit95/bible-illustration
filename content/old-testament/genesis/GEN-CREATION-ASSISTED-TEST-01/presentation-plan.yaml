@@ -1,0 +1,7 @@
+# Assisted single-cut test presentation plan.
+# Production Master는 항상 text-free로 유지한다.
+# 사용자가 첫 프롬프트를 전달하면 해당 Cut entry를 추가한다.
+
+episode_id: GEN-CREATION-ASSISTED-TEST-01
+
+presentation: []

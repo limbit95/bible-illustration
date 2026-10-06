@@ -1,0 +1,29 @@
+session_id: GEN-CREATION-ASSISTED-TEST-01-S001
+episode_id: GEN-CREATION-ASSISTED-TEST-01
+
+purpose: automation_test
+execution_mode: assisted
+
+source_snapshot:
+  repository_commit: 5e6002c6d66fb324e43a31f52f307aac2078c27d
+
+policy:
+  generation_strategy: sequential_per_cut
+  allow_batch_generation: false
+  allow_collage_as_cut_substitute: false
+  require_storyboard_preflight: true
+  require_generation_entry_gate: true
+  require_result_review_before_advance: true
+  require_presentation_gate: true
+  user_confirmation_between_cuts: true
+
+presentation_plan_path: content/old-testament/genesis/GEN-CREATION-ASSISTED-TEST-01/presentation-plan.yaml
+
+progress:
+  current_cut_id: null
+  last_accepted_cut_id: null
+  status: planned
+  blocker: awaiting_first_user_prompt
+
+created_at: "2026-10-06T23:09:00+09:00"
+updated_at: "2026-10-06T23:09:00+09:00"

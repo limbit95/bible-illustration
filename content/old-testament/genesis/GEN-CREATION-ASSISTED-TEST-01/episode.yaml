@@ -1,0 +1,22 @@
+episode_id: GEN-CREATION-ASSISTED-TEST-01
+title: 창세기 1장 수동 단일컷 제작 테스트
+
+primary_scripture:
+  - book: GEN
+    start:
+      chapter: 1
+      verse: 1
+    end:
+      chapter: 1
+      verse: 31
+
+supporting_scripture: []
+
+production_intent: >
+  Genesis 1 전체 범위를 대상으로 사용자가 한 장씩 프롬프트를 전달하고,
+  각 요청마다 Scripture Anchor / Storyboard beat / Cut Canonical Scene /
+  Continuity / Presentation Plan / Generation Entry Gate를 확인한 뒤
+  정확히 한 Cut의 Production Master를 생성하는 assisted non-production test.
+
+definition_status: draft
+revision: 1

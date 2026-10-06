@@ -1,0 +1,5 @@
+episode_id: GEN-CREATION-ASSISTED-TEST-01
+
+# 첫 사용자 프롬프트를 받은 뒤 첫 Cut entry를 추가한다.
+# Cut 순서는 이후 이 파일이 유일한 Source of Truth다.
+storyboard: []
