@@ -804,13 +804,3 @@ STEP 0 확정 후 실제 구조 생성 또는 운영 과정에서 정한다.
 
 **STEP 0 — Architecture Definition: COMPLETED / ALL 7 AREAS CONFIRMED**
 
-완료 후 다음 순서로 실제 저장소 구조를 만든다.
-
-1. 최종 디렉터리 구조 확정
-2. AGENTS.md 정식화
-3. Architecture 문서 분리·정리
-4. Rules 문서 체계 생성
-5. Template 생성
-6. Progress / Decision 기록 체계 생성
-7. Genesis Creation CUT 1–4 기존 작업 이관
-8. CUT 5 제작 재개

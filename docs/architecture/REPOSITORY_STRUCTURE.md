@@ -620,7 +620,7 @@ generation-profile.yaml
 
 - STEP 0 Architecture Definition 완료
 - Repository structure 확정
-- Genesis Creation migration 완료
+- 특정 Architecture migration 완료
 - 특정 Episode production complete
 
 ---
@@ -770,9 +770,9 @@ templates/
   실제 바로 사용할 핵심 template
 ~~~
 
-Genesis Creation CUT 1–4를 이관할 때 처음으로 필요한 Episode/Cut/Run/Asset 디렉터리를 만든다.
+실제 Episode 제작을 시작할 때 처음으로 필요한 Episode / Cut / Run / Asset 디렉터리를 만든다.
 
-이렇게 하면 구조는 확정하되 저장소에는 실제 데이터가 있는 폴더만 존재하게 된다.
+이렇게 하면 구조는 확정하되 저장소에는 실제 데이터가 있는 폴더만 존재하게 된다. 폐기된 production iteration의 디렉터리를 구조 유지를 이유로 빈 껍데기 형태로 복원하지 않는다.
 
 ---
 
@@ -793,21 +793,15 @@ Genesis Creation CUT 1–4를 이관할 때 처음으로 필요한 Episode/Cut/R
 
 ---
 
-## 21. 구조 승인 후 실행 순서
+## 21. 구조 승인 후 운영 원칙
 
-Repository Structure가 승인되면 다음 순서로 진행한다.
+Repository Structure v1.0이 확정된 뒤에는 특정 Episode를 전제로 한 고정 실행 순서를 두지 않는다.
 
-1. **Repository Structure v1 CONFIRMED**
-2. 루트 AGENTS.md 정식화
-3. README.md 생성/정리
-4. docs/architecture 정식 문서 생성
-5. docs/rules 생성
-6. templates 생성
-7. docs/progress / docs/decisions 생성
-8. 필요한 .gitignore / .gitattributes 확정
-9. Genesis Creation CUT 1–4를 새 구조로 이관
-10. 이관 결과 감사
-11. CUT 5 제작 재개
+1. `AGENTS.md`와 `CURRENT.md`에서 현재 작업 위치를 확인한다.
+2. 필요한 Architecture / Rules / Template을 확인한다.
+3. 새 production entity가 실제로 필요할 때만 해당 Episode / Cut / Run / Asset 경로를 생성한다.
+4. 폐기된 production iteration의 디렉터리나 파일은 새 작업의 출발점으로 복원하지 않는다.
+5. production identity는 기존 ID 불변 조건을 지켜 새로 발급한다.
 
 ---
 
@@ -836,4 +830,4 @@ Repository Structure가 승인되면 다음 순서로 진행한다.
 
 **Repository Structure v1.0: CONFIRMED**
 
-다음 단계는 이 구조를 기준으로 실제 저장소의 최소 필수 구조를 생성하고, `AGENTS.md` / `README.md` / 정식 Architecture 문서를 순서대로 정식화하는 것이다.
+현재 Repository Structure v1.0은 확정 상태이며 실제 production 데이터는 필요 시점에 단계적으로 생성한다.

@@ -37,50 +37,31 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - Templates v1.0: **CONFIRMED**
 - Progress / Decision 기록 체계 v1.0: **CONFIRMED**
 - DEC-0001 — Git LFS and Ignore Policy: **ACCEPTED**
-- DEC-0002 — Presentation-only Cut Output Mode: **REJECTED** — CUT 1은 기존 illustration/Asset 모델 유지
-- DEC-0003 — Genesis C01–C04 regeneration strategy: **ACCEPTED**
-- DEC-0004 — Genesis rapid full-chapter prototype before Asset promotion: **ACCEPTED**
 - DEC-0005 — Scripture-unit sequential generation with flexible scene decomposition: **ACCEPTED**
 - DEC-0006 — Scene relation policy: continuity vs transition: **ACCEPTED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
+과거에 사용된 Decision 번호는 삭제 후에도 재사용하지 않는다. 현재 tree에 없는 과거 Decision의 내용은 Git history에서만 확인한다.
+
 ## 3. 현재 단계
 
-현재는 **Architecture Refinement — Storyboard Rules 강화 준비** 단계다.
+현재는 **Architecture Refinement — Storyboard Production Rules 강화** 단계다.
 
-Genesis Creation 이미지 테스트는 실제 제작 규칙 검증 목적을 달성해 일시 중지했으며, 재개 전 Storyboard 제작 규칙을 보완한다.
-
-진행 위치와 다음 작업은 `docs/progress/CURRENT.md`가 Source of Truth다.
+이전 Genesis Creation production/test iteration은 현재 Canonical production tree에서 **retired** 상태다.
 
 현재 원칙:
 
+- 이전 iteration에서 생성된 Episode / Storyboard / Cut / Continuity / Run / Asset / representative selection / image binary를 새 제작의 입력으로 사용하지 않는다.
+- 이전 iteration에서 사용한 장면별 팔레트, 광원, 카메라, 구도, 질감, progression 같은 production-specific 값도 새 Genesis 제작의 기본값으로 계승하지 않는다.
+- 이전 iteration의 상세 산출물은 현재 tree에서 제거하며 과거 Git commit history만 보존한다.
+- 이전 테스트에서 일반화되어 정식 Architecture / Rules / accepted Decision으로 승격된 원칙만 현재 기준으로 유지한다.
+- Genesis Creation을 다시 제작할 때는 Architecture refinement 완료 후 Scripture부터 Storyboard를 새로 설계한다.
+- 과거에 이미 사용한 Episode / Cut / Run / Asset ID를 새 제작물에 조용히 재사용하지 않는다. 새 identity는 기존 ID invariant에 따라 결정한다.
 - 빈 미래 디렉터리와 파일을 필요 이상으로 대량 생성하지 않는다.
 - 실제 데이터나 정식 문서가 필요한 시점에만 구조를 생성한다.
-- Genesis Creation CUT 1–4 Canonical definition은 새 구조로 이관되어 audit를 통과했고, 사용자 승인으로 `approved / revision 1` 상태다.
-- Genesis Creation C01–C04 migration은 완료되었다.
-- CUT 5는 C01–C04 Canonical Production Validation을 먼저 수행한 뒤 재개한다.
-- C02–C04는 실제 생성 feedback을 반영한 `approved / revision 2` 상태다.
-- 기존 accepted Result는 revision 2 기준 Review sequence 2에서도 모두 accepted 되었다.
-- C02–C04 LFS binary는 Canonical `.png` 경로에 정상화되었고 checksum / size 검증을 통과했다.
-- C02–C04 Asset은 `available`, representative 선정 완료 상태이며 revision 2 기준 production complete다.
-- C01 black-screen Asset은 Git LFS ingest / availability / representative 선정까지 완료되었다.
-- Genesis Creation C01–C04 Canonical Production Validation은 최종 완료되었다.
-- C05/C06의 기존 accepted Result / pending_ingest Asset 후보는 historical production-validation 기록으로 유지한다.
-- 현재는 해당 binary ingest를 진행 blocker로 사용하지 않는다.
-- 사용자 선택 00→06 working reference sequence에서 확인된 핵심은 개별 이미지보다 **인접 이미지의 자연스러운 단계적 연결**이다.
-- 00→06의 구체 progression과 Genesis Creation 전용 visual profile은 `docs/progress/GENESIS_CREATION_RAPID_PROTOTYPE.md`에 기록되어 있다.
-- Genesis Creation의 navy / blue-black → cool white → warm gold-white palette와 원초적 유체 질감은 **Genesis Creation 한정**이며 성경 전체 전역 Style이 아니다.
-- Presentation text 기본 reference는 작고 절제된 cinematic sans-serif이며, Key Scripture Frame은 직접 인용 우선 / narration은 설명용 Frame에서만 사용한다.
-- Genesis Creation 이미지 테스트는 현재 **PAUSED**다. 테스트 결과는 Architecture refinement 입력으로 사용한다.
-- 사용자가 개역한글 본문 한 구절 또는 의미 있는 구간을 가져오면 이를 Scripture Work Unit으로 삼는다.
-- Assistant는 생성 전에 해당 본문이 1장면으로 충분한지, 여러 장면 Storyboard가 필요한지 판단한다.
-- 실제 이미지는 기본적으로 한 장면씩 순차 생성하며, 직전 사용자 승인 이미지를 visual continuity anchor로 사용한다. 단 Canonical Scripture / Cut / Continuity가 항상 우선한다.
-- 여러 이미지를 한 번에 일괄 생성하는 방식은 기본값이 아니며 사용자가 명시적으로 원하거나 Continuity 위험이 낮은 경우에만 사용한다.
-- 각 새 Cut 생성 전 직전 장면과의 Scene Relation을 판단한다: 동일 사건의 단계적 변화는 Continuity, 새로운 사건/visual subject는 Transition을 허용한다.
-- Transition에서는 Story/Scripture continuity는 유지하되 카메라·구도·스케일·팔레트·분위기를 새롭게 설계할 수 있다.
-- 전체 시퀀스 선별 뒤 Asset promotion / Git LFS / representative를 정리한다.
-- Presentation text는 Production Master와 분리하고 직접 인용 / 장절 / 역본 / narration을 별도 layer에서 테스트한다.
+
+진행 위치와 다음 작업은 `docs/progress/CURRENT.md`가 Source of Truth다.
 
 ## 4. 저장소 범위
 
@@ -131,6 +112,8 @@ Provider 내부의 character, model, prompt, slot, project structure는 Canonica
 
 현재 진행 위치가 바뀌면 `docs/progress/CURRENT.md`를 함께 갱신한다.
 
+폐기된 production iteration의 상세 파일을 현재 tree에 archive 용도로 복제하지 않는다. Git history가 과거 상세 기록을 보존한다.
+
 ## 7. 구조 변경 원칙
 
 - ID가 identity이며 파일 경로는 identity가 아니다.
@@ -142,6 +125,7 @@ Provider 내부의 character, model, prompt, slot, project structure는 Canonica
 - STORY_KEY를 독립 Story Arc entity로 승격하지 않는다.
 - Asset은 Cut 또는 Library primary owner 아래 등록한다.
 - 의미 있는 이미지 binary 변경은 기존 Asset을 overwrite하지 않고 새 Asset ID를 발급한다.
+- 폐기된 ID는 다른 새 production entity에 재사용하지 않는다.
 
 ## 8. Architecture Source of Truth
 
@@ -189,7 +173,7 @@ Template은 Architecture와 Rules를 구현하기 위한 최소 물리 스키마
 - `docs/progress/CURRENT.md` — 현재 작업 위치와 다음 작업
 - `docs/progress/MILESTONES.md` — 주요 완료 기준점
 - `docs/decisions/README.md` — Decision Record 생성·상태·번호 규칙
-- `docs/decisions/DEC-*.md` — 중요한 선택의 이유와 대안 기록
+- `docs/decisions/DEC-*.md` — 현재 tree에서 유지되는 중요한 선택의 이유와 대안
 
 CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다.
 
@@ -208,6 +192,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**새 채팅에서 Architecture 상태 복원 → Storyboard 제작 규칙 강화 → Architecture / Rules / Template 책임 충돌 검토 → 사용자 승인 → 그 이후 Genesis Creation 이미지 테스트 재개 여부 결정**
+**Storyboard Production Rules 강화 → Architecture / Rules / Template 책임 충돌 검토 → 사용자 승인 → 새로운 Genesis Creation production을 Scripture부터 재설계할지 결정**
 
 이다.

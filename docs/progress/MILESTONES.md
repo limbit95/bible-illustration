@@ -1,19 +1,19 @@
 # Project Milestones
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED**
 >
 > 목적: Bible Illustration 프로젝트에서 장기적으로 의미가 있는 완료 기준점을 간결하게 기록한다.
 >
-> 현재 작업 위치는 `CURRENT.md`가 Source of Truth이며, 이 문서는 과거의 주요 완료 이력을 보존한다.
+> 현재 작업 위치는 `CURRENT.md`가 Source of Truth이며, 이 문서는 주요 완료 이력만 보존한다.
 
 ## 기록 원칙
 
 1. 모든 커밋이나 세부 작업을 기록하지 않는다.
 2. 이후 작업의 기준점이 되는 완료 사건만 기록한다.
 3. 이미 기록된 milestone의 의미를 나중에 조용히 바꾸지 않는다.
-4. 잘못된 기록을 수정해야 하면 변경 이유가 Git history에 남아야 한다.
-5. 진행 중 상태는 이 문서가 아니라 `CURRENT.md`에 기록한다.
-6. 세부 설계 근거는 Architecture / Rules / Decision 문서에 둔다.
+4. 진행 중 상태는 이 문서가 아니라 `CURRENT.md`에 기록한다.
+5. 세부 설계 근거는 Architecture / Rules / Decision 문서에 둔다.
+6. retired production iteration의 상세 산출물은 이 문서에 복제하지 않고 Git history로 보존한다.
 
 ## Milestones
 
@@ -36,126 +36,53 @@
 
 ### 2026-10-02 — Repository Structure v1.0 확정
 
-- 최종 논리 디렉터리 구조 CONFIRMED
 - `docs / content / library / integrations / templates` 책임 분리
-- Story Arc 중간 entity 미사용
+- Storyboard / Cut / Continuity 책임 분리
 - Canonical `prompt.md` 미사용
 - 빈 미래 디렉터리 대량 생성 금지
 
-### 2026-10-02 — 정식 Architecture 이관 완료
+### 2026-10-02 — 정식 Architecture / Rules / Templates 체계 확정
 
 - `docs/architecture/` 정식 문서 생성
-- STEP 0-1~0-7 CONFIRMED 본문 이관
-- 원본 Working Record와 exact-match 검증 통과
-- 현재 Architecture Source of Truth를 정식 문서로 전환
-
-### 2026-10-02 — Production Rules v1.0 확정
-
-- Master / Scripture / Historical / Visual / Continuity / Generation / Text & Copyright Rules 확정
-- legacy 8-cut fixed rule을 전역 규칙으로 계승하지 않음
-- Architecture와 제작 Rules의 책임 경계 확정
-
-### 2026-10-02 — Templates v1.0 확정
-
+- Production Rules v1.0 확정
 - 핵심 YAML Template 11개 확정
-- Architecture 필수 필드와 enum 교차 검증 통과
-- 신규 Episode / Cut / Run / Asset / Library / Provider 설정의 반복 생성 기준 마련
-
-### 2026-10-02 — Progress / Decision 기록 체계 v1.0 확정
-
-- `CURRENT.md` = 현재 작업 위치 복원
-- `MILESTONES.md` = 주요 완료 기준점 이력
-- `docs/decisions/DEC-*.md` = 중요한 선택의 이유·대안·영향 기록
-- STEP 0 세부 결정을 불필요하게 소급 중복 기록하지 않는 원칙 확정
-
-### 2026-10-02 — Git LFS / ignore 정책 확정
-
-- `DEC-0001-git-lfs-and-ignore-policy.md` accepted
-- Canonical `content/**/assets/` 및 `library/**/assets/` 이미지에만 Git LFS 적용
-- 일반 이미지 binary 기본 ignore
-- local working/cache/export 및 credential 제외 규칙 적용
-- 루트 `.gitattributes` / `.gitignore` 생성
-
-### 2026-10-02 — Genesis Creation C01–C04 Canonical definitions 승인
-
-- `GEN-CREATION-01` Canonical definition migration audit 25/25 통과
-- C01–C04 `approved / revision 1` 전환
-- Episode는 C05 이후 정의가 미완료이므로 `draft / revision 1` 유지
-- Asset migration은 별도 잔여 작업으로 유지
-
-### 2026-10-02 — Genesis Creation C01–C04 migration 완료
-
-- Canonical definition migration 완료
-- migration audit 25/25 통과
-- C01–C04 `approved / revision 1`
-- legacy C02–C04 binary는 미확보 상태를 historical provenance로 보존
-- DEC-0003에 따라 legacy binary 복구 대신 새 Canonical 기준 재생성으로 전환
-- 이후 작업은 migration이 아니라 C01–C04 Canonical Production Validation으로 진행
-
-### 2026-10-02 — Genesis Creation C01–C04 Production Validation 완료
-
-- C01 deterministic pure-black Production Master Git LFS ingest 및 pointer 검증 완료
-- C01 representative Asset 선정 — revision 1
-- C02–C04 Git LFS ingest / checksum 검증 / representative 선정 완료
-- C02–C04 revision 2 기준 Result re-review accepted
-- C01–C04 모두 현재 approved revision 기준 production complete
-- 실제 제작 feedback이 기존 Architecture / Rules / Asset model 안에서 처리 가능함을 검증
-- 다음 제작 대상은 C05 — Genesis 1:6–8
-
-### 2026-10-02 — Genesis Creation rapid full-chapter prototype workflow 확정
-
-- DEC-0004 accepted
-- 사용자 선택 00→06 working reference에서 인접 Cut의 단계적 연결을 핵심 제작 기준으로 확정
-- retain / delta / forbidden leap 원칙을 Continuity Rules에 반영
-- 이전 Cut을 continuity anchor로 사용하는 생성 규칙 반영
-- 개별 Cut production complete보다 창세기 1장 전체 1차 완주를 먼저 수행
-- Asset promotion / Git LFS ingest는 전체 시퀀스 선별 이후로 연기
-- 본문·내레이션 합성본은 Presentation derivative로 별도 테스트
-
-### 2026-10-03 — Genesis Creation visual / presentation reference 확정
-
-- 사용자 최종 선택 00→06 working reference sequence의 단계별 연결 흐름 문서화
-- 개별 이미지 복제보다 인접 장면의 retain + delta 연출을 우선하는 기준 재확인
-- widescreen, blue-black → cool white → warm gold-white, 원초적 유체 질감을 **Genesis Creation 전용 profile**로 한정
-- 해당 palette / texture / lighting progression을 성경 전체 Visual Style로 일반화하지 않도록 규칙화
-- Presentation text는 작고 절제된 cinematic sans-serif reference로 확정
-- Key Scripture Frame은 직접 인용 우선, narration은 설명 / 전환 Frame에서만 사용하는 원칙 확정
-- Production Master와 presentation derivative 분리 원칙 유지
-- 정확한 working visual binary는 아직 Canonical Asset이 아니므로 새 채팅에서 필요 시 재첨부
+- Progress / Decision 기록 체계 v1.0 확정
+- Git LFS / ignore 정책 확정
 
 ### 2026-10-03 — Scripture-unit sequential production workflow 확정
 
 - DEC-0005 accepted
-- 실전 입력 단위를 사용자가 제시한 개역한글 본문 한 구절 또는 의미 있는 구간으로 설정
-- 한 구절 = 한 이미지 고정을 폐기하고 본문 의미에 따라 1:N Cut 분해 허용
-- 장면 분할이 필요한 경우 Assistant가 먼저 짧은 Storyboard를 제안하고 사용자와 조정
-- 실제 이미지는 한 장면씩 순차 생성하고 직전 승인 이미지를 visual continuity anchor로 활용
-- 승인 이미지보다 Scripture / Canonical Cut / Continuity가 우선한다는 경계 유지
-- 여러 이미지 batch generation은 opt-in으로 제한
-- rapid prototype의 속도는 Asset/LFS/final polish 지연으로 확보
+- Scripture Work Unit 기반 작업
+- 한 구절 = 한 이미지 고정 금지
+- 필요 시 1:N Cut 분해 / N:1 Cut 통합
+- 다중 장면이면 생성 전 Storyboard 제안
+- 실제 이미지는 기본적으로 한 장면씩 순차 생성
+- batch generation은 기본값으로 사용하지 않음
 
-### 2026-10-06 — Scene relation continuity / transition policy 확정
+### 2026-10-06 — Scene Relation continuity / transition policy 확정
 
 - DEC-0006 accepted
-- 모든 인접 이미지를 강제로 같은 분위기로 연결하지 않는 원칙 확정
 - 동일 사건의 단계적 변화는 Continuity-oriented relation 우선
-- 새로운 사건 / 창조 국면 / 핵심 visual subject는 Transition-oriented relation 허용
-- Transition에서도 Scripture와 Story chronology는 유지
-- 기존 Architecture의 continue / partial_reset / reset으로 Canonical 표현하며 새 enum은 추가하지 않음
-- 사용자가 별도 지시하지 않아도 Assistant가 relation을 먼저 판단
+- 새로운 사건 / 핵심 visual subject는 Transition-oriented relation 허용
+- Transition에서도 Scripture와 Story chronology 유지
+- Canonical 저장은 기존 `continue / partial_reset / reset` 사용
+- 새 relation enum을 추가하지 않음
 
-### 2026-10-06 — 이미지 테스트 Pause / Architecture refinement 복귀
+### 2026-10-06 — 이전 Genesis production iteration retired
 
-- Genesis Creation 이미지 반복 테스트를 통해 실제 Architecture 적용 문제와 개선 방향 확인
-- Scripture-unit sequential generation / flexible Cut decomposition / Continuity vs Transition 정책을 실제 이미지 생성으로 검증
-- 이미지 테스트를 일시 중지하고 Architecture 구조 보완 단계로 복귀
-- 다음 최우선 과제를 Storyboard production rules 강화로 지정
-- 현재 테스트 이미지는 working output으로 유지하고 자동 Asset promotion / LFS ingest하지 않음
-- 새 채팅 인수인계를 위해 `ARCHITECTURE_REFINEMENT_HANDOFF.md` 생성
+- 이전 Genesis production/test iteration의 active production data를 현재 tree에서 제거
+- Episode / Storyboard / Cut / Continuity / Run / Asset / representative selection 제거
+- 현재 tree의 Git LFS image pointer 제거
+- production-specific progress/decision 자료 제거
+- 장면별 시각 micro-rule을 현재 Rules에서 제거
+- Git commit history는 유지
+- 일반화되어 Architecture / Rules / DEC-0005 / DEC-0006에 승격된 원칙은 유지
+- 다음 Genesis production은 Architecture refinement 완료 후 Scripture부터 새로 설계
 
 ## 다음 Milestone 후보
 
-다음 항목은 실제 완료될 때만 이 문서에 추가한다.
+다음 항목은 실제 완료될 때만 추가한다.
 
-- Genesis Creation CUT 5 제작 재개
+- Storyboard Production Rules 강화 완료
+- 새로운 Episode production 시작
 - 특정 Episode production complete

@@ -149,32 +149,18 @@ Presentation layer에서 직접 인용과 내레이션을 동시에 기본 노�
 
 어떤 Frame이 Key Scripture인지 여부는 Episode / Storyboard / Presentation 설계에서 판단하며, 모든 성경 구간을 동일 비율의 직접 인용으로 강제하지 않는다.
 
-Genesis Creation rapid prototype에서는 본문 자체가 창조 행위와 선언을 직접 구성하는 경우가 많으므로 대부분의 핵심 장면에서 **본문 직접 인용 우선**을 적용한다.
 
-## 12. Default Cinematic Presentation Typography
+## 12. Default Presentation Typography
 
-별도 Episode-specific typography profile이 없는 경우 다음을 기본 presentation 방향으로 사용한다.
+별도 Episode-specific typography profile이 없는 경우 presentation text는 이미지 감상을 방해하지 않고 직접 인용과 내레이션의 위계를 명확히 구분하는 방향을 기본으로 한다.
 
-- 장식적·화려한 성경체보다 깔끔하고 절제된 sans-serif 계열
-- Regular 또는 Light에 가까운 가벼운 인상
-- 영화 자막 / 오프닝 카드처럼 조용하고 시네마틱한 배치
-- 이미지 감상을 방해하지 않도록 작은 크기와 넉넉한 여백
-- 기본 위치는 좌하단 계열이며 장면의 중요한 피사체를 가리면 이동 가능
-- 불투명한 큰 텍스트 박스는 피하고, 필요할 때만 약한 shadow 또는 subtle gradient 사용
-- 장절 표기는 본문보다 작게
-- 본문과 내레이션의 시각적 위계를 분리
+- 읽기 쉬운 서체를 사용한다.
+- 본문보다 장절·출처 표기를 보조적인 위계로 둔다.
+- 중요한 피사체를 가리지 않는다.
+- 불필요하게 큰 불투명 텍스트 박스를 기본값으로 사용하지 않는다.
+- 직접 인용과 내레이션이 혼동되지 않도록 표현을 구분한다.
+- 특정 폰트, 위치, 픽셀 크기, 색상, 여백 수치를 프로젝트 전역 고정값으로 두지 않는다.
 
-현재 1672×941 테스트에서 사용자가 선호한 reference scale은 대략 다음과 같다.
+구체 typography profile은 실제 Episode / presentation 요구가 생길 때 별도로 정한다.
 
-- 좌측 여백: 약 5~6%
-- 하단 여백: 약 7~8%
-- 장절 표기: 약 18 px 수준
-- 본문: 약 31 px 수준
-- 얇은 짧은 divider line 허용
-- off-white 계열 text + 매우 약한 shadow
-
-위 수치는 고정 픽셀 규칙이 아니라 **비율과 분위기를 재현하기 위한 reference**다. 해상도·화면 크기에 따라 비례 조정한다.
-
-중요한 본문을 검은 화면 위에 절제된 텍스트로 제시하는 intertitle 연출도 허용한다.
-
-이 Typography는 presentation derivative의 기본 방향이며, Production Master image 자체에는 계속 text를 bake-in하지 않는다.
+이 Typography 규칙은 presentation derivative에 적용하며 Production Master image 자체에는 계속 text를 bake-in하지 않는다.

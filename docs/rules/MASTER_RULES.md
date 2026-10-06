@@ -148,14 +148,13 @@ Architecture가 허용하는 범위에서 draft / in_review Cut의 탐색 Run을
 - `GENERATION_RULES.md` — Provider 생성·Run·Review·Asset Promotion
 - `TEXT_AND_COPYRIGHT.md` — 직접 인용·내레이션·텍스트 레이어·권리
 
-## 8. 이전 테스트 규칙에서 계승하지 않는 항목
+## 8. 폐기된 Production Iteration의 취급
 
-과거 테스트 자료의 **“한 Chapter를 기본 8컷으로 구성”** 규칙은 현재 Architecture와 충돌하므로 정식 규칙으로 계승하지 않는다.
+과거 prototype이나 production iteration에서 사용한 Cut 구성, 장면별 색감·광원·구도·질감·카메라, Provider-specific prompt 패턴은 현재 Rules로 자동 계승하지 않는다.
 
-현재는 본문 분량과 사건 흐름에 따라 Episode와 Cut 수를 유연하게 결정한다.
+폐기된 production iteration에서 반복 검증되어 일반화할 가치가 있는 원칙은 Architecture / Rules / Decision에 별도로 승격한 경우에만 현재 기준으로 사용한다.
 
-Genesis Creation의 과거 CUT 1–4와 당시 8개 흐름 계획은 향후 migration 시 **기존 작업 데이터**로 검토하며, 전역 제작 규칙으로 일반화하지 않는다.
-
+과거 상세 값이 필요하면 Git history에서 확인할 수 있지만, 이를 새 Episode의 기본값으로 복원하지 않는다.
 
 ## 9. Scripture Work Unit 운영
 

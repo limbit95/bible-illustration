@@ -1,6 +1,5 @@
 schema_version: 1
 
 # Canonical Episode Sequence
-episodes:
-  - order: 10
-    episode_id: GEN-CREATION-01
+# No active production episodes are registered yet.
+episodes: []
