@@ -45,6 +45,7 @@ Architecture 완료 상태를 확인하거나 새 production을 시작할 때는
 - DEC-0009 — downstream reference promotion before Run: **ACCEPTED**
 - DEC-0010 — retired identity tombstone registry: **ACCEPTED**
 - DEC-0011 — Episode visual direction ownership: **ACCEPTED**
+- DEC-0012 — Enforced Generation Entry Gate: **ACCEPTED**
 - Pre-Production Hardening Audit: **PASSED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
@@ -68,6 +69,8 @@ Architecture 완료 상태를 확인하거나 새 production을 시작할 때는
 - 새 identity 발급 전 current tree와 `content/identity-tombstones.yaml`을 모두 확인한다.
 - Canonical Library semantic identity는 Library Entity의 `library_id`, 실제 image binary identity는 Image Asset의 `asset_id`를 사용한다.
 - project-owned working/accepted image를 실제 downstream Run reference로 사용할 때는 먼저 available Asset으로 Promotion한다.
+- 모든 실제 Provider image request 전에 Generation Run의 `entry_gate`를 확인한다.
+- 자동화 요청도 Storyboard / Continuity / text-free Production Master Gate를 생략할 수 없다.
 - 빈 미래 디렉터리와 파일을 필요 이상으로 대량 생성하지 않는다.
 
 진행 위치와 다음 작업은 `docs/progress/CURRENT.md`가 Source of Truth다.

@@ -1,10 +1,41 @@
-# Generation Rules v1.2
+# Generation Rules v1.3
 
 > 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 목적: Canonical Scene을 실제 Provider 생성 요청으로 변환하고 Result를 검토·기록·보존하는 운영 규칙을 정의한다.
 
-## 1. Canonical First
+## 1. Enforced Generation Entry Gate
+
+실제 Provider 요청은 다음 조건이 모두 충족된 뒤에만 허용한다.
+
+- Scripture Work Unit 확정
+- Episode identity / definition 존재
+- 현재 Cut이 Storyboard에 존재
+- Cut Canonical Scene 존재
+- Multi-Cut이면 Storyboard Production Preflight 통과
+- 이전 active Cut이 있으면 Scene Relation 판정 완료
+- 필요한 Continuity constraint 존재
+- Production Master가 text-free인지 확인
+- Provider / Generation Profile / Prompt Adapter resolve 완료
+
+각 Run은 이 결과를 `entry_gate` snapshot으로 기록한다.
+
+하나라도 false/unresolved이면 **Run submission prohibited**다.
+
+자동화 테스트 브랜치에서도 이 Gate는 생략하지 않는다.
+
+### Isolated automation-test exception
+
+별도 test branch에서 production이 아닌 자동화 검증을 할 때는 same-session working image를 다음 Cut의 visual reference로 임시 사용할 수 있다.
+
+조건:
+
+1. branch / 기록에 non-production automation test임을 명시한다.
+2. 해당 binary는 Canonical Asset으로 간주하지 않는다.
+3. test production data와 image output을 main의 정식 production으로 merge하지 않는다.
+4. 실제 production에서는 DEC-0009의 Asset Promotion 선행 규칙으로 되돌아간다.
+
+## 2. Canonical First
 
 생성 전에 다음을 먼저 확인한다.
 
@@ -17,7 +48,7 @@
 
 Prompt가 이 데이터를 대체하지 않는다.
 
-## 2. Provider는 Adapter다
+## 3. Provider는 Adapter다
 
 ChatGPT, OpenArt, Higgsfield 등은 Rendering Provider다.
 
@@ -26,7 +57,7 @@ ChatGPT, OpenArt, Higgsfield 등은 Rendering Provider다.
 - Provider가 기능을 지원하지 않아도 Canonical requirement를 자동 삭제하지 않는다.
 - capability mismatch는 unresolved requirement로 드러낸다.
 
-## 3. Prompt / Instruction
+## 4. Prompt / Instruction
 
 실제 observable generation instruction은 Provider Adapter / Profile을 통해 준비한다.
 
@@ -37,7 +68,7 @@ Prompt는 파생 데이터다.
 - Provider 내부 hidden prompt를 추측하지 않는다.
 - Prompt를 수정하고 다시 생성하면 새 Run이다.
 
-## 4. 탐색 Run
+## 5. 탐색 Run
 
 draft / in_review Cut에서도 탐색 Run을 허용한다.
 
@@ -54,7 +85,7 @@ draft / in_review Cut에서도 탐색 Run을 허용한다.
 - 오래된 draft Result가 예쁘다는 이유로 현재 Canonical 기준을 낮추지 않는다.
 - 대표 Asset 선정 전 현재 approved 기준으로 다시 검토한다.
 
-## 5. 한 Run의 경계
+## 6. 한 Run의 경계
 
 Provider에 실제 제출한 요청 1회를 Run 1개로 본다.
 
@@ -67,7 +98,7 @@ Provider에 실제 제출한 요청 1회를 Run 1개로 본다.
 
 한 요청에서 여러 이미지가 반환되면 하나의 Run 아래 여러 Result로 관리한다.
 
-## 6. Reference 사용
+## 7. Reference 사용
 
 Reference는 역할을 명시한다.
 
@@ -86,7 +117,7 @@ Reference는 역할을 명시한다.
 
 프로젝트가 통제하는 binary를 actual Run Reference로 제출하려면 Run 전에 available Asset으로 등록한다.
 
-## 7. 인접 Cut 생성 입력
+## 8. 인접 Cut 생성 입력
 
 같은 사건의 연속 Cut에서는 바로 이전 Cut의 accepted Result 또는 사용자 승인 working image를 continuity anchor 후보로 우선 검토한다.
 그 binary를 실제 Provider reference로 제출할 때는 DEC-0009에 따라 먼저 Asset Promotion하여 available Asset ID로 사용한다.

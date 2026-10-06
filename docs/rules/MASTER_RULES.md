@@ -1,4 +1,4 @@
-# Master Production Rules v1.2
+# Master Production Rules v1.3
 
 > 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
@@ -102,6 +102,11 @@ C는 최소화하며 필요한 경우 사실이 아니라 해석/연출임을 �
 
 ## 4. 장면 분할 원칙
 
+- Cut 수를 줄이는 것 자체를 최적화 목표로 삼지 않는다.
+- 본문에 서로 구별되는 시각적 beat가 충분히 존재하면 여러 Cut으로 적극 분해할 수 있다.
+- 시청자가 창조의 진행·상태 변화·사건의 세부를 더 풍부하게 경험할 수 있는 경우, 불필요한 압축보다 의미 있는 분해를 우선한다.
+- 단, 사실상 같은 화면과 의미를 반복하는 micro-cut은 만들지 않는다.
+
 - Episode와 Cut 수를 고정 숫자에 맞추지 않는다.
 - 본문의 자연스러운 사건·시간·장소·중심인물·목적 변화에 따라 분할한다.
 - 중요 사건을 지나치게 압축하지 않는다.
@@ -110,6 +115,13 @@ C는 최소화하며 필요한 경우 사실이 아니라 해석/연출임을 �
 - 실제 표시 순서는 Storyboard가 Source of Truth다.
 
 ## 5. 제작 루프
+
+**Generation Gate는 권고가 아니라 실행 선행조건이다.**
+
+Provider 이미지 생성 요청을 보내기 전에 현재 Run의 `entry_gate`가 모든 적용 항목에서 통과되어야 한다.
+Gate 미통과 상태에서는 exploratory Run도 실제 Provider 호출을 수행하지 않는다.
+
+자동화 요청처럼 사용자가 전체 진행을 위임한 경우 Assistant가 Storyboard/Preflight/Canonical 정의를 스스로 작성·검토할 수 있지만, Gate 자체를 생략할 수는 없다.
 
 기본 제작 루프는 다음 흐름을 따른다.
 

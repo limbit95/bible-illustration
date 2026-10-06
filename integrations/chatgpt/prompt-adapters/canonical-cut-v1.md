@@ -1,4 +1,4 @@
-# ChatGPT Prompt Adapter — canonical-cut rev1
+# ChatGPT Prompt Adapter — canonical-cut rev2
 
 > Provider: `chatgpt`
 >
@@ -20,6 +20,22 @@
 8. Provider-specific execution preference
 
 하위 입력이 상위 Canonical 정의와 충돌하면 상위 정의를 우선한다.
+
+## Production Master text prohibition
+
+Production Master generation instruction MUST explicitly prohibit:
+
+- scripture text
+- verse numbers
+- translation labels
+- captions
+- narration
+- titles
+- UI text
+- decorative lettering
+- watermark-like typography
+
+Presentation text is handled separately after the image master.
 
 ## Instruction composition
 

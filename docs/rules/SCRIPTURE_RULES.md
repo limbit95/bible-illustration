@@ -1,4 +1,4 @@
-# Scripture Rules v1.2
+# Scripture Rules v1.3
 
 > 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
@@ -123,6 +123,10 @@ supporting Scripture는 맥락과 병행 본문을 보조할 수 있지만 prima
 ## 9. Cut Boundary와 Beat Granularity
 
 Cut 수는 고정하지 않는다.
+
+**의미 있는 시각 경험을 충분히 제공하는 것을 Cut 수 최소화보다 우선한다.**
+본문이 단계적 변화·서로 다른 상태·서로 다른 초점을 자세히 묘사하면 여러 Cut으로 넉넉하게 분해할 수 있다.
+다만 별도 Cut으로 나누어도 새로운 본문 의미나 시각 경험이 거의 추가되지 않는 반복은 피한다.
 
 장면 경계는 절 번호 자체보다 다음 변화가 실제 시각적 beat를 만드는지 보고 판단한다.
 
