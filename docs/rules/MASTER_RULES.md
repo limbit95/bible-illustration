@@ -208,3 +208,34 @@ Storyboard 제안에는 필요한 만큼만 다음을 포함한다.
 빠른 제작의 의미는 대량 batch 생성이 아니라,
 과도한 사전 polish, Asset promotion, Git LFS ingest, representative 확정을 뒤로 미뤄
 본문과 장면 흐름을 먼저 완주하는 데 있다.
+
+
+## 11. Scene Relation 판단
+
+새 Cut을 만들기 전에 직전 Cut과의 관계를 먼저 판단한다.
+
+### Continuity-oriented
+
+같은 사건의 직접적인 다음 단계이거나,
+이전 상태를 유지해야 본문의 변화가 자연스럽게 이해되는 경우에는
+시각적 연결을 우선한다.
+
+- RETAIN을 보존한다.
+- 이번 본문이 요구하는 DELTA만 추가한다.
+- 중간 단계를 건너뛰는 FORBIDDEN LEAP를 피한다.
+- 직전 승인 이미지를 continuity reference로 사용할 수 있다.
+
+### Transition-oriented
+
+새로운 사건, 새로운 창조 국면, 새로운 핵심 subject가 시작되거나
+이전 구도와 분위기를 계속 유지하는 것이 본문 전달을 약하게 만드는 경우에는
+시각적으로 새로운 장면으로 전환할 수 있다.
+
+이 경우에도 Story Continuity는 유지하지만
+카메라, 구도, 스케일, 팔레트, 조명, 분위기는 새롭게 설계할 수 있다.
+
+Assistant는 사용자가 별도 지시하지 않아도 Continuity와 Transition 중 더 적절한 방식을 먼저 판단한다.
+사용자가 명시적으로 연결 또는 전환을 요청하면 Scripture / Architecture와 충돌하지 않는 한 이를 우선한다.
+
+Canonical 저장은 새로운 enum을 만들지 않고 기존 Continuity Model의
+`continue | partial_reset | reset`과 Storyboard의 `transition_note`를 사용한다.
