@@ -1,6 +1,6 @@
-# Provider Integration Model v1.0
+# Provider Integration Model v1.1
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -11,7 +11,7 @@
 >
 > 목적: ChatGPT, OpenArt, Higgsfield 및 향후 추가될 외부 렌더링 서비스를 Canonical 제작 데이터와 분리된 Adapter Layer로 연결하고, Provider 교체·기능 변화·외부 리소스 재등록이 발생해도 프로젝트의 원본 정의가 흔들리지 않도록 한다.
 >
-> 실제 이미지 Asset의 저장 위치와 보존 정책은 STEP 0-7에서 확정한다.
+> 실제 이미지 Asset의 저장 위치와 보존 정책은 `ASSET_STORAGE_POLICY.md`가 Source of Truth다.
 
 ## 1. Provider Integration의 역할
 
@@ -118,7 +118,7 @@ Provider별 재사용 정보를 하나의 거대한 설정 파일에 섞지 않�
 
 ### 4.1 Provider Binding
 
-Canonical Library Asset과 Provider 내부 리소스의 연결.
+Canonical Library Entity과 Provider 내부 리소스의 연결.
 
 예:
 
@@ -142,7 +142,7 @@ Generation Run은 이 세 계층을 사용하더라도 **실제 실행에 사용
 
 ## 5. Provider Binding
 
-Provider Binding은 Canonical Library Asset 또는 그 local profile과 Provider 내부 리소스의 관계를 기록한다.
+Provider Binding은 Canonical Library Entity 또는 그 local profile과 Provider 내부 리소스의 관계를 기록한다.
 
 개념 예:
 
@@ -152,11 +152,11 @@ binding_key: moses-exodus-primary
 binding_revision: 1
 
 canonical_ref:
-  asset_id: CHR-MOSES
+  library_id: CHR-MOSES
   profile: EXODUS
 
 verified_against:
-  asset_revision: 2
+  library_revision: 2
 
 provider_resource:
   resource_type: character
@@ -173,7 +173,7 @@ notes: null
 중요:
 
 - external_id는 Canonical Character ID가 아니다.
-- binding_key도 Library Asset ID가 아니다.
+- binding_key도 Library Entity ID가 아니다.
 - Canonical identity는 항상 CHR-MOSES 같은 Library ID가 소유한다.
 - binding_key는 provider_key + scope_alias 안에서 안정적으로 유지한다.
 - verified_against는 이 Binding이 마지막으로 검증된 Canonical Asset revision을 나타낸다.
@@ -219,14 +219,14 @@ retired
 
 원칙:
 
-1. 외부 resource가 삭제되어도 Canonical Library Asset을 삭제하지 않는다.
+1. 외부 resource가 삭제되어도 Canonical Library Entity을 삭제하지 않는다.
 2. 동일 Character를 Provider에 재등록하면 기존 Library ID를 유지한다.
 3. 같은 Canonical ref와 같은 목적을 위한 외부 리소스를 재등록한 경우 binding_key는 유지하고 binding_revision을 증가시킨다.
 4. 같은 Canonical ref에 대해 병행 사용하려는 별도 목적/별도 외부 리소스라면 새 binding_key를 만든다.
 5. 과거 Run은 당시 실제 binding revision과 external resource snapshot을 계속 보존한다.
 6. Binding 변경 때문에 Cut revision을 자동 증가시키지 않는다.
 
-## 8. Canonical Library Revision과 Binding 검증
+## 8. Canonical Library Entity Revision과 Binding 검증
 
 Provider Binding은 자신이 어떤 Canonical Library revision/profile을 기준으로 생성·검증되었는지 기록한다.
 
@@ -703,52 +703,33 @@ Provider 독립성을 확보하되 모든 Provider 기능을 억지로 하나의
 20. 인증 비밀값을 GitHub Source of Truth에 저장하지 않는다.
 21. Provider-specific 기능은 필요 시 격리하되 과도한 공통 추상화를 만들지 않는다.
 
-## 28. STEP 0-6에서 의도적으로 미확정하는 항목
+## 28. STEP 0-6 후속 책임의 현재 해소 상태
 
-다음은 이후 구현 또는 STEP 0-7에서 정한다.
+STEP 0-6 당시 후속 단계로 넘긴 항목 중 Asset 저장과 물리 구조는 현재 다음 문서에서 해소되었다.
 
-- 각 Provider의 실제 API endpoint / SDK 사용법
-- 현재 지원 모델의 실제 목록
-- 실제 Character Builder / Style resource 생성 절차
-- external resource ID의 구체적인 값
-- API credential 저장 솔루션
-- 실제 Reference Asset 파일 위치
-- Provider API 자동화 코드 구조
-- retry/backoff 구현
-- provider별 비용 계산 자동화
-- 이미지 Asset ID / 저장 위치
-- 웹사이트 전달용 Asset pipeline
+- Asset ID / 저장 위치 / Reference binary → `ASSET_STORAGE_POLICY.md`
+- Integration 물리 경로 → `REPOSITORY_STRUCTURE.md`
+- Binding / Generation Profile schema → `templates/provider-binding.yaml`, `templates/generation-profile.yaml`
 
-## 29. STEP 0-6 검토 포인트
+현재 의도적으로 구현 시점까지 열어두는 항목:
 
-다음 항목은 사용자 승인으로 확정되었다:
+- Provider별 API endpoint / SDK 세부
+- credential 제공 방식의 실제 실행 환경
+- retry / backoff 코드
+- 비용 계산 자동화
+- 특정 Provider의 실제 external resource ID
+- Provider 기능 변경에 따른 capability 갱신
 
-- Provider Integration을 Adapter Layer로 두는 원칙
-- Provider Registry / Capability 구조
-- Provider Binding / Generation Profile / Prompt Adapter 3계층 분리
-- Binding revision과 Canonical Library revision 분리
-- scope alias와 credential 분리
-- Generation Profile과 Canonical Visual Style 분리
-- Generation Profile / Prompt Adapter key와 revision 수명 주기
-- Prompt Adapter 출력은 파생 데이터라는 원칙
-- Input resolution 우선순위와 Canonical constraint 비덮어쓰기 원칙
-- Canonical Reference role과 Provider delivery method 분리
-- Capability mismatch / inactive Binding을 조용히 누락하지 않는 원칙
-- Capability mismatch 시 Canonical 정의를 낮추지 않는 원칙
-- Provider 선택을 운영 결정으로 두는 원칙
-- manual_ui / api / chat_native execution mode
-- Provider 변경이 Canonical revision을 자동 유발하지 않는 원칙
-- Provider 응답을 공통 Run/Result로 정규화하는 원칙
-- Provider 폐기·교체 후 과거 기록 유지
-- secrets / credential Git 저장 금지
-- Run에 Integration revision + 실제 resolved input을 함께 기록
-- 과도한 Provider 공통 추상화를 피하는 원칙
+이 값들은 외부 서비스의 현재 상태에 의존하므로 실제 사용 시 검증한다.
 
-위 항목은 2026-10-02 사용자 승인으로 확정되었다.
+## 29. 현재 확정 상태
 
-**STEP 0-6 — Provider Integration Model: COMPLETED / CONFIRMED**
+- Provider Integration은 Canonical 정의와 분리된 Adapter Layer다.
+- Canonical Library reference는 `library_id`를 사용한다.
+- Provider Binding / Generation Profile / Prompt Adapter 책임을 분리한다.
+- Run은 실제 resolved input을 snapshot한다.
+- Capability mismatch를 조용히 무시하지 않는다.
+- credential은 저장소에 기록하지 않는다.
+- Provider 변경은 Canonical revision을 자동으로 만들지 않는다.
 
-다음 작업은 **STEP 0-7 — Image / Asset Storage Policy**다.
-
-
----
+**Provider Integration Model v1.1 — COMPLETED / CONFIRMED**

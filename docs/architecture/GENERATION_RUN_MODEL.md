@@ -1,6 +1,6 @@
-# Generation Run Model v1.0
+# Generation Run Model v1.1
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -10,7 +10,7 @@
 >
 > 목적: 하나의 Cut을 실제 이미지로 렌더링하기 위해 Provider에 제출한 각 생성 시도를 재현·비교·평가할 수 있도록 Generation Run과 그 결과를 정의한다.
 >
-> Provider별 Character Binding과 generation profile의 최종 구조는 STEP 0-6에서, 실제 이미지 Asset 저장·승인 정책은 STEP 0-7에서 확정한다.
+> Provider Integration은 `PROVIDER_INTEGRATION_MODEL.md`, 이미지 Asset 저장·승격은 `ASSET_STORAGE_POLICY.md`가 현재 Source of Truth다.
 
 ## 1. Generation Run의 역할
 
@@ -186,7 +186,7 @@ C03 revision 1 — approved C
 1. Run에 사용되는 Cut / Storyboard / Continuity / Library의 의미 있는 정의는 가능한 한 생성 전에 GitHub Source of Truth에 반영한다.
 2. Run은 해당 입력 기준의 Git commit SHA를 기록한다.
 3. commit SHA는 Cut revision을 대체하지 않는다. 둘 다 기록한다.
-4. Library Asset은 실제 사용한 asset revision과 local profile도 함께 추적할 수 있어야 한다.
+4. Library Entity은 실제 사용한 asset revision과 local profile도 함께 추적할 수 있어야 한다.
 5. Provider 실행 후 Canonical 정의가 바뀌어도 과거 Run의 source snapshot은 변경하지 않는다.
 
 ## 7. Prompt Snapshot
@@ -220,7 +220,7 @@ Run에는 “어떤 Reference를 사용했는가”뿐 아니라 **어떤 역할
 references:
   - asset_ref: ...
     role: character
-    library_asset_id: CHR-MOSES
+    library_id: CHR-MOSES
     library_revision: 2
     profile: EXODUS
 
@@ -242,9 +242,12 @@ role 후보:
 - edit_source
 - other
 
-Reference strength / weight 같은 Provider별 수치는 settings 또는 STEP 0-6 Provider Integration에서 다룬다.
+Reference strength / weight 같은 Provider별 수치는 settings 또는 Provider Integration에서 다룬다.
 
-Reference 이미지의 실제 Asset ID와 파일 저장 규칙은 STEP 0-7에서 확정한다.
+Project-owned binary를 actual Run reference로 제출할 때는 반드시 available Canonical Asset ID를 `asset_ref`로 사용한다.
+accepted Result나 사용자 승인 working image가 reference 후보가 될 수는 있지만, 실제 downstream request에 사용하기 전에 DEC-0009에 따라 Asset Promotion을 완료한다.
+
+권리 때문에 저장할 수 없는 외부 reference만 External Reference Record + Run snapshot 방식의 예외를 사용한다.
 
 ## 9. Provider / Model 정보
 
@@ -506,7 +509,9 @@ Generation Run은 완료 후 “실제로 무엇을 제출했는가”라는 역
 실행 이후 추가 가능한 영역:
 
 - 새로운 Result Review record
-- 이후 Asset 연결
+
+Asset Promotion linkage는 Run Result에 mutable reverse link를 추가하지 않는다.
+Image Asset metadata의 `source.result_id`가 Canonical provenance relation이며 Result→Asset 조회는 이를 기준으로 역산한다.
 
 기존 Review도 당시 판단의 이력으로 보존하는 것을 원칙으로 하며, 새로운 Canonical 기준으로 판단이 바뀌면 기존 Review를 덮어쓰지 않고 새 Review를 추가한다.
 
@@ -593,49 +598,35 @@ Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산�
 19. 비용·Credit은 알 수 있을 때 기록하되 필수값으로 강제하지 않는다.
 20. Run Result와 장기 보존 Asset을 구분한다.
 
-## 23. STEP 0-5에서 의도적으로 미확정하는 항목
+## 23. STEP 0-5 후속 책임의 현재 해소 상태
 
-다음은 이후 STEP에서 정한다.
+STEP 0-5 당시 후속 단계로 넘긴 항목은 현재 다음 문서에서 해소되었다.
 
-- OpenArt / Higgsfield / ChatGPT별 generation profile 스키마
-- Provider Character ID / Style profile binding
-- Reference strength / weight의 표준화 여부
-- Provider별 Prompt adapter 구조
-- Provider별 retry API 세부 처리
-- Asset ID / 파일명 / 저장 위치
-- accepted Result에서 대표 Asset을 선정하는 방법
-- rejected 이미지 파일을 실제로 얼마나 오래 보존할지
-- thumbnail / web derivative 정책
-- Library Reference 이미지 생성용 Run target 확장 여부
+- Provider Binding / Generation Profile / Prompt Adapter → `PROVIDER_INTEGRATION_MODEL.md`
+- Asset ID / 파일명 / 저장 위치 / 대표 선정 → `ASSET_STORAGE_POLICY.md`
+- 실제 Template → `templates/generation-run.yaml`
 
-## 24. STEP 0-5 검토 포인트
+v1에서 의도적으로 열어두는 항목:
 
-다음 항목은 사용자 승인으로 확정되었다:
+- Provider별 retry/backoff 구현
+- Library Reference 자체를 생성하기 위한 non-Cut Run target 확장
+- Provider가 제공하지 않는 비용/모델 metadata
 
-- Provider 요청 1회 = Run 1개 원칙
-- Run ID 형식: CUT_ID + RNNN
-- Result ID 형식: RUN_ID + ONN
-- Run 하나에서 여러 Result 관리
-- Cut revision + Git commit SHA source snapshot
-- Library revision/profile snapshot
-- 프로젝트에서 확인 가능한 실제 Prompt / generation instruction snapshot 보존
-- Reference 역할과 실제 사용 입력 기록, edit_source 구분
-- generate / edit / variation operation 구분
-- execution_status와 Result Review decision 분리
-- Result Review의 reviewed_against snapshot 및 누적 이력
-- accepted Result와 최종 Asset 승인 분리
-- 비숫자 중심 평가 축과 issue category
-- draft/in_review Cut의 탐색 Run 허용
-- Run 실행 입력의 immutable history 원칙
-- 의미 있는 실패 Run 보존
-- 비용/Credit optional 기록
-- Run Result와 Asset 분리
+현재 Run target은 Cut으로 제한한다. Library Reference용 독립 생성 흐름이 실제로 필요해질 때 target model 확장을 별도 결정한다.
 
-위 항목은 2026-10-02 사용자 승인으로 확정되었다.
+## 24. 현재 확정 상태
 
-**STEP 0-5 — Generation Run Model: COMPLETED / CONFIRMED**
+- Provider request 1회 = Run 1개
+- Run은 v1에서 정확히 하나의 Cut을 target
+- Run / Result ID는 과거 tombstone을 포함해 재사용 금지
+- Cut revision + Git commit SHA snapshot
+- Library Entity revision/profile snapshot
+- observable Prompt / Reference / settings snapshot
+- execution status와 Result Review 분리
+- accepted Result와 representative Asset 분리
+- project-owned actual reference는 available Asset ID 사용
+- completed Run 입력은 immutable
+- Result Review만 누적 가능
+- Asset Promotion linkage는 Asset metadata의 `source.result_id`가 소유
 
-다음 작업은 **STEP 0-6 — Provider Integration Model**이다.
-
-
----
+**Generation Run Model v1.1 — COMPLETED / CONFIRMED**

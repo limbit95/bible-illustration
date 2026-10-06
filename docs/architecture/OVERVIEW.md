@@ -67,7 +67,7 @@ Provider가 반환한 모든 Result를 장기 보존하지 않는다.
 
 ### Storyboard vs Cut vs Continuity
 
-Storyboard는 **무엇을 어떤 순서와 의미 단위로 보여줄지 계획**한다.
+Storyboard는 **무엇을 어떤 순서와 의미 단위로 보여줄지 계획**한다. 각 entry의 `transition_note`는 직전 active Cut에서 현재 Cut으로 들어오는 high-level intent를 기록한다.
 
 - 표시 순서
 - Cut ID
@@ -84,7 +84,7 @@ Storyboard Production Review에서 coverage / granularity / relation / visual re
 
 ### Library vs Continuity
 
-Library는 “무엇인가”를 정의한다.
+Library Entity는 “무엇인가”를 정의한다. 실제 이미지 binary Asset과 identity를 분리한다.
 
 Continuity는 “이전 장면에서 무엇이 유지되고 무엇이 변하는가”를 정의한다.
 

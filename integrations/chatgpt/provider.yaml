@@ -1,0 +1,22 @@
+provider_key: chatgpt
+display_name: ChatGPT
+
+integration_status: active
+
+execution_modes:
+  - chat_native
+
+capabilities:
+  generate: true
+  edit: true
+  variation: unknown
+  image_reference: true
+  provider_character_resource: unknown
+  provider_style_resource: unknown
+
+verified_at: "2026-10-06"
+
+notes: >
+  Current project integration uses ChatGPT native image generation/editing.
+  Exact internal model/version and hidden prompt behavior are not inferred.
+  Capability values must be re-verified when provider behavior materially changes.

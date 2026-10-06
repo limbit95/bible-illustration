@@ -1,5 +1,5 @@
 # Bible Illustration — Provider Binding template
-# Template status: v1.0 CONFIRMED / 2026-10-02 user approved
+# Template status: v1.1 CONFIRMED / 2026-10-06 pre-production hardening
 # Binding connects a Canonical Library Asset/profile to a Provider resource.
 # Never store credentials here.
 
@@ -8,11 +8,11 @@ binding_key: null
 binding_revision: 1
 
 canonical_ref:
-  asset_id: null
+  library_id: null
   profile: null
 
 verified_against:
-  asset_revision: null
+  library_revision: null
 
 provider_resource:
   resource_type: null

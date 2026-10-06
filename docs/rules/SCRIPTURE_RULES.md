@@ -1,6 +1,6 @@
-# Scripture Rules v1.1
+# Scripture Rules v1.2
 
-> 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 목적: 성경 본문을 시각화할 때 본문 직접 내용, 역사적 재구성, 해석적 추정을 구분하고 본문에 없는 내용을 사실처럼 고정하지 않기 위한 제작 규칙을 정의한다.
 
@@ -118,7 +118,7 @@ supporting Scripture는 맥락과 병행 본문을 보조할 수 있지만 prima
 
 - 해당 본문의 직접 묘사를 먼저 확인한다.
 - 외형이 설명되지 않은 경우 과도한 세부를 성경적 사실처럼 고정하지 않는다.
-- 동일 존재가 반복 등장해 Library Asset이 필요한 경우 Scripture Basis와 Visual Reconstruction을 분리한다.
+- 동일 존재가 반복 등장해 Library Entity이 필요한 경우 Scripture Basis와 Visual Reconstruction을 분리한다.
 
 ## 9. Cut Boundary와 Beat Granularity
 

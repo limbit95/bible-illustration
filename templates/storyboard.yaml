@@ -1,8 +1,11 @@
 # Bible Illustration — Storyboard template
-# Template status: v1.0 CONFIRMED / schema unchanged after 2026-10-06 Storyboard Rules refinement
+# Template status: v1.1 CONFIRMED / 2026-10-06 pre-production hardening
 # Storyboard is the single Source of Truth for Cut display order,
 # scripture_anchor, and beat.
 # transition_note records only high-level narrative/visual transition intent.
+# It belongs to the CURRENT entry and describes the incoming transition
+# from the previous active Storyboard Cut -> this Cut.
+# The first active Cut normally uses null; cross-Episode boundary detail belongs to continuity.yaml.
 # Detailed scene specification belongs to cut.yaml.
 # Detailed continue/partial_reset/reset and retain/change/reset constraints
 # belong to continuity.yaml.

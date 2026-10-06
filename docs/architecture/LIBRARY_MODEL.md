@@ -1,15 +1,15 @@
-# Library Model v1.0
+# Library Model v1.1
 
-> 상태: **CONFIRMED / 2026-10-01 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
 > - **STEP 0-2 — Episode / Cut Model v1.0 CONFIRMED**
 > - **STEP 0-3 — Continuity Model v1.0 CONFIRMED**
 >
-> 목적: 여러 Episode와 Cut에서 반복 사용되는 Character, Location, Object, Costume, Environment, Visual Style을 Provider와 독립적인 Canonical Library Asset으로 정의하고, 안정적인 ID·근거 정보·참조 규칙을 설계한다.
+> 목적: 여러 Episode와 Cut에서 반복 사용되는 Character, Location, Object, Costume, Environment, Visual Style을 Provider와 독립적인 Canonical Library Entity로 정의하고, 안정적인 ID·근거 정보·참조 규칙을 설계한다.
 >
-> 실제 이미지 파일 저장, Provider external ID, OpenArt/Higgsfield profile, Generation Run 구조는 이후 STEP에서 정한다.
+> 실제 이미지 binary는 Image Asset, Provider 연결은 Integration, 실행 이력은 Generation Run이 각각 소유한다.
 
 ## 1. Library의 역할
 
@@ -20,7 +20,7 @@ Library는 반복해서 등장하거나 장기 일관성이 필요한 성경 세
 ~~~text
 Scripture / Historical Research
           ↓
-Canonical Library Asset
+Canonical Library Entity
           ↓
 Episode / Cut reference
           ↓
@@ -29,9 +29,9 @@ Continuity state
 Provider-specific rendering
 ~~~
 
-Library Asset은 Provider가 바뀌거나 외부 이미지가 삭제되어도 의미와 정체성이 유지되어야 한다.
+Library Entity은 Provider가 바뀌거나 외부 이미지가 삭제되어도 의미와 정체성이 유지되어야 한다.
 
-## 2. Library Asset 생성 기준
+## 2. Library Entity 생성 기준
 
 모든 장면 요소를 Library로 승격하지 않는다.
 
@@ -45,9 +45,9 @@ Library Asset은 Provider가 바뀌거나 외부 이미지가 삭제되어도 �
 
 반대로 한 Cut에만 등장하는 일반 배경 소품처럼 재사용성과 Canonical identity가 낮은 요소는 Cut-local 정의로 둘 수 있다.
 
-즉 **재사용성과 일관성 가치가 있는 요소만 Library Asset으로 만든다.**
+즉 **재사용성과 일관성 가치가 있는 요소만 Library Entity으로 만든다.**
 
-## 3. Asset 종류와 ID
+## 3. Library Entity 종류와 ID
 
 v1 Library는 다음 여섯 종류를 사용한다.
 
@@ -92,13 +92,13 @@ STY-BIBLICAL-HISTORICAL-REALISM
 6. 자산의 정체성이 달라지면 새 ID를 발급한다.
 7. 같은 실체를 여러 자산 종류로 중복 등록하지 않는다.
 
-## 4. 공통 Library Asset Model
+## 4. 공통 Library Entity Model
 
-모든 Library Asset은 최소 다음 개념을 가진다.
+모든 Library Entity은 최소 다음 개념을 가진다.
 
 ~~~yaml
-asset_id: CHR-MOSES
-asset_type: character
+library_id: CHR-MOSES
+library_type: character
 name: 모세
 aliases: []
 
@@ -118,8 +118,8 @@ revision: 1
 
 공통 책임:
 
-- asset_id: 영구 Canonical ID
-- asset_type: 자산 종류
+- library_id: 영구 Canonical ID
+- library_type: 자산 종류
 - name / aliases: 표시명과 검색용 별칭
 - canonical_summary: 정체성의 핵심 요약
 - basis: 근거 계층
@@ -129,7 +129,7 @@ revision: 1
 
 ### 4.1 Local Profile / Variant 원칙
 
-하나의 Canonical Asset이 생애·시대·형태에 따라 달라진다고 해서 무조건 새 전역 Asset ID를 만들지 않는다.
+하나의 Canonical Asset이 생애·시대·형태에 따라 달라진다고 해서 무조건 새 전역 Library Entity ID를 만들지 않는다.
 
 정체성은 같고 표현 단계만 달라지는 경우 해당 Asset 내부의 local profile 또는 variant를 우선한다.
 
@@ -145,10 +145,10 @@ LOC-JERUSALEM
 
 원칙:
 
-1. 전역 Asset ID는 identity를 나타낸다.
+1. 전역 Library Entity ID는 identity를 나타낸다.
 2. local profile/variant는 같은 identity의 생애·시대·형태 변화를 나타낸다.
 3. local key는 해당 Asset 내부에서만 유일하면 된다.
-4. 독립적으로 여러 자산에서 재사용되어야 하는 정의라면 별도 Library Asset 승격을 검토한다.
+4. 독립적으로 여러 자산에서 재사용되어야 하는 정의라면 별도 Library Entity 승격을 검토한다.
 5. 상처, 먼지, 현재 위치, 파손처럼 사건 중 일시 상태는 profile이 아니라 Cut/Continuity가 관리한다.
 
 ## 5. 근거 계층
@@ -203,7 +203,7 @@ CHR-DAVID
 한 인물의 외형은 생애 전체에서 고정되지 않으므로 나이·시기마다 새 Character ID를 만들지 않는다.
 
 ~~~yaml
-asset_id: CHR-MOSES
+library_id: CHR-MOSES
 
 appearance_profiles:
   - key: MIDIAN
@@ -373,11 +373,11 @@ STY-BIBLICAL-HISTORICAL-REALISM
 1. 역사적 고증 데이터와 Visual Style을 분리한다.
 2. Provider 모델명이나 preset 이름을 Canonical Style에 넣지 않는다.
 3. 실제 Provider style/profile mapping은 STEP 0-6이 맡는다.
-4. 기본 Style은 Episode 수준에서 참조할 수 있다.
-5. Cut별 차이가 필요할 때만 명시적 override를 허용한다.
+4. 여러 Cut에 공통인 기본 Style reference는 필요 시 Continuity Segment baseline의 `visual.style_ref`로 Library Entity ID를 참조할 수 있다.
+5. Cut별 차이가 필요할 때만 Cut의 `library_refs.style`에서 명시적으로 override한다.
 6. v1에서는 복잡한 style 합성보다 하나의 base style + 필요 시 override를 우선한다.
 
-## 12. Asset Reference 원칙
+## 12. Library Entity Reference 원칙
 
 Episode / Cut / Continuity는 Library 정의를 복사하지 않고 ID로 참조한다.
 
@@ -386,24 +386,24 @@ Episode / Cut / Continuity는 Library 정의를 복사하지 않고 ID로 참조
 ~~~yaml
 library_refs:
   characters:
-    - asset_id: CHR-MOSES
+    - library_id: CHR-MOSES
       appearance_profile: EXODUS
       costume_ref: CST-ANCIENT-HEBREW-MALE
 
   location:
-    asset_id: LOC-SINAI
+    library_id: LOC-SINAI
 
   environments:
-    - asset_id: ENV-ARID-HIGHLAND
+    - library_id: ENV-ARID-HIGHLAND
 
   objects:
-    - asset_id: OBJ-STAFF
+    - library_id: OBJ-STAFF
 
   style:
-    asset_id: STY-BIBLICAL-HISTORICAL-REALISM
+    library_id: STY-BIBLICAL-HISTORICAL-REALISM
 ~~~
 
-최종 YAML 위치와 문법은 STEP 0 완료 시 결정한다.
+현재 물리 표현은 `templates/library-definition.yaml`, `templates/cut.yaml`, `templates/continuity.yaml`을 따른다.
 
 핵심 원칙:
 
@@ -446,21 +446,21 @@ Reference image나 Provider 등록 완료 여부와는 별개다.
 
 ### Library Definition 승인 조건
 
-Library Asset의 definition_status를 approved로 만들기 위한 최소 조건:
+Library Entity의 definition_status를 approved로 만들기 위한 최소 조건:
 
-1. 공통 필수 정의와 해당 asset type의 핵심 데이터가 존재한다.
+1. 공통 필수 정의와 해당 library type의 핵심 데이터가 존재한다.
 2. Scripture / Historical / Visual Reconstruction이 가능한 범위에서 구분되어 있다.
 3. 중요한 불확실성이 있다면 uncertainties에 기록되어 있다.
 4. Provider external ID나 특정 서비스 preset이 Canonical 정의를 대신하지 않는다.
-5. 동일 실체의 중복 Library Asset이 없는지 검토되었다.
+5. 동일 실체의 중복 Library Entity이 없는지 검토되었다.
 
-Episode/Cut 작성 중에는 draft Library Asset을 임시 참조할 수 있지만, **Cut definition을 최종 approved로 만들 때 해당 Cut이 의존하는 Canonical Library Asset과 사용 profile은 approved 상태여야 한다.**
+Episode/Cut 작성 중에는 draft Library Entity을 임시 참조할 수 있지만, **Cut definition을 최종 approved로 만들 때 해당 Cut이 의존하는 Canonical Library Entity과 사용 profile은 approved 상태여야 한다.**
 
 이 규칙은 승인된 장면이 아직 확정되지 않은 인물 외형이나 장소 정의에 기대는 것을 막기 위한 것이다.
 
 ## 14. Library 변경 영향 검토
 
-공유 Library Asset의 revision이 올라가면 참조 Cut의 영향 범위를 검토한다.
+공유 Library Entity의 revision이 올라가면 참조 Cut의 영향 범위를 검토한다.
 
 ~~~text
 Library revision 변경
@@ -482,7 +482,7 @@ Library revision 변경
 ## 15. Reference Image와 Provider Binding 분리
 
 ~~~text
-Canonical Library Asset
+Canonical Library Entity
         ↓
 Reference Asset(s)
         ↓
@@ -496,7 +496,7 @@ OpenArt / Higgsfield / future provider
 - Provider용 prompt 최적화 → STEP 0-6
 - Library에는 Provider와 무관한 Canonical 정의만 유지
 
-외부 서비스 슬롯이 삭제되어도 Library Asset ID와 정의는 유지되어야 한다.
+외부 서비스 슬롯이 삭제되어도 Library Entity ID와 정의는 유지되어야 한다.
 
 ## 16. 자산 경계 판단 규칙
 
@@ -532,12 +532,12 @@ OpenArt / Higgsfield / future provider
 ## 17. Library 불변 조건 후보
 
 1. Library는 반복 사용되는 성경 세계 요소의 Canonical Definition Layer다.
-2. Library Asset은 Provider와 독립적이다.
-3. 모든 Library Asset은 안정적인 type prefix ID를 가진다.
-4. 동일 실체를 여러 asset type으로 중복 등록하지 않는다.
+2. Library Entity은 Provider와 독립적이다.
+3. 모든 Library Entity은 안정적인 type prefix ID를 가진다.
+4. 동일 실체를 여러 library type으로 중복 등록하지 않는다.
 5. Scripture Basis / Historical Basis / Visual Reconstruction을 구분한다.
 6. 불확실한 고증을 확정 사실처럼 숨기지 않는다.
-7. 전역 Asset identity와 같은 Asset 내부의 local profile/variant를 분리한다.
+7. 전역 Library Entity identity와 같은 Asset 내부의 local profile/variant를 분리한다.
 8. Character identity와 생애 단계별 appearance profile을 분리한다.
 9. Character와 Costume 원본 정의를 중복하지 않는다.
 10. Location과 Environment 책임을 분리한다.
@@ -548,50 +548,37 @@ OpenArt / Higgsfield / future provider
 15. Library Definition Approval과 Reference Image / Provider 등록 상태를 분리한다.
 16. 승인된 Library 변경은 참조 Cut에 대한 영향 검토를 수행한다.
 17. Library revision 증가가 모든 참조 Cut revision 자동 증가를 의미하지 않는다.
-18. 재사용성과 일관성 가치가 없는 일회성 요소를 과도하게 Library Asset으로 만들지 않는다.
-19. 승인된 Cut은 자신이 의존하는 Canonical Library Asset과 사용 profile이 approved 상태여야 한다.
+18. 재사용성과 일관성 가치가 없는 일회성 요소를 과도하게 Library Entity으로 만들지 않는다.
+19. 승인된 Cut은 자신이 의존하는 Canonical Library Entity과 사용 profile이 approved 상태여야 한다.
 
-## 18. STEP 0-4에서 의도적으로 미확정하는 항목
+## 18. STEP 0-4 후속 책임의 현재 해소 상태
 
-다음은 이후 STEP에서 정한다.
+STEP 0-4 당시 후속 단계로 넘겼던 항목은 현재 다음 Source of Truth에서 해소되었다.
 
-- Reference Image 실제 저장 위치
-- 이미지 파일명 / 버전 규칙
-- OpenArt / Higgsfield external ID mapping
-- Provider별 Character / Style profile
-- Provider reference strength / weight
-- Generation Run에서 사용한 Library revision snapshot 기록 방식
-- 역사 연구 출처의 최종 citation 문법
-- Markdown / YAML 최종 물리 파일 구조
-- Library 하위 파일 분할 방식
-- Reference Asset 승인 정책
+- Reference Image 저장 / 파일명 / 보존 → `ASSET_STORAGE_POLICY.md`
+- Provider external resource / binding / generation profile → `PROVIDER_INTEGRATION_MODEL.md`
+- Generation Run의 Library snapshot → `GENERATION_RUN_MODEL.md`
+- 물리 경로와 YAML Template → `REPOSITORY_STRUCTURE.md` / `templates/library-definition.yaml`
+- Reference Asset 승인 / 사용 관계 → `ASSET_STORAGE_POLICY.md`
 
-## 19. STEP 0-4 검토 포인트
+현재 의도적으로 열어두는 항목:
 
-다음 항목은 사용자 승인으로 확정되었다:
+- 실제 Library Entity 인스턴스
+- 역사 연구 citation의 별도 전용 schema
+- Provider별 reference strength / weight의 실제 값
 
-- Library Asset 생성 기준
-- CHR / LOC / OBJ / CST / ENV / STY ID 체계
-- 공통 Library Asset Model
-- Scripture / Historical / Visual Reconstruction 근거 분리
-- 전역 Asset ID와 local profile/variant 분리 원칙
-- Character appearance profile 방식
-- Character와 Costume 분리 및 실제 장면 배정은 Cut이 소유하는 원칙
-- Location과 Environment 분리
-- Object unique / type 구분
-- Visual Style을 Provider-independent Library Asset으로 관리하는 원칙
-- Episode/Cut/Continuity에서 Library ID를 참조하는 원칙
-- Library Definition Status / revision 및 승인 조건
-- 승인된 Cut이 참조하는 Library Asset도 approved여야 한다는 원칙
-- Library 변경 시 참조 Cut 영향 검토
-- Reference Image / Provider Binding을 Canonical Library에서 분리
-- 일회성 요소를 과도하게 Library Asset으로 만들지 않는 원칙
+이 항목은 실제 사례가 생길 때 최소 범위로 확장한다.
 
-위 항목은 2026-10-01 사용자 승인으로 확정되었다.
+## 19. 현재 확정 상태
 
-**STEP 0-4 — Library Model: COMPLETED / CONFIRMED**
+- Library의 Canonical semantic definition을 **Library Entity**라고 부른다.
+- Library Entity의 공통 식별 필드는 `library_id / library_type`이다.
+- Image binary identity인 `asset_id`와 의미를 분리한다.
+- CHR / LOC / OBJ / CST / ENV / STY ID 형식은 유지한다.
+- Library Entity는 Provider와 독립적이다.
+- Scripture / Historical / Visual Reconstruction 근거를 분리한다.
+- Character / Costume, Location / Environment, Object state, Visual Style의 책임 경계를 유지한다.
+- 승인된 Cut이 의존하는 Library Entity/profile은 approved 상태여야 한다.
+- Reference Asset / Provider Binding은 Canonical Library Entity와 분리한다.
 
-다음 작업은 **STEP 0-5 — Generation Run Model**이다.
-
-
----
+**Library Model v1.1 — COMPLETED / CONFIRMED**

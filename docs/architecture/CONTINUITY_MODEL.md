@@ -1,6 +1,6 @@
-# Continuity Model v1.0
+# Continuity Model v1.1
 
-> 상태: **CONFIRMED / 2026-10-01 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -350,12 +350,22 @@ change:
     from: left
     to: center
 
+reset: []
+
 reason: 인물이 장면 중앙으로 이동하는 사건 진행
 ```
 
 단, baseline에 이미 유지가 명확한 항목을 모든 transition의 `retain`에 반복 작성할 필요는 없다.
 
 `retain`은 특히 중요해서 명시적으로 강조할 필요가 있는 continuity constraint에 사용한다.
+
+`reset`은 이전 baseline 또는 state의 특정 path가 목적 Cut을 더 이상 구속하지 않음을 명시한다.
+
+- `partial_reset`에서는 reset되는 path를 `reset: []`에 명시한다.
+- `reset` mode에서는 이전 장면의 non-Library state를 기본 상속하지 않으므로 전체 path를 열거할 필요는 없다. 다만 특별히 해제/재정의 이유를 강조해야 하는 path를 기록할 수 있다.
+- Library Entity identity는 reset list로 삭제하는 개념이 아니다. 목적 Cut이 해당 Entity를 참조하는지 여부가 별도로 결정한다.
+
+`retain / change / reset`은 서로 모순되게 같은 path를 동시에 소유하지 않는다.
 
 ## 8. 값이 없는 것의 의미
 
@@ -400,8 +410,8 @@ Continuity 문서에 특정 항목이 기록되어 있지 않다고 해서 “�
 
 ```yaml
 episode_boundary:
-  from_cut: GEN-CREATION-01-C07
-  to_cut: GEN-CREATION-02-C01
+  from_cut: BOOK-STORY-01-C07
+  to_cut: BOOK-STORY-02-C01
   mode: continue
 
   retain:
@@ -417,7 +427,7 @@ Cross-Episode Continuity는 Canonical Episode Sequence에 있다고 자동 생�
 
 개념적으로 **도착하는 Episode가 자신의 incoming boundary를 소유**하도록 한다.
 
-즉 이전 Episode의 마지막 Cut을 참조하되, 실제 transition 정의는 다음 Episode 쪽 continuity 데이터에서 한 번만 관리한다. 최종 물리 파일 배치는 STEP 0 전체 구조를 확정할 때 결정한다.
+즉 이전 Episode의 마지막 Cut을 참조하되, 실제 transition 정의는 도착 Episode의 `continuity.yaml`에서 한 번만 관리한다.
 
 ## 11. Continuity와 Revision
 
@@ -504,7 +514,7 @@ continuity mismatch
 ## 15. Continuity 불변 조건 후보
 
 1. Continuity는 Cut 자체가 아니라 Cut 사이의 유지·변화 관계를 정의한다.
-2. Library의 Canonical Asset 정의를 Continuity에 복제하지 않는다.
+2. Library Entity의 Canonical definition 정의를 Continuity에 복제하지 않는다.
 3. Cut의 전체 Scene Specification을 Continuity에 복제하지 않는다.
 4. 같은 장면 맥락이 이어지는 구간은 Continuity Segment로 묶을 수 있다.
 5. Segment baseline은 공통 continuity constraint를 정의한다.
@@ -521,40 +531,32 @@ continuity mismatch
 16. 생성 결과와 Canonical Continuity가 충돌하면 기본적으로 생성 결과를 수정한다.
 17. Continuity 검토는 Cut/Episode Definition Approval의 일부다.
 
-## 16. STEP 0-3에서 의도적으로 미확정하는 항목
+## 16. STEP 0-3 후속 책임의 현재 해소 상태
 
-다음은 이후 STEP에서 정한다.
+STEP 0-3 당시 후속 단계로 넘긴 항목은 현재 다음 문서에서 해소되었다.
 
-- Character / Location / Object의 실제 Library ID와 필드 구조
-- Continuity에서 Library 자산을 참조하는 최종 문법
-- Provider에 continuity reference image를 전달하는 방식
-- reference strength / image weight 같은 provider 설정
-- Generated Asset의 continuity 평가 점수 체계
-- Markdown / YAML 최종 물리 저장 포맷
-- Continuity Segment의 최종 파일 배치
-- 웹사이트 표시용 transition 효과
+- Character / Location / Object identity → `LIBRARY_MODEL.md`
+- Provider reference delivery / weight → `PROVIDER_INTEGRATION_MODEL.md`
+- Result continuity review → `GENERATION_RUN_MODEL.md`
+- physical format / file placement → `templates/continuity.yaml`, `REPOSITORY_STRUCTURE.md`
 
-## 17. STEP 0-3 검토 포인트
+현재 의도적으로 열어두는 항목:
 
-사용자 검토가 필요한 핵심 항목:
+- Provider-specific reference weight의 실제 값
+- 사이트 presentation transition 효과
 
-- Continuity를 Cut 사이 관계 데이터로 두는 원칙
-- World / Character / Object / Spatial / Event State / Visual 영역 구분
-- Episode 내부 Continuity Segment 사용과 Storyboard order 비중복 원칙
-- 모든 인접 Cut transition을 Episode-level 단일 목록에서 관리하는 원칙
-- baseline + transition delta 방식
-- `continue / partial_reset / reset` 3단계 transition mode
-- 기록 없음은 constraint 없음으로 해석하는 원칙
-- Episode 경계 continuity를 자동 추론하지 않고 incoming boundary를 한 곳에서만 관리하는 원칙
-- 의미 있는 Continuity 변경 시 영향을 받는 Cut revision을 다시 검토하는 원칙
-- Continuity를 Cut/Episode Definition Approval 조건에 포함하는 원칙
-- Generated Asset보다 Canonical Continuity 정의를 우선하는 원칙
+이 항목은 Canonical Continuity schema와 분리한다.
 
-위 항목은 2026-10-01 사용자 승인으로 확정되었다.
+## 17. 현재 확정 상태
 
-**STEP 0-3 — Continuity Model: COMPLETED / CONFIRMED**
+- Continuity는 Cut 사이 유지/변화 관계
+- Segment baseline + transition delta
+- `continue / partial_reset / reset` 3 mode
+- transition constraint는 `retain / change / reset`
+- `partial_reset`의 reset path는 명시
+- 모든 인접 active Cut 쌍에 transition 정확히 1개
+- Cross-Episode boundary는 도착 Episode가 incoming boundary를 1회 소유
+- Continuity는 Episode/Cut Definition Approval의 일부
+- Generated Asset이 Continuity Source of Truth가 아님
 
-다음 작업은 **STEP 0-4 — Library Model**이다.
-
-
----
+**Continuity Model v1.1 — COMPLETED / CONFIRMED**

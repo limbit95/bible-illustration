@@ -1,6 +1,6 @@
-# Image / Asset Storage Policy v1.0
+# Image / Asset Storage Policy v1.1
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 선행 조건:
 > - **STEP 0-1 — Content Model v1.0 CONFIRMED**
@@ -129,7 +129,7 @@ STY-BIBLICAL-HISTORICAL-REALISM-A001
 4. Cut-owned Asset은 해당 Cut의 결과·참조 용도에 사용한다.
 5. Library-owned Asset은 해당 Canonical Library Asset의 reference 용도에 사용한다.
 6. v1에서 owner 없는 전역 Asset namespace는 만들지 않는다.
-7. 프로젝트 전역 Style reference는 STY Library Asset 아래에서 관리한다.
+7. 프로젝트 전역 Style reference는 STY Library Entity 아래에서 관리한다.
 8. 새로운 실제 필요가 생기기 전 Asset namespace를 추가하지 않는다.
 
 ## 5. Asset Metadata
@@ -271,7 +271,7 @@ Cut
   ├─ candidate Asset refs
   └─ representative Asset selection
 
-Library Asset
+Library Entity
   └─ reference Asset refs
 
 Continuity
@@ -342,7 +342,7 @@ production complete는 Cut Definition Status와 별도의 **도출 상태**로 �
 
 ## 12. Library Reference Asset
 
-Library Asset은 하나 이상의 이미지 Reference를 가질 수 있다.
+Library Entity는 하나 이상의 이미지 Reference Asset을 가질 수 있다.
 
 예:
 
@@ -487,16 +487,17 @@ STEP 0-5의 모든 Result metadata와 Review history는 유지하지만 binary �
 
 ### Run Reference Input 보존
 
-프로젝트가 직접 통제하는 이미지 binary를 Generation Run의 중요한 Reference input으로 사용할 경우 가능한 한 **Run 실행 전에 또는 실행과 동시에 Asset으로 등록**한다.
+프로젝트가 직접 통제하는 이미지 binary를 Generation Run의 실제 Reference input으로 사용할 경우 **Run 제출 전에 available Asset으로 등록해야 한다.**
 
 이렇게 해야 Run이 참조한 실제 입력 이미지가 나중에 사라지지 않는다.
 
 원칙:
 
-1. Character / Continuity / Composition 등 재현성에 중요한 프로젝트 소유 Reference는 available Asset ID로 전달하는 것을 우선한다.
-2. 임시 로컬 파일을 중요한 Run input으로 사용한 뒤 기록 없이 버리는 흐름을 피한다.
-3. 권리 때문에 저장할 수 없는 외부 remote reference는 External Reference Record + Run snapshot으로 기록하고 재현성 한계를 인정한다.
-4. 과거 Run에서 사용된 Asset Reference는 해당 Run 기록이 유지되는 동안 기본 보존 대상이다.
+1. Character / Continuity / Composition 등 프로젝트 소유 binary Reference는 available Asset ID로 전달한다.
+2. accepted Result 또는 사용자 승인 working image를 실제 downstream reference로 사용할 경우 먼저 Asset Promotion한다.
+3. 임시 로컬 파일을 중요한 Run input으로 사용한 뒤 기록 없이 버리는 흐름을 금지한다.
+4. 권리 때문에 저장할 수 없는 외부 remote reference는 External Reference Record + Run snapshot으로 기록하고 재현성 한계를 인정한다.
+5. 과거 Run에서 사용된 Asset Reference는 해당 Run 기록이 유지되는 동안 기본 보존 대상이다.
 
 ## 16. Asset Promotion 규칙
 
@@ -509,8 +510,8 @@ Generated Result를 Asset으로 승격하면 다음을 수행한다.
 5. Git LFS ingest가 완료되기 전에는 availability를 pending_ingest로 둘 수 있음
 6. SHA-256 및 기본 파일 metadata 기록
 7. provenance / rights 기록
-8. 필요한 Cut / Library / Continuity 사용 관계를 연결
-9. Run Result에서 Asset ID를 역참조할 수 있게 연결
+8. 필요한 Cut / Library Entity / Continuity 사용 관계를 연결
+9. generation_result 기반이면 Asset metadata의 `source.result_id`로 provenance를 연결
 10. binary와 metadata 확인이 끝나면 availability를 available로 전환
 
 Asset Promotion은 Result Review와 별개다.
@@ -678,7 +679,7 @@ Asset으로 승격된 binary는 일반 Result보다 강한 보존 의무를 가�
 2. 과거 representative도 제작 이력상 기본 보존한다.
 3. 과거 Run의 Reference input으로 사용된 Asset도 재현성을 위해 기본 보존한다.
 4. 단순 중복, 권리 문제, 손상 파일 등 명확한 사유가 있을 때만 제거를 검토한다.
-5. 제거할 때 metadata tombstone과 이유를 남긴다.
+5. 제거할 때 Asset metadata는 삭제하지 않고 `availability: removed`와 `removal.removed_at / reason`을 남긴다. 대체 Asset이 있으면 `replacement_asset_id`도 기록할 수 있다.
 6. 동일한 역할의 새 Asset이 생겼다고 기존 Asset을 자동 삭제하지 않는다.
 7. storage 절감을 위해 우선 정리할 대상은 Asset으로 승격되지 않은 Result binary와 재생성 가능한 Derivative다.
 
@@ -757,50 +758,42 @@ CDN / site
 24. 웹 배포본은 Production Master에서 재생성 가능해야 한다.
 25. 사이트용 성경 본문·내레이션·UI text는 기본적으로 이미지 binary와 분리한다.
 
-## 28. STEP 0-7에서 의도적으로 미확정하는 항목
+## 28. STEP 0-7 이후 현재 해소 상태
 
-STEP 0 확정 후 실제 구조 생성 또는 운영 과정에서 정한다.
+현재 이미 확정된 항목:
 
-- Git LFS의 실제 track pattern
-- 허용 image format registry의 세부 목록
-- Production Master 기본 format
-- 웹 derivative의 실제 해상도/포맷
-- 이미지 변환 도구 / pipeline 구현
+- Git LFS track pattern → 루트 `.gitattributes`
+- v1 Canonical image 확장자 → PNG / JPG / JPEG / WEBP / AVIF
+- Asset metadata schema → `templates/asset-metadata.yaml`
+- owner 기반 물리 경로 → `REPOSITORY_STRUCTURE.md`
+- Git ignore 안전장치 → 루트 `.gitignore`
+
+현재 의도적으로 구현·운영 시점까지 열어두는 항목:
+
+- Production Master의 단일 기본 포맷 강제 여부
+- 웹 derivative 실제 해상도 / 포맷
+- 변환 도구 / pipeline 구현
 - CDN / object storage vendor
-- 자동 checksum 검증 구현
-- Asset metadata의 최종 YAML schema
-- Result binary 정리 시점 자동화
-- 백업 주기와 복구 절차
-- 외부 Reference 권리 검토 프로세스의 상세 문서
+- 자동 checksum / LFS 검증 CI
+- Result binary 자동 정리 시점
+- 백업 주기와 복구 자동화
+- 외부 Reference 권리 검토의 세부 workflow
 
-## 29. STEP 0-7 검토 포인트
+이 항목은 현재 production 시작을 막는 Architecture blocker가 아니다.
 
-다음 항목은 사용자 승인으로 확정되었다:
+## 29. 현재 확정 상태
 
-- 일반 Git = metadata / Git LFS = 장기 이미지 binary 원칙
-- 외부 Storage/CDN은 Source of Truth가 아니라는 원칙
-- Generated Result와 Asset Promotion 분리
-- Cut-owned / Library-owned Asset ID 체계
-- Asset binary immutable 정책
-- SHA-256 기반 무결성 / 중복 확인
-- Asset availability와 usage relation 분리
-- 저장 불가 외부 자료를 External Reference Record로 분리하는 원칙
-- representative_asset 관계와 selection history / production complete 도출 방식
-- Library Reference Asset 정책
-- provenance와 rights 분리 및 External Reference 권리 처리
-- 중요한 Run Reference input의 Asset 보존
-- rejected/non-promoted Result binary 정리 가능 정책
-- generation_result 승격 시 원본 binary 보존 원칙
-- Derivative와 Production Master 분리
-- Asset ID 기반 파일명
-- owner 기반 논리적 파일 배치
-- Asset 삭제 / tombstone 정책
-- 웹 공개본과 Production Master 분리
-- 이미지와 사이트용 본문/내레이션 text 분리
+- 일반 Git = Canonical text/metadata
+- Git LFS = promoted Canonical image binary
+- Result와 Asset 분리
+- Image Asset의 `asset_id`는 binary identity 전용
+- Library Entity의 `library_id`와 구분
+- project-owned actual Run reference는 available Asset으로 선행 Promotion
+- Asset metadata `source.result_id`가 Result provenance linkage의 Source of Truth
+- Asset binary immutable
+- representative selection과 Asset identity 분리
+- removed Asset metadata tombstone 유지
+- Derivative는 Canonical master가 아님
+- 사이트용 text는 Production Master와 분리
 
-위 항목은 2026-10-02 사용자 승인으로 확정되었다.
-
-**STEP 0-7 — Image / Asset Storage Policy: COMPLETED / CONFIRMED**
-
-**STEP 0 — Architecture Definition: COMPLETED / ALL 7 AREAS CONFIRMED**
-
+**Image / Asset Storage Policy v1.1 — COMPLETED / CONFIRMED**

@@ -1,0 +1,32 @@
+provider_key: chatgpt
+profile_key: chat-native-standard
+profile_revision: 1
+
+operation: generate
+
+model:
+  identifier: unknown
+  version: unknown
+
+defaults:
+  aspect_ratio: null
+  resolution: null
+  provider_specific: {}
+
+prompt_adapter:
+  key: canonical-cut
+  revision: 1
+
+reference_policy:
+  character: reference_asset_when_available
+  location: reference_asset_when_available
+  object: reference_asset_when_available
+  costume: reference_asset_when_available
+  environment: reference_asset_when_available
+  style: reference_asset_or_canonical_description
+  continuity: reference_asset_when_binary_used
+  composition: reference_asset_when_available
+
+notes: >
+  Project-owned binary references must already be available Canonical Assets.
+  A working Result selected as an actual downstream reference is promoted first.

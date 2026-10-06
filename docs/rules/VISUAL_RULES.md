@@ -1,6 +1,6 @@
-# Visual Rules v1.1
+# Visual Rules v1.2
 
-> 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
+> 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
 > 목적: 장면별 유연성을 유지하면서 프로젝트 전체가 공유할 시각적 품질과 표현 기준을 정의한다.
 
@@ -23,7 +23,7 @@
 - 인물과 동물의 지나친 카툰화
 - 장면의 역사적 분위기를 약화하는 현대 광고·게임 UI 같은 표현
 
-정확한 Style 정의는 Library의 Visual Style Asset이 Source of Truth다.
+정확한 Style 정의는 Library의 Visual Style Entity이 Source of Truth다.
 
 ## 2. 고정하지 않는 요소
 
@@ -138,18 +138,25 @@ visual_quality와 technical_integrity를 구분한다.
 기술적으로 깨끗하더라도 Scripture / Historical / Continuity 기준에 실패하면 대표 Asset 후보가 될 수 없다.
 
 
-## 11. Episode-specific Visual Profile
+## 11. Episode-level Visual Direction 책임
 
-프로젝트 전체의 Visual Rules와 특정 Episode의 구체 미술 방향을 구분한다.
+프로젝트 전체 Visual Rules와 특정 Episode의 구체 미술 방향을 구분하되,
+v1에서는 별도 `Episode Visual Profile` entity나 working guide를 Canonical Source of Truth로 만들지 않는다.
 
-- 프로젝트 전역 Rules는 품질, 본문 충실도, Continuity, 표현 경계처럼 장기적으로 공통 적용할 원칙을 소유한다.
-- 특정 Episode의 팔레트, 질감, 조명 진행, 렌즈감, 화면 비율, 구체적인 visual reference sequence는 **Episode-specific profile**로 취급한다.
-- 한 Episode에서 사용자가 선호한 색감·질감·광원·구도를 성경 전체의 기본 Style로 자동 승격하지 않는다.
-- Episode-specific profile은 해당 Episode의 Canonical Continuity 또는 승인된 working guide / reference record에 기록한다.
-- 다른 Episode에서 재사용하려면 별도 검토와 사용자 승인을 거친다.
+책임은 다음처럼 분해한다.
 
-폐기된 production iteration의 구체 visual profile은 새 Episode의 기본값으로 계승하지 않는다. 새 Episode-specific profile은 해당 Episode를 새로 설계할 때 Scripture와 현재 Rules를 기준으로 다시 정한다.
+- 여러 Episode에서 재사용할 시각 언어 identity → **Library Visual Style Entity**
+- 한 Episode/Segment에서 유지·진행되는 팔레트·질감·조명 상태·공간 방향 → **Continuity Segment baseline.visual**
+- 특정 Cut의 카메라·구도·dominant subject·장면별 강조 → **Cut Canonical Scene Specification**
+- 모델·해상도·reference weight·Provider 실행용 aspect ratio 등 → **Generation Profile / Run snapshot**
+- 프로젝트 전체의 작품적 규칙으로 승격된 값 → **Visual Rules**
 
+특정 Episode에서 선호한 색감·질감·광원·구도를 성경 전체 기본값으로 자동 승격하지 않는다.
+
+working note나 대화에서 나온 장기 유지 결정은 위 정식 owner 중 하나에 반영해야 하며,
+임시 working guide 자체를 Canonical 기준으로 남기지 않는다.
+
+폐기된 production iteration의 구체 visual direction은 새 Episode의 기본값으로 계승하지 않는다.
 
 ## 12. Storyboard 단계의 Visual Repetition Prevention
 
