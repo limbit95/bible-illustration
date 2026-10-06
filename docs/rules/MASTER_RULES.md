@@ -211,8 +211,11 @@ Storyboard 단계에서 상세 RETAIN / change / reset constraint를 복제하�
 인접 장면 Continuity 위험이 낮다고 판단되는 경우에만 사용한다.
 
 빠른 제작의 의미는 대량 batch 생성이 아니라,
-과도한 사전 polish, Asset promotion, Git LFS ingest, representative 확정을 뒤로 미뤄
+과도한 사전 polish, 일반적인 Asset promotion, representative 확정을 뒤로 미뤄
 본문과 장면 흐름을 먼저 완주하는 데 있다.
+
+단, 어떤 working/accepted Result가 다음 Run의 actual project-owned binary reference가 되면
+DEC-0009에 따라 해당 Result의 Asset Promotion과 Git LFS ingest는 다음 Run 전에 먼저 완료한다.
 
 
 ## 11. Scene Relation 판단
@@ -228,7 +231,8 @@ Storyboard 단계에서 상세 RETAIN / change / reset constraint를 복제하�
 - RETAIN을 보존한다.
 - 이번 본문이 요구하는 DELTA만 추가한다.
 - 중간 단계를 건너뛰는 FORBIDDEN LEAP를 피한다.
-- 직전 승인 이미지를 continuity reference로 사용할 수 있다.
+- 직전 승인 이미지를 continuity anchor 후보로 사용할 수 있다.
+- 실제 Provider binary reference로 사용할 때는 available Asset으로 먼저 Promotion한다.
 
 ### Transition-oriented
 
