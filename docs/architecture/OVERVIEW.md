@@ -13,6 +13,8 @@ Scripture
   ↓
 Episode / Storyboard / Cut
   ↓
+Episode Orchestration + Presentation Plan
+  ↓
 Library + Continuity
   ↓
 Provider Integration
@@ -41,6 +43,7 @@ Representative Asset / Library Reference Asset
 - `CONTINUITY_MODEL.md` — Cut 사이의 유지·변화·reset
 - `LIBRARY_MODEL.md` — Character / Location / Object / Costume / Environment / Visual Style
 - `GENERATION_RUN_MODEL.md` — 실제 생성 요청, Result, Review 이력
+- `EPISODE_ORCHESTRATION_MODEL.md` — Multi-Cut / Episode-level 위임의 순차 실행 상태 머신
 - `PROVIDER_INTEGRATION_MODEL.md` — Provider Registry / Binding / Generation Profile / Prompt Adapter
 - `ASSET_STORAGE_POLICY.md` — Asset Promotion, Git LFS, 대표 이미지와 Reference 보존
 - `REPOSITORY_STRUCTURE.md` — 위 모델을 실제 저장소 경로로 배치하는 규칙
@@ -87,6 +90,18 @@ Storyboard Production Review에서 coverage / granularity / relation / visual re
 Library Entity는 “무엇인가”를 정의한다. 실제 이미지 binary Asset과 identity를 분리한다.
 
 Continuity는 “이전 장면에서 무엇이 유지되고 무엇이 변하는가”를 정의한다.
+
+### Episode Orchestration vs Cut Production
+
+Episode Orchestration은 사용자가 Multi-Cut 범위를 통째로 위임했을 때 **기존 Cut 생산 루프를 어떤 순서로 끝까지 호출할지**를 관리한다.
+
+- 전체 범위를 Storyboard active Cut 순서로 실행
+- one-Cut-at-a-time generation cycle
+- Result Review 통과 후 다음 Cut으로 advance
+- Presentation Plan에 따른 Key Scripture / explanatory / visual-only 처리
+- blocker가 없으면 autonomous mode에서 사용자 추가 명령 없이 다음 Cut으로 진행
+
+Orchestration은 Storyboard/Cut/Continuity 정의를 복제하지 않는다.
 
 ### Provider Integration vs Run
 

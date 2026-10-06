@@ -1,0 +1,37 @@
+# Bible Illustration — Episode Production Session template
+# Template status: v1.0 CONFIRMED / 2026-10-06 episode orchestration
+
+session_id: null
+episode_id: null
+
+# Allowed: production | automation_test
+purpose: null
+
+# Allowed: assisted | autonomous
+execution_mode: null
+
+source_snapshot:
+  repository_commit: null
+
+policy:
+  generation_strategy: sequential_per_cut
+  allow_batch_generation: false
+  allow_collage_as_cut_substitute: false
+  require_storyboard_preflight: true
+  require_generation_entry_gate: true
+  require_result_review_before_advance: true
+  require_presentation_gate: true
+  user_confirmation_between_cuts: false
+
+presentation_plan_path: null
+
+# Storyboard remains the execution-order Source of Truth.
+progress:
+  current_cut_id: null
+  last_accepted_cut_id: null
+  status: planned
+  # allowed: planned | running | paused | blocked | completed | cancelled
+  blocker: null
+
+created_at: null
+updated_at: null

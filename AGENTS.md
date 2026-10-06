@@ -16,7 +16,7 @@
 
 Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_STRUCTURE.md`도 함께 확인한다.
 
-Architecture 완료 상태를 확인하거나 새 production을 시작할 때는 `docs/progress/PREPRODUCTION_HARDENING_AUDIT.md`를 함께 확인한다. 이전 `ARCHITECTURE_COMPLETION_AUDIT.md`는 historical audit이다.
+Architecture 완료 상태를 확인하거나 Multi-Cut / Episode-level production을 시작할 때는 `docs/progress/EPISODE_ORCHESTRATION_AUDIT.md`를 함께 확인한다. 이전 `PREPRODUCTION_HARDENING_AUDIT.md`와 `ARCHITECTURE_COMPLETION_AUDIT.md`는 historical audit이다.
 
 채팅 내용, 기억, 과거 요약과 저장소 기록이 충돌할 경우 최신 저장소 상태를 우선한다. 중요한 충돌은 임의로 해결하지 말고 사용자에게 알린다.
 
@@ -32,10 +32,10 @@ Architecture 완료 상태를 확인하거나 새 production을 시작할 때는
 - STEP 0-5 — Generation Run Model: **CONFIRMED**
 - STEP 0-6 — Provider Integration Model: **CONFIRMED**
 - STEP 0-7 — Image / Asset Storage Policy: **CONFIRMED**
-- Repository Structure v1.1: **CONFIRMED**
+- Repository Structure v1.2: **CONFIRMED**
 - Production Rules hardening: **COMPLETED**
 - Storyboard Production Rules refinement: **COMPLETED**
-- Templates v1.1: **CONFIRMED — 11 YAML templates**
+- Template set: **CONFIRMED — 13 YAML templates**
 - Progress / Decision 기록 체계 v1.0: **CONFIRMED**
 - DEC-0001 — Git LFS and Ignore Policy: **ACCEPTED**
 - DEC-0005 — Scripture-unit sequential generation with flexible scene decomposition: **ACCEPTED**
@@ -46,6 +46,8 @@ Architecture 완료 상태를 확인하거나 새 production을 시작할 때는
 - DEC-0010 — retired identity tombstone registry: **ACCEPTED**
 - DEC-0011 — Episode visual direction ownership: **ACCEPTED**
 - DEC-0012 — Enforced Generation Entry Gate: **ACCEPTED**
+- DEC-0013 — Episode-level autonomous orchestration: **ACCEPTED**
+- Episode Orchestration Audit: **PASSED**
 - Pre-Production Hardening Audit: **PASSED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
@@ -54,7 +56,7 @@ Architecture 완료 상태를 확인하거나 새 production을 시작할 때는
 
 ## 3. 현재 단계
 
-현재는 **Pre-Production Architecture Hardening 완료 / 새 Production 시작 준비 상태**다.
+현재는 **Episode Orchestration Layer 완료 / autonomous Episode 재테스트 준비 상태**다.
 
 현재 원칙:
 
@@ -71,6 +73,10 @@ Architecture 완료 상태를 확인하거나 새 production을 시작할 때는
 - project-owned working/accepted image를 실제 downstream Run reference로 사용할 때는 먼저 available Asset으로 Promotion한다.
 - 모든 실제 Provider image request 전에 Generation Run의 `entry_gate`를 확인한다.
 - 자동화 요청도 Storyboard / Continuity / text-free Production Master Gate를 생략할 수 없다.
+- Multi-Cut autonomous 요청은 `production-session.yaml`과 `presentation-plan.yaml`을 먼저 준비한다.
+- autonomous는 batch/collage가 아니라 one-Cut-at-a-time cycle을 사용자 추가 명령 없이 순차 실행하는 것이다.
+- collage/contact sheet는 production Cut output을 대체할 수 없다.
+- Key Scripture presentation은 exact quote / verse / translation 준비 전 완료 처리하지 않는다.
 - 빈 미래 디렉터리와 파일을 필요 이상으로 대량 생성하지 않는다.
 
 진행 위치와 다음 작업은 `docs/progress/CURRENT.md`가 Source of Truth다.
@@ -170,20 +176,23 @@ Provider 내부의 character, model, prompt, slot, project structure는 Canonica
 - `VISUAL_RULES.md`
 - `CONTINUITY_RULES.md`
 - `GENERATION_RULES.md`
+- `ORCHESTRATION_RULES.md`
 - `TEXT_AND_COPYRIGHT.md`
 
 과거 테스트 기준서나 채팅 인수인계 자료보다 정식 Rules 문서를 우선한다.
 
 ## 10. Templates Source of Truth
 
-현재 반복 제작 데이터의 정식 Template Source of Truth는 `templates/` 아래 승인된 v1.1 YAML 11개다.
+현재 반복 제작 데이터의 정식 Template Source of Truth는 `templates/` 아래 승인된 YAML 13개다. Episode-level orchestration에는 `production-session.yaml`, `presentation-plan.yaml`을 사용한다.
 
 Template은 Architecture와 Rules를 구현하기 위한 최소 물리 스키마다. 새로운 필드를 추가하거나 기존 책임을 바꾸기 전에 관련 Architecture / Rules를 먼저 확인한다.
 
 ## 11. Progress / Decision Source of Truth
 
 - `docs/progress/CURRENT.md` — 현재 작업 위치와 다음 작업
-- `docs/progress/PREPRODUCTION_HARDENING_AUDIT.md` — production readiness 최종 감사
+- `docs/progress/EPISODE_ORCHESTRATION_AUDIT.md` — autonomous Episode production readiness 최신 감사
+- `docs/progress/EPISODE_ORCHESTRATION_DRY_RUN.md` — Episode-level synthetic 실행 검증
+- `docs/progress/PREPRODUCTION_HARDENING_AUDIT.md` — 이전 pre-production historical audit
 - `docs/progress/PREPRODUCTION_HARDENING_DRY_RUN.md` — synthetic lifecycle 검증 기록
 - `docs/progress/MILESTONES.md` — 주요 완료 기준점
 - `docs/decisions/README.md` — Decision Record 생성·상태·번호 규칙
@@ -206,6 +215,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 Architecture blocker는 없다.
 
-다음 단계는 **새 production 설계**다.
+다음 단계는 **새 Episode-level autonomous automation 재테스트**다.
 
-Genesis Creation을 다시 시작할 경우 이전 production data나 ID를 복원하지 않는다. current tree + identity tombstone 확인 → Scripture Work Unit → 새 Episode identity → Storyboard → Storyboard Production Preflight → Cut / Continuity 정의 순서로 진행한다.
+Multi-Cut 요청은 current tree + identity tombstone 확인 → Scripture Work Unit → 새 Episode identity → Storyboard → Preflight → Cut / Continuity → Production Session → Presentation Plan → one-Cut-at-a-time generation cycle 순서로 진행한다.

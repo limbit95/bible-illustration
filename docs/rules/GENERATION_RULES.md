@@ -1,4 +1,4 @@
-# Generation Rules v1.3
+# Generation Rules v1.4
 
 > 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
@@ -17,12 +17,18 @@
 - 필요한 Continuity constraint 존재
 - Production Master가 text-free인지 확인
 - Provider / Generation Profile / Prompt Adapter resolve 완료
+- Multi-Cut autonomous request이면 Episode Production Session 존재
+- Multi-Cut autonomous request이면 Presentation Plan 존재
 
 각 Run은 이 결과를 `entry_gate` snapshot으로 기록한다.
+
+single-Cut assisted request에서는 orchestration/presentation 항목을 `not_applicable`로 둘 수 있다.
 
 하나라도 false/unresolved이면 **Run submission prohibited**다.
 
 자동화 테스트 브랜치에서도 이 Gate는 생략하지 않는다.
+
+Multi-Cut autonomous scope를 한 collage/contact sheet/한 번의 batch request로 대체하면 Gate 통과로 인정하지 않는다.
 
 ### Isolated automation-test exception
 

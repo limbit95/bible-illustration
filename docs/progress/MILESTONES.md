@@ -116,6 +116,21 @@
 - 의미 있는 visual beat는 Cut 수 최소화보다 충분한 분해 우선
 - non-production test branch 전용 same-session working reference 예외 정의
 
+### 2026-10-06 — Episode-level autonomous orchestration 확정
+
+- DEC-0013 accepted
+- Episode Orchestration Model v1.0 추가
+- Orchestration Rules v1.0 추가
+- `production-session.yaml` 추가
+- `presentation-plan.yaml` 추가
+- Repository Structure v1.2
+- Multi-Cut autonomous = sequential per-Cut self-execution으로 확정
+- collage/contact sheet/batch shortcut의 Cut output 대체 금지
+- Presentation Plan으로 key_scripture / explanatory / visual_only 물리 Source of Truth 확보
+- Generation Entry Gate에 orchestration / presentation readiness 추가
+- Episode-level synthetic dry-run PASS
+- Episode Orchestration Audit PASS
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 추가한다.

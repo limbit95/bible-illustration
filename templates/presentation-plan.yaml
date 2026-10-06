@@ -1,0 +1,29 @@
+# Bible Illustration — Presentation Plan template
+# Template status: v1.0 CONFIRMED / 2026-10-06 episode orchestration
+# Production Master remains text-free.
+
+episode_id: null
+
+presentation:
+  - cut_id: null
+
+    # Allowed: key_scripture | explanatory | visual_only
+    mode: null
+
+    scripture:
+      book: null
+      start: { chapter: null, verse: null }
+      end:   { chapter: null, verse: null }
+
+    # Required for key_scripture before Presentation Gate can pass.
+    quote:
+      translation: null
+      text: null
+
+    # Optional for explanatory; must remain distinct from direct Scripture quote.
+    narration: null
+
+    # Allowed: planned | text_ready | rendered | reviewed | deferred
+    status: planned
+
+    typography_note: null

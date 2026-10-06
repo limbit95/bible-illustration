@@ -34,7 +34,7 @@ templates/     반복 제작 데이터 템플릿
 1. `AGENTS.md`
 2. `docs/progress/CURRENT.md`
 3. `docs/architecture/OVERVIEW.md`
-4. `docs/progress/PREPRODUCTION_HARDENING_AUDIT.md`
+4. `docs/progress/EPISODE_ORCHESTRATION_AUDIT.md`
 5. 필요한 세부 Architecture / Rules 문서
 6. 현재 Episode / Cut / Library / Integration 데이터
 
@@ -46,19 +46,20 @@ templates/     반복 제작 데이터 템플릿
 - `docs/architecture/CONTINUITY_MODEL.md`
 - `docs/architecture/LIBRARY_MODEL.md`
 - `docs/architecture/GENERATION_RUN_MODEL.md`
+- `docs/architecture/EPISODE_ORCHESTRATION_MODEL.md`
 - `docs/architecture/PROVIDER_INTEGRATION_MODEL.md`
 - `docs/architecture/ASSET_STORAGE_POLICY.md`
 - `docs/architecture/REPOSITORY_STRUCTURE.md`
 
 ## 현재 상태
 
-STEP 0 Architecture와 Storyboard refinement 이후 **Pre-Production Architecture Hardening**까지 완료되었다.
+STEP 0 Architecture, Storyboard refinement, Pre-Production Hardening에 이어 **Episode-level Orchestration Layer**까지 완료되었다.
 
-현재 기준은 Repository Structure v1.1 / Templates v1.1이며 최신 hardening audit과 synthetic lifecycle dry-run이 모두 PASS다.
+현재 기준은 Repository Structure v1.2 / YAML Templates 13개이며 Episode Orchestration synthetic dry-run과 audit이 모두 PASS다.
 
 이전 Genesis production/test iteration은 current tree에서 retired 상태이고 active Episode / Cut / Asset은 없다. 과거 ID는 `content/identity-tombstones.yaml`에 등록되어 재사용하지 않는다.
 
-현재 Architecture blocker는 없으며 새 production은 Scripture부터 새 Episode identity와 Storyboard를 설계해 시작한다.
+현재 Architecture blocker는 없다. Multi-Cut autonomous production은 Production Session과 Presentation Plan을 만든 뒤 Storyboard 순서대로 한 Cut씩 생성·검토·presentation 처리하며, collage/batch로 대체하지 않는다.
 
 최신 진행 위치는 반드시 `docs/progress/CURRENT.md`에서 확인한다.
 

@@ -1,4 +1,4 @@
-# Repository Structure v1.1
+# Repository Structure v1.2
 
 > 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
@@ -6,7 +6,7 @@
 >
 > 목적: 확정된 Content / Episode-Cut / Continuity / Library / Generation Run / Provider Integration / Asset Storage 모델을 실제 `bible-illustration` 저장소의 물리 구조로 변환한다.
 >
-> 이 문서는 STEP 0과 pre-production hardening 결정을 실제 저장소 구조로 변환한 **확정 Repository Structure v1.1**이다.
+> 이 문서는 STEP 0과 pre-production hardening 결정을 실제 저장소 구조로 변환한 **확정 Repository Structure v1.2**이다.
 >
 > 논리 구조는 확정되었지만, 빈 미래 디렉터리를 대량 생성하지 않는 원칙에 따라 실제 디렉터리와 파일은 필요한 순서대로 단계적으로 생성한다.
 
@@ -50,6 +50,7 @@ bible-illustration/
 │  │  ├─ CONTINUITY_MODEL.md
 │  │  ├─ LIBRARY_MODEL.md
 │  │  ├─ GENERATION_RUN_MODEL.md
+│  │  ├─ EPISODE_ORCHESTRATION_MODEL.md
 │  │  ├─ PROVIDER_INTEGRATION_MODEL.md
 │  │  ├─ ASSET_STORAGE_POLICY.md
 │  │  └─ REPOSITORY_STRUCTURE.md
@@ -61,6 +62,7 @@ bible-illustration/
 │  │  ├─ VISUAL_RULES.md
 │  │  ├─ CONTINUITY_RULES.md
 │  │  ├─ GENERATION_RULES.md
+│  │  ├─ ORCHESTRATION_RULES.md
 │  │  └─ TEXT_AND_COPYRIGHT.md
 │  │
 │  ├─ decisions/
@@ -81,6 +83,8 @@ bible-illustration/
 │  │        ├─ episode.yaml
 │  │        ├─ storyboard.yaml
 │  │        ├─ continuity.yaml
+│  │        ├─ production-session.yaml   # Multi-Cut autonomous/assisted 실행 시
+│  │        ├─ presentation-plan.yaml    # presentation output이 필요한 경우
 │  │        ├─ references.yaml          # 필요할 때만
 │  │        │
 │  │        └─ cuts/
@@ -204,6 +208,7 @@ EPISODE_CUT_MODEL.md
 CONTINUITY_MODEL.md
 LIBRARY_MODEL.md
 GENERATION_RUN_MODEL.md
+EPISODE_ORCHESTRATION_MODEL.md
 PROVIDER_INTEGRATION_MODEL.md
 ASSET_STORAGE_POLICY.md
 REPOSITORY_STRUCTURE.md
@@ -366,6 +371,31 @@ Cut 순서의 Source of Truth.
 ### continuity.yaml
 
 Episode 내부 Continuity Segment / transition과 incoming Cross-Episode boundary를 관리한다.
+
+### production-session.yaml
+
+Multi-Cut / Episode-level 위임의 실행 control record다.
+
+- autonomous / assisted mode
+- sequential_per_cut policy
+- batch/collage substitute 금지
+- 현재 progress cursor / blocker
+- presentation plan reference
+
+Storyboard order를 복제하지 않는다.
+
+### presentation-plan.yaml
+
+Production Master와 별도로 사용자-facing text/presentation intent를 관리한다.
+
+- key_scripture
+- explanatory
+- visual_only
+- quote / verse / translation
+- narration
+- presentation status
+
+Production Master에 텍스트를 bake-in하지 않는다.
 
 ### references.yaml
 

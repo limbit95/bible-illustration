@@ -1,4 +1,4 @@
-# Generation Run Model v1.2
+# Generation Run Model v1.3
 
 > 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
@@ -114,11 +114,15 @@ entry_gate:
   continuity_ready: true
   text_free_production_master: true
   provider_ready: true
+  orchestration_ready: true
+  presentation_plan_ready: true
   automation_test_mode: false
 ~~~
 
 단일 Cut은 `storyboard_preflight_passed`를 `not_applicable`로 둘 수 있다.
 첫 Cut은 `scene_relation_ready`와 `continuity_ready`를 `not_applicable`로 둘 수 있다.
+single-Cut assisted request에서는 `orchestration_ready`와 `presentation_plan_ready`를 `not_applicable`로 둘 수 있다.
+Multi-Cut autonomous request에서는 둘 다 true여야 한다.
 
 적용 항목에 false / unresolved가 하나라도 있으면 Provider submission은 유효한 Generation Run으로 시작할 수 없다.
 
