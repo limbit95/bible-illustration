@@ -1,7 +1,7 @@
 # Current Project State
 
-> 마지막 갱신: 2026-10-03
-> 상태: **GENESIS CREATION — SCRIPTURE-UNIT SEQUENTIAL RAPID PROTOTYPE / VISUAL CONTINUITY FIRST**
+> 마지막 갱신: 2026-10-06
+> 상태: **ARCHITECTURE REFINEMENT — STORYBOARD RULES NEXT / IMAGE TESTING PAUSED**
 
 ## 현재 Phase
 
@@ -52,7 +52,16 @@
 - Genesis working visual reference sequence: **00→06 user-selected / conversation-local binary / sequence behavior documented**
 - Genesis-specific visual profile: **DOCUMENTED — widescreen + blue-black→cool-white→warm-gold progression / Genesis Creation only**
 - Presentation text reference: **APPROVED — restrained cinematic sans-serif / key Scripture direct-quote first / narration only when explanatory**
-- 현재 작업: **새 채팅에서 사용자가 제시하는 개역한글 본문 단위로 장면 수를 판단하고, 필요 시 Storyboard 후 한 장면씩 순차 생성하여 Genesis 1 전체를 완주**
+- 현재 작업: **이미지 테스트를 일시 중지하고 Storyboard 제작 규칙을 강화하는 Architecture refinement를 새 채팅에서 재개**
+
+## Architecture refinement handoff
+
+- 새 진행 기록: `docs/progress/ARCHITECTURE_REFINEMENT_HANDOFF.md`
+- 이미지 테스트: **PAUSED**
+- 테스트 산출물: working output — 별도 승인 없이는 Canonical Asset으로 자동 승격하지 않음
+- 다음 최우선 작업: **Storyboard production rules 강화**
+- 강화 범위: Scripture coverage / Cut boundary / beat granularity / Continuity vs Transition planning / visual repetition prevention / Episode rhythm / Storyboard-Cut-Continuity 책임 경계
+- `templates/storyboard.yaml` 필드 추가 여부는 Rules 설계 이후 검토하며, 현재 단계에서 자동 변경하지 않음
 
 ## 현재 Production 위치
 
@@ -148,6 +157,8 @@
 81. Master / Generation / Continuity Rules에 본문 단위 장면 수 판단, Storyboard advisory, 한 장면씩 순차 생성 규칙 반영
 82. DEC-0006 — 모든 장면 강제 연결 대신 Continuity / Transition 관계를 사전 판단하는 방침 accepted
 83. Master / Generation / Continuity Rules와 Genesis working guide에 Scene Relation 판단 규칙 반영
+84. Genesis Creation 이미지 테스트를 일시 중지하고 Architecture refinement 단계로 복귀
+85. `ARCHITECTURE_REFINEMENT_HANDOFF.md` 생성 — Storyboard Rules 강화 범위와 새 채팅 복원 순서 기록
 
 ## 현재 Source of Truth
 
@@ -174,14 +185,13 @@
 
 ## 다음 작업
 
-1. 새 채팅에서 필요한 경우 사용자 선택 00→06 reference sequence를 다시 첨부하거나 동등한 visual anchor를 제공
-2. 사용자가 개역한글 본문 한 구절 또는 의미 있는 구간을 Scripture Work Unit으로 제시
-3. Assistant가 1장면 / 다중 장면 필요 여부를 판단하고, 다중 장면이면 짧은 Storyboard를 먼저 제안
-4. 사용자 승인 후 한 장면씩 순차 생성하며 인접 Cut마다 retain / delta를 우선 적용하고 과도한 미래 상태 선행 묘사를 피함
-5. Genesis 1 전체 완주 후 전체 시퀀스 검토 및 디테일 2차 수정
-6. 최종 선별 후에만 Asset promotion / Git LFS ingest / representative 정리
-7. presentation layer는 승인된 cinematic text reference를 사용하고, Key Scripture Frame은 직접 인용 우선 / narration은 설명 Frame에서만 사용
-
+1. 새 채팅에서 `AGENTS.md` → `CURRENT.md` → Architecture / Rules → `ARCHITECTURE_REFINEMENT_HANDOFF.md` 순서로 상태 복원
+2. Storyboard production rules 강화안 설계
+3. Scripture coverage / Cut boundary / beat granularity / Scene Relation / visual repetition / Episode rhythm 기준 명문화
+4. Storyboard / Cut / Continuity 책임 중복 여부 감사
+5. `templates/storyboard.yaml` 변경 필요성 검토 — 필요성이 입증될 때만 수정
+6. 관련 Architecture / Rules / Template 교차 검증 후 사용자 승인
+7. 승인 뒤 Genesis Creation 이미지 테스트 재개 여부 결정
 ## Blocker
 
 현재 migration blocker 없음.
