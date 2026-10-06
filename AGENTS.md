@@ -16,6 +16,8 @@
 
 Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_STRUCTURE.md`도 함께 확인한다.
 
+현재 Architecture refinement를 이어갈 때는 `docs/progress/ARCHITECTURE_REFINEMENT_HANDOFF.md`도 필수로 확인한다.
+
 채팅 내용, 기억, 과거 요약과 저장소 기록이 충돌할 경우 최신 저장소 상태를 우선한다. 중요한 충돌은 임의로 해결하지 말고 사용자에게 알린다.
 
 ## 2. 확정된 기준
@@ -45,7 +47,9 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 
 ## 3. 현재 단계
 
-현재는 **Genesis Creation Rapid Full-Chapter Prototype** 단계다.
+현재는 **Architecture Refinement — Storyboard Rules 강화 준비** 단계다.
+
+Genesis Creation 이미지 테스트는 실제 제작 규칙 검증 목적을 달성해 일시 중지했으며, 재개 전 Storyboard 제작 규칙을 보완한다.
 
 진행 위치와 다음 작업은 `docs/progress/CURRENT.md`가 Source of Truth다.
 
@@ -68,7 +72,7 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - 00→06의 구체 progression과 Genesis Creation 전용 visual profile은 `docs/progress/GENESIS_CREATION_RAPID_PROTOTYPE.md`에 기록되어 있다.
 - Genesis Creation의 navy / blue-black → cool white → warm gold-white palette와 원초적 유체 질감은 **Genesis Creation 한정**이며 성경 전체 전역 Style이 아니다.
 - Presentation text 기본 reference는 작고 절제된 cinematic sans-serif이며, Key Scripture Frame은 직접 인용 우선 / narration은 설명용 Frame에서만 사용한다.
-- 다음 실전 제작은 `docs/progress/GENESIS_CREATION_RAPID_PROTOTYPE.md`를 따라 창세기 1장을 처음부터 끝까지 빠르게 완주한다.
+- Genesis Creation 이미지 테스트는 현재 **PAUSED**다. 테스트 결과는 Architecture refinement 입력으로 사용한다.
 - 사용자가 개역한글 본문 한 구절 또는 의미 있는 구간을 가져오면 이를 Scripture Work Unit으로 삼는다.
 - Assistant는 생성 전에 해당 본문이 1장면으로 충분한지, 여러 장면 Storyboard가 필요한지 판단한다.
 - 실제 이미지는 기본적으로 한 장면씩 순차 생성하며, 직전 사용자 승인 이미지를 visual continuity anchor로 사용한다. 단 Canonical Scripture / Cut / Continuity가 항상 우선한다.
@@ -204,6 +208,6 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 현재 다음 작업은:
 
-**새 채팅에서 필요한 visual anchor 확인 → 사용자가 제시하는 개역한글 본문 단위로 장면 수 판단 / 필요 시 Storyboard → 한 장면씩 순차 생성 → Genesis 1 전체 완주 → 최종 선별 후 Asset/LFS 정리**
+**새 채팅에서 Architecture 상태 복원 → Storyboard 제작 규칙 강화 → Architecture / Rules / Template 책임 충돌 검토 → 사용자 승인 → 그 이후 Genesis Creation 이미지 테스트 재개 여부 결정**
 
 이다.
