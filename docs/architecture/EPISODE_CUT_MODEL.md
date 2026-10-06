@@ -250,6 +250,7 @@ Episode를 `approved`로 만들기 위한 최소 조건은 다음으로 둔다.
 3. Storyboard에 포함된 모든 active Cut의 **definition_status가 approved**다.
 4. Storyboard 순서와 실제 Cut 참조가 유효하다.
 5. Episode의 주본문 범위를 의도적으로 누락하거나 중복한 부분이 없는지 검토되었다.
+6. Storyboard Production Preflight에서 coverage / granularity / relation / visual repetition / Episode rhythm의 blocking concern이 해결되었다.
 
 Continuity 정의 승인 조건은 STEP 0-3에서 추가될 수 있다.
 
@@ -594,6 +595,7 @@ Episode에도 동일한 원칙을 적용한다.
 16. 실제 Cut 수의 Source of Truth는 active Storyboard entry의 수이며 Episode에 별도 Cut count 값을 중복 저장하지 않는다.
 17. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
 18. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
+19. Storyboard Production Review는 새 필드를 요구하지 않으며, 구체 Scene Specification과 Continuity constraint를 Storyboard에 중복 저장하지 않는다.
 
 ## 15. STEP 0-2에서 의도적으로 미확정하는 항목
 

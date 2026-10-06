@@ -113,19 +113,21 @@ C는 최소화하며 필요한 경우 사실이 아니라 해석/연출임을 �
 
 기본 제작 루프는 다음 흐름을 따른다.
 
-1. 본문 범위와 Scripture Anchor 확인
-2. Episode / Storyboard / Cut의 역할 확인
-3. 필요한 Library / Historical Research 확인
-4. 이전·다음 Cut과 Continuity 확인
-5. Canonical Scene의 required / forbidden 요소 확인
-6. Provider Adapter / Profile을 통해 생성 입력 준비
-7. Generation Run 실행
-8. Scripture / Historical / Continuity / Library / Visual / Technical 검토
-9. Result Review 기록
-10. 필요 시 새 Run
-11. 장기 보존 가치가 있는 결과만 Asset Promotion
-12. 대표 Asset 선정
-13. Progress 기록 후 다음 Cut 진행
+1. 본문 범위와 Scripture Work Unit 확인
+2. 필요한 경우 Storyboard / Cut 분해안 작성
+3. Multi-Cut이면 Storyboard Production Preflight 수행
+4. Episode / Storyboard / Cut의 책임과 현재 정의 확인
+5. 필요한 Library / Historical Research 확인
+6. 이전·다음 Cut과 Canonical Continuity 확인
+7. Canonical Scene의 required / forbidden 요소 확인
+8. Provider Adapter / Profile을 통해 생성 입력 준비
+9. Generation Run 실행
+10. Scripture / Historical / Continuity / Library / Visual / Technical 검토
+11. Result Review 기록
+12. 필요 시 새 Run
+13. 장기 보존 가치가 있는 결과만 Asset Promotion
+14. 대표 Asset 선정
+15. Progress 기록 후 다음 Cut 진행
 
 ## 6. 과도한 사전 설계 금지
 

@@ -282,7 +282,7 @@ Batch 결과에서 인접 장면 연결이 깨지면 batch 효율을 이유로 �
 순차 생성 방식으로 되돌린다.
 
 
-## 17. Scene Relation preflight
+## 17. Per-Cut Scene Relation preflight
 
 이미지 생성 전에 직전 Cut과의 Scene Relation을 확인한다.
 
@@ -311,7 +311,7 @@ Batch 결과에서 인접 장면 연결이 깨지면 batch 효율을 이유로 �
 판단이 애매하거나 장면 수에도 영향을 주면 이미지 생성 전에 짧은 Storyboard 제안을 한다.
 
 
-## 18. Storyboard Generation Entry Gate
+## 18. Multi-Cut Storyboard Generation Entry Gate
 
 여러 Cut을 포함하는 Episode / Scripture Work Unit은 본격 이미지 생성 전에 Storyboard Production Preflight를 통과한다.
 
