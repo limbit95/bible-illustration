@@ -1,4 +1,4 @@
-# Master Production Rules v1.3
+# Master Production Rules v1.4
 
 > 상태: **CONFIRMED / 2026-10-06 pre-production hardening**
 >
@@ -114,7 +114,24 @@ C는 최소화하며 필요한 경우 사실이 아니라 해석/연출임을 �
 - 하나의 사건을 여러 Cut으로 나누는 것은 허용한다.
 - 실제 표시 순서는 Storyboard가 Source of Truth다.
 
-## 5. 제작 루프
+## 5. Episode-level 위임
+
+사용자가 여러 Cut 또는 Episode 전체를 “알아서 끝까지” 제작하도록 위임하면 `ORCHESTRATION_RULES.md`와 `EPISODE_ORCHESTRATION_MODEL.md`를 먼저 적용한다.
+
+autonomous는 batch 생성이 아니라 **기존 Cut cycle을 사용자 추가 명령 없이 순차 실행**한다는 뜻이다.
+
+Multi-Cut autonomous request에서는 첫 Provider 호출 전에:
+
+- Production Session
+- 전체 Storyboard
+- Storyboard Preflight
+- Cut definitions
+- Continuity
+- Presentation Plan
+
+이 준비되어야 한다.
+
+## 6. 제작 루프
 
 **Generation Gate는 권고가 아니라 실행 선행조건이다.**
 

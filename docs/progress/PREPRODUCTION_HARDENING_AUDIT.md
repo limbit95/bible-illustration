@@ -1,5 +1,9 @@
 # Pre-Production Architecture Hardening Audit — 2026-10-06
 
+> **SUPERSEDED BY EPISODE ORCHESTRATION AUDIT**
+>
+> 이 감사 이후 Multi-Cut autonomous execution과 Presentation Plan이 정식 Architecture에 추가되었다. 현재 automation readiness 판정은 `docs/progress/EPISODE_ORCHESTRATION_AUDIT.md`를 따른다.
+
 > 상태: **PASSED / READY FOR NEW PRODUCTION**
 >
 > 목적: Storyboard refinement 이후 Architecture / Rules / Templates / Identity / Provider Integration / Asset lifecycle을 실제 production end-to-end 관점에서 다시 감사하고, 새 성경 일러스트 제작에 진입할 수 있는지 최종 판정한다.

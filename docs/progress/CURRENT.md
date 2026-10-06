@@ -1,105 +1,118 @@
 # Current Project State
 
 > 마지막 갱신: 2026-10-06
-> 상태: **PRE-PRODUCTION ARCHITECTURE HARDENING COMPLETE / READY FOR NEW PRODUCTION**
+> 상태: **EPISODE ORCHESTRATION LAYER COMPLETE / READY FOR AUTONOMOUS RETEST**
 
 ## 현재 Phase
 
-- STEP 0 — Architecture Definition: **COMPLETED**
-- STEP 0-1 ~ STEP 0-7: **ALL CONFIRMED / CURRENT-TENSE HARDENED**
-- Repository Structure v1.1: **CONFIRMED**
-- Production Rules hardening: **COMPLETED**
+- STEP 0 Architecture Definition: **COMPLETED**
+- STEP 0-1 ~ STEP 0-7: **CONFIRMED / HARDENED**
 - Storyboard Production Rules refinement: **COMPLETED**
-- Templates v1.1: **CONFIRMED — 11 YAML templates**
-- Progress / Decision 기록 체계: **CONFIRMED**
-- Git LFS / ignore 정책: **CONFIRMED — DEC-0001**
-- DEC-0005 — Scripture Work Unit / sequential generation: **ACCEPTED**
-- DEC-0006 — Scene Relation continuity vs transition: **ACCEPTED**
-- DEC-0007 — Storyboard Rules without schema expansion: **ACCEPTED**
-- DEC-0008 — Library Entity vs Image Asset identity: **ACCEPTED**
-- DEC-0009 — downstream reference requires prior Asset Promotion: **ACCEPTED**
-- DEC-0010 — retired identity tombstone registry: **ACCEPTED**
-- DEC-0011 — Episode visual direction ownership: **ACCEPTED**
-- DEC-0012 — enforced Generation Entry Gate: **ACCEPTED**
-- Enforced Generation Entry Gate: **ACTIVE**
-- Synthetic lifecycle dry-run: **PASSED**
-- Pre-Production Hardening Audit: **PASSED**
+- Pre-Production Architecture Hardening: **COMPLETED**
+- Enforced Generation Entry Gate: **ACTIVE — DEC-0012**
+- Episode Orchestration Model v1.0: **CONFIRMED — DEC-0013**
+- Orchestration Rules v1.0: **CONFIRMED**
+- Repository Structure v1.2: **CONFIRMED**
+- YAML Templates: **13**
+- Episode Orchestration synthetic dry-run: **PASSED**
+- Episode Orchestration Audit: **PASSED**
 
-## Hardening 완료 내용
+## 이번 보완의 핵심
 
-- 실제 Provider 요청 전 `entry_gate` snapshot 강제
-- Storyboard / Continuity / text-free master / Provider readiness 미충족 시 Run submission 금지
-- 자동화 요청에서도 Architecture traversal 생략 금지
-- 의미 있는 visual beat는 Cut 수 최소화보다 충분한 분해를 우선
-- 별도 non-production test branch에서만 same-session working reference 예외 허용
+기존 Architecture는 Cut 한 장의 제작 규칙은 강했지만,
+“창세기 1장 전체를 알아서 만들어” 같은 high-level Multi-Cut 위임의 control flow가 약했다.
 
-- stale STEP 0 handoff / unresolved 문구 정리
-- Continuity `reset: []` 물리 schema 정합성 확보
-- accepted / working Result → downstream actual reference lifecycle 확정
-- Library Entity `library_id`와 Image Asset `asset_id` 분리
-- Episode visual direction의 Canonical owner 정리
-- retired production identity tombstone registry 추가
-- Storyboard `transition_note` 방향을 previous active Cut → current Cut으로 확정
-- Result ↔ Asset provenance를 Asset metadata `source.result_id`로 단일화
-- removed Asset metadata tombstone 구조 추가
-- ChatGPT 최소 Provider / Profile / Prompt Adapter 구성
-- synthetic 2-Cut end-to-end dry-run PASS
+현재는 다음 상위 실행계층을 추가했다.
 
-## Genesis Production Reset
+~~~text
+User full-scope request
+→ Episode Production Session
+→ Episode / Storyboard / Cut / Continuity
+→ Presentation Plan
+→ Storyboard Preflight
+→ for each active Cut in Storyboard order
+     Generation Entry Gate
+     → Production Master
+     → Result Review
+     → Presentation Gate
+     → next Cut
+→ Episode scope complete
+~~~
 
-이전 Genesis production/test iteration은 current tree에서 retired 상태다.
+## Autonomous 의미
 
-- active 이전 Episode / Storyboard / Continuity: 없음
-- active 이전 C01–C06 Cut / Run / Asset: 없음
-- 이전 Git LFS image pointer: 없음
-- active Genesis production data: 없음
-- retired identity 36개: `content/identity-tombstones.yaml`
+autonomous는 Architecture를 생략하거나 여러 Cut을 한 번에 생성한다는 뜻이 아니다.
 
-상세 과거 production은 Git history에서만 추적한다.
+**사용자가 매 Cut마다 “다음”이라고 말하지 않아도 Assistant가 기존 Cut cycle을 스스로 반복 수행한다는 뜻**이다.
 
-**기존 `GEN-CREATION-01`과 C01–C06 계열 ID를 새 production에 재사용하지 않는다.**
+금지:
+
+- 여러 active Cut을 한 collage로 만들어 대체
+- 서로 다른 Cut을 하나의 Generation Run으로 batch 처리
+- Storyboard contact sheet를 Production Master로 간주
+- rejected Cut을 건너뛰고 다음 Cut을 확정
+- Production Master와 Presentation output 혼동
+
+## Presentation 구조
+
+Production Master는 계속 text-free다.
+
+사용자-facing output은 `presentation-plan.yaml`에서 Cut별로:
+
+- `key_scripture`
+- `explanatory`
+- `visual_only`
+
+중 하나로 계획한다.
+
+Key Scripture는 정확한 quote / verse / translation이 준비되어야 Presentation Gate를 통과한다.
 
 ## 현재 Production 위치
 
-- current_episode: **none**
-- current_cut: **none**
-- active_storyboard: **none**
-- active_continuity: **none**
-- active_genesis_assets: **none**
+main에는 active Genesis production이 없다.
+
+- current_episode: none
+- current_cut: none
+- active_storyboard: none
+- active_continuity: none
+- active_production_session: none
+- active_presentation_plan: none
+- active_genesis_assets: none
+
+이전 Genesis production identity 36개는 `content/identity-tombstones.yaml`에서 재사용을 금지한다.
 
 ## 현재 Source of Truth
 
-- 작업 진입점: `AGENTS.md`
-- 현재 진행 복원: `docs/progress/CURRENT.md`
+- Entry: `AGENTS.md`
+- Current: `docs/progress/CURRENT.md`
 - Architecture: `docs/architecture/*.md`
+- Episode Orchestration: `docs/architecture/EPISODE_ORCHESTRATION_MODEL.md`
 - Production Rules: `docs/rules/*.md`
+- Orchestration Rules: `docs/rules/ORCHESTRATION_RULES.md`
 - Templates: `templates/*.yaml`
-- retired identity: `content/identity-tombstones.yaml`
-- latest production readiness audit: `docs/progress/PREPRODUCTION_HARDENING_AUDIT.md`
-- dry-run evidence: `docs/progress/PREPRODUCTION_HARDENING_DRY_RUN.md`
-- Milestones: `docs/progress/MILESTONES.md`
+- Latest autonomous readiness audit: `docs/progress/EPISODE_ORCHESTRATION_AUDIT.md`
+- Dry-run evidence: `docs/progress/EPISODE_ORCHESTRATION_DRY_RUN.md`
 - Decisions: `docs/decisions/DEC-*.md`
-- ChatGPT Integration: `integrations/chatgpt/`
 
 ## 다음 작업
 
-다음 단계는 **강제 Generation Gate를 적용한 Genesis 1 자동화 재테스트**다.
+다음 단계는 **Genesis 1 전체 autonomous automation 재테스트**다.
 
-재테스트는 main이 아닌 별도 non-production test branch에서 수행하고, test production data/image는 정식 production으로 merge하지 않는다.
+테스트는 main이 아닌 별도 non-production branch에서 수행한다.
 
-1. 사용자가 제시하는 개역한글 Scripture Work Unit 확인
-2. current tree + identity tombstone에서 ID 사용 이력 확인
-3. 새 Episode identity 발급
-4. 새 Storyboard 설계
-5. Multi-Cut이면 Storyboard Production Preflight
-6. Cut / Continuity 신규 정의
-7. 필요한 Library Entity / Historical Reference 준비
-8. 사용자 검토
-9. 이후 한 장면씩 Generation
-10. downstream actual reference가 되는 working/accepted Result는 다음 Run 전에 Asset Promotion
+이번 재테스트의 성공 조건:
+
+1. 창세기 1장 전체를 충분한 visual beat로 Storyboard화
+2. Production Session + Presentation Plan 생성
+3. 첫 이미지 생성 전에 planning completeness 확인
+4. 한 Cut씩 개별 Production Master 생성
+5. Continuity-oriented 구간에서 실제 직전 image reference 활용
+6. Transition-oriented 구간에서는 필요한 world state 유지 + 허용 축만 reset
+7. 매 Cut Review 후에만 다음 Cut 진행
+8. Key Scripture는 정확한 개역한글 text로 presentation derivative 제작
+9. explanatory / visual-only 장면은 계획대로 처리
+10. collage/batch shortcut 없음
 
 ## Blocker
 
 현재 Architecture blocker 없음.
-
-이미지 생성은 사용자가 새 production 시작을 지시하기 전까지 진행하지 않는다.

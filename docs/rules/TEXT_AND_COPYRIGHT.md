@@ -1,4 +1,4 @@
-# Text and Copyright Rules v1.1
+# Text and Copyright Rules v1.2
 
 > 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
 >
@@ -157,6 +157,17 @@ Storyboard 단계에서는 각 beat가 **Key Scripture 중심인지 / Explanator
 
 구체 presentation text와 표시 방식은 presentation layer가 소유한다.
 
+Multi-Cut / Episode-level production에서는 `presentation-plan.yaml`이 이 계획의 물리 Source of Truth다.
+
+각 active Cut은 필요에 따라 다음 중 하나로 분류한다.
+
+- `key_scripture`
+- `explanatory`
+- `visual_only`
+
+`key_scripture`는 Presentation Gate 전에 정확한 quote / verse / translation이 준비되어야 한다.
+요약·의역 문장을 직접 인용처럼 대체하지 않는다.
+
 
 ## 12. Default Presentation Typography
 
@@ -172,3 +183,41 @@ Storyboard 단계에서는 각 beat가 **Key Scripture 중심인지 / Explanator
 구체 typography profile은 실제 Episode / presentation 요구가 생길 때 별도로 정한다.
 
 이 Typography 규칙은 presentation derivative에 적용하며 Production Master image 자체에는 계속 text를 bake-in하지 않는다.
+
+
+## 13. Presentation Coverage
+
+Episode-level production에서는 모든 active Cut이 `presentation-plan.yaml`에 정확히 한 entry를 가진다.
+
+사용자가 “모든 장면에 본문이 필요하지는 않지만 중요한 말씀은 반드시 넣어라”라고 요구한 경우:
+
+1. Storyboard / Presentation planning 단계에서 Key Scripture 후보를 먼저 식별한다.
+2. 중요한 선언·명령·축복·언약·핵심 사건 문구를 이유 없이 모두 `visual_only`로 처리하지 않는다.
+3. Key Scripture 선정 결과는 실제 presentation output까지 이어져야 한다.
+4. Production Master가 text-free라는 이유로 Presentation 단계 자체를 생략하지 않는다.
+
+### 본문을 여러 Cut으로 나눌 때
+
+하나의 Scripture 구간이 여러 visual beat로 분해되면 직접 인용문도 장면 의미에 맞춰 여러 presentation frame에 나누어 배치할 수 있다.
+
+원칙:
+
+- 번역문 wording을 임의로 바꾸지 않는다.
+- verse order를 유지한다.
+- 각 Cut에 해당 beat와 관련된 구간만 배치한다.
+- 긴 동일 본문 전문을 모든 Cut에 반복하지 않는다.
+- 필요한 경우 앞/뒤 Cut의 quote segment를 합치면 의도한 핵심 본문 흐름을 복원할 수 있어야 한다.
+- 잘라낸 문구가 원래 의미를 왜곡하지 않는지 검토한다.
+
+## 14. Presentation Gate
+
+Presentation derivative가 필요한 Cut은 다음 조건을 만족해야 한다.
+
+1. Production Master Result가 accepted다.
+2. `presentation-plan.yaml`의 mode가 확정되어 있다.
+3. `key_scripture`이면 translation / verse / exact quote가 확정되어 있다.
+4. `explanatory`이면 narration이 직접 인용과 구분되어 있다.
+5. Typography Rule을 확인한다.
+6. Production Master 자체는 계속 text-free로 보존한다.
+
+이 Gate를 통과하지 않은 상태에서 임의 summary caption을 최종 presentation으로 만들지 않는다.
