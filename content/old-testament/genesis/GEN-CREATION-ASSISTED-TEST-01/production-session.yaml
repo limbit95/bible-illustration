@@ -5,7 +5,7 @@ purpose: automation_test
 execution_mode: assisted
 
 source_snapshot:
-  repository_commit: 5e6002c6d66fb324e43a31f52f307aac2078c27d
+  repository_commit: 59137b033a8153c8e3dfa64eee1c42f4cae772ea
 
 policy:
   generation_strategy: sequential_per_cut
