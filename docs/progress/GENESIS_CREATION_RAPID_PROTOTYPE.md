@@ -39,6 +39,28 @@
 또한 rapid prototype의 속도는 여러 장을 한 번에 뽑는 방식으로 확보하지 않는다.
 Asset promotion, Git LFS ingest, representative 확정, 과도한 polish를 뒤로 미루는 방식으로 확보한다.
 
+## 1.2 Scene Relation 판단
+
+Genesis Creation prototype에서도 모든 이미지를 강제로 연결하지 않는다.
+
+각 새 본문 / Cut 전에:
+
+- 같은 창조 행위의 점진적 단계면 **Continuity**
+- 새로운 창조 국면이나 새로운 visual subject면 **Transition**
+
+을 먼저 판단한다.
+
+Continuity에서는 이전 승인 이미지의 RETAIN + DELTA를 중심으로 진행한다.
+Transition에서는 Story와 Scripture fact는 유지하되 구도, 카메라, 스케일, 팔레트, 분위기를 새롭게 설계할 수 있다.
+
+예:
+- 흑암 → 빛 등장 → 빛/어둠 분리: Continuity 비중 높음
+- 뭍 형성 → 식물 창조: Transition 가능
+- 식물 창조 → 광명과 주야 질서: Transition 권장 가능
+
+사용자가 연결/전환을 따로 말하지 않아도 Assistant가 먼저 판단하고,
+필요하면 Storyboard 제안에 relation 판단을 포함한다.
+
 ## 2. 사용자 선택 Working Reference Sequence
 
 사용자가 2026-10-03 최종 첨부한 00→06 이미지 묶음을 Genesis Creation rapid prototype의 **working visual reference sequence**로 사용한다.
