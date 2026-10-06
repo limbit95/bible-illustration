@@ -79,6 +79,18 @@
 - 일반화되어 Architecture / Rules / DEC-0005 / DEC-0006에 승격된 원칙은 유지
 - 다음 Genesis production은 Architecture refinement 완료 후 Scripture부터 새로 설계
 
+### 2026-10-06 — Storyboard Production Rules refinement 완료
+
+- DEC-0007 accepted
+- Scripture coverage / beat granularity 규칙 강화
+- Storyboard 단계 Scene Relation planning 명문화
+- visual repetition prevention / Episode-level rhythm review 추가
+- Key Scripture / explanatory frame의 Storyboard 책임 경계 정리
+- Storyboard / Cut / Continuity Source of Truth 경계 재확인
+- `templates/storyboard.yaml` schema 변경 없음
+- Architecture Completion Audit 통과
+- Architecture blocker 없이 새 production 시작 가능한 상태 확정
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 추가한다.
