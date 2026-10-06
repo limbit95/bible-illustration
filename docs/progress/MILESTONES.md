@@ -134,6 +134,16 @@
 - 여러 이미지 batch generation은 opt-in으로 제한
 - rapid prototype의 속도는 Asset/LFS/final polish 지연으로 확보
 
+### 2026-10-06 — Scene relation continuity / transition policy 확정
+
+- DEC-0006 accepted
+- 모든 인접 이미지를 강제로 같은 분위기로 연결하지 않는 원칙 확정
+- 동일 사건의 단계적 변화는 Continuity-oriented relation 우선
+- 새로운 사건 / 창조 국면 / 핵심 visual subject는 Transition-oriented relation 허용
+- Transition에서도 Scripture와 Story chronology는 유지
+- 기존 Architecture의 continue / partial_reset / reset으로 Canonical 표현하며 새 enum은 추가하지 않음
+- 사용자가 별도 지시하지 않아도 Assistant가 relation을 먼저 판단
+
 ## 다음 Milestone 후보
 
 다음 항목은 실제 완료될 때만 이 문서에 추가한다.
