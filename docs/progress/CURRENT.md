@@ -48,6 +48,7 @@
 - C05/C06 Asset candidates: **A001 / pending_ingest — historical candidates, LFS ingest deferred**
 - DEC-0004: **ACCEPTED — whole-chapter rapid prototype before Asset promotion**
 - DEC-0005: **ACCEPTED — scripture-unit sequential generation / flexible one-to-many scene decomposition**
+- DEC-0006: **ACCEPTED — scene relation judgment / continuity when progression matters, transition when new visual treatment is stronger**
 - Genesis working visual reference sequence: **00→06 user-selected / conversation-local binary / sequence behavior documented**
 - Genesis-specific visual profile: **DOCUMENTED — widescreen + blue-black→cool-white→warm-gold progression / Genesis Creation only**
 - Presentation text reference: **APPROVED — restrained cinematic sans-serif / key Scripture direct-quote first / narration only when explanatory**
@@ -145,6 +146,8 @@
 79. 사용자 승인 cinematic presentation text reference를 `TEXT_AND_COPYRIGHT.md`와 Genesis working guide에 반영
 80. DEC-0005 — Scripture Work Unit 기반 순차 생성 + 유연한 one-to-many Cut 분해 방침 accepted
 81. Master / Generation / Continuity Rules에 본문 단위 장면 수 판단, Storyboard advisory, 한 장면씩 순차 생성 규칙 반영
+82. DEC-0006 — 모든 장면 강제 연결 대신 Continuity / Transition 관계를 사전 판단하는 방침 accepted
+83. Master / Generation / Continuity Rules와 Genesis working guide에 Scene Relation 판단 규칙 반영
 
 ## 현재 Source of Truth
 
