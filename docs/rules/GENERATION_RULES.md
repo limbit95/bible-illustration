@@ -280,3 +280,32 @@ Canonical Cut revision이나 기준 commit이 달라져 판정이 달라지면 �
 
 Batch 결과에서 인접 장면 연결이 깨지면 batch 효율을 이유로 유지하지 않고
 순차 생성 방식으로 되돌린다.
+
+
+## 17. Scene Relation preflight
+
+이미지 생성 전에 직전 Cut과의 Scene Relation을 확인한다.
+
+판단 결과는 두 제작 방향 중 하나다.
+
+- `Continuity`: 이전 장면의 시각 상태를 적극적으로 계승
+- `Transition`: Story는 이어가되 새로운 visual treatment 허용
+
+### Continuity 생성 입력
+
+- 직전 승인 이미지를 primary continuity reference로 사용
+- RETAIN 명시
+- DELTA 명시
+- FORBIDDEN LEAP 명시
+- 필요 없는 새 구도·팔레트·카메라 변화 최소화
+
+### Transition 생성 입력
+
+- 직전 이미지 복제를 목표로 하지 않는다.
+- 새 본문의 핵심 subject와 visual intent를 중심으로 새 구도를 설계한다.
+- 필요한 identity / 사건 상태만 유지한다.
+- 카메라, 스케일, 조명, 분위기, 팔레트는 새롭게 구성할 수 있다.
+- 단 Scripture chronology와 Canonical fact는 reset하지 않는다.
+
+사용자가 별도 Relation Mode를 지정하지 않으면 Assistant가 먼저 판단한다.
+판단이 애매하거나 장면 수에도 영향을 주면 이미지 생성 전에 짧은 Storyboard 제안을 한다.
