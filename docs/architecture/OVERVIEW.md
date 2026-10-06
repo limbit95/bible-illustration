@@ -2,7 +2,7 @@
 
 > 상태: **CONFIRMED ARCHITECTURE INDEX**
 >
-> 기준: STEP 0-1~0-7의 사용자 승인 모델과 Repository Structure v1.0
+> 기준: STEP 0-1~0-7의 승인 모델, pre-production hardening, Episode Orchestration, Repository Structure v1.2
 
 이 문서는 Bible Illustration 프로젝트의 정식 Architecture 진입점이다.
 

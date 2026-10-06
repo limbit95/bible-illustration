@@ -95,6 +95,7 @@ Architecture 완료 상태를 확인하거나 Multi-Cut / Episode-level producti
 - Continuity
 - Library
 - Generation Run / Result Review metadata
+- Episode Production Session / Presentation Plan
 - Provider Integration metadata
 - Asset metadata / selection
 
@@ -155,6 +156,7 @@ Provider 내부의 character, model, prompt, slot, project structure는 Canonica
 - `CONTINUITY_MODEL.md`
 - `LIBRARY_MODEL.md`
 - `GENERATION_RUN_MODEL.md`
+- `EPISODE_ORCHESTRATION_MODEL.md`
 - `PROVIDER_INTEGRATION_MODEL.md`
 - `ASSET_STORAGE_POLICY.md`
 - `REPOSITORY_STRUCTURE.md`
