@@ -159,6 +159,44 @@ STEP 0-1에서 Storyboard의 최소 책임으로 확정된 `scripture_anchor`와
 
 Cut 문서가 해당 값을 필요로 할 때는 자신의 `cut_id`로 Storyboard entry를 참조한다. 동일한 `scripture_anchor`나 `beat`를 Cut에 다시 복사해 두 군데를 동기화하지 않는다.
 
+### 4.1 Storyboard Production Planning
+
+Storyboard는 단순 순서표가 아니라 Cut 정의 전에 전체 제작 흐름을 점검하는 planning surface로도 사용한다.
+
+다만 이 역할은 **새 Canonical 필드를 추가하는 것**과 다르다.
+
+현재 최소 필드만으로 다음을 검토한다.
+
+- Episode / Work Unit의 Scripture coverage
+- Cut boundary와 beat granularity
+- 인접 Cut의 high-level Scene Relation
+- 전체 시퀀스의 visual repetition 가능성
+- Episode-level rhythm
+- 필요 시 Key Scripture / explanatory presentation intent
+
+이 검토 결과가 구체적인 장면 요구사항으로 이어지면 Cut이 소유하고,
+인접 Cut 사이의 retain / change / reset 요구사항으로 이어지면 Continuity가 소유한다.
+
+### 4.2 `transition_note`의 책임
+
+`transition_note`는 앞뒤 Cut 사이의 **서사적·연출적 전환 의도**를 짧게 기록한다.
+
+적절한 예:
+
+- 같은 사건의 직접적인 다음 단계이므로 연결감을 우선한다.
+- 새로운 사건이 시작되므로 visual reset을 허용한다.
+- Story chronology는 이어지지만 새로운 scale의 장면으로 전환한다.
+
+다음 상세 데이터는 `transition_note`에 Canonical constraint로 중복 저장하지 않는다.
+
+- 정확한 continuity mode
+- retain path
+- change path와 값
+- reset path
+- Segment baseline
+
+이 값들은 Continuity Model이 Source of Truth다.
+
 ## 5. Episode Definition Status
 
 Episode의 상태는 이미지 제작 진행률이 아니라 **Episode 정의 자체의 설계·검토·승인 상태**만 나타낸다.
@@ -212,6 +250,7 @@ Episode를 `approved`로 만들기 위한 최소 조건은 다음으로 둔다.
 3. Storyboard에 포함된 모든 active Cut의 **definition_status가 approved**다.
 4. Storyboard 순서와 실제 Cut 참조가 유효하다.
 5. Episode의 주본문 범위를 의도적으로 누락하거나 중복한 부분이 없는지 검토되었다.
+6. Storyboard Production Preflight에서 coverage / granularity / relation / visual repetition / Episode rhythm의 blocking concern이 해결되었다.
 
 Continuity 정의 승인 조건은 STEP 0-3에서 추가될 수 있다.
 
@@ -556,6 +595,7 @@ Episode에도 동일한 원칙을 적용한다.
 16. 실제 Cut 수의 Source of Truth는 active Storyboard entry의 수이며 Episode에 별도 Cut count 값을 중복 저장하지 않는다.
 17. Scripture Reference, Production Text, Display Text는 서로 다른 책임을 가진다.
 18. 생성 이미지는 Canonical Cut Specification의 구현 결과이며 Source of Truth가 아니다.
+19. Storyboard Production Review는 새 필드를 요구하지 않으며, 구체 Scene Specification과 Continuity constraint를 Storyboard에 중복 저장하지 않는다.
 
 ## 15. STEP 0-2에서 의도적으로 미확정하는 항목
 

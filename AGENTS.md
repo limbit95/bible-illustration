@@ -16,7 +16,7 @@
 
 Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_STRUCTURE.md`도 함께 확인한다.
 
-현재 Architecture refinement를 이어갈 때는 `docs/progress/ARCHITECTURE_REFINEMENT_HANDOFF.md`도 필수로 확인한다.
+Architecture 완료 상태를 확인하거나 새 production을 시작할 때는 `docs/progress/ARCHITECTURE_COMPLETION_AUDIT.md`도 함께 확인한다.
 
 채팅 내용, 기억, 과거 요약과 저장소 기록이 충돌할 경우 최신 저장소 상태를 우선한다. 중요한 충돌은 임의로 해결하지 말고 사용자에게 알린다.
 
@@ -33,12 +33,14 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 - STEP 0-6 — Provider Integration Model: **CONFIRMED**
 - STEP 0-7 — Image / Asset Storage Policy: **CONFIRMED**
 - Repository Structure v1.0: **CONFIRMED**
-- Production Rules v1.0: **CONFIRMED**
+- Production Rules baseline: **CONFIRMED**
+- Storyboard Production Rules refinement: **COMPLETED**
 - Templates v1.0: **CONFIRMED**
 - Progress / Decision 기록 체계 v1.0: **CONFIRMED**
 - DEC-0001 — Git LFS and Ignore Policy: **ACCEPTED**
 - DEC-0005 — Scripture-unit sequential generation with flexible scene decomposition: **ACCEPTED**
 - DEC-0006 — Scene relation policy: continuity vs transition: **ACCEPTED**
+- DEC-0007 — Storyboard Production Rules without schema expansion: **ACCEPTED**
 
 확정된 Repository Structure는 `docs/architecture/REPOSITORY_STRUCTURE.md`를 따른다.
 
@@ -46,20 +48,19 @@ Repository 물리 구조가 필요한 작업은 `docs/architecture/REPOSITORY_ST
 
 ## 3. 현재 단계
 
-현재는 **Architecture Refinement — Storyboard Production Rules 강화** 단계다.
-
-이전 Genesis Creation production/test iteration은 현재 Canonical production tree에서 **retired** 상태다.
+현재는 **Architecture Refinement 완료 / 새 Production 시작 준비 상태**다.
 
 현재 원칙:
 
-- 이전 iteration에서 생성된 Episode / Storyboard / Cut / Continuity / Run / Asset / representative selection / image binary를 새 제작의 입력으로 사용하지 않는다.
-- 이전 iteration에서 사용한 장면별 팔레트, 광원, 카메라, 구도, 질감, progression 같은 production-specific 값도 새 Genesis 제작의 기본값으로 계승하지 않는다.
-- 이전 iteration의 상세 산출물은 현재 tree에서 제거하며 과거 Git commit history만 보존한다.
-- 이전 테스트에서 일반화되어 정식 Architecture / Rules / accepted Decision으로 승격된 원칙만 현재 기준으로 유지한다.
-- Genesis Creation을 다시 제작할 때는 Architecture refinement 완료 후 Scripture부터 Storyboard를 새로 설계한다.
-- 과거에 이미 사용한 Episode / Cut / Run / Asset ID를 새 제작물에 조용히 재사용하지 않는다. 새 identity는 기존 ID invariant에 따라 결정한다.
+- 이전 Genesis production/test iteration은 current tree에서 retired 상태다.
+- active Episode / Cut / Storyboard / Continuity / Asset은 없다.
+- 이전 production의 장면별 팔레트, 광원, 카메라, 구도, 질감, progression은 새 제작의 기본값으로 계승하지 않는다.
+- 이전 테스트에서 일반화되어 Architecture / Rules / accepted Decision으로 승격된 원칙만 유지한다.
+- Storyboard Production Rules refinement와 Architecture Completion Audit은 완료되었다.
+- Storyboard schema는 `order / cut_id / scripture_anchor / beat / transition_note`를 유지한다.
+- 새 production은 Scripture Work Unit에서 Storyboard를 새로 설계한 뒤 시작한다.
+- 과거에 사용한 Episode / Cut / Run / Asset ID를 새 production entity에 재사용하지 않는다.
 - 빈 미래 디렉터리와 파일을 필요 이상으로 대량 생성하지 않는다.
-- 실제 데이터나 정식 문서가 필요한 시점에만 구조를 생성한다.
 
 진행 위치와 다음 작업은 `docs/progress/CURRENT.md`가 Source of Truth다.
 
@@ -190,8 +191,8 @@ CURRENT / MILESTONES / Decision의 책임을 장문으로 중복하지 않는다
 
 `docs/progress/CURRENT.md`를 기준으로 이어서 진행한다.
 
-현재 다음 작업은:
+현재 Architecture blocker는 없다.
 
-**Storyboard Production Rules 강화 → Architecture / Rules / Template 책임 충돌 검토 → 사용자 승인 → 새로운 Genesis Creation production을 Scripture부터 재설계할지 결정**
+다음 단계는 **새 production 설계**다.
 
-이다.
+Genesis Creation을 다시 시작할 경우 이전 production data를 복원하지 않고 Scripture Work Unit → 새 Episode identity → Storyboard → Storyboard Production Preflight → Cut / Continuity 정의 순서로 진행한다.

@@ -1,6 +1,6 @@
-# Master Production Rules v1.0
+# Master Production Rules v1.1
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
 >
 > 목적: Bible Illustration 제작 전반에서 공통으로 적용할 상위 판단 규칙과 세부 Rules 문서의 우선순위를 정의한다.
 >
@@ -113,19 +113,21 @@ C는 최소화하며 필요한 경우 사실이 아니라 해석/연출임을 �
 
 기본 제작 루프는 다음 흐름을 따른다.
 
-1. 본문 범위와 Scripture Anchor 확인
-2. Episode / Storyboard / Cut의 역할 확인
-3. 필요한 Library / Historical Research 확인
-4. 이전·다음 Cut과 Continuity 확인
-5. Canonical Scene의 required / forbidden 요소 확인
-6. Provider Adapter / Profile을 통해 생성 입력 준비
-7. Generation Run 실행
-8. Scripture / Historical / Continuity / Library / Visual / Technical 검토
-9. Result Review 기록
-10. 필요 시 새 Run
-11. 장기 보존 가치가 있는 결과만 Asset Promotion
-12. 대표 Asset 선정
-13. Progress 기록 후 다음 Cut 진행
+1. 본문 범위와 Scripture Work Unit 확인
+2. 필요한 경우 Storyboard / Cut 분해안 작성
+3. Multi-Cut이면 Storyboard Production Preflight 수행
+4. Episode / Storyboard / Cut의 책임과 현재 정의 확인
+5. 필요한 Library / Historical Research 확인
+6. 이전·다음 Cut과 Canonical Continuity 확인
+7. Canonical Scene의 required / forbidden 요소 확인
+8. Provider Adapter / Profile을 통해 생성 입력 준비
+9. Generation Run 실행
+10. Scripture / Historical / Continuity / Library / Visual / Technical 검토
+11. Result Review 기록
+12. 필요 시 새 Run
+13. 장기 보존 가치가 있는 결과만 Asset Promotion
+14. 대표 Asset 선정
+15. Progress 기록 후 다음 Cut 진행
 
 ## 6. 과도한 사전 설계 금지
 
@@ -178,10 +180,12 @@ Storyboard 제안에는 필요한 만큼만 다음을 포함한다.
 
 - Cut 수
 - 각 Cut의 Scripture Anchor
-- 핵심 visual beat
-- RETAIN
-- DELTA
-- FORBIDDEN LEAP
+- 각 Cut의 핵심 visual beat
+- 인접 Cut의 high-level Scene Relation / transition intent
+- 본문 coverage나 continuity에서 아직 해결해야 할 concern
+
+Storyboard 단계에서 상세 RETAIN / change / reset constraint를 복제하지 않는다.
+그 값의 Canonical Source of Truth는 Continuity다.
 
 이 운영은 장면 수를 늘리기 위한 규칙이 아니라,
 본문 누락과 과도한 압축을 피하고 자연스러운 시각 전개를 확보하기 위한 규칙이다.
@@ -238,3 +242,84 @@ Assistant는 사용자가 별도 지시하지 않아도 Continuity와 Transition
 
 Canonical 저장은 새로운 enum을 만들지 않고 기존 Continuity Model의
 `continue | partial_reset | reset`과 Storyboard의 `transition_note`를 사용한다.
+
+
+## 12. Storyboard Production Preflight
+
+여러 Cut을 포함하는 Episode 또는 Scripture Work Unit은 실제 이미지 생성 전에 Storyboard 전체를 한 번의 계획 단위로 검토한다.
+
+이 검토는 새 데이터 엔터티나 새 Storyboard 필드를 요구하지 않는다.
+현재 Storyboard의 `order / cut_id / scripture_anchor / beat / transition_note`와 관련 Episode / Cut / Continuity 정의를 함께 본다.
+
+### 12.1 Scripture Coverage Gate
+
+- primary Scripture / Work Unit의 의미 있는 본문 구간이 이유 없이 빠지지 않았는가
+- 같은 본문이 여러 Cut에 걸치면 각 Cut의 역할이 beat로 구분되는가
+- 여러 절을 하나의 Cut으로 묶을 때 중요한 사건·상태가 사라지지 않는가
+- supporting Scripture가 primary Scripture의 제작 근거를 대신하고 있지 않은가
+
+### 12.2 Beat Granularity Gate
+
+- 각 Cut에 하나의 명확한 visual beat가 있는가
+- 한 화면에 서로 경쟁하는 핵심 사건을 과도하게 압축하지 않았는가
+- 본문상 변화가 거의 없는 Cut을 의미 없이 세분화하지 않았는가
+- 분할 또는 통합의 이유를 사건·상태·시간·장소·시각적 초점 변화로 설명할 수 있는가
+
+### 12.3 Scene Relation Gate
+
+인접 Cut마다 먼저 다음 중 어떤 제작 방향이 적절한지 판단한다.
+
+- Continuity-oriented
+- Transition-oriented
+
+Storyboard의 `transition_note`에는 이 관계의 **high-level intent**만 기록한다.
+
+실제 `continue | partial_reset | reset`, retain / change / reset constraint는 Continuity가 소유한다.
+
+### 12.4 Visual Repetition Gate
+
+본문의 의미가 달라지는데도 동일한 시각적 메시지가 반복되는지 검토한다.
+
+필요하면 다음 축의 변화 가능성을 검토한다.
+
+- dominant visual subject
+- camera distance
+- viewpoint
+- scale
+- composition
+- lighting concept
+- visual rhythm
+
+단순한 다양성을 위해 Scripture fact나 사건 chronology를 바꾸지 않는다.
+
+### 12.5 Episode Rhythm Gate
+
+Multi-Cut Storyboard 전체에서 다음을 점검한다.
+
+- establishing / medium / detail의 흐름
+- Continuity / Transition 배치
+- 반복되는 구도와 dominant subject
+- visual climax
+- rest / breathing frame
+- 같은 분위기의 불필요한 장기 반복
+
+고정 비율이나 장면 수 quota는 두지 않는다.
+
+### 12.6 Presentation Intent Gate
+
+필요하면 각 beat가:
+
+- Key Scripture 중심인지
+- Explanatory / Transitional 중심인지
+
+를 판단한다.
+
+이 판단은 presentation 전략을 준비하기 위한 것이며,
+Storyboard에 직접 인용문 전체나 narration 문장을 중복 저장하는 근거가 아니다.
+
+### 12.7 Generation Entry Gate
+
+Storyboard Preflight에서 중요한 coverage / granularity / relation / repetition 문제가 남아 있으면
+여러 Cut의 본격 Generation으로 진입하지 않는다.
+
+단, 장면 표현 가능성을 확인하기 위한 제한적인 탐색 Run은 기존 Rules 범위 안에서 허용한다.

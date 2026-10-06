@@ -1,6 +1,6 @@
-# Generation Rules v1.0
+# Generation Rules v1.1
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
 >
 > 목적: Canonical Scene을 실제 Provider 생성 요청으로 변환하고 Result를 검토·기록·보존하는 운영 규칙을 정의한다.
 
@@ -282,7 +282,7 @@ Batch 결과에서 인접 장면 연결이 깨지면 batch 효율을 이유로 �
 순차 생성 방식으로 되돌린다.
 
 
-## 17. Scene Relation preflight
+## 17. Per-Cut Scene Relation preflight
 
 이미지 생성 전에 직전 Cut과의 Scene Relation을 확인한다.
 
@@ -309,3 +309,27 @@ Batch 결과에서 인접 장면 연결이 깨지면 batch 효율을 이유로 �
 
 사용자가 별도 Relation Mode를 지정하지 않으면 Assistant가 먼저 판단한다.
 판단이 애매하거나 장면 수에도 영향을 주면 이미지 생성 전에 짧은 Storyboard 제안을 한다.
+
+
+## 18. Multi-Cut Storyboard Generation Entry Gate
+
+여러 Cut을 포함하는 Episode / Scripture Work Unit은 본격 이미지 생성 전에 Storyboard Production Preflight를 통과한다.
+
+최소 확인:
+
+1. Scripture coverage에 중요한 누락이 없는가
+2. 중복 Scripture Anchor가 있다면 각 Cut의 beat 역할이 구분되는가
+3. 한 Cut에 사건을 과도하게 압축하지 않았는가
+4. 의미 없는 미세 Cut을 과도하게 만들지 않았는가
+5. 인접 Cut의 Scene Relation 방향이 정해졌는가
+6. 전체 시퀀스에 불필요한 visual repetition이 예상되지 않는가
+7. Episode-level rhythm에서 명백한 단조로움이나 과밀함이 없는가
+
+이 Gate는 모든 카메라·조명·Prompt를 미리 확정하라는 의미가 아니다.
+
+Storyboard 단계에서 해결해야 할 구조적 문제가 없는지 확인한 뒤
+각 Cut의 구체 Scene Specification과 Continuity constraint를 필요한 시점에 작성한다.
+
+중요한 문제가 남아 있다면 대량 generation으로 문제를 우회하지 않는다.
+
+단, 특정 장면의 표현 가능성을 확인하기 위한 소수의 exploratory Run은 기존 `탐색 Run` 규칙에 따라 사용할 수 있다.

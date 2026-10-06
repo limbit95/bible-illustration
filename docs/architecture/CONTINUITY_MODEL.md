@@ -72,10 +72,16 @@ Cut B Canonical Scene
 즉:
 
 ```text
+Storyboard = 무엇을 어떤 순서와 beat로 보여줄 것인가
 Library = 무엇인가
 Cut = 지금 무엇을 보여주는가
 Continuity = 다음 장면으로 무엇이 이어지고 무엇이 변하는가
 ```
+
+Storyboard의 `transition_note`는 관계의 high-level intent를 표현할 수 있지만
+실제 transition mode와 retain / change / reset constraint를 소유하지 않는다.
+
+Storyboard planning과 Continuity가 같은 정보를 중복 저장하지 않도록 한다.
 
 ## 3. Continuity의 범위
 
@@ -434,7 +440,20 @@ Continuity는 이미지 생성에 영향을 주는 Canonical 정의의 일부다
 3. 생성 결과를 달라지게 할 정도의 Continuity 변경은 영향을 받는 Cut의 revision 증가 대상으로 본다.
 4. Episode 구조나 active Cut 구성이 바뀌면 STEP 0-2의 Episode revision 규칙도 적용한다.
 
-## 12. Continuity와 Definition Approval
+## 12. Storyboard Relation Intent와 Continuity 확정
+
+Storyboard 단계에서 인접 Cut을 Continuity-oriented 또는 Transition-oriented로 먼저 판단할 수 있다.
+
+이 판단은 제작 planning이며 별도 Canonical relation enum을 추가하지 않는다.
+
+Canonical Continuity를 작성할 때는 해당 의도를 참고해 기존 세 mode 중 하나를 결정한다.
+
+- Continuity-oriented → `continue` 또는 `partial_reset`
+- Transition-oriented → `partial_reset` 또는 `reset`
+
+Storyboard의 `transition_note`가 구체 retain / change / reset 데이터를 대신하지 않는다.
+
+## 13. Continuity와 Definition Approval
 
 STEP 0-2에서 Cut / Episode 정의 승인과 이미지 제작 완료를 분리했다.
 
@@ -456,7 +475,7 @@ Episode의 모든 인접 active Cut 쌍에 대해 continuity mode가 결정되�
 
 Cross-Episode Continuity가 필요한 경우 Episode 경계 transition도 정의되어야 한다.
 
-## 13. Continuity와 Generated Asset 검토
+## 14. Continuity와 Generated Asset 검토
 
 이미지 생성 후에는 Canonical Continuity 정의와 결과를 비교한다.
 
@@ -482,7 +501,7 @@ continuity mismatch
 
 즉 **AI가 우연히 만든 결과가 Canonical 세계관을 역으로 결정하지 않는다.**
 
-## 14. Continuity 불변 조건 후보
+## 15. Continuity 불변 조건 후보
 
 1. Continuity는 Cut 자체가 아니라 Cut 사이의 유지·변화 관계를 정의한다.
 2. Library의 Canonical Asset 정의를 Continuity에 복제하지 않는다.
@@ -502,7 +521,7 @@ continuity mismatch
 16. 생성 결과와 Canonical Continuity가 충돌하면 기본적으로 생성 결과를 수정한다.
 17. Continuity 검토는 Cut/Episode Definition Approval의 일부다.
 
-## 15. STEP 0-3에서 의도적으로 미확정하는 항목
+## 16. STEP 0-3에서 의도적으로 미확정하는 항목
 
 다음은 이후 STEP에서 정한다.
 
@@ -515,7 +534,7 @@ continuity mismatch
 - Continuity Segment의 최종 파일 배치
 - 웹사이트 표시용 transition 효과
 
-## 16. STEP 0-3 검토 포인트
+## 17. STEP 0-3 검토 포인트
 
 사용자 검토가 필요한 핵심 항목:
 

@@ -1,6 +1,6 @@
-# Text and Copyright Rules v1.0
+# Text and Copyright Rules v1.1
 
-> 상태: **CONFIRMED / 2026-10-02 사용자 승인**
+> 상태: **CONFIRMED / 2026-10-06 Storyboard Production Rules refinement**
 >
 > 목적: 성경 직접 인용, 자체 내레이션, 이미지 내 텍스트, 외부 Reference와 이미지 권리를 분리하여 관리하는 규칙을 정의한다.
 
@@ -148,6 +148,14 @@ Presentation layer에서 직접 인용과 내레이션을 동시에 기본 노�
 - 내레이션은 성경 직접 인용과 혼동되지 않도록 데이터와 표현을 분리한다.
 
 어떤 Frame이 Key Scripture인지 여부는 Episode / Storyboard / Presentation 설계에서 판단하며, 모든 성경 구간을 동일 비율의 직접 인용으로 강제하지 않는다.
+
+Storyboard 단계에서는 각 beat가 **Key Scripture 중심인지 / Explanatory·Transitional 중심인지** 판단할 수 있다.
+
+다만 이 판단을 위해 현재 Storyboard schema에 별도 enum 필드를 추가하지 않는다.
+필요한 의도는 `beat` 또는 `transition_note`의 짧은 설명으로 충분히 드러낼 수 있으며,
+실제 직접 인용문 전문·장절 표시 문구·narration 문장은 Storyboard에 중복 저장하지 않는다.
+
+구체 presentation text와 표시 방식은 presentation layer가 소유한다.
 
 
 ## 12. Default Presentation Typography
