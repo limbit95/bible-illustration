@@ -43,7 +43,7 @@ Git LFS
 
 ## 2. Generated Result와 Asset의 차이
 
-STEP 0-5에서 정의한 Generated Result는 Provider가 반환한 개별 출력 기록이다.
+`GENERATION_RUN_MODEL.md`에서 정의한 Generated Result는 Provider가 반환한 개별 출력 기록이다.
 
 모든 Generated Result가 장기 Asset이 되는 것은 아니다.
 
@@ -101,8 +101,8 @@ v1에서는 Asset을 소유 맥락에 따라 안정적으로 식별한다.
 예:
 
 ~~~text
-GEN-CREATION-01-C03-A001
-GEN-CREATION-01-C03-A002
+BOOK-STORY-01-C03-A001
+BOOK-STORY-01-C03-A002
 ~~~
 
 ### Library-owned Asset
@@ -127,7 +127,7 @@ STY-BIBLICAL-HISTORICAL-REALISM-A001
 2. 번호는 최소 3자리 zero-padding을 사용하되 999를 상한으로 두지 않는다.
 3. 삭제·폐기된 번호를 재사용하지 않는다.
 4. Cut-owned Asset은 해당 Cut의 결과·참조 용도에 사용한다.
-5. Library-owned Asset은 해당 Canonical Library Asset의 reference 용도에 사용한다.
+5. Library-owned Asset은 해당 Canonical Library Entity의 reference 용도에 사용한다.
 6. v1에서 owner 없는 전역 Asset namespace는 만들지 않는다.
 7. 프로젝트 전역 Style reference는 STY Library Entity 아래에서 관리한다.
 8. 새로운 실제 필요가 생기기 전 Asset namespace를 추가하지 않는다.
@@ -139,15 +139,15 @@ STY-BIBLICAL-HISTORICAL-REALISM-A001
 개념 예:
 
 ~~~yaml
-asset_id: GEN-CREATION-01-C03-A001
+asset_id: BOOK-STORY-01-C03-A001
 
 owner:
   type: cut
-  id: GEN-CREATION-01-C03
+  id: BOOK-STORY-01-C03
 
 source:
   kind: generation_result
-  result_id: GEN-CREATION-01-C03-R007-O02
+  result_id: BOOK-STORY-01-C03-R007-O02
   parent_asset_id: null
 
 binary:
@@ -293,14 +293,14 @@ Cut의 최종 제작 상태는 Asset 자체의 이름에 final을 넣는 방식�
 
 ~~~yaml
 representative_asset:
-  asset_id: GEN-CREATION-01-C03-A004
+  asset_id: BOOK-STORY-01-C03-A004
   selected_against:
     cut_revision: 2
     repository_commit: ...
   selected_at: ...
 
 representative_history:
-  - asset_id: GEN-CREATION-01-C03-A002
+  - asset_id: BOOK-STORY-01-C03-A002
     selected_against:
       cut_revision: 1
       repository_commit: ...
@@ -320,7 +320,7 @@ representative_history:
 
 ## 11. Production Complete 확정
 
-STEP 0-2에서 미뤄둔 production complete를 여기서 정의한다.
+Episode/Cut Definition Approval과 분리된 production complete를 여기서 정의한다.
 
 ### Cut Production Complete
 
@@ -549,7 +549,7 @@ Derivative는 Canonical Asset에서 재생성 가능한 전달용 파일이다.
 예:
 
 ~~~text
-GEN-CREATION-01-C03-A004
+BOOK-STORY-01-C03-A004
   ├─ web-1920.avif
   ├─ web-1280.webp
   └─ thumb-480.webp
@@ -621,7 +621,7 @@ Canonical binary 파일명은 사람이 임의로 지은 긴 Prompt 기반 이�
 예:
 
 ~~~text
-GEN-CREATION-01-C03-A004.png
+BOOK-STORY-01-C03-A004.png
 CHR-MOSES-A002.png
 ~~~
 

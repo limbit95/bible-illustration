@@ -48,7 +48,7 @@ Cut B Canonical Scene
 - 주요 사물의 기본 형태
 - 시대별 의복 기준
 
-상세 스키마는 STEP 0-4에서 확정한다.
+상세 semantic identity와 revision schema는 `LIBRARY_MODEL.md`가 Source of Truth다.
 
 ### Cut — 현재 장면 자체의 정의
 

@@ -60,9 +60,9 @@ v1에서는 **Provider에 실제로 한 번 제출한 하나의 생성 요청**�
 예:
 
 ~~~text
-GEN-CREATION-01-C03-R001
-GEN-CREATION-01-C03-R002
-GEN-CREATION-01-C03-R003
+BOOK-STORY-01-C03-R001
+BOOK-STORY-01-C03-R002
+BOOK-STORY-01-C03-R003
 ~~~
 
 규칙:
@@ -89,25 +89,25 @@ Library Reference용 별도 이미지 생성 Run이 필요해질 경우 v1 Cut R
 예:
 
 ~~~text
-GEN-CREATION-01-C03-R007-O01
-GEN-CREATION-01-C03-R007-O02
-GEN-CREATION-01-C03-R007-O03
-GEN-CREATION-01-C03-R007-O04
+BOOK-STORY-01-C03-R007-O01
+BOOK-STORY-01-C03-R007-O02
+BOOK-STORY-01-C03-R007-O03
+BOOK-STORY-01-C03-R007-O04
 ~~~
 
 Result ID는 Generated Asset ID가 아니다.
 
-Result는 Provider가 반환한 개별 생성 결과의 기록이고, 최종 Asset 식별 체계는 STEP 0-7에서 정한다.
+Result는 Provider가 반환한 개별 생성 결과의 기록이고, Image Asset identity와 promotion은 `ASSET_STORAGE_POLICY.md`를 따른다.
 
 ## 5. Generation Run 공통 데이터
 
 개념 예:
 
 ~~~yaml
-run_id: GEN-CREATION-01-C03-R007
+run_id: BOOK-STORY-01-C03-R007
 
 target:
-  cut_id: GEN-CREATION-01-C03
+  cut_id: BOOK-STORY-01-C03
   cut_revision: 1
 
 source_snapshot:
@@ -207,7 +207,7 @@ C03 revision 1 — approved C
 
 1. Run 생성 입력은 완료 후 수정하지 않는다.
 2. Prompt를 고쳐 다시 생성하면 새 Run이다.
-3. Provider별 Prompt 구조와 profile은 STEP 0-6에서 정한다.
+3. Provider별 Prompt Adapter / Generation Profile은 `PROVIDER_INTEGRATION_MODEL.md`를 따른다.
 4. ChatGPT처럼 내부에서 최종 생성 Prompt가 자동 구성되지만 그 값이 공개되지 않는 경우, 사용자가 제공한 생성 instruction과 확인 가능한 참조 context만 기록하고 내부 Prompt는 unavailable로 둔다.
 5. Provider가 내부적으로 추가하는 비공개 Prompt는 추측해서 기록하지 않는다.
 6. 실제로 확인 가능한 입력만 기록한다.
@@ -226,7 +226,7 @@ references:
 
   - asset_ref: ...
     role: continuity
-    source_cut_id: GEN-CREATION-01-C02
+    source_cut_id: BOOK-STORY-01-C02
 ~~~
 
 role 후보:
@@ -297,7 +297,7 @@ Run의 성공 여부와 결과 이미지의 품질 판단은 다른 개념이다
 각 Result는 Run으로부터 생성된 개별 출력이다.
 
 ~~~yaml
-result_id: GEN-CREATION-01-C03-R007-O01
+result_id: BOOK-STORY-01-C03-R007-O01
 provider_output_id: ...
 
 reviews: []
@@ -368,7 +368,7 @@ Review가 아직 하나도 없으면 Result는 unreviewed로 간주한다.
 
 accepted는 Cut Definition approved와 다른 개념이며, 곧바로 “대표 최종 Asset”을 의미하지 않는다.
 
-한 Cut에서 현재 기준에 accepted인 Result가 여러 개 존재할 수 있으며 대표 Asset 선택은 STEP 0-7에서 정한다.
+한 Cut에서 현재 기준에 accepted인 Result가 여러 개 존재할 수 있으며 대표 Asset 선택은 `ASSET_STORAGE_POLICY.md`를 따른다.
 
 ## 13. 평가 축
 
@@ -445,7 +445,7 @@ Review decision은 단순히 “예쁜가”로 결정하지 않는다.
 4. 중요한 Continuity constraint를 위반하면 rejected.
 5. 승인된 Library 정의와 중요한 충돌이 있으면 rejected.
 6. 기술적 결함이 장면 사용을 방해하면 rejected.
-7. 사소한 문제만 있고 후처리로 해결 가능한 경우의 Asset 처리 기준은 STEP 0-7에서 다룬다.
+7. 사소한 문제의 후처리/Asset 처리 기준은 `ASSET_STORAGE_POLICY.md`를 따른다.
 8. visual quality가 높더라도 본문·Canonical 정의와 충돌하면 품질만으로 accepted 처리하지 않는다.
 
 ## 16. Run과 Cut Definition Status의 관계
@@ -571,7 +571,7 @@ Run Result는 생성 과정의 원본 기록이다.
 
 Asset은 프로젝트가 보존·사용하기 위해 등록한 이미지 자산이다.
 
-모든 Result를 장기 Asset으로 보존해야 하는지는 STEP 0-7에서 정한다.
+모든 Result를 장기 Asset으로 보존하지 않으며 보존 여부는 `ASSET_STORAGE_POLICY.md`를 따른다.
 
 따라서 Run metadata와 실제 이미지 파일 보존 정책을 동일시하지 않는다.
 

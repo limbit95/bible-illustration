@@ -111,7 +111,7 @@ revision: 1
 
 ### 3.2 Cut의 상세 시각 필드는 단계적으로 확장한다
 
-다음은 Cut에 필요할 가능성이 높지만 STEP 0-2에서 세부 스키마를 확정하지 않는다.
+다음 시각 정보는 필요할 수 있지만 v1에서는 모두를 고정 필드로 강제하지 않는다. Library Entity reference, Continuity constraint, `scene.summary / required_elements / forbidden_elements` 조합으로 필요한 만큼만 표현한다.
 
 - 인물과 인물 상태
 - 장소
@@ -513,9 +513,9 @@ Production Complete
 
 1. Episode/Cut의 `approved`는 **정의 승인**을 뜻한다.
 2. 이미지 제작이 시작되거나 완료되어도 Episode/Cut의 Definition Status를 `in_production` 같은 값으로 바꾸지 않는다.
-3. 이미지 생성 진행률과 Run 성공/실패는 STEP 0-5 Generation Run Model이 책임진다.
-4. 대표 승인 이미지와 Asset 상태는 STEP 0-7 Image / Asset Storage Policy에서 책임진다.
-5. 필요하다면 향후 UI에서 `production_status`를 계산해 보여줄 수 있지만, STEP 0-2에서는 Episode/Cut Canonical 데이터에 이를 중복 저장하지 않는다.
+3. 이미지 생성 진행률과 Run 성공/실패는 `GENERATION_RUN_MODEL.md`가 책임진다.
+4. 대표 승인 이미지와 Asset 상태는 `ASSET_STORAGE_POLICY.md`가 책임진다.
+5. 필요하다면 UI에서 `production_status`를 도출해 보여줄 수 있지만 Episode/Cut Canonical 데이터에 이를 중복 저장하지 않는다.
 6. 따라서 설계는 승인됐지만 이미지가 아직 없는 Cut도 정상적인 상태다.
 7. 새 Provider로 이미지를 다시 생성하더라도 Canonical Scene 정의가 바뀌지 않았다면 Cut revision과 Definition Status는 그대로 유지할 수 있다.
 
@@ -527,7 +527,7 @@ Production Complete
 
 Episode의 production complete는 active Cut 전체가 production complete일 때 도출할 수 있다.
 
-이 값의 정확한 저장/계산 방법은 STEP 0-5와 STEP 0-7에서 확정한다.
+production complete는 `ASSET_STORAGE_POLICY.md`의 대표 Asset / availability / current canonical revision 조건으로 도출한다.
 
 ## 11. 이미지와 Cut의 관계
 

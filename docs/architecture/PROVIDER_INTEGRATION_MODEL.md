@@ -421,7 +421,7 @@ Canonical role: object
 
 Provider Integration은 이 변환 규칙을 명시한다.
 
-실제 Run에는 STEP 0-5에서 확정한 대로 **무엇을 어떤 역할과 설정으로 전달했는지** snapshot한다.
+실제 Run에는 `GENERATION_RUN_MODEL.md`에 따라 **무엇을 어떤 역할과 설정으로 전달했는지** snapshot한다.
 
 ## 15. Reference Delivery Method
 
@@ -520,7 +520,7 @@ Provider-specific 데이터는 가능한 한 Integration Layer에 격리한다.
 Canonical
 CHR-MOSES
 STY-BIBLICAL-HISTORICAL-REALISM
-GEN-CREATION-01-C03
+BOOK-STORY-01-C03
         ↓
 Integration
 OpenArt binding
@@ -545,7 +545,7 @@ Run
 
 Provider마다 반환하는 job 구조, output ID, 이미지 개수, metadata 형식이 다를 수 있다.
 
-Integration Layer는 이를 STEP 0-5의 공통 Run / Result 의미로 정규화한다.
+Integration Layer는 이를 `GENERATION_RUN_MODEL.md`의 공통 Run / Result 의미로 정규화한다.
 
 ~~~text
 Provider-specific response
@@ -565,7 +565,7 @@ Generated Result(s)
 4. Provider가 일부 결과만 반환하면 execution_status를 partial로 표현할 수 있다.
 5. Provider 고유 metadata를 공통 필드에 억지로 끼워 맞추지 않고 provider_specific raw metadata 영역을 허용한다.
 6. raw metadata를 보존하더라도 인증 토큰이나 민감한 요청 헤더는 저장하지 않는다.
-7. 대용량 binary/image payload 자체를 raw metadata에 중복 저장하지 않는다. 실제 Asset 저장은 STEP 0-7 정책을 따른다.
+7. 대용량 binary/image payload 자체를 raw metadata에 중복 저장하지 않는다. 실제 Asset 저장은 `ASSET_STORAGE_POLICY.md`를 따른다.
 8. Integration normalization이 Canonical Scene이나 Result 평가를 자동으로 변경하지 않는다.
 
 ## 21. Provider Integration 변경과 Canonical Revision
@@ -579,7 +579,7 @@ Generated Result(s)
 - Reference weight 조정
 - Provider API/UI 변화
 
-단, Provider 작업 중 Canonical 정의 자체가 잘못되었음을 발견했다면 STEP 0-2~0-4의 정식 revision 절차를 따른다.
+단, Provider 작업 중 Canonical 정의 자체가 잘못되었음을 발견했다면 Episode/Cut/Continuity/Library의 정식 revision 규칙을 따른다.
 
 즉 **Integration 변경과 Canonical 변경을 구분한다.**
 

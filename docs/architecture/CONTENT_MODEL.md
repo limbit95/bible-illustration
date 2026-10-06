@@ -4,7 +4,7 @@
 >
 > 목적: 성경 본문 → 제작 Episode → Cut으로 이어지는 콘텐츠 모델과 식별 체계를 먼저 안정화한다.
 >
-> 이 단계에서는 Episode/Cut의 세부 필드, 승인 상태, Continuity, Provider, 이미지 저장 정책까지 확정하지 않는다. 해당 항목은 이후 STEP 0-2~0-7에서 다룬다.
+> Episode/Cut 세부 모델, Continuity, Library Entity, Run, Provider, Image Asset 책임은 현재 각 정식 Architecture 문서에서 확정되어 있다.
 
 ## 1. 핵심 모델
 
@@ -176,7 +176,7 @@ GEN-EXAMPLE-06
 
 `STORY_KEY`는 현재 ID를 안정화하기 위한 naming token으로만 사용한다.
 
-ID가 이미 발급된 뒤 제목이나 표현 방식이 바뀌었다는 이유로 `STORY_KEY`를 다시 이름 붙이지 않는다. Episode의 정체성이 달라질 정도로 주본문이나 제작 범위가 크게 재설계되는 경우 기존 ID를 억지로 개명하기보다 새 Episode ID를 부여하는 방향을 우선한다. 기존 Episode의 폐기·대체 상태 표현은 STEP 0-2에서 정의한다.
+ID가 이미 발급된 뒤 제목이나 표현 방식이 바뀌었다는 이유로 `STORY_KEY`를 다시 이름 붙이지 않는다. Episode의 정체성이 달라질 정도로 주본문이나 제작 범위가 크게 재설계되는 경우 기존 ID를 억지로 개명하기보다 새 Episode ID를 부여하는 방향을 우선한다. 기존 Episode의 폐기·대체 상태는 `EPISODE_CUT_MODEL.md`를 따른다.
 
 STEP 0 v0 단계에서는 별도의 `Story Arc` 엔터티를 먼저 만들지 않는다. 실제로 독립된 Arc 데이터가 필요해질 때 도입 여부를 다시 검토한다.
 
