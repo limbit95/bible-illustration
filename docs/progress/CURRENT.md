@@ -57,11 +57,11 @@ autonomous는 Architecture를 생략하거나 여러 Cut을 한 번에 생성한
 
 Production Master는 계속 text-free다.
 
-사용자-facing output은 \`presentation-plan.yaml\`에서 Cut별로:
+사용자-facing output은 `presentation-plan.yaml`에서 Cut별로:
 
-- \`key_scripture\`
-- \`explanatory\`
-- \`visual_only\`
+- `key_scripture`
+- `explanatory`
+- `visual_only`
 
 중 하나로 계획한다.
 
@@ -79,20 +79,20 @@ main에는 active Genesis production이 없다.
 - active_presentation_plan: none
 - active_genesis_assets: none
 
-이전 Genesis production identity 36개는 \`content/identity-tombstones.yaml\`에서 재사용을 금지한다.
+이전 Genesis production identity 36개는 `content/identity-tombstones.yaml`에서 재사용을 금지한다.
 
 ## 현재 Source of Truth
 
-- Entry: \`AGENTS.md\`
-- Current: \`docs/progress/CURRENT.md\`
-- Architecture: \`docs/architecture/*.md\`
-- Episode Orchestration: \`docs/architecture/EPISODE_ORCHESTRATION_MODEL.md\`
-- Production Rules: \`docs/rules/*.md\`
-- Orchestration Rules: \`docs/rules/ORCHESTRATION_RULES.md\`
-- Templates: \`templates/*.yaml\`
-- Latest autonomous readiness audit: \`docs/progress/EPISODE_ORCHESTRATION_AUDIT.md\`
-- Dry-run evidence: \`docs/progress/EPISODE_ORCHESTRATION_DRY_RUN.md\`
-- Decisions: \`docs/decisions/DEC-*.md\`
+- Entry: `AGENTS.md`
+- Current: `docs/progress/CURRENT.md`
+- Architecture: `docs/architecture/*.md`
+- Episode Orchestration: `docs/architecture/EPISODE_ORCHESTRATION_MODEL.md`
+- Production Rules: `docs/rules/*.md`
+- Orchestration Rules: `docs/rules/ORCHESTRATION_RULES.md`
+- Templates: `templates/*.yaml`
+- Latest autonomous readiness audit: `docs/progress/EPISODE_ORCHESTRATION_AUDIT.md`
+- Dry-run evidence: `docs/progress/EPISODE_ORCHESTRATION_DRY_RUN.md`
+- Decisions: `docs/decisions/DEC-*.md`
 
 ## 다음 작업
 

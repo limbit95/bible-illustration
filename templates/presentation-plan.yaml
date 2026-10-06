@@ -1,6 +1,9 @@
 # Bible Illustration — Presentation Plan template
 # Template status: v1.0 CONFIRMED / 2026-10-06 episode orchestration
 # Production Master remains text-free.
+# Every active Cut in an Episode-level autonomous scope must have exactly one entry.
+# If one Scripture passage is split across multiple Cuts, quote text may be split by beat
+# while preserving exact wording, verse order, and meaning.
 
 episode_id: null
 

@@ -74,6 +74,15 @@ Transition-oriented relation에서는:
 
 ## 6. Presentation execution
 
+Multi-Cut autonomous scope에서는 모든 active Cut에 Presentation Plan entry가 있어야 한다.
+
+사용자가 중요한 말씀을 넣도록 요구했다면 Key Scripture selection을 사전에 수행하며,
+Production Master가 text-free라는 이유로 중요한 말씀 presentation을 누락하지 않는다.
+
+하나의 본문을 여러 Cut으로 나눈 경우 quote도 각 visual beat에 맞게 나눌 수 있으며,
+동일 긴 본문을 기계적으로 매 Cut에 반복하지 않는다.
+
+
 Production Master는 항상 text-free다.
 
 Presentation Plan에 따라:

@@ -4,26 +4,26 @@
 >
 > 목적: 기존 Cut 중심 Architecture 위에 Episode-level autonomous orchestration이 일관되게 추가되었는지 감사한다.
 >
-> 이 문서는 production automation readiness에 대해 \`PREPRODUCTION_HARDENING_AUDIT.md\`의 판정을 확장한다.
+> 이 문서는 production automation readiness에 대해 `PREPRODUCTION_HARDENING_AUDIT.md`의 판정을 확장한다.
 
 ## 1. 추가된 정식 구조
 
 Architecture:
 
-- \`docs/architecture/EPISODE_ORCHESTRATION_MODEL.md\`
+- `docs/architecture/EPISODE_ORCHESTRATION_MODEL.md`
 
 Rules:
 
-- \`docs/rules/ORCHESTRATION_RULES.md\`
+- `docs/rules/ORCHESTRATION_RULES.md`
 
 Templates:
 
-- \`templates/production-session.yaml\`
-- \`templates/presentation-plan.yaml\`
+- `templates/production-session.yaml`
+- `templates/presentation-plan.yaml`
 
 Decision:
 
-- \`DEC-0013 — Episode-level autonomous orchestration\`
+- `DEC-0013 — Episode-level autonomous orchestration`
 
 ## 2. 책임 경계
 
@@ -101,8 +101,8 @@ Production Master count에 포함하지 않는다.
 
 Multi-Cut autonomous request에서는:
 
-- \`orchestration_ready = true\`
-- \`presentation_plan_ready = true\`
+- `orchestration_ready = true`
+- `presentation_plan_ready = true`
 
 가 추가로 필요하다.
 
@@ -110,7 +110,7 @@ single-Cut assisted request에서는 not_applicable 가능.
 
 ## 7. Synthetic dry-run
 
-\`docs/progress/EPISODE_ORCHESTRATION_DRY_RUN.md\`
+`docs/progress/EPISODE_ORCHESTRATION_DRY_RUN.md`
 
 검증:
 
